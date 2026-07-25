@@ -1,0 +1,356 @@
+{
+  "schema": "format_prediction.v2",
+  "generated_at": "2026-07-25T02:33:44",
+  "race_id": "20260725_新芝1400_3勝",
+  "header": {
+    "date": "2026-07-25",
+    "venue": "新",
+    "surface": "芝",
+    "distance": 1400.0,
+    "race_class": "3勝",
+    "baba": "稍_A",
+    "N": 18
+  },
+  "verdict": {
+    "value": "⚠️慎重",
+    "reason": "V27欠測(対象レースがV27履歴外(CSV未収録/新規馬多数))→gap確定不可・慎重フォールバック / 較正フォールバック中→本命サイズを落とす(物差し④)",
+    "bet_tier": "seihai_fukusho"
+  },
+  "bets": [
+    "第一推奨: ◎複勝 コートアリシアン (的中~49%・回収88%/F5 83%=全買い方最良)",
+    "第二推奨: 標準形馬連3点 コートアリシアン×モンテシート・モジャーリオ・ポッドロワール (的中20%・配当妙味)"
+  ],
+  "bet_notes": [],
+  "venue_guidance": {
+    "mark": null,
+    "note": "物差し無し(控えめ)"
+  },
+  "seihai": {
+    "fired": true,
+    "axis": "コートアリシアン",
+    "n_fired": 3,
+    "is_ultimate": false,
+    "skills_str": "🤔【要検討】 🌟調教(1.18倍) 💨展開利",
+    "c_buff": 47.20643592383136,
+    "p_buff": 12.0,
+    "b_buff": -57.64739956297752,
+    "raw_elo_rank": 1
+  },
+  "gap": {
+    "elo_gap_top2": 31.4,
+    "v27_gap_top2": null,
+    "elo_top2": [
+      "コートアリシアン",
+      "ピコローズ"
+    ],
+    "v27_top2": null,
+    "big_e": true,
+    "big_v": null,
+    "overlap": null,
+    "state": "V27欠測",
+    "v27_missing": true,
+    "v27_reason": "対象レースがV27履歴外(CSV未収録/新規馬多数)",
+    "v27_source_latest": null
+  },
+  "fallback": true,
+  "calib": {
+    "calib_ok_30R": false,
+    "calib_sample_n": 26,
+    "calibrated_temp": null,
+    "using_calibrated_mc": false
+  },
+  "learning_profile": {
+    "available": true,
+    "cell": "新芝1400・ELITE",
+    "build_date": "2026-07-24",
+    "pin": 36.6,
+    "pkl": "phase1_cache_新_芝_1400m_ELITE.pkl",
+    "systems": [
+      {
+        "label": "展開",
+        "pct": 53.9,
+        "bars": "◉◉◉◎◎"
+      },
+      {
+        "label": "騎手",
+        "pct": 11.2,
+        "bars": "◉◎◎◎◎"
+      },
+      {
+        "label": "調教",
+        "pinned": true,
+        "pin": 36.6
+      },
+      {
+        "label": "厩舎",
+        "pct": 88.3,
+        "bars": "◉◉◉◉◎"
+      },
+      {
+        "label": "斤量",
+        "pct": 96.7,
+        "bars": "◉◉◉◉◉"
+      },
+      {
+        "label": "減衰",
+        "pct": 16.1,
+        "bars": "◉◎◎◎◎"
+      }
+    ],
+    "note": "※学習された係数の相対配置。係数の大小が予測寄与を保証するものではない"
+  },
+  "horses": [
+    {
+      "umaban": 2,
+      "mark": "◎",
+      "name": "コートアリシアン",
+      "style": "—",
+      "mc_win": 0.1283,
+      "top3_est": 0.363279557134696,
+      "jitsuryoku": 1635.1168335526415,
+      "zenjitsu": 1632.046154068563,
+      "adjust": -3.0706794840784823,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 9,
+      "mark": "○",
+      "name": "モンテシート",
+      "style": "—",
+      "mc_win": 0.12,
+      "top3_est": 0.34360802341328883,
+      "jitsuryoku": 1595.6952705641222,
+      "zenjitsu": 1626.066379771496,
+      "adjust": 30.37110920737382,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 17,
+      "mark": "▲",
+      "name": "モジャーリオ",
+      "style": "—",
+      "mc_win": 0.11600000000000002,
+      "top3_est": 0.33393055066418226,
+      "jitsuryoku": 1577.3139029130487,
+      "zenjitsu": 1618.8110151744092,
+      "adjust": 41.4971122613606,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 1,
+      "mark": "△",
+      "name": "ポッドロワール",
+      "style": "—",
+      "mc_win": 0.0925,
+      "top3_est": 0.2744999334742865,
+      "jitsuryoku": 1585.339696743866,
+      "zenjitsu": 1596.2200690886236,
+      "adjust": 10.880372344757689,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 8,
+      "mark": "",
+      "name": "ボンヌソワレ",
+      "style": "—",
+      "mc_win": 0.0719,
+      "top3_est": 0.21883747726214428,
+      "jitsuryoku": 1539.939471138446,
+      "zenjitsu": 1572.5963864991463,
+      "adjust": 32.656915360700395,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 16,
+      "mark": "",
+      "name": "キタサンダムール",
+      "style": "—",
+      "mc_win": 0.0712,
+      "top3_est": 0.21688861645029794,
+      "jitsuryoku": 1537.7680635892234,
+      "zenjitsu": 1559.4799920429164,
+      "adjust": 21.711928453692963,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 10,
+      "mark": "",
+      "name": "チューラワンサ",
+      "style": "—",
+      "mc_win": 0.0699,
+      "top3_est": 0.2132594060765138,
+      "jitsuryoku": 1551.4381051165383,
+      "zenjitsu": 1553.5026066488706,
+      "adjust": 2.064501532332315,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 6,
+      "mark": "",
+      "name": "ピコローズ",
+      "style": "—",
+      "mc_win": 0.0666,
+      "top3_est": 0.20398917766573332,
+      "jitsuryoku": 1627.117949897521,
+      "zenjitsu": 1551.7843234147465,
+      "adjust": -75.33362648277443,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 3,
+      "mark": "",
+      "name": "エマヌエーレ",
+      "style": "—",
+      "mc_win": 0.0577,
+      "top3_est": 0.1785786813391753,
+      "jitsuryoku": 1544.6543037800568,
+      "zenjitsu": 1540.617323128041,
+      "adjust": -4.0369806520157,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 11,
+      "mark": "",
+      "name": "ヴェサリウス",
+      "style": "—",
+      "mc_win": 0.051100000000000007,
+      "top3_est": 0.15935391645872626,
+      "jitsuryoku": 1520.4932400581256,
+      "zenjitsu": 1528.0340312989451,
+      "adjust": 7.540791240819544,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 18,
+      "mark": "",
+      "name": "フライングブレード",
+      "style": "—",
+      "mc_win": 0.0382,
+      "top3_est": 0.12085798900738894,
+      "jitsuryoku": 1525.9219425810622,
+      "zenjitsu": 1496.8804994285338,
+      "adjust": -29.041443152528473,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 5,
+      "mark": "",
+      "name": "エイムフォーエース",
+      "style": "—",
+      "mc_win": 0.0368,
+      "top3_est": 0.11660790630043322,
+      "jitsuryoku": 1512.6236712950197,
+      "zenjitsu": 1493.2443317235436,
+      "adjust": -19.379339571476066,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 4,
+      "mark": "",
+      "name": "スマイルアップ",
+      "style": "—",
+      "mc_win": 0.0325,
+      "top3_est": 0.10346677551348052,
+      "jitsuryoku": 1524.2778563453646,
+      "zenjitsu": 1478.135385855213,
+      "adjust": -46.14247049015171,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 7,
+      "mark": "",
+      "name": "アームテイル",
+      "style": "—",
+      "mc_win": 0.0225,
+      "top3_est": 0.07240227831791898,
+      "jitsuryoku": 1504.7286609743985,
+      "zenjitsu": 1452.9605322314972,
+      "adjust": -51.768128742901354,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 13,
+      "mark": "",
+      "name": "スティールブルー",
+      "style": "—",
+      "mc_win": 0.0189,
+      "top3_est": 0.06104881790228446,
+      "jitsuryoku": 1519.9359695621079,
+      "zenjitsu": 1431.1018264548986,
+      "adjust": -88.83414310720923,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 15,
+      "mark": "",
+      "name": "ウナギノボリ",
+      "style": "—",
+      "mc_win": 0.0022,
+      "top3_est": 0.007228965824953047,
+      "jitsuryoku": 1288.2990708992236,
+      "zenjitsu": 1242.3668048550462,
+      "adjust": -45.93226604417737,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 12,
+      "mark": "",
+      "name": "ミストレス",
+      "style": "—",
+      "mc_win": 0.002,
+      "top3_est": 0.006573106056282887,
+      "jitsuryoku": 1266.483950363544,
+      "zenjitsu": 1277.4443215795343,
+      "adjust": 10.960371215990335,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 14,
+      "mark": "",
+      "name": "ルミノメテオール",
+      "style": "—",
+      "mc_win": 0.0017,
+      "top3_est": 0.0055888211382144745,
+      "jitsuryoku": 1296.2678792045217,
+      "zenjitsu": 1223.273581625398,
+      "adjust": -72.99429757912367,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    }
+  ]
+}

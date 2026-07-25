@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>競馬予想記録 — 最新予想</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>競馬予想記録</h1>
+<div class="updated" id="updated">最終更新: —</div>
+<div class="nav">
+  <a href="index.html">最新予想</a><span class="sep">|</span>
+  <a href="seiseki.html">成績</a><span class="sep">|</span>
+  <a href="kensho.html">検証中</a><span class="sep">|</span>
+  <a href="archive.html">アーカイブ</a><span class="sep">|</span>
+  <a href="about.html">について</a>
+</div>
+
+<div class="updated" id="latest-date"></div>
+<div id="latest"><p>読み込み中…</p></div>
+
+<p class="note">記号の意味: <span class="v-shoubu">🔥勝負</span>=自信あり /
+<span class="v-shincho">⚠️慎重</span>=控えめに / <span class="v-miokuri">🚫見送り</span>=買わない /
+<span class="seihai">🌈特別サイン</span>=特別な条件がそろった本命。
+「買わない」もおすすめの結論として出します（むだに負けないため）。
+くわしい言葉の説明は<a href="about.html">「について」</a>にあります。</p>
+
+<footer>
+<p class="disclaimer">本サイトは個人の予想記録です。的中・収支を保証するものではありません。
+馬券の購入は自己責任で。20歳未満の馬券購入は禁止されています。</p>
+<p>Since 2026</p>
+</footer>
+
+<script src="app.js"></script>
+<script>initLatest();</script>
+</body>
+</html>

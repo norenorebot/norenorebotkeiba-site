@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>競馬予想記録 — について</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>競馬予想記録 — について</h1>
+<div class="updated" id="updated">最終更新: —</div>
+<div class="nav">
+  <a href="index.html">最新予想</a><span class="sep">|</span>
+  <a href="seiseki.html">成績</a><span class="sep">|</span>
+  <a href="kensho.html">検証中</a><span class="sep">|</span>
+  <a href="archive.html">アーカイブ</a><span class="sep">|</span>
+  <a href="about.html">について</a>
+</div>
+
+<h2>このサイトについて</h2>
+<p>各馬の強さを点数にして、そこに調教・展開・枠順・騎手・厩舎などの条件を足し、
+コンピュータで「勝つ確率」を計算する予想の<b>記録</b>です。
+全部のレースを買うのではなく、「当たりやすいレースだけを選んで、しかもうまみがある時だけ買う」ことを目指しています。
+むだに負けないことを大事にしているので、<b>「買わない」も立派な結論</b>として出します。</p>
+
+<h2>4つの判定の読み方</h2>
+<ul>
+<li><span class="v-shoubu">🔥勝負</span>: 「強さ」で見ても「持ち時計」で見ても同じ2頭が上位。競馬場の傾向もよく、自信のある一戦。</li>
+<li><span class="v-shincho">⚠️慎重</span>: そこまでの自信はないレース。本命は少なめに。</li>
+<li><span class="v-miokuri">🚫見送り</span>: 「強さ」と「持ち時計」の上位馬がバラバラ、または本命が8〜15倍でうまみが小さい時。<b>買わないのがおすすめ</b>。</li>
+<li><span class="seihai">🌈特別サイン</span>: 調教や展開など、いくつもの条件がそろった特別な本命。</li>
+</ul>
+
+<h2>よく出てくる言葉</h2>
+<table>
+<tr><th>言葉</th><th>意味</th></tr>
+<tr><td>強さ</td><td>各馬の実力を点数にしたもの。</td></tr>
+<tr><td>持ち時計</td><td>その馬が過去に出した走破タイムの速さ。</td></tr>
+<tr><td>特別サイン（🌈）</td><td>調教・展開などがそろった時に出る、自信の本命マーク。</td></tr>
+<tr><td>件数（N）</td><td>その成績が何レース分かを表す数。少ないほど当てになりません。</td></tr>
+<tr><td>まぐれ除き（F5）</td><td>まぐれの大当たりを1回分だけ取り除いて計算しなおした回収率。安定して勝てるかの目安です。</td></tr>
+<tr><td>回収率</td><td>使ったお金に対して、いくら返ってきたかの割合。100%で「差し引きゼロ」。</td></tr>
+</table>
+<p class="note">成績にはすべて件数（N）と、まぐれ除き（F5）を付けています。
+月ごとの成績は件数が少ないので、たまたま良かった月を買う理由には使いません。</p>
+
+<h2>免責</h2>
+<p class="disclaimer">本サイトは個人の予想記録です。的中・収支を保証するものではありません。
+馬券の購入は自己責任で。20歳未満の馬券購入は禁止されています。</p>
+
+<footer>
+<p>Since 2026</p>
+</footer>
+
+<script src="app.js"></script>
+<script>loadJSON(DATA+'index.json').then(function(x){setUpdated(x.generated_at);}).catch(function(){});</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>競馬予想記録 — アーカイブ</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>競馬予想記録 — アーカイブ</h1>
+<div class="updated" id="updated">最終更新: —</div>
+<div class="nav">
+  <a href="index.html">最新予想</a><span class="sep">|</span>
+  <a href="seiseki.html">成績</a><span class="sep">|</span>
+  <a href="kensho.html">検証中</a><span class="sep">|</span>
+  <a href="archive.html">アーカイブ</a><span class="sep">|</span>
+  <a href="about.html">について</a>
+</div>
+
+<p class="note">これまでの予想の一覧（新しい順）。「詳細」を押すと結論と根拠が開きます。
+結果は翌週、着順と払戻を照らし合わせて記録します（まだのものは「待ち」）。</p>
+
+<div id="archive"><p>読み込み中…</p></div>
+
+<footer>
+<p class="disclaimer">本サイトは個人の予想記録です。的中・収支を保証するものではありません。
+馬券の購入は自己責任で。20歳未満の馬券購入は禁止されています。</p>
+<p>Since 2026</p>
+</footer>
+
+<script src="app.js"></script>
+<script>initArchive();</script>
+</body>
+</html>

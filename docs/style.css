@@ -1,0 +1,87 @@
+/* ============================================================================
+   予想サイト スタイル — 「平成個人サイト」様式(指示書_予想サイト構築.md §6)
+   中身は2026年の検証システム、見た目は2003年の個人サイト。
+   禁止: カードUI/角丸/影/グラデーション/アニメ/パララックス/ヒーロー/Webフォント/CDN。
+   許可: 罫線テーブル主役・システムフォント・太字と判定色のみ・判定絵文字のみ。
+   ============================================================================ */
+
+/* --- 基本(16px基準・遠慮なく詰める) --- */
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: "MS PGothic", "Hiragino Kaku Gothic ProN", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #000;
+  background: #fffdf5;            /* 薄クリーム1色 */
+  margin: 0;
+  padding: 8px 10px 40px;
+}
+* { box-sizing: border-box; }
+
+/* --- リンク(青・訪問済み紫のデフォルトを殺さない) --- */
+a { color: #0000ee; }
+a:visited { color: #551a8b; }
+
+/* --- 見出し(装飾しない・詰める) --- */
+h1 { font-size: 20px; margin: 4px 0 2px; }
+h2 { font-size: 17px; margin: 14px 0 4px; border-bottom: 2px solid #000; padding-bottom: 1px; }
+h3 { font-size: 16px; margin: 10px 0 3px; }
+p  { margin: 4px 0; }
+
+/* --- ナビ(素の横並び・囲み罫線1本) --- */
+.nav { border-top: 1px solid #000; border-bottom: 1px solid #000; padding: 3px 0; margin: 4px 0 8px; font-size: 15px; }
+.nav a { margin-right: 6px; }
+.nav .sep { color: #888; }
+.updated { font-size: 13px; color: #333; margin: 2px 0 6px; }
+
+/* --- テーブルが主役(細罫線・詰める) --- */
+table { border-collapse: collapse; width: 100%; margin: 4px 0 8px; background: #fff; }
+caption { text-align: left; font-weight: bold; font-size: 15px; padding: 2px 0; }
+th, td { border: 1px solid #999; padding: 2px 6px; font-size: 15px; vertical-align: top; }
+th { background: #eee; font-weight: bold; white-space: nowrap; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+td.c, th.c { text-align: center; }
+tr.year-total td, tr.year-total th { background: #f3f3f3; font-weight: bold; }
+
+/* --- 判定色(強調は太字と判定文字色のみ・§6) --- */
+.v-shoubu  { color: #cc0000; font-weight: bold; }   /* 🔥勝負=赤 */
+.v-shincho { color: #000000; font-weight: bold; }   /* ⚠️慎重=黒太字(赤でもグレーでもない中間) */
+.v-miokuri { color: #777777; font-weight: bold; }   /* 🚫見送り=グレー */
+.seihai    { color: #b8860b; font-weight: bold; }    /* 聖杯=金系の文字色1つ */
+
+/* --- 結論カード(枠は罫線・角丸/影なし。1画面密度優先) --- */
+.verdict-block { border: 2px solid #000; padding: 6px 8px; margin: 6px 0; background: #fff; }
+.verdict-block .rid { font-size: 17px; font-weight: bold; }
+.verdict-block .line { margin: 3px 0; }
+.verdict-block .bet { margin: 2px 0; }
+.verdict-block .note { font-size: 13px; color: #444; }
+.verdict-block ul { margin: 2px 0 2px 0; padding-left: 20px; }
+.checklist { font-size: 14px; color: #333; }
+
+/* --- N基準色(成績テーブルのセル) --- */
+.n-gray  { color: #999; }              /* N<10 参考外 */
+.n-light { color: #666; }              /* 10-19 傾向 */
+.n-normal { color: #000; }             /* 20+ 通常 */
+
+/* --- 注記・免責(小さく・削らない) --- */
+.frozen-note, .disclaimer { font-size: 13px; color: #333; margin: 6px 0; }
+.frozen-note ul { margin: 2px 0; padding-left: 18px; }
+.disclaimer { border: 1px solid #999; padding: 5px 7px; background: #f7f7ef; }
+
+/* --- 学習プロファイル(等幅バーは通常フォントで) --- */
+.learn-profile { font-size: 14px; margin: 4px 0; }
+.learn-profile .bars { letter-spacing: 1px; }
+
+/* --- details/summary は素のまま(装飾しない) --- */
+details { margin: 4px 0; }
+summary { cursor: pointer; font-weight: bold; }
+
+/* --- フッター --- */
+footer { border-top: 1px solid #000; margin-top: 16px; padding-top: 6px; font-size: 13px; color: #333; }
+
+/* --- モバイルでテーブルが崩れない最小限(§6例外・見た目は平成/実装だけ現代) --- */
+.tablewrap { overflow-x: auto; }
+@media (max-width: 640px) {
+  body { padding: 6px 6px 40px; }
+  th, td { padding: 2px 4px; font-size: 14px; }
+}
