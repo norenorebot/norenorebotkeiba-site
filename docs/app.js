@@ -339,6 +339,11 @@ function initLatest() {
 }
 
 /* ---------- 成績ページ ---------- */
+/* 運用分(2026年7月以降)は結果突合が未実装のため、この表には入っていない。
+   実態と異なる印象を与えないよう、各表の直前に必ず出す。 */
+var PENDING_NOTE = '<p class="frozen-note">※ 2026年7月以降の運用分は未反映です' +
+                   '（結果の突合が未実装のため）。この表は過去データでの成績です。</p>';
+
 function nColor(color) {
   if (color === 'gray_参考外') return 'n-gray';
   if (color === 'light_傾向') return 'n-light';
@@ -409,10 +414,14 @@ function initStats() {
     var fk = st.seihai_fukusho || {};
     var um = st.hyojun_umaren || {};
     var html = '';
-    html += '<h2>「特別サイン」の本番成績（自動でたまります）</h2>';
+    // 現状 stats.json は遡及(バックテスト)のみで作られており、運用分は入らない。
+    // 実態と異なる見出しを公開しないよう「過去データ」であることを明示する。
+    html += '<h2>「特別サイン」の成績（過去データ・2026年6月まで）</h2>';
     html += '<p class="note">配当が分かった ' + esc(fk.coverage_matched) + ' 件で集計（サイン点灯は全 ' + esc(fk.fired_total) + ' 件）。</p>';
+    html += PENDING_NOTE;
     html += renderSeriesTable(fk, '100円');
-    html += '<h2>馬連3点（軸＋2〜4番人気の予想馬）</h2>';
+    html += '<h2>馬連3点（軸＋2〜4番人気の予想馬）（過去データ・2026年6月まで）</h2>';
+    html += PENDING_NOTE;
     html += renderSeriesTable(um, '300円');
     html += '<h2>競馬場ごとの傾向</h2>';
     html += renderVenueMap();
