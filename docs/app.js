@@ -248,12 +248,15 @@ function renderHorsesTable(rows) {
   // 死んでいる列は出さない: オッズが全行空ならオッズ列ごと省く
   var hasOdds = rows.some(function (r) { return r.odds !== null && r.odds !== undefined; });
   var hasSwap = rows.some(function (r) { return r.swap; });
+  // 調教は「このシステムで唯一 独立した価値が検証済みの軸」なので、該当馬がいれば列を出す
+  var hasChokyo = rows.some(function (r) { return r.chokyo; });
 
   // 印の並び(レース全体の評価順)と表の並び(勝つ確率順)は一致しないので先に断る
   var html = '<div class="note">印はレース全体の評価順、表は勝つ確率の高い順に並べています' +
              '（順番が前後することがあります）。</div>';
   html += '<div class="tablewrap"><table>';
-  html += '<tr><th>印</th><th>馬名</th><th class="num">勝つ確率</th><th class="num">3着内に入る率(推定)</th>' +
+  html += '<tr><th>印</th><th>馬名</th>' + (hasChokyo ? '<th>調教</th>' : '') +
+          '<th class="num">勝つ確率</th><th class="num">3着内に入る率(推定)</th>' +
           '<th class="num">実力の点数</th><th class="num">前日の総合点</th><th class="num">前日の上げ下げ</th>' +
           (hasOdds ? '<th class="num">オッズ</th>' : '') + '</tr>';
   rows.forEach(function (r) {
@@ -263,6 +266,7 @@ function renderHorsesTable(rows) {
     html += '<tr>';
     html += '<td class="c">' + esc(r.mark || '') + '</td>';
     html += '<td>' + esc(r.name) + style + sw + '</td>';
+    if (hasChokyo) html += '<td class="seihai">' + esc(r.chokyo || '') + '</td>';
     html += '<td class="num">' + pct(r.mc_win) + '</td>';
     html += '<td class="num">' + pct(r.top3_est) + '</td>';
     html += '<td class="num">' + num(r.jitsuryoku) + '</td>';
@@ -315,8 +319,16 @@ function initLatest() {
   loadJSON(DATA + 'index.json').then(function (idx) {
     setUpdated(idx.generated_at);
     var latest = idx.latest_date;
-    var todays = (idx.races || []).filter(function (r) { return r.date === latest; });
+    var todays = (idx.races || []).filter(function (r) {
+      return (r.race_date || r.date) === latest;
+    });
     if (!todays.length) { el.innerHTML = '<p>まだ予想がありません。</p>'; return; }
+    // 当日の進行は1Rからなので、場ごとに R番号の昇順で並べる(番組表と同じ読み順)
+    todays.sort(function (a, b) {
+      var va = String(a.venue_name || a.venue || ''), vb = String(b.venue_name || b.venue || '');
+      if (va !== vb) return va < vb ? -1 : 1;
+      return (a.race_no || 99) - (b.race_no || 99);
+    });
     document.getElementById('latest-date').textContent = '最新予想日: ' + latest + '(' + todays.length + 'レース)';
     // 各レースの data.json を取得して結論カードを縦に並べる
     return Promise.all(todays.map(function (r) { return loadJSON(DATA + 'archive/' + r.file); }))
