@@ -1,0 +1,112 @@
+{
+  "schema": "stats_forward.v1",
+  "generated_at": "2026-07-26T23:11:05",
+  "period_from": "2026-07-19",
+  "results_latest_date": "20260719",
+  "source": "docs/archive/*.json(公開した買い目) ⋈ jra_data_*.csv(確定着順・払戻)",
+  "series": {
+    "seihai_fukusho": {
+      "label": "聖杯◎複勝(100円/1点)",
+      "all": {
+        "n": 0,
+        "hit_rate": null,
+        "roi": null,
+        "f5_roi": null,
+        "color": "gray_参考外"
+      },
+      "rule_8_15": {
+        "n": 0,
+        "hit_rate": null,
+        "roi": null,
+        "f5_roi": null,
+        "color": "gray_参考外"
+      }
+    },
+    "seihai_umaren": {
+      "label": "聖杯 標準形馬連3点(300円)",
+      "all": {
+        "n": 0,
+        "hit_rate": null,
+        "roi": null,
+        "f5_roi": null,
+        "color": "gray_参考外"
+      },
+      "rule_8_15": {
+        "n": 0,
+        "hit_rate": null,
+        "roi": null,
+        "f5_roi": null,
+        "color": "gray_参考外"
+      }
+    },
+    "gap_fukusho": {
+      "label": "📐格差シグナル◎複勝(100円/1点)",
+      "all": {
+        "n": 0,
+        "hit_rate": null,
+        "roi": null,
+        "f5_roi": null,
+        "color": "gray_参考外"
+      },
+      "rule_8_15": {
+        "n": 0,
+        "hit_rate": null,
+        "roi": null,
+        "f5_roi": null,
+        "color": "gray_参考外"
+      }
+    }
+  },
+  "by_month": [],
+  "skipped_reference": {
+    "n": 2,
+    "axis_top3": 1,
+    "axis_win": 0,
+    "by_verdict": {
+      "⚠️慎重": 2
+    },
+    "note": "見送った判断の事後確認(参考)。買い目としては提示せず、回収率にも一切含めない。"
+  },
+  "pending": 32,
+  "pre_period_excluded": 1,
+  "races": [
+    {
+      "date": "2026-07-19",
+      "file": "20260719_20260719_函ダ1000_1勝.json",
+      "venue": "函",
+      "race_no": null,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "グレイトソン",
+      "axis_rank": 3,
+      "axis_odds": 6.8,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない"
+    },
+    {
+      "date": "2026-07-19",
+      "file": "20260719_20260719_小ダ1000_1勝.json",
+      "venue": "小",
+      "race_no": null,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "スマッシング",
+      "axis_rank": 13,
+      "axis_odds": 3.7,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない"
+    }
+  ],
+  "notes": [
+    "前向き実績は 2026-07-19(pin=36.6 運用開始)以降。遡及(過去データ)とは別系列で、合算しない。",
+    "N基準色: N<10=参考外 / 10-19=傾向 / 20+=通常。F5は最高配当1本抜き(頑健性確認)。",
+    "「ルール適用後」= ◎の確定単勝オッズ8〜15倍のレースを除外した系列(サイト公開ルール)。",
+    "採点は公開した bet_tier と bets のみを対象とし、予想の再計算は行わない。"
+  ]
+}

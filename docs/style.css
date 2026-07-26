@@ -58,6 +58,13 @@ tr.year-total td, tr.year-total th { background: #f3f3f3; font-weight: bold; }
 .verdict-block ul { margin: 2px 0 2px 0; padding-left: 20px; }
 .checklist { font-size: 14px; color: #333; }
 
+/* --- 結果表示(結果突合・§7)。装飾せず、罫線1本と文字色だけで区別する --- */
+.result-line { margin: 4px 0; padding: 3px 6px; border: 1px solid #999; background: #f7f7ef; }
+.result-line.hit     { color: #cc0000; }   /* 的中=判定色と同じ赤 */
+.result-line.miss    { color: #333; }
+.result-line.pending { color: #777; }
+.result-line.ref     { color: #555; }      /* 見送りの参考記録(買い目ではない) */
+
 /* --- N基準色(成績テーブルのセル) --- */
 .n-gray  { color: #999; }              /* N<10 参考外 */
 .n-light { color: #666; }              /* 10-19 傾向 */

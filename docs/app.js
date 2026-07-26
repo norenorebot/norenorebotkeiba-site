@@ -175,6 +175,39 @@ function raceTitle(d) {
   return head + venueLabel(d) + (r.no ? ' ' + r.no + 'R' : '');
 }
 
+/* ---------- 結果表示(reconcile_results.py が書いた result ブロック) ---------- */
+/* 予想は「その時点の記録」として凍結し、結果はここにだけ足す。
+   買い目なし(見送り)のレースは「◎が何着だったか」を参考として出すだけで、
+   的中・回収の文言は出さない(回収率にも入らない)。 */
+var TIER_LABEL = {
+  seihai_fukusho: '複勝',
+  gap_fukusho: '複勝',
+  seihai_umaren: '馬連3点'
+};
+function renderResultLine(d) {
+  var res = d.result;
+  if (!res) return '';
+  if (res.status !== '確定') {
+    // res.reason は内部診断用の文言なのでそのまま出さない(「最新 20260719 < 20260726」等)。
+    return '<div class="result-line pending">結果: <b>結果待ち</b>' +
+           ' <span class="note">（着順・払戻のデータが届きしだい、自動で入ります）</span></div>';
+  }
+  var b = res.bet || {};
+  var rk = (b.axis_rank === null || b.axis_rank === undefined) ? null : b.axis_rank;
+  var axisTxt = '◎' + esc(b.axis || '') + ' ' + (rk === null ? '着順なし' : rk + '着');
+
+  if (b.hit === null || b.hit === undefined) {
+    // 買い目なし＝見送り。降りた判断の事後確認(参考)であり、買い目ではない。
+    return '<div class="result-line ref">結果: ' + axisTxt +
+           ' <span class="note">（買い目なしのレース＝見送った判断の事後確認です。成績には入れていません）</span></div>';
+  }
+  var label = TIER_LABEL[b.tier] || '買い目';
+  var money = (b.hit ? '　払戻 ' + Math.round(b.payout) + '円（' + Math.round(b.cost) + '円買って）'
+                     : '　' + Math.round(b.cost) + '円ハズレ');
+  return '<div class="result-line ' + (b.hit ? 'hit' : 'miss') + '">結果: ' + axisTxt +
+         ' → <b>' + label + (b.hit ? '的中' : 'ハズレ') + '</b>' + money + '</div>';
+}
+
 /* ---------- 結論カード(ブロック1 + 折りたたみ2/3) ---------- */
 function renderVerdictCard(d) {
   var h = d.header || {}, v = d.verdict || {}, se = d.seihai || {}, g = d.gap || {};
@@ -202,6 +235,7 @@ function renderVerdictCard(d) {
   html += '<div class="bet">買い目:</div><ul>';
   (d.bets || []).forEach(function (b) { html += '<li>' + esc(soften(b)) + '</li>'; });
   html += '</ul>';
+  html += renderResultLine(d);
   if ((d.bet_notes || []).length) {
     html += '<div class="note">';
     (d.bet_notes || []).forEach(function (n) { html += '※ ' + esc(soften(n)) + '<br>'; });
@@ -339,10 +373,11 @@ function initLatest() {
 }
 
 /* ---------- 成績ページ ---------- */
-/* 運用分(2026年7月以降)は結果突合が未実装のため、この表には入っていない。
-   実態と異なる印象を与えないよう、各表の直前に必ず出す。 */
-var PENDING_NOTE = '<p class="frozen-note">※ 2026年7月以降の運用分は未反映です' +
-                   '（結果の突合が未実装のため）。この表は過去データでの成績です。</p>';
+/* 2ブロック構成(指示書§7): 上=前向き実績(このサイトに載せた予想の結果)、
+   下=過去データ(遡及バックテスト)。価値が高い順に並べ、合算はしない。
+   前向きは当面 N が一桁なので、N基準の色分けが誤読を防ぐ命綱。 */
+var RETRO_NOTE = '<p class="frozen-note">※ この表は<b>過去データ（遡及）での成績</b>です。' +
+                 'このサイトに載せた予想の結果は、上の「前向き実績」に入っています。両者は合算しません。</p>';
 
 function nColor(color) {
   if (color === 'gray_参考外') return 'n-gray';
@@ -394,6 +429,48 @@ function renderSeriesTable(series, unitLabel) {
   }
   return html;
 }
+/* 前向き実績(運用) — stats_forward.json。N と F5 を必ず併記し、N基準色を適用する。 */
+function fwdCell(c) {
+  if (!c || !c.n) return '<td class="num n-gray">—<br><span class="note">N=0</span></td>';
+  var roi = (c.roi === null ? '—' : c.roi + '%');
+  var f5 = (c.f5_roi === null || c.f5_roi === undefined ? '—' : c.f5_roi + '%');
+  return '<td class="num ' + nColor(c.color) + '">' + (c.hit_rate === null ? '—' : c.hit_rate + '%') +
+         ' / ' + roi + '<br><span class="note">まぐれ除き ' + f5 + '・N=' + c.n + '</span></td>';
+}
+function renderForward(fw) {
+  if (!fw) {
+    return '<p class="note">前向き実績はまだありません（結果の突合が未実行）。</p>';
+  }
+  var s = fw.series || {};
+  var keys = ['seihai_fukusho', 'seihai_umaren', 'gap_fukusho'];
+  var html = '';
+  html += '<p class="note">' + esc(fw.period_from) + ' 以降に<b>このサイトに載せた予想</b>だけを、' +
+          '公開した買い目のまま採点しています（あとから買い目を変えることはしません）。' +
+          '結果が確定した分のみ集計。<b>結果待ち ' + esc(fw.pending) + ' 件</b>。</p>';
+  html += '<div class="tablewrap"><table>';
+  html += '<caption>前向き実績（当たった率 / 回収率・件数つき）</caption>';
+  html += '<tr><th>買い方</th><th class="num">全件</th><th class="num">8〜15倍を除いた分</th></tr>';
+  keys.forEach(function (k) {
+    var v = s[k];
+    if (!v) return;
+    html += '<tr><th>' + esc(soften(v.label)) + '</th>' + fwdCell(v.all) + fwdCell(v.rule_8_15) + '</tr>';
+  });
+  html += '</table></div>';
+
+  var allN = keys.reduce(function (a, k) { return a + ((s[k] && s[k].all && s[k].all.n) || 0); }, 0);
+  if (allN < 10) {
+    html += '<p class="frozen-note">⚠️ 件数がまだ ' + allN + ' 件です（10件未満＝<b>参考外</b>）。' +
+            'この数字で良し悪しを判断できる段階ではありません。表のグレーは「参考外」を表しています。</p>';
+  }
+  var sr = fw.skipped_reference || {};
+  if (sr.n) {
+    html += '<p class="note">見送ったレース ' + esc(sr.n) + ' 件の事後確認（参考）: ' +
+            '本命が3着以内だったのは ' + esc(sr.axis_top3) + ' 件（うち1着 ' + esc(sr.axis_win) + ' 件）。' +
+            '<b>これは買っていないので、上の回収率には入れていません。</b></p>';
+  }
+  return html;
+}
+
 function renderVenueMap() {
   var html = '<div class="tablewrap"><table>';
   html += '<caption>競馬場ごとの傾向（2026-07-16 時点）</caption>';
@@ -409,19 +486,26 @@ function renderVenueMap() {
 }
 function initStats() {
   var el = document.getElementById('stats');
-  loadJSON(DATA + 'stats.json').then(function (st) {
+  // 前向き(stats_forward.json)は未生成のこともあるので、無ければ null で続行する。
+  Promise.all([
+    loadJSON(DATA + 'stats.json'),
+    loadJSON(DATA + 'stats_forward.json').catch(function () { return null; })
+  ]).then(function (arr) {
+    var st = arr[0], fw = arr[1];
     setUpdated(st.generated_at);
     var fk = st.seihai_fukusho || {};
     var um = st.hyojun_umaren || {};
     var html = '';
-    // 現状 stats.json は遡及(バックテスト)のみで作られており、運用分は入らない。
-    // 実態と異なる見出しを公開しないよう「過去データ」であることを明示する。
-    html += '<h2>「特別サイン」の成績（過去データ・2026年6月まで）</h2>';
+    // ── 上: 前向き実績(このサイトに載せた予想の結果) ──
+    html += '<h2>前向き実績（このサイトに載せた予想の結果）</h2>';
+    html += renderForward(fw);
+    // ── 下: 過去データ(遡及バックテスト) ──
+    html += '<h2>過去データでの成績（遡及）</h2>';
+    html += RETRO_NOTE;
+    html += '<h3>「特別サイン」の成績</h3>';
     html += '<p class="note">配当が分かった ' + esc(fk.coverage_matched) + ' 件で集計（サイン点灯は全 ' + esc(fk.fired_total) + ' 件）。</p>';
-    html += PENDING_NOTE;
     html += renderSeriesTable(fk, '100円');
-    html += '<h2>馬連3点（軸＋2〜4番人気の予想馬）（過去データ・2026年6月まで）</h2>';
-    html += PENDING_NOTE;
+    html += '<h3>馬連3点（軸＋2〜4番人気の予想馬）</h3>';
     html += renderSeriesTable(um, '300円');
     html += '<h2>競馬場ごとの傾向</h2>';
     html += renderVenueMap();
@@ -430,6 +514,7 @@ function initStats() {
     html += '</ul>';
     html += '<details><summary>正式な注記（原文）</summary><ul>';
     (st.frozen_notes || []).forEach(function (n) { html += '<li>' + esc(n) + '</li>'; });
+    ((fw && fw.notes) || []).forEach(function (n) { html += '<li>【前向き】' + esc(n) + '</li>'; });
     if (st.coverage_note) html += '<li>' + esc(st.coverage_note) + '</li>';
     html += '</ul></details></div>';
     el.innerHTML = html;
@@ -437,6 +522,15 @@ function initStats() {
 }
 
 /* ---------- アーカイブ ---------- */
+/* 一覧の「結果」列。買い目なし(hit=null)は着順だけ出し、的中/ハズレとは書かない。 */
+function archiveResult(r) {
+  if (r.result_status !== '確定') return '結果待ち';
+  var rk = (r.result_axis_rank === null || r.result_axis_rank === undefined) ? null : r.result_axis_rank;
+  var head = '◎' + (rk === null ? '—' : rk + '着');
+  if (r.result_bet_hit === true) return head + ' 的中 ' + Math.round(r.result_payout) + '円';
+  if (r.result_bet_hit === false) return head + ' ハズレ';
+  return head + '（参考）';
+}
 function initArchive() {
   var el = document.getElementById('archive');
   loadJSON(DATA + 'index.json').then(function (idx) {
@@ -454,7 +548,7 @@ function initArchive() {
       html += '<td class="' + vcls + '">' + esc(r.verdict) + '</td>';
       html += '<td class="c">' + (r.seihai_fired ? '🌈' : '') + '</td>';
       html += '<td>' + esc(plainState(r.gap_state)) + '</td>';
-      html += '<td class="c">' + esc(r.result_status) + '</td>';
+      html += '<td class="c">' + esc(archiveResult(r)) + '</td>';
       html += '<td><a href="#" data-file="' + esc(r.file) + '" class="detail-link">詳細</a></td>';
       html += '</tr>';
       html += '<tr id="row-' + i + '"><td colspan="9" class="detail-slot"></td></tr>';
