@@ -107,6 +107,16 @@ function soften(s) {
   return out;
 }
 
+/* ☔鬼神化該当馬(重・不良で一変する条件を満たした馬)を data.json から取る。
+   ※本体では Rule0 発火ブロック内のコンソール出力のみで、prob_log/seihai_log に
+     記録が無い(2026-07-26 調査)。よって現状この配列は常に空＝道悪行は表示されない。
+     本体が Rule0 発火をログに出すようになれば、data.json に kishin が入り自動で表示される。 */
+function kishinHorses(d) {
+  var k = (d.race || {}).kishin || d.kishin;
+  if (!k) return [];
+  return (Array.isArray(k) ? k : [k]).filter(Boolean);
+}
+
 /* 判定理由を「構造化データ」からやさしい日本語で組み立てる(元の判定文は詳細に残す) */
 function plainReason(d) {
   var v = (d.verdict || {}).value || '';
@@ -119,10 +129,19 @@ function plainReason(d) {
   if (v.indexOf('勝負') >= 0) {
     return '「強さ」で見ても「持ち時計」で見ても同じ上位2頭。特別な条件もそろっていて、自信のある一戦です。';
   }
-  // ⚠️慎重
-  if (g.v27_missing) return '過去の「持ち時計」データが足りず、はっきり判断できませんでした。念のため控えめにします。';
-  if (g.state === '一致') return '「強さ」と「持ち時計」の上位2頭は同じでしたが、特別な条件まではそろっていません。控えめにいきます。';
-  return 'はっきりした狙い目がないので、控えめにします。';
+  // ⚠️慎重 — レースの見立て(gap由来)と、特別サイン(独立軸)は別物。
+  // 慎重なのに買い目が出るのは矛盾ではないので、後半で「ただし…」と繋いで整合させる。
+  var head;
+  if (g.v27_missing) head = '過去の「持ち時計」データが足りず、レースとしてははっきり判断できませんでした';
+  else if (g.state === '一致') head = '「強さ」と「持ち時計」の上位2頭は同じですが、レースとしての狙いどころはもう一歩です';
+  else head = 'レースとしては、はっきりした狙い目がありません';
+
+  if (se.fired) {
+    // 聖杯発火時: 買い目が出る理由を明示して矛盾に見せない
+    return head + '。ただし ◎' + esc(se.axis || '本命') +
+           ' に特別サインが点灯しているため、下記を<b>控えめのサイズで</b>。';
+  }
+  return head + '。控えめにします。';
 }
 
 /* gapの1行をやさしく */
@@ -171,7 +190,8 @@ function renderVerdictCard(d) {
   html += '<div class="verdict-block">';
   html += '<div class="rid">▼ ' + title + '　<span class="note">[' + esc(venueLabel(d)) + ': ' + esc(vgLabel) + ']</span></div>';
   html += '<div class="line">判定: <span class="' + vcls + '">' + esc(v.value) + '</span></div>';
-  html += '<div class="line">' + esc(plainReason(d)) + '</div>';
+  // plainReason は動的部分に esc 済みの安全なHTMLを返す(強調と馬名を含むため二重エスケープしない)
+  html += '<div class="line">' + plainReason(d) + '</div>';
 
   if (se.fired) {
     var u = se.is_ultimate ? '🌈特別サイン(最上位)' : '🌈特別サイン';
@@ -187,9 +207,23 @@ function renderVerdictCard(d) {
     (d.bet_notes || []).forEach(function (n) { html += '※ ' + esc(soften(n)) + '<br>'; });
     html += '</div>';
   }
+  // やめる目安(8〜15倍帯は検証済みの死角なので必ず残す)
   html += '<div class="line note">やめる目安: 本命のオッズが8〜15倍なら買わない</div>';
-  html += '<div class="checklist">⏰ 当日チェック: ☐馬体重が±10kg以上動いていないか　' +
-          '☐馬場が重・不良に悪化→道悪(みちわる)が得意な馬に注意　☐直前オッズが8〜15倍になったら見送り</div>';
+
+  // 当日チェック — 検証済みの物差しだけを、該当する時だけ出す。
+  //   ・馬体重±10kg は削除(休み明け等で日常的に起き、検証済みの物差しでもないため雑音)
+  //   ・オッズ8〜15倍は「やめる目安」と重複するため削除(情報自体は上に残っている)
+  //   ・道悪は ☔鬼神化該当馬がいる時だけ表示(該当馬名も出す)
+  // 項目が1つも無ければ欄ごと出さない。
+  var checks = [];
+  var kishin = kishinHorses(d);
+  if (kishin.length) {
+    checks.push('☐馬場が重・不良に悪化したら <b>' + kishin.map(esc).join('・') +
+                '</b> に注意（道悪(みちわる)で一変する条件を満たしています）');
+  }
+  if (checks.length) {
+    html += '<div class="checklist">⏰ 当日チェック: ' + checks.join('　') + '</div>';
+  }
 
   /* ブロック2【根拠】折りたたみ */
   html += '<details><summary>くわしい根拠を見る（各馬の点数・強さと時計の見方）</summary>';
