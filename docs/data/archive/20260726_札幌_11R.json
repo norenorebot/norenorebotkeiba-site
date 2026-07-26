@@ -1,0 +1,298 @@
+{
+  "schema": "format_prediction.v2",
+  "generated_at": "2026-07-26T13:16:16",
+  "race_id": "20260726_札芝2600_OP",
+  "header": {
+    "date": "2026-07-26",
+    "venue": "札",
+    "surface": "芝",
+    "distance": 2600.0,
+    "race_class": "OP",
+    "baba": "良",
+    "N": 13
+  },
+  "race": {
+    "date": "2026-07-26",
+    "no": 11,
+    "venue_code": "札",
+    "venue_name": "札幌",
+    "labeled": true,
+    "draft": false,
+    "warnings": []
+  },
+  "verdict": {
+    "value": "⚠️慎重",
+    "reason": "gap部分一致 or 場別物差し無し / 較正フォールバック中→本命サイズを落とす(物差し④)",
+    "bet_tier": "seihai_fukusho"
+  },
+  "bets": [
+    "第一推奨: ◎複勝 レクスノヴァス (的中~49%・回収88%/F5 83%=全買い方最良)",
+    "第二推奨: 標準形馬連3点 レクスノヴァス×コーチェラバレー・ミラージュナイト・レッドテリオス (的中20%・配当妙味)"
+  ],
+  "bet_notes": [],
+  "venue_guidance": {
+    "mark": null,
+    "note": "物差し無し(控えめ)"
+  },
+  "seihai": {
+    "fired": true,
+    "axis": "レクスノヴァス",
+    "n_fired": 1,
+    "is_ultimate": false,
+    "skills_str": "🤔【要検討】 🌟調教(1.13倍) 💨展開利",
+    "c_buff": 44.83567159009261,
+    "p_buff": 5.967694175980684,
+    "b_buff": 8.272944944043363,
+    "raw_elo_rank": 4
+  },
+  "gap": {
+    "elo_gap_top2": 24.2,
+    "v27_gap_top2": 17.5,
+    "elo_top2": [
+      "コーチェラバレー",
+      "ミラージュナイト"
+    ],
+    "v27_top2": [
+      "アマキヒ",
+      "ミラージュナイト"
+    ],
+    "big_e": true,
+    "big_v": true,
+    "overlap": 1,
+    "state": "中間",
+    "v27_missing": false,
+    "v27_reason": null,
+    "v27_source_latest": "2026-07-19"
+  },
+  "fallback": true,
+  "calib": {
+    "calib_ok_30R": false,
+    "calib_sample_n": 15,
+    "calibrated_temp": null,
+    "using_calibrated_mc": false
+  },
+  "learning_profile": {
+    "available": true,
+    "cell": "札芝2600・ELITE",
+    "build_date": "2026-07-23",
+    "pin": 36.6,
+    "pkl": "phase1_cache_札_芝_2600m_ELITE.pkl",
+    "systems": [
+      {
+        "label": "展開",
+        "pct": 50.4,
+        "bars": "◉◉◉◎◎"
+      },
+      {
+        "label": "騎手",
+        "pct": 48.4,
+        "bars": "◉◉◎◎◎"
+      },
+      {
+        "label": "調教",
+        "pinned": true,
+        "pin": 36.6
+      },
+      {
+        "label": "厩舎",
+        "pct": 88.8,
+        "bars": "◉◉◉◉◎"
+      },
+      {
+        "label": "斤量",
+        "pct": 43.7,
+        "bars": "◉◉◎◎◎"
+      },
+      {
+        "label": "減衰",
+        "pct": 33.0,
+        "bars": "◉◉◎◎◎"
+      }
+    ],
+    "note": "※学習された係数の相対配置。係数の大小が予測寄与を保証するものではない"
+  },
+  "horses": [
+    {
+      "umaban": 3,
+      "mark": "◎",
+      "name": "レクスノヴァス",
+      "style": "—",
+      "mc_win": 0.1857,
+      "top3_est": 0.49697287161091064,
+      "jitsuryoku": 1617.9944646118174,
+      "zenjitsu": 1676.8547189814167,
+      "adjust": 58.86025436959926,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 5,
+      "mark": "○",
+      "name": "コーチェラバレー",
+      "style": "—",
+      "mc_win": 0.1326,
+      "top3_est": 0.3835875348201274,
+      "jitsuryoku": 1644.1834273785696,
+      "zenjitsu": 1628.2739887386874,
+      "adjust": -15.909438639882183,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 2,
+      "mark": "▲",
+      "name": "ミラージュナイト",
+      "style": "—",
+      "mc_win": 0.1024,
+      "top3_est": 0.30854580977119794,
+      "jitsuryoku": 1655.9786851972087,
+      "zenjitsu": 1602.9327694091444,
+      "adjust": -53.04591578806435,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 8,
+      "mark": "△",
+      "name": "レッドテリオス",
+      "style": "—",
+      "mc_win": 0.1023,
+      "top3_est": 0.3082846284352485,
+      "jitsuryoku": 1615.8416710208994,
+      "zenjitsu": 1607.1502648010173,
+      "adjust": -8.691406219882083,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 1,
+      "mark": "",
+      "name": "スピードリッチ",
+      "style": "—",
+      "mc_win": 0.0876,
+      "top3_est": 0.2689935679972004,
+      "jitsuryoku": 1599.0578700923265,
+      "zenjitsu": 1588.127340576699,
+      "adjust": -10.93052951562754,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 13,
+      "mark": "",
+      "name": "ホールネス",
+      "style": "—",
+      "mc_win": 0.0745,
+      "top3_est": 0.23249685008496374,
+      "jitsuryoku": 1545.8745801254677,
+      "zenjitsu": 1565.1054457740818,
+      "adjust": 19.2308656486141,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 11,
+      "mark": "",
+      "name": "アマキヒ",
+      "style": "—",
+      "mc_win": 0.0725,
+      "top3_est": 0.22680385379865659,
+      "jitsuryoku": 1619.9648312868019,
+      "zenjitsu": 1554.6280898970806,
+      "adjust": -65.33674138972128,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 10,
+      "mark": "",
+      "name": "バルナバ",
+      "style": "—",
+      "mc_win": 0.0703,
+      "top3_est": 0.22050491497797553,
+      "jitsuryoku": 1599.532796929674,
+      "zenjitsu": 1563.1431866417488,
+      "adjust": -36.38961028792528,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 9,
+      "mark": "",
+      "name": "エコロレイズ",
+      "style": "—",
+      "mc_win": 0.0617,
+      "top3_est": 0.19551635478002932,
+      "jitsuryoku": 1609.4389262563272,
+      "zenjitsu": 1543.5372974193936,
+      "adjust": -65.9016288369337,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 7,
+      "mark": "",
+      "name": "ブレイヴロッカー",
+      "style": "—",
+      "mc_win": 0.047,
+      "top3_est": 0.1514778521003568,
+      "jitsuryoku": 1560.707731834616,
+      "zenjitsu": 1519.860305899839,
+      "adjust": -40.84742593477699,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 4,
+      "mark": "",
+      "name": "ギャンブルルーム",
+      "style": "—",
+      "mc_win": 0.0451,
+      "top3_est": 0.14566581619178268,
+      "jitsuryoku": 1538.7833876663187,
+      "zenjitsu": 1521.4225975316795,
+      "adjust": -17.360790134639274,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 6,
+      "mark": "",
+      "name": "パトリックハンサム",
+      "style": "—",
+      "mc_win": 0.0155,
+      "top3_est": 0.051690372671648305,
+      "jitsuryoku": 1506.0983041938105,
+      "zenjitsu": 1408.6888408686768,
+      "adjust": -97.40946332513363,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 12,
+      "mark": "",
+      "name": "ラスカンブレス",
+      "style": "—",
+      "mc_win": 0.0027999999999999995,
+      "top3_est": 0.009459572759902184,
+      "jitsuryoku": 1328.3385911866385,
+      "zenjitsu": 1290.5152184275628,
+      "adjust": -37.82337275907571,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    }
+  ]
+}
