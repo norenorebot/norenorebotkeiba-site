@@ -207,8 +207,11 @@ function renderVerdictCard(d) {
     (d.bet_notes || []).forEach(function (n) { html += '※ ' + esc(soften(n)) + '<br>'; });
     html += '</div>';
   }
-  // やめる目安(8〜15倍帯は検証済みの死角なので必ず残す)
-  html += '<div class="line note">やめる目安: 本命のオッズが8〜15倍なら買わない</div>';
+  // やめる目安(8〜15倍帯は検証済みの死角)。ただし🚫見送りのレースでは
+  // そもそも買わないので「買う条件」は出さない。
+  if (v.value && v.value.indexOf('見送り') < 0) {
+    html += '<div class="line note">やめる目安: 本命のオッズが8〜15倍なら買わない</div>';
+  }
 
   // 当日チェック — 検証済みの物差しだけを、該当する時だけ出す。
   //   ・馬体重±10kg は削除(休み明け等で日常的に起き、検証済みの物差しでもないため雑音)
@@ -242,23 +245,36 @@ function renderVerdictCard(d) {
 }
 
 function renderHorsesTable(rows) {
-  var html = '<div class="tablewrap"><table>';
-  html += '<tr><th>印</th><th>馬名(脚質)</th><th class="num">勝つ確率</th><th class="num">3着内に入る率</th>' +
-          '<th class="num">実力の点数</th><th class="num">前日の総合点</th><th class="num">前日の上げ下げ</th><th class="num">オッズ</th></tr>';
+  // 死んでいる列は出さない: オッズが全行空ならオッズ列ごと省く
+  var hasOdds = rows.some(function (r) { return r.odds !== null && r.odds !== undefined; });
+  var hasSwap = rows.some(function (r) { return r.swap; });
+
+  // 印の並び(レース全体の評価順)と表の並び(勝つ確率順)は一致しないので先に断る
+  var html = '<div class="note">印はレース全体の評価順、表は勝つ確率の高い順に並べています' +
+             '（順番が前後することがあります）。</div>';
+  html += '<div class="tablewrap"><table>';
+  html += '<tr><th>印</th><th>馬名</th><th class="num">勝つ確率</th><th class="num">3着内に入る率(推定)</th>' +
+          '<th class="num">実力の点数</th><th class="num">前日の総合点</th><th class="num">前日の上げ下げ</th>' +
+          (hasOdds ? '<th class="num">オッズ</th>' : '') + '</tr>';
   rows.forEach(function (r) {
     var sw = r.swap ? ' ⇅' : '';
+    // 脚質は不明なことが多い(運用日はparquet未収録)。不明なら括弧ごと出さない
+    var style = (r.style && r.style !== '—') ? '(' + esc(r.style) + ')' : '';
     html += '<tr>';
     html += '<td class="c">' + esc(r.mark || '') + '</td>';
-    html += '<td>' + esc(r.name) + '(' + esc(r.style || '—') + ')' + sw + '</td>';
+    html += '<td>' + esc(r.name) + style + sw + '</td>';
     html += '<td class="num">' + pct(r.mc_win) + '</td>';
     html += '<td class="num">' + pct(r.top3_est) + '</td>';
     html += '<td class="num">' + num(r.jitsuryoku) + '</td>';
     html += '<td class="num">' + num(r.zenjitsu) + '</td>';
     html += '<td class="num">' + signed(r.adjust) + '</td>';
-    html += '<td class="num">' + (r.odds === null || r.odds === undefined ? '—' : num(r.odds, 1)) + '</td>';
+    if (hasOdds) html += '<td class="num">' + (r.odds === null || r.odds === undefined ? '—' : num(r.odds, 1)) + '</td>';
     html += '</tr>';
   });
   html += '</table></div>';
+  if (hasSwap) {
+    html += '<div class="note">⇅ = 実力の順位と前日の総合点の順位が入れ替わっている馬</div>';
+  }
   return html;
 }
 
