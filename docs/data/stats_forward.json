@@ -1,6 +1,6 @@
 {
   "schema": "stats_forward.v1",
-  "generated_at": "2026-07-26T23:11:05",
+  "generated_at": "2026-07-27T09:55:29",
   "period_from": "2026-07-19",
   "results_latest_date": "20260719",
   "source": "docs/archive/*.json(公開した買い目) ⋈ jra_data_*.csv(確定着順・払戻)",
@@ -62,10 +62,20 @@
     "n": 2,
     "axis_top3": 1,
     "axis_win": 0,
+    "gap_disagree": {
+      "n": 0,
+      "axis_top3": 0,
+      "axis_win": 0
+    },
+    "no_signal": {
+      "n": 2,
+      "axis_top3": 1,
+      "axis_win": 0
+    },
     "by_verdict": {
       "⚠️慎重": 2
     },
-    "note": "見送った判断の事後確認(参考)。買い目としては提示せず、回収率にも一切含めない。"
+    "note": "見送った判断の事後確認(参考)。買い目としては提示せず、回収率にも一切含めない。 gap_disagree=上位2頭が食い違い(危険サイン回避) / no_signal=買う条件が不足。"
   },
   "pending": 32,
   "pre_period_excluded": 1,
@@ -84,7 +94,8 @@
       "cost": 0.0,
       "payout": 0.0,
       "in_odds_band": false,
-      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない"
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
     },
     {
       "date": "2026-07-19",
@@ -100,7 +111,8 @@
       "cost": 0.0,
       "payout": 0.0,
       "in_odds_band": false,
-      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない"
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
     }
   ],
   "notes": [

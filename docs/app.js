@@ -41,6 +41,37 @@ function verdictClass(v) {
   return 'v-shincho';
 }
 
+/* ---------- 表示ラベルを「行動」に揃える(2026-07-26・表示層のみ) ----------
+   data.json の verdict.value は判定の“由来”(gapシグナル)を表すため、
+   「⚠️慎重 かつ 買い目なし」が最多になる(7/26は32本中25本)。読み手の行動は
+   🚫見送りと同じ「買わない」なのに、ラベルが買い目の有無と一致せず
+   「結局どれを買うのか」が一目で分からない。
+   そこで表示だけを (verdict.value, 買い目の有無) から導出し直す。
+   data.json のスキーマ・verdict は一切変更しない(既存アーカイブにも遡及して効く)。
+   採点(reconcile_results.py)は bet_tier 基準なので、この変更の影響を受けない。 */
+function hasBet(betTier) {
+  return !!betTier && betTier !== 'none';
+}
+/* 買わない理由の2種を区別する。🚫見送りは gap食い違い のときだけ本体が出す判定。 */
+function isGapDisagree(verdictValue, gapState) {
+  return String(verdictValue || '').indexOf('見送り') >= 0 || gapState === '食い違い';
+}
+/* → {label, cls, kind}。kind: 'bet'(買い目あり) / 'disagree' / 'nosignal' */
+function actionVerdict(verdictValue, betTier, gapState) {
+  if (hasBet(betTier)) {
+    return { label: verdictValue, cls: verdictClass(verdictValue), kind: 'bet' };
+  }
+  return {
+    label: '🚫見送り', cls: 'v-miokuri',
+    kind: isGapDisagree(verdictValue, gapState) ? 'disagree' : 'nosignal'
+  };
+}
+function actionVerdictOf(d) {
+  return actionVerdict((d.verdict || {}).value,
+                       (d.verdict || {}).bet_tier,
+                       (d.gap || {}).state);
+}
+
 function loadJSON(url) {
   return fetch(url, { cache: 'no-store' }).then(function (r) {
     if (!r.ok) throw new Error(url + ' が読めません (' + r.status + ')');
@@ -121,10 +152,13 @@ function kishinHorses(d) {
 function plainReason(d) {
   var v = (d.verdict || {}).value || '';
   var g = d.gap || {}, se = d.seihai || {};
-  if (v.indexOf('見送り') >= 0) {
-    if (g.state === '食い違い')
-      return '「強さ」で上位の馬と「持ち時計」で上位の馬がバラバラです。こういうレースは当てにくいので、買わずに見送ります。';
-    return '本命のオッズが8〜15倍あたりで、うまみが小さいと判断しました。今回は見送ります。';
+  var av = actionVerdictOf(d);
+  // 買い目が無いレースは、理由文の側で「バラバラ(危険サイン)」と「条件不足」を区別する。
+  if (av.kind === 'disagree') {
+    return '「強さ」と「持ち時計」の上位馬がバラバラです（検証済みの危険サイン）。こういうレースは当てにくいので、買わずに見送ります。';
+  }
+  if (av.kind === 'nosignal') {
+    return '買う条件がそろっていません。無理に買わず、このレースは見送ります。';
   }
   if (v.indexOf('勝負') >= 0) {
     return '「強さ」で見ても「持ち時計」で見ても同じ上位2頭。特別な条件もそろっていて、自信のある一戦です。';
@@ -213,7 +247,7 @@ function renderVerdictCard(d) {
   var h = d.header || {}, v = d.verdict || {}, se = d.seihai || {}, g = d.gap || {};
   var vg = d.venue_guidance || {};
   var r = d.race || {};
-  var vcls = verdictClass(v.value);
+  var av = actionVerdictOf(d);          // 表示ラベルは「行動」基準(買い目の有無で決まる)
   var course = esc(h.surface) + dist(h.distance);
   var title = esc(raceTitle(d)) + '　' + course + ' ' + esc(h.race_class);
   var vm = VENUE_MAP[(h.venue || '').charAt(0)];
@@ -222,7 +256,7 @@ function renderVerdictCard(d) {
   var html = '';
   html += '<div class="verdict-block">';
   html += '<div class="rid">▼ ' + title + '　<span class="note">[' + esc(venueLabel(d)) + ': ' + esc(vgLabel) + ']</span></div>';
-  html += '<div class="line">判定: <span class="' + vcls + '">' + esc(v.value) + '</span></div>';
+  html += '<div class="line">判定: <span class="' + av.cls + '">' + esc(av.label) + '</span></div>';
   // plainReason は動的部分に esc 済みの安全なHTMLを返す(強調と馬名を含むため二重エスケープしない)
   html += '<div class="line">' + plainReason(d) + '</div>';
 
@@ -241,9 +275,9 @@ function renderVerdictCard(d) {
     (d.bet_notes || []).forEach(function (n) { html += '※ ' + esc(soften(n)) + '<br>'; });
     html += '</div>';
   }
-  // やめる目安(8〜15倍帯は検証済みの死角)。ただし🚫見送りのレースでは
-  // そもそも買わないので「買う条件」は出さない。
-  if (v.value && v.value.indexOf('見送り') < 0) {
+  // やめる目安(8〜15倍帯は検証済みの死角)。買い目が無いレースでは
+  // そもそも買わないので出さない(表示ラベルが🚫見送りなのに買う条件を出すと矛盾する)。
+  if (av.kind === 'bet') {
     html += '<div class="line note">やめる目安: 本命のオッズが8〜15倍なら買わない</div>';
   }
 
@@ -333,6 +367,15 @@ function renderDetail(d, rawReason) {
   var se = d.seihai || {}, g = d.gap || {}, c = d.calib || {};
   var html = '<div class="note">';
   html += '<span style="color:#555">このブロックは開発用の専門的な内訳です（読み飛ばしてOK）。</span><br>';
+  // 表示ラベルは「行動」基準に置き換えているので、システム内部の元の判定値もここに残す
+  // (置き換えた事実を隠さない。data.json 側の verdict は無改変)。
+  var rawV = (d.verdict || {}).value;
+  var shown = actionVerdictOf(d);
+  if (rawV) {
+    html += 'システム内部の判定値: ' + esc(rawV) + ' / bet_tier=' + esc((d.verdict || {}).bet_tier) +
+            (shown.label !== rawV ? '　<span style="color:#555">（表示は買い目の有無に合わせて「'
+                                    + esc(shown.label) + '」に置換）</span>' : '') + '<br>';
+  }
   if (rawReason) html += 'システムの元の判定文: ' + esc(rawReason) + '<br>';
   if (se.fired) {
     html += 'バフ内訳: C(調教)=' + num(se.c_buff, 1) + ' / P(展開)=' + num(se.p_buff, 1) +
@@ -464,9 +507,21 @@ function renderForward(fw) {
   }
   var sr = fw.skipped_reference || {};
   if (sr.n) {
-    html += '<p class="note">見送ったレース ' + esc(sr.n) + ' 件の事後確認（参考）: ' +
-            '本命が3着以内だったのは ' + esc(sr.axis_top3) + ' 件（うち1着 ' + esc(sr.axis_win) + ' 件）。' +
-            '<b>これは買っていないので、上の回収率には入れていません。</b></p>';
+    // 見送りは理由で分けて出す。「危険サインを避けた」と「条件が出なかった」は
+    // 追跡したいことが違うので混ぜない。
+    var line = function (o, lab) {
+      if (!o || !o.n) return '';
+      return '<li>' + lab + ' ' + esc(o.n) + ' 件 — 本命が3着以内だったのは ' +
+             esc(o.axis_top3) + ' 件（うち1着 ' + esc(o.axis_win) + ' 件）</li>';
+    };
+    html += '<p class="note">見送ったレース ' + esc(sr.n) + ' 件の事後確認（参考）:</p>';
+    // 内訳(gap_disagree/no_signal)は新しい stats_forward.json にしか無い。
+    // 古い版を配信している間は内訳が空になり見出しだけ残るので、合算値に落とす。
+    var breakdown = line(sr.gap_disagree, '上位馬がバラバラで見送り') +
+                    line(sr.no_signal, '買う条件が不足で見送り');
+    html += '<ul class="note">' +
+            (breakdown || line(sr, '見送り（理由の内訳なし）')) + '</ul>';
+    html += '<p class="note"><b>これは買っていないので、上の回収率には入れていません。</b></p>';
   }
   return html;
 }
@@ -539,13 +594,16 @@ function initArchive() {
     html += '<tr><th>レース日</th><th>競馬場</th><th class="c">R</th><th>コース・クラス</th>' +
             '<th>判定</th><th>サイン</th><th>強さ×時計</th><th>結果</th><th></th></tr>';
     (idx.races || []).forEach(function (r, i) {
-      var vcls = verdictClass(r.verdict);
+      // 一覧の判定も「行動」基準に揃える(index.json に bet_tier / gap_state がある)
+      var av = actionVerdict(r.verdict, r.bet_tier, r.gap_state);
       html += '<tr>';
       html += '<td>' + esc(r.race_date || r.date) + '</td>';
       html += '<td>' + esc(r.venue_name || CODE_TO_NAME[(r.venue || '').charAt(0)] || r.venue) + '</td>';
       html += '<td class="c">' + (r.race_no ? esc(r.race_no) + 'R' : '—') + '</td>';
       html += '<td>' + esc(r.surface) + dist(r.distance) + ' ' + esc(r.race_class) + '</td>';
-      html += '<td class="' + vcls + '">' + esc(r.verdict) + '</td>';
+      html += '<td class="verdict-cell ' + av.cls + '">' + esc(av.label) +
+              (av.kind === 'disagree' ? '<br><span class="note">バラバラ</span>'
+             : av.kind === 'nosignal' ? '<br><span class="note">条件不足</span>' : '') + '</td>';
       html += '<td class="c">' + (r.seihai_fired ? '🌈' : '') + '</td>';
       html += '<td>' + esc(plainState(r.gap_state)) + '</td>';
       html += '<td class="c">' + esc(archiveResult(r)) + '</td>';
