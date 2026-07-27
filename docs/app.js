@@ -303,7 +303,7 @@ function renderVerdictCard(d) {
   html += renderLearningProfile(d.learning_profile || {});
 
   /* ブロック3【詳細】深折りたたみ */
-  html += '<details><summary>さらに専門的な内訳（上級者向け）</summary>';
+  html += '<details><summary>くわしい数字（競馬に詳しい方向け）</summary>';
   html += renderDetail(d, v.reason);
   html += '</details>';
   html += '</details>';
@@ -325,7 +325,8 @@ function renderHorsesTable(rows) {
   html += '<div class="tablewrap"><table>';
   html += '<tr><th>印</th><th>馬名</th>' + (hasChokyo ? '<th>調教</th>' : '') +
           '<th class="num">勝つ確率</th><th class="num">3着内に入る率(推定)</th>' +
-          '<th class="num">実力の点数</th><th class="num">前日の総合点</th><th class="num">前日の上げ下げ</th>' +
+          '<th class="num">実力の点数</th><th class="num">前日の総合点</th>' +
+          '<th class="num">調教・展開などの上げ下げ</th>' +
           (hasOdds ? '<th class="num">オッズ</th>' : '') + '</tr>';
   rows.forEach(function (r) {
     var sw = r.swap ? ' ⇅' : '';
@@ -344,10 +345,37 @@ function renderHorsesTable(rows) {
     html += '</tr>';
   });
   html += '</table></div>';
+  html += '<div class="note">「調教・展開などの上げ下げ」＝ 調教の動き・想定される展開・' +
+          '枠順と脚質の相性・騎手や厩舎の傾向などをまとめて点数化した増減です。</div>';
   if (hasSwap) {
     html += '<div class="note">⇅ = 実力の順位と前日の総合点の順位が入れ替わっている馬</div>';
   }
   return html;
+}
+
+/* 学習プロファイルの見出し(cell)は内部表記
+   「{場コード1文字}{芝/ダ}{距離}・{TIER}」 で来る(format_prediction._learning_profile)。
+   TIER は format_prediction._get_tier_local の戻り値で、実データに出る race_class
+   (未勝利 / 1勝 / 2勝 / 3勝 / OP / オープン / 重賞名)では次のとおり(2026-07-27 実測):
+     MAIDEN   ← 未勝利・新馬
+     STANDARD ← 1勝・2勝
+     ELITE    ← 3勝・OP・オープン・G1/G2/G3
+   UNKNOWN も戻り値にあるため、未知の値はそのまま出す(勝手に言い換えない)。 */
+var TIER_JA = {
+  'MAIDEN': '未勝利・新馬クラスのデータ',
+  'STANDARD': '1〜2勝クラスのデータ',
+  'ELITE': '3勝クラス〜オープン・重賞のデータ',
+  'UNKNOWN': 'クラス区分なしのデータ'
+};
+function plainCell(cell) {
+  var s = String(cell || '');
+  var i = s.lastIndexOf('・');
+  if (i < 0) return esc(s);
+  var head = s.slice(0, i), tier = s.slice(i + 1);
+  // 先頭1文字の場コードを正式名に(中/名 の取り違えが目で分かるように)
+  var full = CODE_TO_NAME[head.charAt(0)];
+  if (full) head = full + ' ' + head.slice(1);
+  return esc(head) + '・' + esc(TIER_JA[tier] || tier);
 }
 
 function renderLearningProfile(lp) {
@@ -356,36 +384,41 @@ function renderLearningProfile(lp) {
     if (s.pinned) return esc(s.label) + '[固定' + num(s.pin, 1) + ']';
     return esc(s.label) + s.bars;
   });
-  var html = '<div class="learn-profile">📊 <b>このレースの計算のクセ</b>（' + esc(lp.cell) + '・作成日' + esc(lp.build_date) + '）<br>';
+  var html = '<div class="learn-profile">📊 <b>このレースの計算のクセ</b>（' + plainCell(lp.cell) +
+             '・作成日' + esc(lp.build_date) + '）<br>';
   html += '<span class="bars">　' + parts.join('　') + '</span><br>';
   html += '<span class="note">※ バーが多い＝その項目を大きく計算に使った、というだけの目安です。' +
           '数字の大小が「当たりやすさ」を保証するものではありません。</span></div>';
   return html;
 }
 
+/* くわしい数字(競馬に詳しい方向け)。
+   以前は開発用の生値(較正温度T・bet_tier・overlap 等)を並べていたが、開こうとする
+   読み手に価値が薄いので平文に入れ替えた(2026-07-27)。内部識別子は出さない。 */
 function renderDetail(d, rawReason) {
-  var se = d.seihai || {}, g = d.gap || {}, c = d.calib || {};
+  var se = d.seihai || {}, g = d.gap || {};
   var html = '<div class="note">';
-  html += '<span style="color:#555">このブロックは開発用の専門的な内訳です（読み飛ばしてOK）。</span><br>';
-  // 表示ラベルは「行動」基準に置き換えているので、システム内部の元の判定値もここに残す
-  // (置き換えた事実を隠さない。data.json 側の verdict は無改変)。
-  var rawV = (d.verdict || {}).value;
-  var shown = actionVerdictOf(d);
-  if (rawV) {
-    html += 'システム内部の判定値: ' + esc(rawV) + ' / bet_tier=' + esc((d.verdict || {}).bet_tier) +
-            (shown.label !== rawV ? '　<span style="color:#555">（表示は買い目の有無に合わせて「'
-                                    + esc(shown.label) + '」に置換）</span>' : '') + '<br>';
+
+  // 「強さ」「持ち時計」の上位2頭と、その重なり(旧 gap内訳)
+  var eloTop = (g.elo_top2 || []).map(esc).join('・');
+  html += '「強さ」上位2頭 = ' + (eloTop || '—');
+  if (g.v27_missing) {
+    html += '　／　「持ち時計」= 測れず（' + esc(soften(g.v27_reason || 'データ不足')) + '）<br>';
+  } else {
+    html += '　／　「持ち時計」上位2頭 = ' + ((g.v27_top2 || []).map(esc).join('・') || '—') +
+            '　／　重なり ' + esc(g.overlap) + '頭<br>';
+    html += '<span style="color:#555">2頭とも同じ＝評価が一致、0頭＝食い違い（食い違いは買いません）。</span><br>';
   }
-  if (rawReason) html += 'システムの元の判定文: ' + esc(rawReason) + '<br>';
+
+  // 特別サインが点いた時だけ、その中身(加点の内訳)を出す
   if (se.fired) {
-    html += 'バフ内訳: C(調教)=' + num(se.c_buff, 1) + ' / P(展開)=' + num(se.p_buff, 1) +
-            ' / B(枠)=' + num(se.b_buff, 1) + ' / 素Eloランク=' + esc(se.raw_elo_rank) + '<br>';
+    html += '特別サインの加点: 調教 ' + signed(se.c_buff) + ' ／ 展開 ' + signed(se.p_buff) +
+            ' ／ 枠 ' + signed(se.b_buff) +
+            '　（実力の点数での順位: ' + esc(se.raw_elo_rank) + '番手）<br>';
   }
-  html += 'gap内訳: Elo上位2=' + esc((g.elo_top2 || []).join('・')) + ' / V27上位2=' +
-          (g.v27_missing ? '欠測(' + esc(g.v27_reason || '') + ')' : esc((g.v27_top2 || []).join('・'))) +
-          ' / overlap=' + esc(g.overlap) + '<br>';
-  html += '較正: ' + (c.using_calibrated_mc ? '較正温度T=' + num(c.calibrated_temp, 3) + ' 適用' :
-          'フォールバック(素MC・calib_ok_30R=' + esc(c.calib_ok_30R) + ', n=' + esc(c.calib_sample_n) + ')') + '<br>';
+
+  // 判定ラベルを置き換えている事実は隠さない(1行だけ・平文)
+  html += '<span style="color:#555">※判定の表示は買い目の有無に合わせています。</span>';
   html += '</div>';
   return html;
 }
