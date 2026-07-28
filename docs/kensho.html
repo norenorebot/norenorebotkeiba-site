@@ -2,6 +2,8 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>競馬予想記録 — 検証中コーナー</title>
 <link rel="stylesheet" href="style.css">
@@ -46,6 +48,5 @@
 </footer>
 
 <script src="app.js"></script>
-<script>loadJSON(DATA+'index.json').then(function(x){setUpdated(x.generated_at);}).catch(function(){});</script>
 </body>
 </html>

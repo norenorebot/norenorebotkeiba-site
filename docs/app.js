@@ -412,7 +412,7 @@ function renderDetail(d, rawReason) {
   } else {
     html += '　／　「持ち時計」上位2頭 = ' + ((g.v27_top2 || []).map(esc).join('・') || '—') +
             '　／　重なり ' + esc(g.overlap) + '頭<br>';
-    html += '<span style="color:#555">2頭とも同じ＝評価が一致、0頭＝食い違い（食い違いは買いません）。</span><br>';
+    html += '<span class="dim">2頭とも同じ＝評価が一致、0頭＝食い違い（食い違いは買いません）。</span><br>';
   }
 
   // 特別サインが点いた時だけ、その中身(加点の内訳)を出す
@@ -423,7 +423,7 @@ function renderDetail(d, rawReason) {
   }
 
   // 判定ラベルを置き換えている事実は隠さない(1行だけ・平文)
-  html += '<span style="color:#555">※判定の表示は買い目の有無に合わせています。</span>';
+  html += '<span class="dim">※判定の表示は買い目の有無に合わせています。</span>';
   html += '</div>';
   return html;
 }
@@ -680,4 +680,26 @@ function initArchive() {
 function setUpdated(ts) {
   var el = document.getElementById('updated');
   if (el && ts) el.textContent = '最終更新: ' + String(ts).replace('T', ' ');
+}
+
+/* ---------- ページ初期化(2026-07-28) ----------
+   以前は各HTMLに <script>initLatest();</script> のようなインラインスクリプトを
+   直書きしていたが、CSP の script-src 'self' はインラインスクリプトを禁止するため
+   撤去した。代わりに「どのコンテナidがあるか」でページを判定してここから呼ぶ。
+   ページを増やすときは、専用コンテナのidをここに足す。 */
+function autoInit() {
+  if (document.getElementById('latest')) { initLatest(); return; }   // index.html
+  if (document.getElementById('stats')) { initStats(); return; }     // seiseki.html
+  if (document.getElementById('archive')) { initArchive(); return; } // archive.html
+  // 一覧を持たないページ(about / kensho)は最終更新だけ入れる
+  if (document.getElementById('updated')) {
+    loadJSON(DATA + 'index.json')
+      .then(function (x) { setUpdated(x.generated_at); })
+      .catch(function () {});
+  }
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', autoInit);
+} else {
+  autoInit();   // app.js は </body> 直前で読むので通常はこちら
 }
