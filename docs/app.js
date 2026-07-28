@@ -25,6 +25,11 @@ function esc(s) {
     return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
   });
 }
+/* 辞書引きは必ず「自分のキー」だけ見る。obj[key] は key='constructor'/'__proto__' 等で
+   プロトタイプ側を拾い、意図しない値が表示に流れる(2026-07-28 のXSS点検で発見)。 */
+function lookup(map, key, fallback) {
+  return Object.prototype.hasOwnProperty.call(map, key) ? map[key] : fallback;
+}
 function pct(x) { return (x === null || x === undefined) ? '—' : (x * 100).toFixed(1) + '%'; }
 function num(x, d) { d = (d === undefined) ? 0 : d; return (x === null || x === undefined) ? '—' : Number(x).toFixed(d); }
 function signed(x) { if (x === null || x === undefined) return '—'; var v = Number(x); return (v >= 0 ? '+' : '') + v.toFixed(0); }
@@ -228,14 +233,14 @@ function renderResultLine(d) {
   }
   var b = res.bet || {};
   var rk = (b.axis_rank === null || b.axis_rank === undefined) ? null : b.axis_rank;
-  var axisTxt = '◎' + esc(b.axis || '') + ' ' + (rk === null ? '着順なし' : rk + '着');
+  var axisTxt = '◎' + esc(b.axis || '') + ' ' + (rk === null ? '着順なし' : esc(rk) + '着');
 
   if (b.hit === null || b.hit === undefined) {
     // 買い目なし＝見送り。降りた判断の事後確認(参考)であり、買い目ではない。
     return '<div class="result-line ref">結果: ' + axisTxt +
            ' <span class="note">（買い目なしのレース＝見送った判断の事後確認です。成績には入れていません）</span></div>';
   }
-  var label = TIER_LABEL[b.tier] || '買い目';
+  var label = lookup(TIER_LABEL, b.tier, '買い目');
   var money = (b.hit ? '　払戻 ' + Math.round(b.payout) + '円（' + Math.round(b.cost) + '円買って）'
                      : '　' + Math.round(b.cost) + '円ハズレ');
   return '<div class="result-line ' + (b.hit ? 'hit' : 'miss') + '">結果: ' + axisTxt +
@@ -375,14 +380,14 @@ function plainCell(cell) {
   // 先頭1文字の場コードを正式名に(中/名 の取り違えが目で分かるように)
   var full = CODE_TO_NAME[head.charAt(0)];
   if (full) head = full + ' ' + head.slice(1);
-  return esc(head) + '・' + esc(TIER_JA[tier] || tier);
+  return esc(head) + '・' + esc(lookup(TIER_JA, tier, tier));
 }
 
 function renderLearningProfile(lp) {
   if (!lp || !lp.available) return '<div class="note">計算のクセ: このレース用のデータがありません</div>';
   var parts = (lp.systems || []).map(function (s) {
     if (s.pinned) return esc(s.label) + '[固定' + num(s.pin, 1) + ']';
-    return esc(s.label) + s.bars;
+    return esc(s.label) + esc(s.bars);   // bars も data.json 由来 → 素通しにしない
   });
   var html = '<div class="learn-profile">📊 <b>このレースの計算のクセ</b>（' + plainCell(lp.cell) +
              '・作成日' + esc(lp.build_date) + '）<br>';
@@ -460,13 +465,15 @@ function nColor(color) {
   if (color === 'light_傾向') return 'n-light';
   return 'n-normal';
 }
+/* 数値も stats.json 由来＝外部データなので素通ししない。
+   esc() は数値の見た目を1文字も変えない(String(91.7)→"91.7")ので表示は不変。 */
 function cell(c) {
   if (!c || c.n === 0) return '<td class="num n-gray">—</td>';
-  var roi = (c.roi === null ? '—' : c.roi + '%');
-  var f5 = (c.f5_roi === null || c.f5_roi === undefined ? '' : ' <span class="note">まぐれ除き ' + c.f5_roi + '%</span>');
-  var hit = (c.hit_rate === null ? '—' : c.hit_rate + '%');
+  var roi = (c.roi === null ? '—' : esc(c.roi) + '%');
+  var f5 = (c.f5_roi === null || c.f5_roi === undefined ? '' : ' <span class="note">まぐれ除き ' + esc(c.f5_roi) + '%</span>');
+  var hit = (c.hit_rate === null ? '—' : esc(c.hit_rate) + '%');
   return '<td class="num ' + nColor(c.color) + '">' + hit + ' / ' + roi + f5 +
-         '<br><span class="note">N=' + c.n + '</span></td>';
+         '<br><span class="note">N=' + esc(c.n) + '</span></td>';
 }
 function renderSeriesTable(series, unitLabel) {
   if (!series || series.available === false) {
@@ -495,7 +502,8 @@ function renderSeriesTable(series, unitLabel) {
     html += '<td class="num" colspan="12">';
     html += Object.keys(summer).sort().map(function (y) {
       var s = summer[y];
-      return y + ': ' + (s.hit_rate === null ? '—' : s.hit_rate + '%') + ' / ' + (s.roi === null ? '—' : s.roi + '%') + '(N=' + s.n + ')';
+      return esc(y) + ': ' + (s.hit_rate === null ? '—' : esc(s.hit_rate) + '%') +
+             ' / ' + (s.roi === null ? '—' : esc(s.roi) + '%') + '(N=' + esc(s.n) + ')';
     }).join('　');
     html += '</td></tr>';
   }
@@ -508,10 +516,10 @@ function renderSeriesTable(series, unitLabel) {
 /* 前向き実績(運用) — stats_forward.json。N と F5 を必ず併記し、N基準色を適用する。 */
 function fwdCell(c) {
   if (!c || !c.n) return '<td class="num n-gray">—<br><span class="note">N=0</span></td>';
-  var roi = (c.roi === null ? '—' : c.roi + '%');
-  var f5 = (c.f5_roi === null || c.f5_roi === undefined ? '—' : c.f5_roi + '%');
-  return '<td class="num ' + nColor(c.color) + '">' + (c.hit_rate === null ? '—' : c.hit_rate + '%') +
-         ' / ' + roi + '<br><span class="note">まぐれ除き ' + f5 + '・N=' + c.n + '</span></td>';
+  var roi = (c.roi === null ? '—' : esc(c.roi) + '%');
+  var f5 = (c.f5_roi === null || c.f5_roi === undefined ? '—' : esc(c.f5_roi) + '%');
+  return '<td class="num ' + nColor(c.color) + '">' + (c.hit_rate === null ? '—' : esc(c.hit_rate) + '%') +
+         ' / ' + roi + '<br><span class="note">まぐれ除き ' + f5 + '・N=' + esc(c.n) + '</span></td>';
 }
 function renderForward(fw) {
   if (!fw) {
@@ -653,7 +661,14 @@ function initArchive() {
         ev.preventDefault();
         var slot = document.getElementById('row-' + i).querySelector('.detail-slot');
         if (slot.innerHTML) { slot.innerHTML = ''; return; }
-        loadJSON(DATA + 'archive/' + a.getAttribute('data-file'))
+        // index.json 由来のファイル名をURLに連結するので、形を検査してから使う
+        // (../ 等が入っても data/archive/ の外へは出さない)。
+        var file = String(a.getAttribute('data-file') || '');
+        if (!/^[^/\\?#]+\.json$/.test(file)) {
+          slot.innerHTML = '<span class="note">読み込み失敗: ファイル名が不正です</span>';
+          return;
+        }
+        loadJSON(DATA + 'archive/' + file)   // 形は上で検査済み(/ \ ? # を含まない.json)
           .then(function (d) { slot.innerHTML = renderVerdictCard(d); })
           .catch(function (e) { slot.innerHTML = '<span class="note">読み込み失敗: ' + esc(e.message) + '</span>'; });
       });
