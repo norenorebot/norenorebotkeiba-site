@@ -125,7 +125,7 @@
       "adjust": 107.60223318389512,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 1
     },
     {
       "umaban": 2,
@@ -140,7 +140,7 @@
       "adjust": 114.27361532214877,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 2
     },
     {
       "umaban": 10,
@@ -155,7 +155,7 @@
       "adjust": -15.702013736465915,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 8
     },
     {
       "umaban": 6,
@@ -170,7 +170,7 @@
       "adjust": 92.58341765448677,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 7
     },
     {
       "umaban": 5,
@@ -185,7 +185,7 @@
       "adjust": 17.726073898514414,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 4
     },
     {
       "umaban": 8,
@@ -200,7 +200,7 @@
       "adjust": -47.841415624411184,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 6
     },
     {
       "umaban": 9,
@@ -215,7 +215,7 @@
       "adjust": -32.493701967249535,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 3
     },
     {
       "umaban": 7,
@@ -230,7 +230,7 @@
       "adjust": -33.29874070423352,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 5
     },
     {
       "umaban": 3,
@@ -245,7 +245,7 @@
       "adjust": 2.5678638496129906,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 10
     },
     {
       "umaban": 4,
@@ -260,14 +260,93 @@
       "adjust": -28.427298870508707,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 9
     }
   ],
   "result": {
-    "status": "結果待ち",
-    "reconciled_at": "2026-07-26",
-    "reason": "結果データ未更新(最新 20260719 < 20260726)",
+    "status": "確定",
+    "reconciled_at": "2026-07-31",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "2名2",
+      "r": "6",
+      "race_name": "木曽川Ｈ･2勝",
+      "atama": 10
+    },
+    "finish": [
+      "サヴォアフェール",
+      "レッドラージャ",
+      "コリカンチャ"
+    ],
+    "horses": [
+      {
+        "name": "サヴォアフェール",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "レッドラージャ",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "エアビッグマム",
+        "rank": 8,
+        "note": null
+      },
+      {
+        "name": "マディソンガール",
+        "rank": 7,
+        "note": null
+      },
+      {
+        "name": "ホウオウタイタン",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "オデット",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "コリカンチャ",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "コンフェルマ",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "ツーエムクロノス",
+        "rank": 10,
+        "note": null
+      },
+      {
+        "name": "ハッピーダンチャン",
+        "rank": 9,
+        "note": null
+      }
+    ],
     "unmatched": [],
-    "unmatched_n": 10
+    "bet": {
+      "tier": "seihai_fukusho",
+      "axis": "サヴォアフェール",
+      "axis_rank": 1,
+      "axis_odds": 2.2,
+      "partners": [
+        "レッドラージャ",
+        "エアビッグマム",
+        "マディソンガール"
+      ],
+      "partners_src": "bets文字列",
+      "in_odds_band": false,
+      "cost": 100.0,
+      "hit": true,
+      "payout": 120.0,
+      "note": "複勝は3着まで(頭数10)"
+    }
   }
 }
