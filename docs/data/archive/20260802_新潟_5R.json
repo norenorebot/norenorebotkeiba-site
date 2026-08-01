@@ -1,0 +1,386 @@
+{
+  "schema": "format_prediction.v2",
+  "generated_at": "2026-08-02T02:14:47",
+  "race_id": "20260802_新芝1800_未勝利",
+  "header": {
+    "date": "2026-08-02",
+    "venue": "新",
+    "surface": "芝",
+    "distance": 1800.0,
+    "race_class": "未勝利",
+    "baba": "良",
+    "N": 18
+  },
+  "race": {
+    "date": "2026-08-02",
+    "no": 5,
+    "venue_code": "新",
+    "venue_name": "新潟",
+    "labeled": true,
+    "draft": false,
+    "warnings": []
+  },
+  "verdict": {
+    "value": "⚠️慎重",
+    "reason": "Elo格差小(gap一致条件を満たさない)",
+    "bet_tier": "seihai_fukusho"
+  },
+  "bets": [
+    "第一推奨: ◎複勝 レッドレガリア (的中~49%・回収88%/F5 83%=全買い方最良)",
+    "第二推奨: 標準形馬連3点 レッドレガリア×チルチャンプ・ナイトバード・セーヌデローヴ (的中20%・配当妙味)"
+  ],
+  "bet_notes": [],
+  "venue_guidance": {
+    "mark": null,
+    "note": "物差し無し(控えめ)"
+  },
+  "seihai": {
+    "fired": true,
+    "axis": "レッドレガリア",
+    "n_fired": 1,
+    "is_ultimate": true,
+    "skills_str": "💮【盤石軸】 🔻長距離時計(2200m経由・割引)",
+    "c_buff": 55.95267301246412,
+    "p_buff": 3.911894170184323,
+    "b_buff": -2.0487257610964473,
+    "raw_elo_rank": 1
+  },
+  "gap": {
+    "elo_gap_top2": 5.1,
+    "v27_gap_top2": 4.5,
+    "elo_top2": [
+      "チルチャンプ",
+      "レッドレガリア"
+    ],
+    "v27_top2": [
+      "セーヌデローヴ",
+      "レッドレガリア"
+    ],
+    "big_e": false,
+    "big_v": false,
+    "overlap": 1,
+    "state": "中間",
+    "v27_missing": false,
+    "v27_reason": null,
+    "v27_source_latest": "2026-07-19"
+  },
+  "fallback": false,
+  "calib": {
+    "calib_ok_30R": true,
+    "calib_sample_n": 91,
+    "calibrated_temp": 45.141736814538184,
+    "using_calibrated_mc": true
+  },
+  "learning_profile": {
+    "available": true,
+    "cell": "新芝1800・MAIDEN",
+    "build_date": "2026-07-23",
+    "pin": 36.6,
+    "pkl": "phase1_cache_新_芝_1800m_MAIDEN.pkl",
+    "systems": [
+      {
+        "label": "展開",
+        "pct": 37.3,
+        "bars": "◉◉◎◎◎"
+      },
+      {
+        "label": "騎手",
+        "pct": 51.4,
+        "bars": "◉◉◉◎◎"
+      },
+      {
+        "label": "調教",
+        "pinned": true,
+        "pin": 36.6
+      },
+      {
+        "label": "厩舎",
+        "pct": 23.0,
+        "bars": "◉◎◎◎◎"
+      },
+      {
+        "label": "斤量",
+        "pct": 27.9,
+        "bars": "◉◎◎◎◎"
+      },
+      {
+        "label": "減衰",
+        "pct": 12.1,
+        "bars": "◉◎◎◎◎"
+      }
+    ],
+    "note": "※学習された係数の相対配置。係数の大小が予測寄与を保証するものではない"
+  },
+  "horses": [
+    {
+      "umaban": 7,
+      "mark": "◎",
+      "name": "レッドレガリア",
+      "style": "先行",
+      "chokyo": "🌟調教(1.16倍)",
+      "mc_win": 0.24998587334715075,
+      "top3_est": 0.6359909342509659,
+      "jitsuryoku": 1569.5576787052692,
+      "zenjitsu": 1628.4377144923812,
+      "adjust": 58.88003578711209,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 5,
+      "mark": "○",
+      "name": "チルチャンプ",
+      "style": "差し",
+      "chokyo": "🌟調教(1.20倍)",
+      "mc_win": 0.1970889193455828,
+      "top3_est": 0.5483789626536367,
+      "jitsuryoku": 1549.9110585496405,
+      "zenjitsu": 1617.7052929493752,
+      "adjust": 67.7942343997347,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 1,
+      "mark": "▲",
+      "name": "ナイトバード",
+      "style": "差し",
+      "chokyo": "🌟調教(1.16倍)",
+      "mc_win": 0.15715013504503905,
+      "top3_est": 0.4663026548824585,
+      "jitsuryoku": 1535.8946452210228,
+      "zenjitsu": 1607.4827944497738,
+      "adjust": 71.58814922875104,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 3,
+      "mark": "△",
+      "name": "セーヌデローヴ",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.0723330644841105,
+      "top3_est": 0.24133789076174433,
+      "jitsuryoku": 1537.8342987174824,
+      "zenjitsu": 1572.4564056280678,
+      "adjust": 34.622106910585444,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 12,
+      "mark": "",
+      "name": "カルダモン",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.06988166284338883,
+      "top3_est": 0.23385772228946886,
+      "jitsuryoku": 1525.681667452169,
+      "zenjitsu": 1570.9000057847522,
+      "adjust": 45.218338332583244,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 2,
+      "mark": "",
+      "name": "ラグアイリータ",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.06673837323519276,
+      "top3_est": 0.22419061115133104,
+      "jitsuryoku": 1519.0389535323573,
+      "zenjitsu": 1568.8224394013325,
+      "adjust": 49.783485868975276,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 17,
+      "mark": "",
+      "name": "フキョウワオン",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.06316637287622626,
+      "top3_est": 0.21310245248377796,
+      "jitsuryoku": 1544.7615107940078,
+      "zenjitsu": 1566.3392821305788,
+      "adjust": 21.577771336571004,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 16,
+      "mark": "",
+      "name": "プラネタリーアワー",
+      "style": "追込",
+      "chokyo": null,
+      "mc_win": 0.03322123685353734,
+      "top3_est": 0.11598051630604901,
+      "jitsuryoku": 1538.1469191471076,
+      "zenjitsu": 1537.3319807882447,
+      "adjust": -0.8149383588629462,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 6,
+      "mark": "",
+      "name": "エクストラダーク",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.03030949826501943,
+      "top3_est": 0.10615153495631999,
+      "jitsuryoku": 1533.7618941260923,
+      "zenjitsu": 1533.1912106065383,
+      "adjust": -0.5706835195539952,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 18,
+      "mark": "",
+      "name": "アオゾラランチ",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.01700245487891315,
+      "top3_est": 0.060396751910260144,
+      "jitsuryoku": 1518.9534259184452,
+      "zenjitsu": 1507.0946191076835,
+      "adjust": -11.858806810761735,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 11,
+      "mark": "",
+      "name": "ビップマリク",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.011676235477836732,
+      "top3_est": 0.04170644933358039,
+      "jitsuryoku": 1468.784343363796,
+      "zenjitsu": 1490.1302588114345,
+      "adjust": 21.34591544763839,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 10,
+      "mark": "",
+      "name": "レーザーキック",
+      "style": "追込",
+      "chokyo": null,
+      "mc_win": 0.011399957357069305,
+      "top3_est": 0.04073118240986616,
+      "jitsuryoku": 1494.2908218482376,
+      "zenjitsu": 1489.0492945251133,
+      "adjust": -5.241527323124274,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 4,
+      "mark": "",
+      "name": "ジーナグレイス",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.010462041743451524,
+      "top3_est": 0.037416098260543845,
+      "jitsuryoku": 1461.740423183911,
+      "zenjitsu": 1485.1736064793029,
+      "adjust": 23.433183295391927,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 14,
+      "mark": "",
+      "name": "キタノアヤカ",
+      "style": "追込",
+      "chokyo": null,
+      "mc_win": 0.006575422155146795,
+      "top3_est": 0.023609514243053353,
+      "jitsuryoku": 1484.1247651414044,
+      "zenjitsu": 1464.2091134196996,
+      "adjust": -19.915651721704762,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 13,
+      "mark": "",
+      "name": "ニシノトップダノン",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.0027838096568172785,
+      "top3_est": 0.010033766904559427,
+      "jitsuryoku": 1440.4836498443524,
+      "zenjitsu": 1425.408959461245,
+      "adjust": -15.074690383107281,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 15,
+      "mark": "",
+      "name": "テンノルーキー",
+      "style": "差し",
+      "chokyo": "🌟調教(1.15倍)",
+      "mc_win": 0.00010572182883624463,
+      "top3_est": 0.0003820776700388859,
+      "jitsuryoku": 1246.9580761167704,
+      "zenjitsu": 1277.7609800418677,
+      "adjust": 30.802903925097326,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 9,
+      "mark": "",
+      "name": "イバラヒメ",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 7.776764065165701e-05,
+      "top3_est": 0.00028105932630886595,
+      "jitsuryoku": 1254.2095758379778,
+      "zenjitsu": 1263.8985858367862,
+      "adjust": 9.689009998808388,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 8,
+      "mark": "",
+      "name": "ルビーサンセット",
+      "style": "追込",
+      "chokyo": null,
+      "mc_win": 4.1452966029448474e-05,
+      "top3_est": 0.00014982020603760288,
+      "jitsuryoku": 1242.161794343371,
+      "zenjitsu": 1235.4969408041318,
+      "adjust": -6.664853539239175,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    }
+  ]
+}
