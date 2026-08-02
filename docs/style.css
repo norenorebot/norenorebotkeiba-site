@@ -91,6 +91,11 @@ td.verdict-cell { white-space: nowrap; }
 details { margin: 4px 0; }
 summary { cursor: pointer; font-weight: bold; }
 
+/* 折りたたみ末尾の「閉じる」。素のリンク1本で、装飾はしない(区切りの細罫線のみ)。
+   スマホで開いた中身が3画面分ほどになり、閉じるのに上まで戻る必要があったため追加。 */
+.close-wrap { border-top: 1px solid #ccc; margin-top: 6px; padding-top: 3px; text-align: right; }
+.close-details { font-size: 13px; }
+
 /* --- フッター --- */
 footer { border-top: 1px solid #000; margin-top: 16px; padding-top: 6px; font-size: 13px; color: #333; }
 

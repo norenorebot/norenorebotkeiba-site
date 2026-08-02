@@ -247,6 +247,12 @@ function renderResultLine(d) {
          ' → <b>' + label + (b.hit ? '的中' : 'ハズレ') + '</b>' + money + '</div>';
 }
 
+/* 折りたたみの末尾に置く「閉じる」リンク。
+   スマホでは開いた中身が3画面分ほどになり、閉じるために画面上部まで戻る必要があった。
+   読み終わった位置で閉じられるようにする。CSPでインラインhandlerが使えないので、
+   クリックは bindDetailsUX() の委譲リスナで拾う。 */
+var CLOSE_LINK = '<div class="close-wrap"><a href="#" class="close-details">▲ 閉じる</a></div>';
+
 /* ---------- 結論カード(ブロック1 + 折りたたみ2/3) ---------- */
 function renderVerdictCard(d) {
   var h = d.header || {}, v = d.verdict || {}, se = d.seihai || {}, g = d.gap || {};
@@ -310,7 +316,9 @@ function renderVerdictCard(d) {
   /* ブロック3【詳細】深折りたたみ */
   html += '<details><summary>くわしい数字（競馬に詳しい方向け）</summary>';
   html += renderDetail(d, v.reason);
+  html += CLOSE_LINK;
   html += '</details>';
+  html += CLOSE_LINK;
   html += '</details>';
 
   html += '</div>';
@@ -682,12 +690,53 @@ function setUpdated(ts) {
   if (el && ts) el.textContent = '最終更新: ' + String(ts).replace('T', ' ');
 }
 
+/* ---------- 折りたたみの操作性(2026-08-02) ----------
+   CSP(script-src 'self')でインラインhandlerが使えないため、document に委譲リスナを1つ置く。
+   ・「▲ 閉じる」: 読み終わった位置で閉じ、その折りたたみの見出しへ戻す
+   ・アコーディオン: **スマホ幅のみ**、別のレースを開いたら開いていたレースを閉じる
+     (実測で1レース展開＝約2,773px＝3.4画面。何枚も開くと現在地を見失うため)
+     デスクトップは複数レースを見比べられる方が有利なので従来どおり据え置き。 */
+var MOBILE_Q = '(max-width: 640px)';
+
+function isMobile() {
+  return window.matchMedia && window.matchMedia(MOBILE_Q).matches;
+}
+
+function bindDetailsUX() {
+  if (document._detailsUXBound) return;      // 再描画で二重登録しない
+  document._detailsUXBound = true;
+
+  // 「▲ 閉じる」
+  document.addEventListener('click', function (ev) {
+    var a = ev.target;
+    if (!a || !a.classList || !a.classList.contains('close-details')) return;
+    ev.preventDefault();
+    var det = a.closest ? a.closest('details') : null;
+    if (!det) return;
+    det.open = false;
+    var sum = det.querySelector('summary');
+    if (sum && sum.scrollIntoView) sum.scrollIntoView({ block: 'nearest' });
+  });
+
+  // アコーディオン(スマホのみ・レース単位の一番外側の details だけが対象)
+  document.addEventListener('toggle', function (ev) {
+    var det = ev.target;
+    if (!det || det.tagName !== 'DETAILS' || !det.open) return;
+    if (!isMobile()) return;
+    var card = det.closest ? det.closest('.verdict-block') : null;
+    if (!card || det.parentElement !== card) return;   // 入れ子(ブロック3)は対象外
+    Array.prototype.forEach.call(document.querySelectorAll('.verdict-block > details[open]'),
+      function (other) { if (other !== det) other.open = false; });
+  }, true);   // toggle はバブリングしないのでキャプチャで拾う
+}
+
 /* ---------- ページ初期化(2026-07-28) ----------
    以前は各HTMLに <script>initLatest();</script> のようなインラインスクリプトを
    直書きしていたが、CSP の script-src 'self' はインラインスクリプトを禁止するため
    撤去した。代わりに「どのコンテナidがあるか」でページを判定してここから呼ぶ。
    ページを増やすときは、専用コンテナのidをここに足す。 */
 function autoInit() {
+  bindDetailsUX();
   if (document.getElementById('latest')) { initLatest(); return; }   // index.html
   if (document.getElementById('stats')) { initStats(); return; }     // seiseki.html
   if (document.getElementById('archive')) { initArchive(); return; } // archive.html
