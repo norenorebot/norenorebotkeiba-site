@@ -335,11 +335,20 @@ function renderHorsesTable(rows) {
   // 印の並び(レース全体の評価順)と表の並び(勝つ確率順)は一致しないので先に断る
   var html = '<div class="note">印はレース全体の評価順、表は勝つ確率の高い順に並べています' +
              '（順番が前後することがあります）。</div>';
+  // スマホでは 実力/前日/上げ下げ の3列を隠して横スクロールを無くす(案A′)。
+  //   ・列に固定クラス(col-drop)を振る。nth-child は 調教列・オッズ列の有無で
+  //     位置がずれて壊れるため使わない。
+  //   ・見出しはスマホだけ短縮する(幅を食っているのはデータでなく見出し語のため)。
+  //     全角の長い見出しと短縮版を両方入れ、CSSで出し分ける(CSPでインラインstyle不可)。
+  var h2 = function (full, short) {
+    return '<span class="lbl-full">' + full + '</span><span class="lbl-short">' + short + '</span>';
+  };
   html += '<div class="tablewrap"><table>';
   html += '<tr><th>印</th><th>馬名</th>' + (hasChokyo ? '<th>調教</th>' : '') +
-          '<th class="num">勝つ確率</th><th class="num">3着内に入る率(推定)</th>' +
-          '<th class="num">実力の点数</th><th class="num">前日の総合点</th>' +
-          '<th class="num">調教・展開などの上げ下げ</th>' +
+          '<th class="num">' + h2('勝つ確率', '勝率') + '</th>' +
+          '<th class="num">' + h2('3着内に入る率(推定)', '3着内') + '</th>' +
+          '<th class="num col-drop">実力の点数</th><th class="num col-drop">前日の総合点</th>' +
+          '<th class="num col-drop">調教・展開などの上げ下げ</th>' +
           (hasOdds ? '<th class="num">オッズ</th>' : '') + '</tr>';
   rows.forEach(function (r) {
     var sw = r.swap ? ' ⇅' : '';
@@ -351,14 +360,15 @@ function renderHorsesTable(rows) {
     if (hasChokyo) html += '<td class="seihai">' + esc(r.chokyo || '') + '</td>';
     html += '<td class="num">' + pct(r.mc_win) + '</td>';
     html += '<td class="num">' + pct(r.top3_est) + '</td>';
-    html += '<td class="num">' + num(r.jitsuryoku) + '</td>';
-    html += '<td class="num">' + num(r.zenjitsu) + '</td>';
-    html += '<td class="num">' + signed(r.adjust) + '</td>';
+    html += '<td class="num col-drop">' + num(r.jitsuryoku) + '</td>';
+    html += '<td class="num col-drop">' + num(r.zenjitsu) + '</td>';
+    html += '<td class="num col-drop">' + signed(r.adjust) + '</td>';
     if (hasOdds) html += '<td class="num">' + (r.odds === null || r.odds === undefined ? '—' : num(r.odds, 1)) + '</td>';
     html += '</tr>';
   });
   html += '</table></div>';
-  html += '<div class="note">「調教・展開などの上げ下げ」＝ 調教の動き・想定される展開・' +
+  // 説明はその列が見えている時だけ出す(スマホでは列ごと隠すので注記も隠す)
+  html += '<div class="note col-drop">「調教・展開などの上げ下げ」＝ 調教の動き・想定される展開・' +
           '枠順と脚質の相性・騎手や厩舎の傾向などをまとめて点数化した増減です。</div>';
   if (hasSwap) {
     html += '<div class="note">⇅ = 実力の順位と前日の総合点の順位が入れ替わっている馬</div>';
@@ -475,12 +485,13 @@ function nColor(color) {
 }
 /* 数値も stats.json 由来＝外部データなので素通ししない。
    esc() は数値の見た目を1文字も変えない(String(91.7)→"91.7")ので表示は不変。 */
-function cell(c) {
-  if (!c || c.n === 0) return '<td class="num n-gray">—</td>';
+function cell(c, extraClass) {
+  var ex = extraClass ? ' ' + extraClass : '';
+  if (!c || c.n === 0) return '<td class="num n-gray' + ex + '">—</td>';
   var roi = (c.roi === null ? '—' : esc(c.roi) + '%');
   var f5 = (c.f5_roi === null || c.f5_roi === undefined ? '' : ' <span class="note">まぐれ除き ' + esc(c.f5_roi) + '%</span>');
   var hit = (c.hit_rate === null ? '—' : esc(c.hit_rate) + '%');
-  return '<td class="num ' + nColor(c.color) + '">' + hit + ' / ' + roi + f5 +
+  return '<td class="num ' + nColor(c.color) + ex + '">' + hit + ' / ' + roi + f5 +
          '<br><span class="note">N=' + esc(c.n) + '</span></td>';
 }
 function renderSeriesTable(series, unitLabel) {
@@ -491,31 +502,55 @@ function renderSeriesTable(series, unitLabel) {
   var years = Object.keys(byYear).sort();
   var months = [];
   for (var m = 1; m <= 12; m++) months.push(m);
+  // 月別12列はスマホで実測2,630px(可視363px)＝7.2倍の横スクロールになり実質読めない。
+  //   ・月別セルに col-month を振り、スマホでは列ごと隠す(年計だけ残す)
+  //   ・隠した月別は下の折りたたみ(スマホのみ表示)で縦に読める形で出す
+  //   ・夏合算(6-8月)は §6既知の弱点のモニタとして判断に使う枠なので、
+  //     月別ではなく**年計と同じ層**に残す(スマホでも常に見える)
   var html = '<div class="tablewrap"><table>';
   html += '<caption>' + esc(soften(series.series)) + '（当たった率 / 回収率・件数つき）</caption>';
   html += '<tr><th>年</th><th class="num">年計</th>';
-  months.forEach(function (m) { html += '<th class="num">' + m + '月</th>'; });
+  months.forEach(function (m) { html += '<th class="num col-month">' + m + '月</th>'; });
   html += '</tr>';
   years.forEach(function (y) {
     var yr = byYear[y];
     html += '<tr class="year-total"><th>' + esc(y) + '</th>' + cell(yr.year_total);
-    months.forEach(function (m) { html += cell((yr.months || {})[m]); });
+    months.forEach(function (m) { html += cell((yr.months || {})[m], 'col-month'); });
     html += '</tr>';
   });
-  // 夏合算(6-8月)行
+  // 夏合算(6-8月)行 — 年計と同じ層(スマホでも隠さない)
   var summer = series.summer_6_8 || {};
+  var summerText = '';
   if (Object.keys(summer).length) {
-    html += '<tr><th>夏(6-8月)</th><td class="num note">下記</td>';
-    // 夏行は年ごとに月列を潰して1セルにまとめる(小標本モニタ)
-    html += '<td class="num" colspan="12">';
-    html += Object.keys(summer).sort().map(function (y) {
+    summerText = Object.keys(summer).sort().map(function (y) {
       var s = summer[y];
       return esc(y) + ': ' + (s.hit_rate === null ? '—' : esc(s.hit_rate) + '%') +
              ' / ' + (s.roi === null ? '—' : esc(s.roi) + '%') + '(N=' + esc(s.n) + ')';
     }).join('　');
-    html += '</td></tr>';
+    // num は white-space:nowrap なので使わない(1行に伸びて表が横に広がる)。折り返させる。
+    html += '<tr><th>夏(6-8月)</th><td class="wrapcell" colspan="13">' + summerText + '</td></tr>';
   }
   html += '</table></div>';
+
+  // スマホ用: 隠した月別を折りたたみで縦に読ませる(デスクトップではCSSで非表示)
+  if (years.length) {
+    html += '<details class="mobile-only"><summary>月ごとの内訳を見る</summary>';
+    years.forEach(function (y) {
+      var yr = byYear[y];
+      var ms = yr.months || {};
+      var keys = months.filter(function (m) { return ms[m] && ms[m].n; });
+      if (!keys.length) return;
+      html += '<div class="tablewrap"><table>';
+      html += '<caption>' + esc(y) + '年</caption>';
+      html += '<tr><th>月</th><th class="num">当たった率 / 回収率</th></tr>';
+      keys.forEach(function (m) {
+        html += '<tr><th>' + m + '月</th>' + cell(ms[m]) + '</tr>';
+      });
+      html += '</table></div>';
+    });
+    html += CLOSE_LINK + '</details>';
+  }
+
   if (series.summer_weak_flag) {
     html += '<p class="frozen-note">⚠️ 夏(6-8月)が沈んでいます → 聖杯を1段階割引を検討(§6モニタ)。</p>';
   }
@@ -541,11 +576,15 @@ function renderForward(fw) {
           '結果が確定した分のみ集計。<b>結果待ち ' + esc(fw.pending) + ' 件</b>。</p>';
   html += '<div class="tablewrap"><table>';
   html += '<caption>前向き実績（当たった率 / 回収率・件数つき）</caption>';
-  html += '<tr><th>買い方</th><th class="num">全件</th><th class="num">8〜15倍を除いた分</th></tr>';
+  // th は既定で nowrap のため、買い方の長いラベル(「特別サイン◎複勝(100円/1点)」等)が
+  // 1行に伸びて表が横に広がっていた(実測242px)。この列だけ折り返させる。
+  html += '<tr><th class="wraphead">買い方</th><th class="num">全件</th>' +
+          '<th class="num">8〜15倍を除いた分</th></tr>';
   keys.forEach(function (k) {
     var v = s[k];
     if (!v) return;
-    html += '<tr><th>' + esc(soften(v.label)) + '</th>' + fwdCell(v.all) + fwdCell(v.rule_8_15) + '</tr>';
+    html += '<tr><th class="wraphead">' + esc(soften(v.label)) + '</th>' +
+            fwdCell(v.all) + fwdCell(v.rule_8_15) + '</tr>';
   });
   html += '</table></div>';
 
@@ -640,8 +679,11 @@ function initArchive() {
   loadJSON(DATA + 'index.json').then(function (idx) {
     setUpdated(idx.generated_at);
     var html = '<div class="tablewrap"><table>';
-    html += '<tr><th>レース日</th><th>競馬場</th><th class="c">R</th><th>コース・クラス</th>' +
-            '<th>判定</th><th>サイン</th><th>強さ×時計</th><th>結果</th><th></th></tr>';
+    // スマホでは「コース・クラス」と「強さ×時計」を隠す(実測+146px→0)。
+    //   ・一覧の役割は 日付・場・R・判定・結果 で果たせる(コースは詳細を開けば分かる)
+    //   ・「強さ×時計」は判定セルの補足(バラバラ/条件不足)と内容が重複するため
+    html += '<tr><th>レース日</th><th>競馬場</th><th class="c">R</th><th class="col-drop">コース・クラス</th>' +
+            '<th>判定</th><th>サイン</th><th class="col-drop">強さ×時計</th><th>結果</th><th></th></tr>';
     (idx.races || []).forEach(function (r, i) {
       // 一覧の判定も「行動」基準に揃える(index.json に bet_tier / gap_state がある)
       var av = actionVerdict(r.verdict, r.bet_tier, r.gap_state);
@@ -649,12 +691,12 @@ function initArchive() {
       html += '<td>' + esc(r.race_date || r.date) + '</td>';
       html += '<td>' + esc(r.venue_name || CODE_TO_NAME[(r.venue || '').charAt(0)] || r.venue) + '</td>';
       html += '<td class="c">' + (r.race_no ? esc(r.race_no) + 'R' : '—') + '</td>';
-      html += '<td>' + esc(r.surface) + dist(r.distance) + ' ' + esc(r.race_class) + '</td>';
+      html += '<td class="col-drop">' + esc(r.surface) + dist(r.distance) + ' ' + esc(r.race_class) + '</td>';
       html += '<td class="verdict-cell ' + av.cls + '">' + esc(av.label) +
               (av.kind === 'disagree' ? '<br><span class="note">バラバラ</span>'
              : av.kind === 'nosignal' ? '<br><span class="note">条件不足</span>' : '') + '</td>';
       html += '<td class="c">' + (r.seihai_fired ? '🌈' : '') + '</td>';
-      html += '<td>' + esc(plainState(r.gap_state)) + '</td>';
+      html += '<td class="col-drop">' + esc(plainState(r.gap_state)) + '</td>';
       html += '<td class="c">' + esc(archiveResult(r)) + '</td>';
       html += '<td><a href="#" data-file="' + esc(r.file) + '" class="detail-link">詳細</a></td>';
       html += '</tr>';

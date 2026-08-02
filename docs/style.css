@@ -40,6 +40,10 @@ caption { text-align: left; font-weight: bold; font-size: 15px; padding: 2px 0; 
 th, td { border: 1px solid #999; padding: 2px 6px; font-size: 15px; vertical-align: top; }
 th { background: #eee; font-weight: bold; white-space: nowrap; }
 td.num, th.num { text-align: right; white-space: nowrap; }
+/* 長文を入れるセル(夏合算の年別まとめ等)。num と違い折り返す＝表を横に広げない */
+td.wrapcell { white-space: normal; word-break: break-word; }
+/* th は既定 nowrap。長いラベルを入れる見出し列だけ折り返させる */
+th.wraphead { white-space: normal; word-break: break-word; }
 td.c, th.c { text-align: center; }
 tr.year-total td, tr.year-total th { background: #f3f3f3; font-weight: bold; }
 
@@ -101,7 +105,27 @@ footer { border-top: 1px solid #000; margin-top: 16px; padding-top: 6px; font-si
 
 /* --- モバイルでテーブルが崩れない最小限(§6例外・見た目は平成/実装だけ現代) --- */
 .tablewrap { overflow-x: auto; }
+
+/* 見出しの短縮版はデスクトップでは出さない(既定=フル表記) */
+.lbl-short { display: none; }
+/* スマホ専用ブロック(月別の折りたたみ等)はデスクトップでは出さない */
+.mobile-only { display: none; }
+
 @media (max-width: 640px) {
   body { padding: 6px 6px 40px; }
   th, td { padding: 2px 4px; font-size: 14px; }
+
+  /* スマホだけ列を落として横スクロールを無くす(2026-08-02)。
+     デスクトップの罫線テーブルは一切変えない=平成様式は維持。
+     列の位置は 調教列/オッズ列の有無で動くので nth-child は使わず固定クラスで指定する。
+       col-drop  : 馬柱の 実力/前日/上げ下げ、アーカイブの コース・クラス/強さ×時計
+       col-month : 成績の月別12列(年計と夏合算は残す) */
+  .col-drop, .col-month { display: none; }
+
+  /* 見出しはスマホだけ短縮(幅を食っているのはデータでなく見出し語のため) */
+  .lbl-full { display: none; }
+  .lbl-short { display: inline; }
+
+  /* 月別の折りたたみはスマホでのみ出す */
+  .mobile-only { display: block; }
 }

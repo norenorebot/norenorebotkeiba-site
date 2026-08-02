@@ -27,12 +27,15 @@
 
 <div class="tablewrap"><table>
 <caption>人気馬を軸にした馬連（お試し中）</caption>
-<tr><th>買い方</th><th>過去に当てはめた成績</th><th>いまの扱い</th><th>本番の件数</th><th>正式採用の条件</th></tr>
+<!-- スマホでは「過去に当てはめた成績」列を隠す(col-drop)。
+     この値は本文で「信用しないでほしい」と断っている参考値で、
+     一覧の役割(いまの扱い・本番の件数・採用条件)は残りの列で果たせるため。 -->
+<tr><th>買い方</th><th class="col-drop">過去に当てはめた成績</th><th>いまの扱い</th><th>本番の件数</th><th>正式採用の条件</th></tr>
 <tr>
   <td>ある条件がそろった時に、人気上位馬を軸にした馬連</td>
-  <td class="num">過去に当てはめると回収105%</td>
+  <td class="num wrapcell col-drop">過去に当てはめると回収105%</td>
   <td class="v-miokuri">まだ採用しない<br><span class="note">時期を分けると再現しなかった</span></td>
-  <td class="num" id="rule0-n">0件（これから）</td>
+  <td class="num wrapcell" id="rule0-n">0件（これから）</td>
   <td>本番の結果が <b>30件</b> たまったら採用するか決める</td>
 </tr>
 </table></div>
