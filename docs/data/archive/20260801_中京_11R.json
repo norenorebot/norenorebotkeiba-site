@@ -116,7 +116,7 @@
       "adjust": 72.60821935976514,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 3
     },
     {
       "umaban": 1,
@@ -131,7 +131,7 @@
       "adjust": 36.75817050674027,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 4
     },
     {
       "umaban": 3,
@@ -146,7 +146,7 @@
       "adjust": -72.26385704024983,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 1
     },
     {
       "umaban": 2,
@@ -161,7 +161,7 @@
       "adjust": -63.94349193073322,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 9
     },
     {
       "umaban": 5,
@@ -176,7 +176,7 @@
       "adjust": 41.04488273419679,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 2
     },
     {
       "umaban": 6,
@@ -191,7 +191,7 @@
       "adjust": -57.700578234071145,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 5
     },
     {
       "umaban": 9,
@@ -206,7 +206,7 @@
       "adjust": 45.02696081298086,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 8
     },
     {
       "umaban": 4,
@@ -221,7 +221,7 @@
       "adjust": -12.179609779263501,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 6
     },
     {
       "umaban": 8,
@@ -236,14 +236,88 @@
       "adjust": -44.41217747284418,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 7
     }
   ],
   "result": {
-    "status": "結果待ち",
+    "status": "確定",
     "reconciled_at": "2026-08-03",
-    "reason": "日付+馬名で1頭も一致せず",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "2名3",
+      "r": "11",
+      "race_name": "１勝ｸﾗｽ・牝",
+      "atama": 9
+    },
+    "finish": [
+      "サムシングスイート",
+      "ヴィスコンテッサ",
+      "ピカキウイ"
+    ],
+    "horses": [
+      {
+        "name": "ピカキウイ",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "シルバーリム",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "サムシングスイート",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "エクリュ",
+        "rank": 9,
+        "note": null
+      },
+      {
+        "name": "ヴィスコンテッサ",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "シェーラ",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "エイシンウィスパー",
+        "rank": 8,
+        "note": null
+      },
+      {
+        "name": "カポレイラ",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "マーゴットレジーナ",
+        "rank": 7,
+        "note": null
+      }
+    ],
     "unmatched": [],
-    "unmatched_n": 9
+    "bet": {
+      "tier": "none",
+      "axis": "サムシングスイート",
+      "axis_rank": 1,
+      "axis_odds": 4.8,
+      "partners": [
+        "ピカキウイ",
+        "シルバーリム",
+        "エクリュ"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 0.0,
+      "hit": null,
+      "payout": 0.0,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない"
+    }
   }
 }

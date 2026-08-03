@@ -116,7 +116,7 @@
       "adjust": 12.75483916404778,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 1
     },
     {
       "umaban": 8,
@@ -131,7 +131,7 @@
       "adjust": 28.412319965621236,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 2
     },
     {
       "umaban": 1,
@@ -146,7 +146,7 @@
       "adjust": -4.430649545597134,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 9
     },
     {
       "umaban": 3,
@@ -161,7 +161,7 @@
       "adjust": -43.9533258010797,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 8
     },
     {
       "umaban": 2,
@@ -176,7 +176,7 @@
       "adjust": -33.70688593429213,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 4
     },
     {
       "umaban": 10,
@@ -191,7 +191,7 @@
       "adjust": -25.67376390327945,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 3
     },
     {
       "umaban": 6,
@@ -206,7 +206,7 @@
       "adjust": 1.8498115476265866,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 6
     },
     {
       "umaban": 5,
@@ -221,7 +221,7 @@
       "adjust": 31.271734393315,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 7
     },
     {
       "umaban": 4,
@@ -236,7 +236,7 @@
       "adjust": -26.738612021686095,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 5
     },
     {
       "umaban": 9,
@@ -251,14 +251,93 @@
       "adjust": -9.75921270946128,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 10
     }
   ],
   "result": {
-    "status": "結果待ち",
+    "status": "確定",
     "reconciled_at": "2026-08-03",
-    "reason": "日付+馬名で1頭も一致せず",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "2名3",
+      "r": "1",
+      "race_name": "未勝利*",
+      "atama": 10
+    },
+    "finish": [
+      "アーデルボーデン",
+      "サイモンレガシー",
+      "クラリスバローズ"
+    ],
+    "horses": [
+      {
+        "name": "アーデルボーデン",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "サイモンレガシー",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "ヤマニンイハナ",
+        "rank": 9,
+        "note": null
+      },
+      {
+        "name": "オスカーレイア",
+        "rank": 8,
+        "note": null
+      },
+      {
+        "name": "シャインラブ",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "クラリスバローズ",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "フェーエンハフト",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "メモリアデルレ",
+        "rank": 7,
+        "note": null
+      },
+      {
+        "name": "ヴェールダムール",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "ディーヴァレギオン",
+        "rank": 10,
+        "note": null
+      }
+    ],
     "unmatched": [],
-    "unmatched_n": 10
+    "bet": {
+      "tier": "none",
+      "axis": "オスカーレイア",
+      "axis_rank": 8,
+      "axis_odds": 2.3,
+      "partners": [
+        "アーデルボーデン",
+        "サイモンレガシー",
+        "ヤマニンイハナ"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 0.0,
+      "hit": null,
+      "payout": 0.0,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない"
+    }
   }
 }

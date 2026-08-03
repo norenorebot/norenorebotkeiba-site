@@ -116,7 +116,7 @@
       "adjust": -35.544349101552825,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 2
     },
     {
       "umaban": 11,
@@ -131,7 +131,7 @@
       "adjust": -34.47635524782072,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 3
     },
     {
       "umaban": 4,
@@ -146,7 +146,7 @@
       "adjust": -17.36124970314677,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 5
     },
     {
       "umaban": 5,
@@ -161,7 +161,7 @@
       "adjust": -73.53492875166057,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 7
     },
     {
       "umaban": 2,
@@ -176,7 +176,7 @@
       "adjust": -19.36234774341051,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 6
     },
     {
       "umaban": 6,
@@ -191,7 +191,7 @@
       "adjust": -66.80474978132247,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 4
     },
     {
       "umaban": 8,
@@ -206,7 +206,7 @@
       "adjust": -47.705288010305594,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 11
     },
     {
       "umaban": 9,
@@ -221,7 +221,7 @@
       "adjust": -38.27097539572446,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 8
     },
     {
       "umaban": 3,
@@ -236,7 +236,7 @@
       "adjust": -1.8937633492337227,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 10
     },
     {
       "umaban": 10,
@@ -251,7 +251,7 @@
       "adjust": -49.79541446049507,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 9
     },
     {
       "umaban": 7,
@@ -266,14 +266,98 @@
       "adjust": -61.94663738592885,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 1
     }
   ],
   "result": {
-    "status": "結果待ち",
+    "status": "確定",
     "reconciled_at": "2026-08-03",
-    "reason": "日付+馬名で1頭も一致せず",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "1札3",
+      "r": "4",
+      "race_name": "１勝ｸﾗｽ",
+      "atama": 11
+    },
+    "finish": [
+      "ミリオンクラウン",
+      "アイドクレース",
+      "アドミラルシップ"
+    ],
+    "horses": [
+      {
+        "name": "アイドクレース",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "アドミラルシップ",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "ブルースカイブルー",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "マイバラード",
+        "rank": 7,
+        "note": null
+      },
+      {
+        "name": "ドーギッド",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "ゴールドジェスター",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "リリーズブルーム",
+        "rank": 11,
+        "note": null
+      },
+      {
+        "name": "エイトスターズ",
+        "rank": 8,
+        "note": null
+      },
+      {
+        "name": "エイカイカッシーナ",
+        "rank": 10,
+        "note": null
+      },
+      {
+        "name": "マイネルマスター",
+        "rank": 9,
+        "note": null
+      },
+      {
+        "name": "ミリオンクラウン",
+        "rank": 1,
+        "note": null
+      }
+    ],
     "unmatched": [],
-    "unmatched_n": 11
+    "bet": {
+      "tier": "none",
+      "axis": "アイドクレース",
+      "axis_rank": 2,
+      "axis_odds": 2.0,
+      "partners": [
+        "アドミラルシップ",
+        "ブルースカイブルー",
+        "ドーギッド"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 0.0,
+      "hit": null,
+      "payout": 0.0,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない"
+    }
   }
 }

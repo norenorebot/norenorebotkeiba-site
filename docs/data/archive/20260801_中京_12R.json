@@ -125,7 +125,7 @@
       "adjust": 70.06913675618284,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 3
     },
     {
       "umaban": 9,
@@ -140,7 +140,7 @@
       "adjust": 34.55191064714381,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 4
     },
     {
       "umaban": 1,
@@ -155,7 +155,7 @@
       "adjust": 29.942779005599732,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 1
     },
     {
       "umaban": 7,
@@ -170,7 +170,7 @@
       "adjust": -2.5471522439070213,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 9
     },
     {
       "umaban": 11,
@@ -185,7 +185,7 @@
       "adjust": -24.260383164615178,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 5
     },
     {
       "umaban": 6,
@@ -200,7 +200,7 @@
       "adjust": 48.19109282468162,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 2
     },
     {
       "umaban": 4,
@@ -215,7 +215,7 @@
       "adjust": 4.181579798844496,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 10
     },
     {
       "umaban": 5,
@@ -230,7 +230,7 @@
       "adjust": -52.371095254125294,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 8
     },
     {
       "umaban": 8,
@@ -245,7 +245,7 @@
       "adjust": -69.86647315517052,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 7
     },
     {
       "umaban": 2,
@@ -260,7 +260,7 @@
       "adjust": -8.702021206072459,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 6
     },
     {
       "umaban": 10,
@@ -275,14 +275,98 @@
       "adjust": -19.855098209655125,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 11
     }
   ],
   "result": {
-    "status": "結果待ち",
+    "status": "確定",
     "reconciled_at": "2026-08-03",
-    "reason": "日付+馬名で1頭も一致せず",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "2名3",
+      "r": "12",
+      "race_name": "１勝ｸﾗｽ",
+      "atama": 11
+    },
+    "finish": [
+      "サーディンラン",
+      "ヴォーカライズ",
+      "ララファキュルテ"
+    ],
+    "horses": [
+      {
+        "name": "ララファキュルテ",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "パスコード",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "サーディンラン",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "パーシャングレー",
+        "rank": 9,
+        "note": null
+      },
+      {
+        "name": "ウインラウダ",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "ヴォーカライズ",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "キングケープ",
+        "rank": 10,
+        "note": null
+      },
+      {
+        "name": "メイショウビストロ",
+        "rank": 8,
+        "note": null
+      },
+      {
+        "name": "グレゴリオ",
+        "rank": 7,
+        "note": null
+      },
+      {
+        "name": "ウィテカービート",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "サマーブリザード",
+        "rank": 11,
+        "note": null
+      }
+    ],
     "unmatched": [],
-    "unmatched_n": 11
+    "bet": {
+      "tier": "seihai_fukusho",
+      "axis": "ララファキュルテ",
+      "axis_rank": 3,
+      "axis_odds": 4.7,
+      "partners": [
+        "パスコード",
+        "サーディンラン",
+        "パーシャングレー"
+      ],
+      "partners_src": "bets文字列",
+      "in_odds_band": false,
+      "cost": 100.0,
+      "hit": true,
+      "payout": 170.0,
+      "note": "複勝は3着まで(頭数11)"
+    }
   }
 }
