@@ -603,10 +603,19 @@ function renderForward(fw) {
   });
   html += '</table></div>';
 
-  var allN = keys.reduce(function (a, k) { return a + ((s[k] && s[k].all && s[k].all.n) || 0); }, 0);
-  if (allN < 10) {
-    html += '<p class="frozen-note">⚠️ 件数がまだ ' + allN + ' 件です（10件未満＝<b>参考外</b>）。' +
-            'この数字で良し悪しを判断できる段階ではありません。表のグレーは「参考外」を表しています。</p>';
+  // 参考外(N<10)の判定は**系列ごと**に行う(2026-08-03修正)。
+  //   以前は全系列のNを合算して判定していたため、たとえば N=7 と N=5 で
+  //   合計12となり警告が消える一方、セルの色は各系列N<10で「参考外」のグレーのまま、
+  //   という不整合が起きていた。系列は別の買い方なので合算に意味がない
+  //   (片方30件・片方2件でも警告が消えてしまう)。
+  //   Nを系列ごとに数えるのは stats.json のN基準色と同じ原則。
+  var thin = keys.map(function (k) { return s[k]; })
+                 .filter(function (v) { return v && v.all && v.all.n > 0 && v.all.n < 10; });
+  if (thin.length) {
+    html += '<p class="frozen-note">⚠️ 件数が10件未満の買い方があります（' +
+            thin.map(function (v) { return esc(soften(v.label)) + ' N=' + esc(v.all.n); }).join(' / ') +
+            '）。この数字で良し悪しを判断できる段階ではありません。' +
+            '表のグレーは「参考外」を表しています。</p>';
   }
   var sr = fw.skipped_reference || {};
   if (sr.n) {
