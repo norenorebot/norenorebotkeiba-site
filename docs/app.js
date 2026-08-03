@@ -335,8 +335,12 @@ function renderHorsesTable(rows) {
   // 印の並び(レース全体の評価順)と表の並び(勝つ確率順)は一致しないので先に断る
   var html = '<div class="note">印はレース全体の評価順、表は勝つ確率の高い順に並べています' +
              '（順番が前後することがあります）。</div>';
-  // スマホでは 実力/前日/上げ下げ の3列を隠して横スクロールを無くす(案A′)。
-  //   ・列に固定クラス(col-drop)を振る。nth-child は 調教列・オッズ列の有無で
+  // スマホでは 実力の点数 と 上げ下げ の2列を隠す(2026-08-02改訂)。
+  //   ・「上げ下げ」だけ残すと基準の総合点が見えず増減の意味が読めないため、
+  //     残すのは最終評価である「前日の総合点」にする(印の並び順とも対応する)。
+  //   ・実力の点数と上げ下げは差分関係(総合点 = 実力 + 上げ下げ)なので、
+  //     両方隠せば整合する(片方だけ残すと引き算の相手が無い状態になる)。
+  //   ・列には固定クラス(col-drop)を振る。nth-child は 調教列・オッズ列の有無で
   //     位置がずれて壊れるため使わない。
   //   ・見出しはスマホだけ短縮する(幅を食っているのはデータでなく見出し語のため)。
   //     全角の長い見出しと短縮版を両方入れ、CSSで出し分ける(CSPでインラインstyle不可)。
@@ -347,7 +351,8 @@ function renderHorsesTable(rows) {
   html += '<tr><th>印</th><th>馬名</th>' + (hasChokyo ? '<th>調教</th>' : '') +
           '<th class="num">' + h2('勝つ確率', '勝率') + '</th>' +
           '<th class="num">' + h2('3着内に入る率(推定)', '3着内') + '</th>' +
-          '<th class="num col-drop">実力の点数</th><th class="num col-drop">前日の総合点</th>' +
+          '<th class="num col-drop">実力の点数</th>' +
+          '<th class="num">' + h2('前日の総合点', '総合点') + '</th>' +
           '<th class="num col-drop">調教・展開などの上げ下げ</th>' +
           (hasOdds ? '<th class="num">オッズ</th>' : '') + '</tr>';
   rows.forEach(function (r) {
@@ -361,7 +366,7 @@ function renderHorsesTable(rows) {
     html += '<td class="num">' + pct(r.mc_win) + '</td>';
     html += '<td class="num">' + pct(r.top3_est) + '</td>';
     html += '<td class="num col-drop">' + num(r.jitsuryoku) + '</td>';
-    html += '<td class="num col-drop">' + num(r.zenjitsu) + '</td>';
+    html += '<td class="num">' + num(r.zenjitsu) + '</td>';
     html += '<td class="num col-drop">' + signed(r.adjust) + '</td>';
     if (hasOdds) html += '<td class="num">' + (r.odds === null || r.odds === undefined ? '—' : num(r.odds, 1)) + '</td>';
     html += '</tr>';
@@ -371,7 +376,13 @@ function renderHorsesTable(rows) {
   html += '<div class="note col-drop">「調教・展開などの上げ下げ」＝ 調教の動き・想定される展開・' +
           '枠順と脚質の相性・騎手や厩舎の傾向などをまとめて点数化した増減です。</div>';
   if (hasSwap) {
-    html += '<div class="note">⇅ = 実力の順位と前日の総合点の順位が入れ替わっている馬</div>';
+    // ⇅ はスマホでも残す(順位が動いたという情報自体は有効で、動かした要因の
+    // 調教は同じ表に見えている)。ただしスマホでは「実力の点数」列が無く
+    // 「実力の順位と」と書いても確かめられないので、説明文だけ言い換える。
+    html += '<div class="note">' +
+            '<span class="lbl-full">⇅ = 実力の順位と前日の総合点の順位が入れ替わっている馬</span>' +
+            '<span class="lbl-short">⇅ = 調教や展開などの評価で、素の実力から順位が入れ替わった馬</span>' +
+            '</div>';
   }
   return html;
 }
