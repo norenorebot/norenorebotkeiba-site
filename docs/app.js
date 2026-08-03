@@ -186,9 +186,13 @@ function plainReason(d) {
 /* gapの1行をやさしく */
 function plainGap(g) {
   if (!g) return '';
-  if (g.v27_missing) return '見方: 「強さ」の開き ' + num(g.elo_gap_top2, 1) + ' ／ 「持ち時計」はデータ不足で今回は測れず';
+  // どちらも当サイト独自の指標なので、その場で1語ずつ性質を添える(長くしない)。
+  // くわしい定義は「このサイトについて」の用語表。
+  var E = '「強さ」(実力の指標)';
+  var V = '「持ち時計」(独自推定)';
+  if (g.v27_missing) return '見方: ' + E + 'の開き ' + num(g.elo_gap_top2, 1) + ' ／ ' + V + 'はデータ不足で今回は測れず';
   var word = g.state === '一致' ? '同じ2頭が上位（一致）' : g.state === '食い違い' ? '上位がバラバラ（食い違い）' : esc(g.state);
-  return '見方: 「強さ」の開き ' + num(g.elo_gap_top2, 1) + ' ／ 「持ち時計」の開き ' + num(g.v27_gap_top2, 1) + ' → <b>' + word + '</b>';
+  return '見方: ' + E + 'の開き ' + num(g.elo_gap_top2, 1) + ' ／ ' + V + 'の開き ' + num(g.v27_gap_top2, 1) + ' → <b>' + word + '</b>';
 }
 
 /* 正式場名(中山/中京の取り違えが目で分かるように必ず出す) */
