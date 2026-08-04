@@ -90,6 +90,20 @@ td.verdict-cell { white-space: nowrap; }
 tr.row-skip td { color: #555; }
 tr.row-skip td .note { color: #777; }
 
+/* --- 買い目のある行/カードの識別(2026-08-04) ---
+   実機で淡色化だけでは判別が不十分だったため、行頭に「形」の差を足す。
+   見送り側は同じ幅の空白を置いて桁を揃える(記号の有無だけが差になる)。 */
+.bet-mark { display: inline-block; width: 1.1em; color: #000; font-weight: bold; }
+tr.row-skip .bet-mark, .verdict-block.vb-skip .bet-mark { color: inherit; }
+
+/* 記号と淡色化に加えて、買い目のある行/カードだけ薄クリーム1色を敷く。
+   見送りには何も付けない(白のまま)。§6の「背景は白または薄クリーム1色」を守る。
+   ※対象は**アーカイブ一覧の行**と**結論カード**だけに限定する。
+     `.tablewrap table tr td` で書くと成績ページの年月別テーブルや馬柱まで
+     着色されてしまう(それらの行に row-skip は付かないため)。 */
+.verdict-block:not(.vb-skip) { background: #fffbe6; }
+#archive tr:not(.row-skip) td { background: #fffbe6; }
+
 /* --- 結果表示(結果突合・§7)。装飾せず、罫線1本と文字色だけで区別する --- */
 .result-line { margin: 4px 0; padding: 3px 6px; border: 1px solid #999; background: #f7f7ef; }
 .result-line.hit     { color: #cc0000; }   /* 的中=判定色と同じ赤 */
