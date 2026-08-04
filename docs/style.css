@@ -85,6 +85,11 @@ td.verdict-cell { white-space: nowrap; }
 /* 折りたたみの中身は開いた時に読むものなので落とさない(可読性優先) */
 .verdict-block.vb-skip details { color: #000; }
 
+/* アーカイブ一覧も同じ手法で、見送り行の文字を落とす(列は増やさない)。
+   判定セルの .v-miokuri など固有色は各セル側の指定が優先される。 */
+tr.row-skip td { color: #555; }
+tr.row-skip td .note { color: #777; }
+
 /* --- 結果表示(結果突合・§7)。装飾せず、罫線1本と文字色だけで区別する --- */
 .result-line { margin: 4px 0; padding: 3px 6px; border: 1px solid #999; background: #f7f7ef; }
 .result-line.hit     { color: #cc0000; }   /* 的中=判定色と同じ赤 */

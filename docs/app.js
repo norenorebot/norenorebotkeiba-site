@@ -762,7 +762,9 @@ function initArchive() {
     (idx.races || []).forEach(function (r, i) {
       // 一覧の判定も「行動」基準に揃える(index.json に bet_tier / gap_state がある)
       var av = actionVerdict(r.verdict, r.bet_tier, r.gap_state);
-      html += '<tr>';
+      // 見送り行は文字を落として、買い目のあった行を相対的に浮き上がらせる。
+      // (最新予想の .vb-skip と同じ手法。列は増やさないのでスマホ幅に影響しない)
+      html += '<tr' + (av.kind === 'bet' ? '' : ' class="row-skip"') + '>';
       html += '<td>' + esc(r.race_date || r.date) + '</td>';
       html += '<td>' + esc(r.venue_name || CODE_TO_NAME[(r.venue || '').charAt(0)] || r.venue) + '</td>';
       html += '<td class="c">' + (r.race_no ? esc(r.race_no) + 'R' : '—') + '</td>';
