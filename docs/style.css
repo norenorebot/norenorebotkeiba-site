@@ -66,6 +66,25 @@ tr.year-total td, tr.year-total th { background: #f3f3f3; font-weight: bold; }
    はみ出した分は .tablewrap の横スクロールで見る。 */
 td.verdict-cell { white-space: nowrap; }
 
+/* --- その日のサマリー(最新予想ページ上部・2026-08-03) ---
+   §6準拠: 罫線とテキストのみ。カード/影/角丸/グラデは使わない。 */
+.day-summary { border: 2px solid #000; padding: 6px 8px; margin: 6px 0 10px; background: #fff; }
+.day-summary .ds-head { font-size: 17px; font-weight: bold; margin-bottom: 3px; }
+.day-summary .ds-list { margin: 2px 0 4px; padding-left: 20px; }
+.day-summary .ds-list li { margin: 1px 0; }
+
+/* 見送りカードは文字色を落として、買い目ありを相対的に浮き上がらせる。
+   色を足すのではなく引く(様式を壊さずに差を作る)。
+   #555 は白背景でコントラスト比 7:1 以上あり、本文として読める濃さ。 */
+.verdict-block.vb-skip { border-color: #999; }
+.verdict-block.vb-skip .rid,
+.verdict-block.vb-skip .line,
+.verdict-block.vb-skip .bet,
+.verdict-block.vb-skip li { color: #555; }
+.verdict-block.vb-skip .note { color: #777; }
+/* 折りたたみの中身は開いた時に読むものなので落とさない(可読性優先) */
+.verdict-block.vb-skip details { color: #000; }
+
 /* --- 結果表示(結果突合・§7)。装飾せず、罫線1本と文字色だけで区別する --- */
 .result-line { margin: 4px 0; padding: 3px 6px; border: 1px solid #999; background: #f7f7ef; }
 .result-line.hit     { color: #cc0000; }   /* 的中=判定色と同じ赤 */

@@ -257,8 +257,53 @@ function renderResultLine(d) {
    クリックは bindDetailsUX() の委譲リスナで拾う。 */
 var CLOSE_LINK = '<div class="close-wrap"><a href="#" class="close-details">▲ 閉じる</a></div>';
 
+/* カードのアンカーid。**ASCIIの連番**にする。
+   場コード(漢字)を id に入れて encodeURIComponent すると、id は "r-%E5%90%8D-6" のまま
+   なのにブラウザは href の "#r-%E5%90%8D-6" をデコードして "r-名-6" を探すため一致しない
+   (実測でリンク5件すべて切れた)。表示順の通し番号なら日本語を持ち込まずに済む。 */
+function raceAnchor(idx) {
+  return 'race-' + idx;
+}
+
+/* ---------- その日のサマリー(最新予想ページ上部) ----------
+   「買うレース」と「見送り」を最初に分けて見せる。罫線とテキストのみ(§6)。 */
+function renderDaySummary(rows) {
+  // rows: [{d: data.json, idx: 表示順(アンカーと対応)}]
+  var bets = rows.filter(function (x) { return actionVerdictOf(x.d).kind === 'bet'; });
+  var skips = rows.filter(function (x) { return actionVerdictOf(x.d).kind !== 'bet'; });
+
+  var html = '<div class="day-summary">';
+  if (!bets.length) {
+    html += '<div class="ds-head">本日は買い目のあるレースがありません</div>';
+    html += '<div class="note">見送り ' + skips.length + ' 件。' +
+            '「買わない」も結論として出しています。</div>';
+  } else {
+    html += '<div class="ds-head">買い目のあるレース: <b>' + bets.length + '</b> 件</div>';
+    html += '<ul class="ds-list">';
+    bets.forEach(function (x) {
+      var d = x.d, se = d.seihai || {}, tier = (d.verdict || {}).bet_tier;
+      var axis = se.axis || axisFromRows(d) || '—';
+      var sign = se.fired ? '🌈特別サイン' : '📐実力差サイン';
+      var what = TIER_LABEL[tier] || '';
+      html += '<li><a href="#' + esc(raceAnchor(x.idx)) + '">' +
+              esc(venueLabel(d)) + (d.race && d.race.no ? esc(d.race.no) + 'R' : '') + '</a>' +
+              '　◎' + esc(axis) +
+              '　<span class="note">' + esc(sign) + (what ? '／' + esc(what) : '') + '</span></li>';
+    });
+    html += '</ul>';
+    html += '<div class="note">見送り: <b>' + skips.length + '</b> 件</div>';
+  }
+  html += '</div>';
+  return html;
+}
+/* ◎の馬名は seihai.axis が無い時(実力差サイン等)に表から拾う */
+function axisFromRows(d) {
+  var r = (d.horses || []).filter(function (x) { return x.mark === '◎'; })[0];
+  return r ? r.name : null;
+}
+
 /* ---------- 結論カード(ブロック1 + 折りたたみ2/3) ---------- */
-function renderVerdictCard(d) {
+function renderVerdictCard(d, idx) {
   var h = d.header || {}, v = d.verdict || {}, se = d.seihai || {}, g = d.gap || {};
   var vg = d.venue_guidance || {};
   var r = d.race || {};
@@ -269,7 +314,10 @@ function renderVerdictCard(d) {
   var vgLabel = vm ? (vm[0] + ' ' + vm[1]) : ((vg.mark || '—') + ' ' + soften(vg.note || '目安なし'));
 
   var html = '';
-  html += '<div class="verdict-block">';
+  // サマリーから飛べるようにアンカーを振り、見送りは淡色クラスを足す。
+  // (色を足すのではなく引くことで、買い目ありを相対的に浮き上がらせる)
+  html += '<div class="verdict-block' + (av.kind === 'bet' ? '' : ' vb-skip') +
+          (idx === undefined ? '">' : '" id="' + esc(raceAnchor(idx)) + '">');
   html += '<div class="rid">▼ ' + title + '　<span class="note">[' + esc(venueLabel(d)) + ': ' + esc(vgLabel) + ']</span></div>';
   html += '<div class="line">判定: <span class="' + av.cls + '">' + esc(av.label) + '</span></div>';
   // plainReason は動的部分に esc 済みの安全なHTMLを返す(強調と馬名を含むため二重エスケープしない)
@@ -481,7 +529,10 @@ function initLatest() {
     // 各レースの data.json を取得して結論カードを縦に並べる
     return Promise.all(todays.map(function (r) { return loadJSON(DATA + 'archive/' + r.file); }))
       .then(function (list) {
-        el.innerHTML = list.map(renderVerdictCard).join('');
+        var rows = list.map(function (d, i) { return { d: d, idx: i }; });
+        // 上部にその日の要約(買い目のあるレース/見送り)、続けて従来どおりカードを縦に並べる
+        el.innerHTML = renderDaySummary(rows) +
+                       list.map(function (d, i) { return renderVerdictCard(d, i); }).join('');
       });
   }).catch(function (e) { el.innerHTML = '<p>読み込みエラー: ' + esc(e.message) + '</p>'; });
 }
