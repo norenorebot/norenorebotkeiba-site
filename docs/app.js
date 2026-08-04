@@ -265,14 +265,10 @@ function raceAnchor(idx) {
   return 'race-' + idx;
 }
 
-/* 買い目のある行/カードの行頭に付ける識別記号。
-   淡色化(#555 vs #000)だけでは、隣接していない行同士の濃淡が実機で判別しづらかった。
-   色ではなく**形**の差にして目が先に拾えるようにする(◎○▲と同じ字種で様式も崩さない)。
-   見送り側は同じ幅の空白を出して桁を揃える(記号の有無だけが差になる)。 */
-function betMark(isBet) {
-  return isBet ? '<span class="bet-mark">●</span>'
-               : '<span class="bet-mark bet-mark-off">　</span>';
-}
+/* 【削除済み: betMark() の行頭「●」】(2026-08-04)
+   淡色化だけでは判別が足りず一度 ● を足したが、薄クリーム背景(#fffbe6)を入れた時点で
+   十分に見分けが付いたため記号は不要になった(実機確認)。
+   識別は「背景色(買い目のみ薄クリーム)」＋「文字色(#000 / #555)」の2つで行う。 */
 
 /* ---------- その日のサマリー(最新予想ページ上部) ----------
    「買うレース」と「見送り」を最初に分けて見せる。罫線とテキストのみ(§6)。 */
@@ -327,7 +323,7 @@ function renderVerdictCard(d, idx) {
   // (色を足すのではなく引くことで、買い目ありを相対的に浮き上がらせる)
   html += '<div class="verdict-block' + (av.kind === 'bet' ? '' : ' vb-skip') +
           (idx === undefined ? '">' : '" id="' + esc(raceAnchor(idx)) + '">');
-  html += '<div class="rid">' + betMark(av.kind === 'bet') + '▼ ' + title +
+  html += '<div class="rid">▼ ' + title +
           '　<span class="note">[' + esc(venueLabel(d)) + ': ' + esc(vgLabel) + ']</span></div>';
   html += '<div class="line">判定: <span class="' + av.cls + '">' + esc(av.label) + '</span></div>';
   // plainReason は動的部分に esc 済みの安全なHTMLを返す(強調と馬名を含むため二重エスケープしない)
@@ -775,7 +771,7 @@ function initArchive() {
       // 見送り行は文字を落として、買い目のあった行を相対的に浮き上がらせる。
       // (最新予想の .vb-skip と同じ手法。列は増やさないのでスマホ幅に影響しない)
       html += '<tr' + (av.kind === 'bet' ? '' : ' class="row-skip"') + '>';
-      html += '<td>' + betMark(av.kind === 'bet') + esc(r.race_date || r.date) + '</td>';
+      html += '<td>' + esc(r.race_date || r.date) + '</td>';
       html += '<td>' + esc(r.venue_name || CODE_TO_NAME[(r.venue || '').charAt(0)] || r.venue) + '</td>';
       html += '<td class="c">' + (r.race_no ? esc(r.race_no) + 'R' : '—') + '</td>';
       html += '<td class="col-drop">' + esc(r.surface) + dist(r.distance) + ' ' + esc(r.race_class) + '</td>';
