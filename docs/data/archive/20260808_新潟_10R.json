@@ -1,0 +1,311 @@
+{
+  "schema": "format_prediction.v2",
+  "generated_at": "2026-08-08T08:52:03",
+  "race_id": "20260808_新芝1600_1勝",
+  "header": {
+    "date": "2026-08-08",
+    "venue": "新",
+    "surface": "芝",
+    "distance": 1600.0,
+    "race_class": "1勝",
+    "baba": "良",
+    "N": 13
+  },
+  "race": {
+    "date": "2026-08-08",
+    "no": 10,
+    "venue_code": "新",
+    "venue_name": "新潟",
+    "labeled": true,
+    "draft": false,
+    "warnings": []
+  },
+  "verdict": {
+    "value": "⚠️慎重",
+    "reason": "Elo格差小(gap一致条件を満たさない) / 較正フォールバック中→本命サイズを落とす(物差し④)",
+    "bet_tier": "seihai_fukusho"
+  },
+  "bets": [
+    "第一推奨: ◎複勝 マツリダイコ (的中~49%・回収88%/F5 83%=全買い方最良)",
+    "第二推奨: 標準形馬連3点 マツリダイコ×クリールスル・サレジオ・スピリットサージ (的中20%・配当妙味)"
+  ],
+  "bet_notes": [],
+  "venue_guidance": {
+    "mark": null,
+    "note": "物差し無し(控えめ)"
+  },
+  "seihai": {
+    "fired": true,
+    "axis": "マツリダイコ",
+    "n_fired": 1,
+    "is_ultimate": true,
+    "skills_str": "💮【盤石軸】 💪剛腕 ⚔️猛者善戦",
+    "c_buff": 70.93668413295319,
+    "p_buff": 3.7592423117961578,
+    "b_buff": -7.876714133519558,
+    "raw_elo_rank": 1
+  },
+  "gap": {
+    "elo_gap_top2": 8.7,
+    "v27_gap_top2": 15.7,
+    "elo_top2": [
+      "ガラク",
+      "マツリダイコ"
+    ],
+    "v27_top2": [
+      "サレジオ",
+      "マツリダイコ"
+    ],
+    "big_e": false,
+    "big_v": true,
+    "overlap": 1,
+    "state": "中間",
+    "v27_missing": false,
+    "v27_reason": null,
+    "v27_source_latest": "2026-08-02"
+  },
+  "fallback": true,
+  "calib": {
+    "calib_ok_30R": false,
+    "calib_sample_n": 27,
+    "calibrated_temp": null,
+    "using_calibrated_mc": false
+  },
+  "learning_profile": {
+    "available": true,
+    "cell": "新芝1600・STANDARD",
+    "build_date": "2026-07-23",
+    "pin": 36.6,
+    "pkl": "phase1_cache_新_芝_1600m_STANDARD.pkl",
+    "systems": [
+      {
+        "label": "展開",
+        "pct": 30.9,
+        "bars": "◉◉◎◎◎"
+      },
+      {
+        "label": "騎手",
+        "pct": 65.2,
+        "bars": "◉◉◉◎◎"
+      },
+      {
+        "label": "調教",
+        "pinned": true,
+        "pin": 36.6
+      },
+      {
+        "label": "厩舎",
+        "pct": 30.4,
+        "bars": "◉◉◎◎◎"
+      },
+      {
+        "label": "斤量",
+        "pct": 76.1,
+        "bars": "◉◉◉◉◎"
+      },
+      {
+        "label": "減衰",
+        "pct": 73.7,
+        "bars": "◉◉◉◉◎"
+      }
+    ],
+    "note": "※学習された係数の相対配置。係数の大小が予測寄与を保証するものではない"
+  },
+  "horses": [
+    {
+      "umaban": 4,
+      "mark": "◎",
+      "name": "マツリダイコ",
+      "style": "先行",
+      "chokyo": "🌟調教(1.17倍)",
+      "mc_win": 0.2005,
+      "top3_est": 0.5333019283486706,
+      "jitsuryoku": 1674.4143461612791,
+      "zenjitsu": 1738.2091975849107,
+      "adjust": 63.7948514236316,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 13,
+      "mark": "○",
+      "name": "クリールスル",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.1377,
+      "top3_est": 0.40265434386369936,
+      "jitsuryoku": 1643.0957736829666,
+      "zenjitsu": 1667.0378094344937,
+      "adjust": 23.9420357515271,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 1,
+      "mark": "▲",
+      "name": "サレジオ",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.1242,
+      "top3_est": 0.3701233581109001,
+      "jitsuryoku": 1633.8510680365305,
+      "zenjitsu": 1656.645826557494,
+      "adjust": 22.79475852096357,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 11,
+      "mark": "△",
+      "name": "スピリットサージ",
+      "style": "先行",
+      "chokyo": "🌟調教(1.18倍)",
+      "mc_win": 0.1039,
+      "top3_est": 0.31821718857258047,
+      "jitsuryoku": 1557.937263203184,
+      "zenjitsu": 1621.1465995554229,
+      "adjust": 63.20933635223878,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 10,
+      "mark": "",
+      "name": "ガラク",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.1018,
+      "top3_est": 0.3126448920118892,
+      "jitsuryoku": 1651.797956066542,
+      "zenjitsu": 1620.7973883277245,
+      "adjust": -31.00056773881738,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 9,
+      "mark": "",
+      "name": "スタニングヴュー",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.0882,
+      "top3_est": 0.27565170883344003,
+      "jitsuryoku": 1623.6985188222188,
+      "zenjitsu": 1590.5689539147645,
+      "adjust": -33.12956490745432,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 5,
+      "mark": "",
+      "name": "ハナコトバ",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.0863,
+      "top3_est": 0.27035970231837,
+      "jitsuryoku": 1585.84369739106,
+      "zenjitsu": 1592.2390948995394,
+      "adjust": 6.395397508479391,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 6,
+      "mark": "",
+      "name": "ルモンテ",
+      "style": "追込",
+      "chokyo": null,
+      "mc_win": 0.0683,
+      "top3_est": 0.2187469280455165,
+      "jitsuryoku": 1595.6936189089097,
+      "zenjitsu": 1557.5096768461585,
+      "adjust": -38.18394206275116,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 2,
+      "mark": "",
+      "name": "エラルディーク",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.042199999999999994,
+      "top3_est": 0.13929801619429974,
+      "jitsuryoku": 1464.6333997070494,
+      "zenjitsu": 1493.1706930419268,
+      "adjust": 28.537293334877404,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 12,
+      "mark": "",
+      "name": "クリスタルタワー",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.0228,
+      "top3_est": 0.07686536894809166,
+      "jitsuryoku": 1419.4232224109564,
+      "zenjitsu": 1413.4852450171186,
+      "adjust": -5.937977393837855,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 7,
+      "mark": "",
+      "name": "ヤマカンドリーミン",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.015599999999999998,
+      "top3_est": 0.05299080901224906,
+      "jitsuryoku": 1408.710574247403,
+      "zenjitsu": 1363.041548661114,
+      "adjust": -45.66902558628908,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 8,
+      "mark": "",
+      "name": "ミッキーコンドル",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.0073,
+      "top3_est": 0.025009297631177492,
+      "jitsuryoku": 1252.5203123262168,
+      "zenjitsu": 1260.4727764717027,
+      "adjust": 7.952464145485919,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 3,
+      "mark": "",
+      "name": "ミズノミヤコ",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.0012,
+      "top3_est": 0.004136458109115896,
+      "jitsuryoku": 1156.7540142148528,
+      "zenjitsu": 1088.2916381785456,
+      "adjust": -68.4623760363072,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    }
+  ]
+}
