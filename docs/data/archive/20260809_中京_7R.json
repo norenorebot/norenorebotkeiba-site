@@ -1,0 +1,371 @@
+{
+  "schema": "format_prediction.v2",
+  "generated_at": "2026-08-09T00:50:57",
+  "race_id": "20260809_名芝1200_G3",
+  "header": {
+    "date": "2026-08-09",
+    "venue": "名",
+    "surface": "芝",
+    "distance": 1200.0,
+    "race_class": "G3",
+    "baba": "良",
+    "N": 17
+  },
+  "race": {
+    "date": "2026-08-09",
+    "no": 7,
+    "venue_code": "名",
+    "venue_name": "中京",
+    "labeled": true,
+    "draft": false,
+    "warnings": []
+  },
+  "verdict": {
+    "value": "⚠️慎重",
+    "reason": "gap部分一致 or 場別物差し無し",
+    "bet_tier": "seihai_fukusho"
+  },
+  "bets": [
+    "第一推奨: ◎複勝 タマモイカロス (的中~49%・回収88%/F5 83%=全買い方最良)",
+    "第二推奨: 標準形馬連3点 タマモイカロス×レイピア・レッドエヴァンス・ジェニファー (的中20%・配当妙味)"
+  ],
+  "bet_notes": [],
+  "venue_guidance": {
+    "mark": null,
+    "note": "物差し無し(控えめ)"
+  },
+  "seihai": {
+    "fired": true,
+    "axis": "タマモイカロス",
+    "n_fired": 1,
+    "is_ultimate": false,
+    "skills_str": "🌟調教(1.04倍) 💨展開利",
+    "c_buff": 46.141557196333956,
+    "p_buff": 8.849323036532832,
+    "b_buff": -30.855388968182584,
+    "raw_elo_rank": 2
+  },
+  "gap": {
+    "elo_gap_top2": 27.6,
+    "v27_gap_top2": 6.3,
+    "elo_top2": [
+      "タマモイカロス",
+      "レイピア"
+    ],
+    "v27_top2": [
+      "イツモニコニコ",
+      "ジェニファー"
+    ],
+    "big_e": true,
+    "big_v": false,
+    "overlap": 0,
+    "state": "中間",
+    "v27_missing": false,
+    "v27_reason": null,
+    "v27_source_latest": "2026-08-02"
+  },
+  "fallback": false,
+  "calib": {
+    "calib_ok_30R": true,
+    "calib_sample_n": 49,
+    "calibrated_temp": 111.34966593134801,
+    "using_calibrated_mc": true
+  },
+  "learning_profile": {
+    "available": true,
+    "cell": "名芝1200・ELITE",
+    "build_date": "2026-08-06",
+    "pin": 36.6,
+    "pkl": "phase1_cache_名_芝_1200m_ELITE.pkl",
+    "systems": [
+      {
+        "label": "展開",
+        "pct": 69.3,
+        "bars": "◉◉◉◎◎"
+      },
+      {
+        "label": "騎手",
+        "pct": 50.9,
+        "bars": "◉◉◉◎◎"
+      },
+      {
+        "label": "調教",
+        "pinned": true,
+        "pin": 36.6
+      },
+      {
+        "label": "厩舎",
+        "pct": 50.2,
+        "bars": "◉◉◉◎◎"
+      },
+      {
+        "label": "斤量",
+        "pct": 55.4,
+        "bars": "◉◉◉◎◎"
+      },
+      {
+        "label": "減衰",
+        "pct": 62.7,
+        "bars": "◉◉◉◎◎"
+      }
+    ],
+    "note": "※学習された係数の相対配置。係数の大小が予測寄与を保証するものではない"
+  },
+  "horses": [
+    {
+      "umaban": 3,
+      "mark": "○",
+      "name": "レイピア",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.13512351818409482,
+      "top3_est": 0.37734320568634094,
+      "jitsuryoku": 1730.4588582556564,
+      "zenjitsu": 1750.9685663601408,
+      "adjust": 20.50970810448439,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 6,
+      "mark": "▲",
+      "name": "レッドエヴァンス",
+      "style": "先行",
+      "chokyo": "🌟調教(1.16倍)",
+      "mc_win": 0.12481559132553155,
+      "top3_est": 0.3534931585871326,
+      "jitsuryoku": 1669.6117343334554,
+      "zenjitsu": 1742.132755350739,
+      "adjust": 72.5210210172836,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 17,
+      "mark": "◎",
+      "name": "タマモイカロス",
+      "style": "差し",
+      "chokyo": "🌟調教(1.04倍)",
+      "mc_win": 0.11133707868119383,
+      "top3_est": 0.32103143668320494,
+      "jitsuryoku": 1701.7608768904638,
+      "zenjitsu": 1729.4082684868256,
+      "adjust": 27.647391596361786,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 5,
+      "mark": "△",
+      "name": "ジェニファー",
+      "style": "逃げ",
+      "chokyo": "🌟調教(1.09倍)",
+      "mc_win": 0.06859510838483854,
+      "top3_est": 0.20864971892228412,
+      "jitsuryoku": 1635.6487386375798,
+      "zenjitsu": 1675.4770467176613,
+      "adjust": 39.82830808008157,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 7,
+      "mark": "",
+      "name": "ディアナザール",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.06754275391986908,
+      "top3_est": 0.2057054267763876,
+      "jitsuryoku": 1633.0525188795798,
+      "zenjitsu": 1673.7555322147996,
+      "adjust": 40.703013335219794,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 8,
+      "mark": "",
+      "name": "フィオライア",
+      "style": "追込",
+      "chokyo": "🌟調教(1.19倍)",
+      "mc_win": 0.06419038302538758,
+      "top3_est": 0.19627059574031996,
+      "jitsuryoku": 1571.533833508087,
+      "zenjitsu": 1668.087011744228,
+      "adjust": 96.5531782361411,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 13,
+      "mark": "",
+      "name": "サンアントワーヌ",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.05783226583603103,
+      "top3_est": 0.178145747020953,
+      "jitsuryoku": 1632.6131535515904,
+      "zenjitsu": 1656.4725122493894,
+      "adjust": 23.859358697799053,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 15,
+      "mark": "",
+      "name": "アンクルクロス",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.05677124946100209,
+      "top3_est": 0.1750919161683094,
+      "jitsuryoku": 1674.1671436904094,
+      "zenjitsu": 1654.410669830786,
+      "adjust": -19.756473859623384,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 12,
+      "mark": "",
+      "name": "インビンシブルパパ",
+      "style": "逃げ",
+      "chokyo": "🌟調教(1.20倍)",
+      "mc_win": 0.05192967319406944,
+      "top3_est": 0.16105149589897233,
+      "jitsuryoku": 1612.5626787255417,
+      "zenjitsu": 1644.4849983034783,
+      "adjust": 31.922319577936605,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 14,
+      "mark": "",
+      "name": "コウセキ",
+      "style": "逃げ",
+      "chokyo": "🌟調教(1.04倍)",
+      "mc_win": 0.051116775914505475,
+      "top3_est": 0.1586772476263686,
+      "jitsuryoku": 1634.5109392988882,
+      "zenjitsu": 1642.7281649726253,
+      "adjust": 8.217225673737175,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 9,
+      "mark": "",
+      "name": "クラスペディア",
+      "style": "逃げ",
+      "chokyo": "🌟調教(1.16倍)",
+      "mc_win": 0.048865099342826755,
+      "top3_est": 0.1520755207940414,
+      "jitsuryoku": 1589.7168276389414,
+      "zenjitsu": 1637.7119390952698,
+      "adjust": 47.99511145632846,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 1,
+      "mark": "",
+      "name": "イツモニコニコ",
+      "style": "差し",
+      "chokyo": "🌟調教(1.20倍)",
+      "mc_win": 0.04152044875035428,
+      "top3_est": 0.1302859329977031,
+      "jitsuryoku": 1571.9661211718258,
+      "zenjitsu": 1619.5755972509078,
+      "adjust": 47.609476079082015,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 10,
+      "mark": "",
+      "name": "ナムラローズマリー",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.04053041503963707,
+      "top3_est": 0.1273190446741434,
+      "jitsuryoku": 1633.8777020780822,
+      "zenjitsu": 1616.888355013749,
+      "adjust": -16.98934706433306,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 16,
+      "mark": "",
+      "name": "アブキールベイ",
+      "style": "追込",
+      "chokyo": null,
+      "mc_win": 0.030571477743998893,
+      "top3_est": 0.09708656908743135,
+      "jitsuryoku": 1600.9019694026965,
+      "zenjitsu": 1585.4893964745254,
+      "adjust": -15.41257292817113,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 11,
+      "mark": "",
+      "name": "タマモブラックタイ",
+      "style": "差し",
+      "chokyo": "🌟調教(1.05倍)",
+      "mc_win": 0.026226418936256143,
+      "top3_est": 0.08367741552285511,
+      "jitsuryoku": 1539.2252254013506,
+      "zenjitsu": 1568.4194687080035,
+      "adjust": 29.19424330665288,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 2,
+      "mark": "",
+      "name": "フロムダスク",
+      "style": "差し",
+      "chokyo": "🌟調教(1.18倍)",
+      "mc_win": 0.0204007184677626,
+      "top3_est": 0.06549328272123285,
+      "jitsuryoku": 1494.4087772662187,
+      "zenjitsu": 1540.4487511055818,
+      "adjust": 46.03997383936303,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 4,
+      "mark": "",
+      "name": "プロトポロス",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.0026310237926409096,
+      "top3_est": 0.008602285092318447,
+      "jitsuryoku": 1313.8632382509122,
+      "zenjitsu": 1312.3826911510382,
+      "adjust": -1.480547099874002,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    }
+  ]
+}

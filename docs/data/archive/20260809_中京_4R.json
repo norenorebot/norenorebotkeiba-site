@@ -1,0 +1,341 @@
+{
+  "schema": "format_prediction.v2",
+  "generated_at": "2026-08-09T00:00:26",
+  "race_id": "20260808_名ダ1800_未勝利",
+  "header": {
+    "date": "2026-08-08",
+    "venue": "名",
+    "surface": "ダ",
+    "distance": 1800.0,
+    "race_class": "未勝利",
+    "baba": "良",
+    "N": 15
+  },
+  "race": {
+    "date": "2026-08-09",
+    "no": 4,
+    "venue_code": "名",
+    "venue_name": "中京",
+    "labeled": true,
+    "draft": false,
+    "warnings": []
+  },
+  "verdict": {
+    "value": "⚠️慎重",
+    "reason": "gap部分一致 or 場別物差し無し",
+    "bet_tier": "seihai_fukusho"
+  },
+  "bets": [
+    "第一推奨: ◎複勝 レッドフレーザー (的中~49%・回収88%/F5 83%=全買い方最良)",
+    "第二推奨: 標準形馬連3点 レッドフレーザー×エイシンリブウェル・スパルタンエックス・アラムシャピラス (的中20%・配当妙味)"
+  ],
+  "bet_notes": [],
+  "venue_guidance": {
+    "mark": null,
+    "note": "物差し無し(控えめ)"
+  },
+  "seihai": {
+    "fired": true,
+    "axis": "レッドフレーザー",
+    "n_fired": 1,
+    "is_ultimate": false,
+    "skills_str": "🌟調教(1.18倍) 💨展開利",
+    "c_buff": 40.257557850162414,
+    "p_buff": 7.110471899266683,
+    "b_buff": 3.289169794781806,
+    "raw_elo_rank": 4
+  },
+  "gap": {
+    "elo_gap_top2": 34.2,
+    "v27_gap_top2": 11.5,
+    "elo_top2": [
+      "エイシンリブウェル",
+      "スパルタンエックス"
+    ],
+    "v27_top2": [
+      "アラムシャピラス",
+      "スパルタンエックス"
+    ],
+    "big_e": true,
+    "big_v": true,
+    "overlap": 1,
+    "state": "中間",
+    "v27_missing": false,
+    "v27_reason": null,
+    "v27_source_latest": "2026-08-02"
+  },
+  "fallback": false,
+  "calib": {
+    "calib_ok_30R": true,
+    "calib_sample_n": 219,
+    "calibrated_temp": 81.82557897409772,
+    "using_calibrated_mc": true
+  },
+  "learning_profile": {
+    "available": true,
+    "cell": "名ダ1800・MAIDEN",
+    "build_date": "2026-07-25",
+    "pin": 20.92,
+    "pkl": "phase1_cache_名_ダ_1800m_MAIDEN.pkl",
+    "systems": [
+      {
+        "label": "展開",
+        "pct": 37.7,
+        "bars": "◉◉◎◎◎"
+      },
+      {
+        "label": "騎手",
+        "pct": 64.0,
+        "bars": "◉◉◉◎◎"
+      },
+      {
+        "label": "調教",
+        "pinned": true,
+        "pin": 20.9
+      },
+      {
+        "label": "厩舎",
+        "pct": 42.3,
+        "bars": "◉◉◎◎◎"
+      },
+      {
+        "label": "斤量",
+        "pct": 64.6,
+        "bars": "◉◉◉◎◎"
+      },
+      {
+        "label": "減衰",
+        "pct": 12.1,
+        "bars": "◉◎◎◎◎"
+      }
+    ],
+    "note": "※学習された係数の相対配置。係数の大小が予測寄与を保証するものではない"
+  },
+  "horses": [
+    {
+      "umaban": 13,
+      "mark": "○",
+      "name": "エイシンリブウェル",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.3122337500725287,
+      "top3_est": 0.7588589239698416,
+      "jitsuryoku": 1633.9914377697733,
+      "zenjitsu": 1632.0512800162487,
+      "adjust": -1.9401577535245451,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 4,
+      "mark": "▲",
+      "name": "スパルタンエックス",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.24841873806585268,
+      "top3_est": 0.6817261482508394,
+      "jitsuryoku": 1622.1496495136691,
+      "zenjitsu": 1613.3429804313805,
+      "adjust": -8.806669082288636,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 6,
+      "mark": "△",
+      "name": "アラムシャピラス",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.1491202857866926,
+      "top3_est": 0.491223087048293,
+      "jitsuryoku": 1587.921815794483,
+      "zenjitsu": 1571.5822721680436,
+      "adjust": -16.339543626439536,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 1,
+      "mark": "◎",
+      "name": "レッドフレーザー",
+      "style": "差し",
+      "chokyo": "🌟調教(1.18倍)",
+      "mc_win": 0.12077029291643218,
+      "top3_est": 0.41537118236637793,
+      "jitsuryoku": 1503.7964606952708,
+      "zenjitsu": 1554.328290694907,
+      "adjust": 50.53182999963633,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 11,
+      "mark": "",
+      "name": "ジーティーピカソ",
+      "style": "先行",
+      "chokyo": "🌟調教(1.18倍)",
+      "mc_win": 0.04817905922809149,
+      "top3_est": 0.1819932929257001,
+      "jitsuryoku": 1480.0228299636292,
+      "zenjitsu": 1479.1333767430929,
+      "adjust": -0.8894532205363248,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 5,
+      "mark": "",
+      "name": "アイゼンハイム",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.043566504541771064,
+      "top3_est": 0.165434748505659,
+      "jitsuryoku": 1467.4718171073653,
+      "zenjitsu": 1470.8987892203254,
+      "adjust": 3.4269721129601294,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 9,
+      "mark": "",
+      "name": "グランセンチュリ",
+      "style": "—",
+      "chokyo": null,
+      "mc_win": 0.01631192070648338,
+      "top3_est": 0.06379317488821104,
+      "jitsuryoku": 1415.8799451644259,
+      "zenjitsu": 1390.5139591649438,
+      "adjust": -25.365985999482064,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 3,
+      "mark": "",
+      "name": "タイセイゼスティ",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.015603776011021796,
+      "top3_est": 0.061068450424615214,
+      "jitsuryoku": 1365.3703335102646,
+      "zenjitsu": 1386.8822752437138,
+      "adjust": 21.511941733449248,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 2,
+      "mark": "",
+      "name": "アルヴァルディ",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.014126778975423223,
+      "top3_est": 0.05537216653788944,
+      "jitsuryoku": 1356.239417675773,
+      "zenjitsu": 1378.7454805360487,
+      "adjust": 22.506062860275733,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 10,
+      "mark": "",
+      "name": "ビーウィナー",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.008097145321242833,
+      "top3_est": 0.03193362711003202,
+      "jitsuryoku": 1361.980356051148,
+      "zenjitsu": 1333.2045835917868,
+      "adjust": -28.77577245936118,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 8,
+      "mark": "",
+      "name": "ハオカノア",
+      "style": "差し",
+      "chokyo": "🌟調教(1.12倍)",
+      "mc_win": 0.006927646701270413,
+      "top3_est": 0.027353555415196806,
+      "jitsuryoku": 1331.6053359047437,
+      "zenjitsu": 1320.4404973073254,
+      "adjust": -11.164838597418338,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 15,
+      "mark": "",
+      "name": "ピースビート",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.005517158923832509,
+      "top3_est": 0.02181515400609233,
+      "jitsuryoku": 1309.0918817107686,
+      "zenjitsu": 1301.8123205016464,
+      "adjust": -7.279561209122221,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 12,
+      "mark": "",
+      "name": "メイショウヒタカミ",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.0047829795565509595,
+      "top3_est": 0.018926061100056797,
+      "jitsuryoku": 1346.1152425285825,
+      "zenjitsu": 1290.1276810450622,
+      "adjust": -55.98756148352027,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 7,
+      "mark": "",
+      "name": "サンライズフリード",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.004440425605417021,
+      "top3_est": 0.01757659998600826,
+      "jitsuryoku": 1313.1096507794123,
+      "zenjitsu": 1284.046939026254,
+      "adjust": -29.062711753158283,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 14,
+      "mark": "",
+      "name": "リリークリスタル",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.0019035375873893512,
+      "top3_est": 0.007553827465186968,
+      "jitsuryoku": 1283.5731817312392,
+      "zenjitsu": 1214.7377127095908,
+      "adjust": -68.83546902164835,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    }
+  ]
+}
