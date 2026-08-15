@@ -1,0 +1,386 @@
+{
+  "schema": "format_prediction.v2",
+  "generated_at": "2026-08-15T23:38:48",
+  "race_id": "20260815_名芝2000_未勝利",
+  "header": {
+    "date": "2026-08-15",
+    "venue": "名",
+    "surface": "芝",
+    "distance": 2000.0,
+    "race_class": "未勝利",
+    "baba": "良",
+    "N": 18
+  },
+  "race": {
+    "date": "2026-08-16",
+    "no": 4,
+    "venue_code": "名",
+    "venue_name": "中京",
+    "labeled": true,
+    "draft": false,
+    "warnings": []
+  },
+  "verdict": {
+    "value": "⚠️慎重",
+    "reason": "Elo格差小(gap一致条件を満たさない)",
+    "bet_tier": "seihai_fukusho"
+  },
+  "bets": [
+    "第一推奨: ◎複勝 コスモフィレンツェ (的中~49%・回収88%/F5 83%=全買い方最良)",
+    "第二推奨: 標準形馬連3点 コスモフィレンツェ×ホウオウモチーヴ・レッドブライトン・オーマイラッキーン (的中20%・配当妙味)"
+  ],
+  "bet_notes": [],
+  "venue_guidance": {
+    "mark": null,
+    "note": "物差し無し(控えめ)"
+  },
+  "seihai": {
+    "fired": true,
+    "axis": "コスモフィレンツェ",
+    "n_fired": 1,
+    "is_ultimate": false,
+    "skills_str": "🌟調教(1.14倍) 💨展開利",
+    "c_buff": 43.79565436341243,
+    "p_buff": 12.278775452352534,
+    "b_buff": -71.51858875111553,
+    "raw_elo_rank": 3
+  },
+  "gap": {
+    "elo_gap_top2": 8.0,
+    "v27_gap_top2": 0.6,
+    "elo_top2": [
+      "ホウオウモチーヴ",
+      "レッドブライトン"
+    ],
+    "v27_top2": [
+      "コスモフィレンツェ",
+      "レッドブライトン"
+    ],
+    "big_e": false,
+    "big_v": false,
+    "overlap": 1,
+    "state": "中間",
+    "v27_missing": false,
+    "v27_reason": null,
+    "v27_source_latest": "2026-08-09"
+  },
+  "fallback": false,
+  "calib": {
+    "calib_ok_30R": true,
+    "calib_sample_n": 149,
+    "calibrated_temp": 85.44585589781336,
+    "using_calibrated_mc": true
+  },
+  "learning_profile": {
+    "available": true,
+    "cell": "名芝2000・MAIDEN",
+    "build_date": "2026-07-25",
+    "pin": 36.6,
+    "pkl": "phase1_cache_名_芝_2000m_MAIDEN.pkl",
+    "systems": [
+      {
+        "label": "展開",
+        "pct": 39.4,
+        "bars": "◉◉◎◎◎"
+      },
+      {
+        "label": "騎手",
+        "pct": 68.0,
+        "bars": "◉◉◉◎◎"
+      },
+      {
+        "label": "調教",
+        "pinned": true,
+        "pin": 36.6
+      },
+      {
+        "label": "厩舎",
+        "pct": 34.3,
+        "bars": "◉◉◎◎◎"
+      },
+      {
+        "label": "斤量",
+        "pct": 28.3,
+        "bars": "◉◎◎◎◎"
+      },
+      {
+        "label": "減衰",
+        "pct": 38.9,
+        "bars": "◉◉◎◎◎"
+      }
+    ],
+    "note": "※学習された係数の相対配置。係数の大小が予測寄与を保証するものではない"
+  },
+  "horses": [
+    {
+      "umaban": 18,
+      "mark": "○",
+      "name": "ホウオウモチーヴ",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.2746046991283729,
+      "top3_est": 0.7081529766817907,
+      "jitsuryoku": 1675.8467938605008,
+      "zenjitsu": 1670.0322177150285,
+      "adjust": -5.8145761454723015,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 7,
+      "mark": "▲",
+      "name": "レッドブライトン",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.25641334689779366,
+      "top3_est": 0.684266884588895,
+      "jitsuryoku": 1663.5814196307847,
+      "zenjitsu": 1664.1756026300127,
+      "adjust": 0.5941829992279963,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 2,
+      "mark": "◎",
+      "name": "コスモフィレンツェ",
+      "style": "逃げ",
+      "chokyo": "🌟調教(1.14倍)",
+      "mc_win": 0.19202256442331606,
+      "top3_est": 0.5779626148648784,
+      "jitsuryoku": 1655.5591717451966,
+      "zenjitsu": 1639.4665502682599,
+      "adjust": -16.092621476936756,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 9,
+      "mark": "△",
+      "name": "オーマイラッキーン",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.06352025125374845,
+      "top3_est": 0.23096967956720071,
+      "jitsuryoku": 1559.4478776579504,
+      "zenjitsu": 1544.9417205097934,
+      "adjust": -14.506157148156944,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 6,
+      "mark": "",
+      "name": "バックドラフト",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.05315434155422775,
+      "top3_est": 0.19565067270838024,
+      "jitsuryoku": 1518.0567224636688,
+      "zenjitsu": 1529.7187734607348,
+      "adjust": 11.66205099706599,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 4,
+      "mark": "",
+      "name": "ダーコ",
+      "style": "追込",
+      "chokyo": null,
+      "mc_win": 0.04765349573023137,
+      "top3_est": 0.1765146746283692,
+      "jitsuryoku": 1541.8347417714338,
+      "zenjitsu": 1520.3843437820296,
+      "adjust": -21.45039798940411,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 3,
+      "mark": "",
+      "name": "リボンインザスカイ",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.036828932882797996,
+      "top3_est": 0.1380824882782381,
+      "jitsuryoku": 1522.504783377078,
+      "zenjitsu": 1498.3673191938901,
+      "adjust": -24.13746418318783,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 17,
+      "mark": "",
+      "name": "プシュパ",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.03313583039178672,
+      "top3_est": 0.12473924503400105,
+      "jitsuryoku": 1461.4213370215755,
+      "zenjitsu": 1489.338377804511,
+      "adjust": 27.9170407829356,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 5,
+      "mark": "",
+      "name": "スレイクイーン",
+      "style": "追込",
+      "chokyo": null,
+      "mc_win": 0.021199456324284906,
+      "top3_est": 0.08082957562928836,
+      "jitsuryoku": 1434.305988605372,
+      "zenjitsu": 1451.1748706474255,
+      "adjust": 16.86888204205343,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 14,
+      "mark": "",
+      "name": "メイショウタカネ",
+      "style": "追込",
+      "chokyo": null,
+      "mc_win": 0.013958023051059516,
+      "top3_est": 0.0536208152695402,
+      "jitsuryoku": 1421.2762679161556,
+      "zenjitsu": 1415.4652476177641,
+      "adjust": -5.8110202983914405,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 13,
+      "mark": "",
+      "name": "ドットカモン",
+      "style": "差し",
+      "chokyo": "🌟調教(1.12倍)",
+      "mc_win": 0.0021502185803490372,
+      "top3_est": 0.008359166447107989,
+      "jitsuryoku": 1220.6783449735049,
+      "zenjitsu": 1255.6400584290714,
+      "adjust": 34.961713455566496,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 11,
+      "mark": "",
+      "name": "プロスト",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.0018763999204399313,
+      "top3_est": 0.007296649910577969,
+      "jitsuryoku": 1268.2610978998607,
+      "zenjitsu": 1244.001094131935,
+      "adjust": -24.26000376792581,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 16,
+      "mark": "",
+      "name": "テーオーシュテルン",
+      "style": "差し",
+      "chokyo": "🌟調教(1.11倍)",
+      "mc_win": 0.0012953726749068421,
+      "top3_est": 0.005040137152176239,
+      "jitsuryoku": 1187.800292929935,
+      "zenjitsu": 1212.3385707241112,
+      "adjust": 24.53827779417611,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 15,
+      "mark": "",
+      "name": "マテンロウブリッジ",
+      "style": "追込",
+      "chokyo": null,
+      "mc_win": 0.0008947148960574854,
+      "top3_est": 0.003482604029680563,
+      "jitsuryoku": 1186.8201879329363,
+      "zenjitsu": 1180.7194516340653,
+      "adjust": -6.10073629887097,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 1,
+      "mark": "",
+      "name": "テイクザスローン",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.0007739421351749695,
+      "top3_est": 0.0030128649838487907,
+      "jitsuryoku": 1212.641746051947,
+      "zenjitsu": 1168.3291184838633,
+      "adjust": -44.3126275680836,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 8,
+      "mark": "",
+      "name": "ミーサーク",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.0004211187733015419,
+      "top3_est": 0.0016399358157908601,
+      "jitsuryoku": 1133.6532218828347,
+      "zenjitsu": 1116.328292008648,
+      "adjust": -17.324929874186637,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 10,
+      "mark": "",
+      "name": "ニミッツハイウェイ",
+      "style": "追込",
+      "chokyo": null,
+      "mc_win": 5.352283248556796e-05,
+      "top3_est": 0.0002085060024940665,
+      "jitsuryoku": 945.0461508352103,
+      "zenjitsu": 940.0700184459836,
+      "adjust": -4.976132389226677,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 12,
+      "mark": "",
+      "name": "キョウエイクローム",
+      "style": "追込",
+      "chokyo": null,
+      "mc_win": 4.3768549665271224e-05,
+      "top3_est": 0.0001705084077393701,
+      "jitsuryoku": 973.3638970913714,
+      "zenjitsu": 922.8789254845005,
+      "adjust": -50.484971606870886,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    }
+  ]
+}
