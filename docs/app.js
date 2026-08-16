@@ -307,6 +307,20 @@ function axisFromRows(d) {
   return r ? r.name : null;
 }
 
+/* 出走メンバーの取り込みミスがあった予想の注記(2026-08-16)。
+   予想そのものは当時のまま保存し、書き換えない。表示層は data.json の
+   incomplete_entry を読むだけで、日付のハードコードはしない。 */
+function incompleteNote(d) {
+  var ie = d.incomplete_entry;
+  if (!ie) return '';
+  var n = ie.missing || 1;
+  var size = (ie.field_size && ie.used)
+    ? '（' + esc(ie.used) + '頭で計算／実際は' + esc(ie.field_size) + '頭立て）' : '';
+  return '<div class="incomplete-note">※ この予想は出走メンバーの取り込みミスにより' +
+         esc(n) + '頭欠けた状態で計算されています' + size +
+         '（最大の馬番の馬が未反映）。予想内容は当時のまま保存しています。</div>';
+}
+
 /* ---------- 結論カード(ブロック1 + 折りたたみ2/3) ---------- */
 function renderVerdictCard(d, idx) {
   var h = d.header || {}, v = d.verdict || {}, se = d.seihai || {}, g = d.gap || {};
@@ -325,6 +339,7 @@ function renderVerdictCard(d, idx) {
           (idx === undefined ? '">' : '" id="' + esc(raceAnchor(idx)) + '">');
   html += '<div class="rid">▼ ' + title +
           '　<span class="note">[' + esc(venueLabel(d)) + ': ' + esc(vgLabel) + ']</span></div>';
+  html += incompleteNote(d);
   html += '<div class="line">判定: <span class="' + av.cls + '">' + esc(av.label) + '</span></div>';
   // plainReason は動的部分に esc 済みの安全なHTMLを返す(強調と馬名を含むため二重エスケープしない)
   html += '<div class="line">' + plainReason(d) + '</div>';
@@ -666,6 +681,11 @@ function renderForward(fw) {
   //   という不整合が起きていた。系列は別の買い方なので合算に意味がない
   //   (片方30件・片方2件でも警告が消えてしまう)。
   //   Nを系列ごとに数えるのは stats.json のN基準色と同じ原則。
+  // 入力不完全な予想を含めたまま計上している旨を必ず出す(除外しない方針)
+  html += '<p class="frozen-note">※ 2026-08-09・08-15 の一部レースは、出走メンバーの' +
+          '取り込みミスにより1頭欠けた状態で計算された予想が含まれます。' +
+          '<b>除外せずそのまま計上しています</b>。</p>';
+
   var thin = keys.map(function (k) { return s[k]; })
                  .filter(function (v) { return v && v.all && v.all.n > 0 && v.all.n < 10; });
   if (thin.length) {
@@ -771,7 +791,9 @@ function initArchive() {
       // 見送り行は文字を落として、買い目のあった行を相対的に浮き上がらせる。
       // (最新予想の .vb-skip と同じ手法。列は増やさないのでスマホ幅に影響しない)
       html += '<tr' + (av.kind === 'bet' ? '' : ' class="row-skip"') + '>';
-      html += '<td>' + esc(r.race_date || r.date) + '</td>';
+      html += '<td>' + esc(r.race_date || r.date) +
+              (r.incomplete_entry ? '<br><span class="note incomplete-tag">※出走メンバー欠落</span>' : '') +
+              '</td>';
       html += '<td>' + esc(r.venue_name || CODE_TO_NAME[(r.venue || '').charAt(0)] || r.venue) + '</td>';
       html += '<td class="c">' + (r.race_no ? esc(r.race_no) + 'R' : '—') + '</td>';
       html += '<td class="col-drop">' + esc(r.surface) + dist(r.distance) + ' ' + esc(r.race_class) + '</td>';

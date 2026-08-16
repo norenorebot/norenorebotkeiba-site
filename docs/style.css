@@ -113,6 +113,14 @@ tr.row-skip td .note { color: #777; }
    インラインstyleはすべてクラスに寄せている(2026-07-28)。 */
 .dim { color: #555; }
 
+/* 出走メンバーの取り込みミスがあった予想の注記(2026-08-16)。
+   目立たせるが騒がない: 罫線1本と文字色のみ(§6・装飾は足さない)。 */
+.incomplete-note {
+  border: 1px solid #999; background: #f7f7ef; padding: 3px 6px; margin: 3px 0;
+  font-size: 13px; color: #333;
+}
+.incomplete-tag { color: #333; }
+
 /* --- N基準色(成績テーブルのセル) --- */
 .n-gray  { color: #999; }              /* N<10 参考外 */
 .n-light { color: #666; }              /* 10-19 傾向 */
