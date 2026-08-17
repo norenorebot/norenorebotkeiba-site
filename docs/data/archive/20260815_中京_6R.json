@@ -116,7 +116,7 @@
       "adjust": -6.71532267499515,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 5
     },
     {
       "umaban": 10,
@@ -131,7 +131,7 @@
       "adjust": 46.77455675199349,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 1
     },
     {
       "umaban": 7,
@@ -146,7 +146,7 @@
       "adjust": -29.894989716903638,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 2
     },
     {
       "umaban": 1,
@@ -161,7 +161,7 @@
       "adjust": -15.680365546067605,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 11
     },
     {
       "umaban": 2,
@@ -176,7 +176,7 @@
       "adjust": -27.67494446264618,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 8
     },
     {
       "umaban": 3,
@@ -191,7 +191,7 @@
       "adjust": -25.7144255191065,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 6
     },
     {
       "umaban": 9,
@@ -206,7 +206,7 @@
       "adjust": -38.826422547324,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 7
     },
     {
       "umaban": 5,
@@ -221,7 +221,7 @@
       "adjust": 9.87933667122934,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 4
     },
     {
       "umaban": 6,
@@ -236,7 +236,7 @@
       "adjust": -39.00084304187635,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 9
     },
     {
       "umaban": 8,
@@ -251,7 +251,7 @@
       "adjust": 17.297248848924937,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 3
     }
   ],
   "incomplete_entry": {
@@ -263,10 +263,89 @@
     "reason": "出走メンバーの取り込みミス(最終馬が未反映)"
   },
   "result": {
-    "status": "結果待ち",
-    "reconciled_at": "2026-08-15",
-    "reason": "結果データ未更新(最新 20260809 < 20260815)",
+    "status": "確定",
+    "reconciled_at": "2026-08-17",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "2名7",
+      "r": "6",
+      "race_name": "知多特別･2勝",
+      "atama": 11
+    },
+    "finish": [
+      "フォーゲル",
+      "トップアタック",
+      "ファイツオン"
+    ],
+    "horses": [
+      {
+        "name": "モンサンゴールデン",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "フォーゲル",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "トップアタック",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "モンテディアーナ",
+        "rank": 11,
+        "note": null
+      },
+      {
+        "name": "ハルオーブ",
+        "rank": 8,
+        "note": null
+      },
+      {
+        "name": "ヒーローインチーフ",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "シラヌイ",
+        "rank": 7,
+        "note": null
+      },
+      {
+        "name": "パリコレジェンヌ",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "タミゼ",
+        "rank": 9,
+        "note": null
+      },
+      {
+        "name": "ファイツオン",
+        "rank": 3,
+        "note": null
+      }
+    ],
     "unmatched": [],
-    "unmatched_n": 10
+    "bet": {
+      "tier": "none",
+      "axis": "モンサンゴールデン",
+      "axis_rank": 5,
+      "axis_odds": 15.2,
+      "partners": [
+        "フォーゲル",
+        "トップアタック",
+        "モンテディアーナ"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 0.0,
+      "hit": null,
+      "payout": 0.0,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない"
+    }
   }
 }

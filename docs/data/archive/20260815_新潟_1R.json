@@ -116,7 +116,7 @@
       "adjust": 68.38288446382057,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 5
     },
     {
       "umaban": 3,
@@ -131,7 +131,7 @@
       "adjust": -5.541867431463288,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 1
     },
     {
       "umaban": 6,
@@ -146,7 +146,7 @@
       "adjust": 12.702167771163658,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 2
     },
     {
       "umaban": 5,
@@ -161,7 +161,7 @@
       "adjust": 42.32416040681869,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 3
     },
     {
       "umaban": 1,
@@ -176,7 +176,7 @@
       "adjust": 23.867483576483437,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 6
     },
     {
       "umaban": 7,
@@ -191,7 +191,7 @@
       "adjust": 10.11156798100842,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 7
     },
     {
       "umaban": 2,
@@ -206,7 +206,7 @@
       "adjust": -17.467911295650083,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 9
     },
     {
       "umaban": 8,
@@ -221,7 +221,7 @@
       "adjust": -16.035249827913958,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 8
     }
   ],
   "incomplete_entry": {
@@ -233,10 +233,79 @@
     "reason": "出走メンバーの取り込みミス(最終馬が未反映)"
   },
   "result": {
-    "status": "結果待ち",
-    "reconciled_at": "2026-08-15",
-    "reason": "結果データ未更新(最新 20260809 < 20260815)",
+    "status": "確定",
+    "reconciled_at": "2026-08-17",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "2新7",
+      "r": "1",
+      "race_name": "未勝利*",
+      "atama": 9
+    },
+    "finish": [
+      "フルーツバスケット",
+      "シュートザワークス",
+      "スターマイン"
+    ],
+    "horses": [
+      {
+        "name": "コナパームス",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "フルーツバスケット",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "シュートザワークス",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "スターマイン",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "ミライノシャチョウ",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "オーラムミーティア",
+        "rank": 7,
+        "note": null
+      },
+      {
+        "name": "ムーチョピカンテ",
+        "rank": 9,
+        "note": null
+      },
+      {
+        "name": "マルガリート",
+        "rank": 8,
+        "note": null
+      }
+    ],
     "unmatched": [],
-    "unmatched_n": 8
+    "bet": {
+      "tier": "none",
+      "axis": "フルーツバスケット",
+      "axis_rank": 1,
+      "axis_odds": 2.6,
+      "partners": [
+        "コナパームス",
+        "シュートザワークス",
+        "スターマイン"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 0.0,
+      "hit": null,
+      "payout": 0.0,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない"
+    }
   }
 }

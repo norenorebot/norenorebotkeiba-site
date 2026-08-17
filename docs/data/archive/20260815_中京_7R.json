@@ -116,7 +116,7 @@
       "adjust": -4.691080594345294,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 5
     },
     {
       "umaban": 2,
@@ -131,7 +131,7 @@
       "adjust": -56.52197406198661,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 6
     },
     {
       "umaban": 5,
@@ -146,7 +146,7 @@
       "adjust": 39.61051407485206,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 1
     },
     {
       "umaban": 4,
@@ -161,7 +161,7 @@
       "adjust": -30.687294499296968,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 4
     },
     {
       "umaban": 3,
@@ -176,7 +176,7 @@
       "adjust": -3.4238260438341968,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 2
     },
     {
       "umaban": 6,
@@ -191,7 +191,7 @@
       "adjust": -15.586572374994375,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 7
     },
     {
       "umaban": 1,
@@ -206,7 +206,7 @@
       "adjust": -14.362652145551237,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 3
     }
   ],
   "incomplete_entry": {
@@ -218,10 +218,74 @@
     "reason": "出走メンバーの取り込みミス(最終馬が未反映)"
   },
   "result": {
-    "status": "結果待ち",
-    "reconciled_at": "2026-08-15",
-    "reason": "結果データ未更新(最新 20260809 < 20260815)",
+    "status": "確定",
+    "reconciled_at": "2026-08-17",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "2名7",
+      "r": "7",
+      "race_name": "高山ＳＨ･3勝",
+      "atama": 8
+    },
+    "finish": [
+      "バッデレイト",
+      "ドットクルー",
+      "アラタマフェーヴル"
+    ],
+    "horses": [
+      {
+        "name": "フィオレストラーダ",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "シンゼンカガ",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "バッデレイト",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "ダノンジャイアン",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "ドットクルー",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "キーパフォーマー",
+        "rank": 7,
+        "note": null
+      },
+      {
+        "name": "アラタマフェーヴル",
+        "rank": 3,
+        "note": null
+      }
+    ],
     "unmatched": [],
-    "unmatched_n": 7
+    "bet": {
+      "tier": "none",
+      "axis": "シンゼンカガ",
+      "axis_rank": 6,
+      "axis_odds": 7.3,
+      "partners": [
+        "フィオレストラーダ",
+        "バッデレイト",
+        "ダノンジャイアン"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 0.0,
+      "hit": null,
+      "payout": 0.0,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない"
+    }
   }
 }

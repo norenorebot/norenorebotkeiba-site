@@ -116,7 +116,7 @@
       "adjust": 47.230442713716,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 3
     },
     {
       "umaban": 3,
@@ -131,7 +131,7 @@
       "adjust": -17.7259388319942,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 4
     },
     {
       "umaban": 2,
@@ -146,7 +146,7 @@
       "adjust": 6.702163673038058,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 2
     },
     {
       "umaban": 7,
@@ -161,7 +161,7 @@
       "adjust": -15.58388723171879,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 6
     },
     {
       "umaban": 9,
@@ -176,7 +176,7 @@
       "adjust": -35.17533309261944,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 1
     },
     {
       "umaban": 6,
@@ -191,7 +191,7 @@
       "adjust": -26.251611703626168,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 9
     },
     {
       "umaban": 1,
@@ -206,7 +206,7 @@
       "adjust": -98.99863430231471,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 5
     },
     {
       "umaban": 5,
@@ -221,7 +221,7 @@
       "adjust": -40.43184234848877,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 7
     },
     {
       "umaban": 4,
@@ -236,7 +236,7 @@
       "adjust": -71.44506210785858,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 10
     }
   ],
   "incomplete_entry": {
@@ -248,10 +248,84 @@
     "reason": "出走メンバーの取り込みミス(最終馬が未反映)"
   },
   "result": {
-    "status": "結果待ち",
-    "reconciled_at": "2026-08-15",
-    "reason": "結果データ未更新(最新 20260809 < 20260815)",
+    "status": "確定",
+    "reconciled_at": "2026-08-17",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "1札7",
+      "r": "2",
+      "race_name": "未勝利*",
+      "atama": 10
+    },
+    "finish": [
+      "レゾンフォルテ",
+      "オンザボー",
+      "ルージュロマーナ"
+    ],
+    "horses": [
+      {
+        "name": "ルージュロマーナ",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "イッペイ",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "オンザボー",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "ラヴァンドローリエ",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "レゾンフォルテ",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "カリスマン",
+        "rank": 9,
+        "note": null
+      },
+      {
+        "name": "マイネルラビリンス",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "ローザベッラ",
+        "rank": 7,
+        "note": null
+      },
+      {
+        "name": "マイネルサリーレ",
+        "rank": 10,
+        "note": null
+      }
+    ],
     "unmatched": [],
-    "unmatched_n": 9
+    "bet": {
+      "tier": "none",
+      "axis": "イッペイ",
+      "axis_rank": 4,
+      "axis_odds": 3.5,
+      "partners": [
+        "ルージュロマーナ",
+        "オンザボー",
+        "ラヴァンドローリエ"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 0.0,
+      "hit": null,
+      "payout": 0.0,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない"
+    }
   }
 }

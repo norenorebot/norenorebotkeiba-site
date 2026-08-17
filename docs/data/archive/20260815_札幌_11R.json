@@ -116,7 +116,7 @@
       "adjust": 17.74972265642191,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 10
     },
     {
       "umaban": 7,
@@ -131,7 +131,7 @@
       "adjust": -7.767368199359225,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 3
     },
     {
       "umaban": 11,
@@ -146,7 +146,7 @@
       "adjust": 16.78767555129093,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 1
     },
     {
       "umaban": 1,
@@ -161,7 +161,7 @@
       "adjust": 23.120634101398764,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 5
     },
     {
       "umaban": 13,
@@ -176,7 +176,7 @@
       "adjust": 53.85249676928561,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 7
     },
     {
       "umaban": 3,
@@ -191,7 +191,7 @@
       "adjust": -1.0130323890348336,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 13
     },
     {
       "umaban": 8,
@@ -206,7 +206,7 @@
       "adjust": -31.608187494150798,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 4
     },
     {
       "umaban": 12,
@@ -221,7 +221,7 @@
       "adjust": 20.674831419061775,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 8
     },
     {
       "umaban": 5,
@@ -236,7 +236,7 @@
       "adjust": -13.492320045708084,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 2
     },
     {
       "umaban": 10,
@@ -251,7 +251,7 @@
       "adjust": -9.707407685484213,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 12
     },
     {
       "umaban": 4,
@@ -266,7 +266,7 @@
       "adjust": 32.40813385839874,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 11
     },
     {
       "umaban": 6,
@@ -281,7 +281,7 @@
       "adjust": -26.946080965253714,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 6
     },
     {
       "umaban": 9,
@@ -296,7 +296,7 @@
       "adjust": -0.32970601699275903,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 9
     }
   ],
   "incomplete_entry": {
@@ -308,10 +308,104 @@
     "reason": "出走メンバーの取り込みミス(最終馬が未反映)"
   },
   "result": {
-    "status": "結果待ち",
-    "reconciled_at": "2026-08-15",
-    "reason": "結果データ未更新(最新 20260809 < 20260815)",
+    "status": "確定",
+    "reconciled_at": "2026-08-17",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "1札7",
+      "r": "11",
+      "race_name": "報知杯Ｈ･3勝",
+      "atama": 14
+    },
+    "finish": [
+      "アイウィル",
+      "ゲキザル",
+      "セボンサデッセ"
+    ],
+    "horses": [
+      {
+        "name": "マンオブザマッチ",
+        "rank": 10,
+        "note": null
+      },
+      {
+        "name": "セボンサデッセ",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "アイウィル",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "プロミシングスター",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "ロードブレイズ",
+        "rank": 7,
+        "note": null
+      },
+      {
+        "name": "キャットテイル",
+        "rank": 13,
+        "note": null
+      },
+      {
+        "name": "トルショー",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "アスクケンタッキー",
+        "rank": 8,
+        "note": null
+      },
+      {
+        "name": "ゲキザル",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "モズカトレア",
+        "rank": 12,
+        "note": null
+      },
+      {
+        "name": "ノーブルスカイ",
+        "rank": 11,
+        "note": null
+      },
+      {
+        "name": "レーウィン",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "キュールエフウジン",
+        "rank": 9,
+        "note": null
+      }
+    ],
     "unmatched": [],
-    "unmatched_n": 13
+    "bet": {
+      "tier": "none",
+      "axis": "セボンサデッセ",
+      "axis_rank": 3,
+      "axis_odds": 4.2,
+      "partners": [
+        "マンオブザマッチ",
+        "アイウィル",
+        "プロミシングスター"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 0.0,
+      "hit": null,
+      "payout": 0.0,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない"
+    }
   }
 }

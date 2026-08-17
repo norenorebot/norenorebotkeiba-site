@@ -116,7 +116,7 @@
       "adjust": 0.8641671153054631,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 3
     },
     {
       "umaban": 3,
@@ -131,7 +131,7 @@
       "adjust": 9.354657362437365,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 5
     },
     {
       "umaban": 6,
@@ -146,7 +146,7 @@
       "adjust": -6.064132954279103,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 2
     },
     {
       "umaban": 7,
@@ -176,7 +176,7 @@
       "adjust": 33.12399463060501,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 6
     },
     {
       "umaban": 4,
@@ -191,7 +191,7 @@
       "adjust": 19.1214922723193,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 4
     },
     {
       "umaban": 5,
@@ -206,7 +206,7 @@
       "adjust": -3.1595498810620484,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 7
     }
   ],
   "incomplete_entry": {
@@ -218,10 +218,74 @@
     "reason": "出走メンバーの取り込みミス(最終馬が未反映)"
   },
   "result": {
-    "status": "結果待ち",
-    "reconciled_at": "2026-08-15",
-    "reason": "結果データ未更新(最新 20260809 < 20260815)",
+    "status": "確定",
+    "reconciled_at": "2026-08-17",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "1札7",
+      "r": "9",
+      "race_name": "コスモス",
+      "atama": 8
+    },
+    "finish": [
+      "デアグランツ",
+      "アゴルディーノ",
+      "コスモハナミズキ"
+    ],
+    "horses": [
+      {
+        "name": "コスモハナミズキ",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "アヴィアトーレ",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "アゴルディーノ",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "ウインワーグナー",
+        "rank": null,
+        "note": "競走中止"
+      },
+      {
+        "name": "アヴナント",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "キャトルブランシュ",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "ミラクルヴェリテ",
+        "rank": 7,
+        "note": null
+      }
+    ],
     "unmatched": [],
-    "unmatched_n": 7
+    "bet": {
+      "tier": "none",
+      "axis": "コスモハナミズキ",
+      "axis_rank": 3,
+      "axis_odds": 7.4,
+      "partners": [
+        "アヴィアトーレ",
+        "アゴルディーノ",
+        "ウインワーグナー"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 0.0,
+      "hit": null,
+      "payout": 0.0,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない"
+    }
   }
 }

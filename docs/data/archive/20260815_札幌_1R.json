@@ -116,7 +116,7 @@
       "adjust": -126.40784324801712,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 5
     },
     {
       "umaban": 3,
@@ -131,7 +131,7 @@
       "adjust": -85.80013022836329,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 1
     },
     {
       "umaban": 4,
@@ -146,7 +146,7 @@
       "adjust": 41.48720494120607,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 9
     },
     {
       "umaban": 12,
@@ -161,7 +161,7 @@
       "adjust": -64.62226909462197,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 2
     },
     {
       "umaban": 1,
@@ -176,7 +176,7 @@
       "adjust": 0.22412464458830073,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 3
     },
     {
       "umaban": 7,
@@ -191,7 +191,7 @@
       "adjust": -92.06905172000825,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 4
     },
     {
       "umaban": 2,
@@ -206,7 +206,7 @@
       "adjust": 109.36753785375095,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 11
     },
     {
       "umaban": 10,
@@ -251,7 +251,7 @@
       "adjust": -15.06624590907063,
       "odds": null,
       "swap": true,
-      "rank_result": null
+      "rank_result": 6
     },
     {
       "umaban": 9,
@@ -266,7 +266,7 @@
       "adjust": -11.874642744753828,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 12
     },
     {
       "umaban": 5,
@@ -281,7 +281,7 @@
       "adjust": 5.498448062221087,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 8
     },
     {
       "umaban": 11,
@@ -296,7 +296,7 @@
       "adjust": 2.062089355818898,
       "odds": null,
       "swap": false,
-      "rank_result": null
+      "rank_result": 7
     }
   ],
   "incomplete_entry": {
@@ -308,10 +308,104 @@
     "reason": "出走メンバーの取り込みミス(最終馬が未反映)"
   },
   "result": {
-    "status": "結果待ち",
-    "reconciled_at": "2026-08-15",
-    "reason": "結果データ未更新(最新 20260809 < 20260815)",
+    "status": "確定",
+    "reconciled_at": "2026-08-17",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "1札7",
+      "r": "1",
+      "race_name": "未勝利",
+      "atama": 14
+    },
+    "finish": [
+      "クルビデンス",
+      "サンオブザサン",
+      "ジャストグレース"
+    ],
+    "horses": [
+      {
+        "name": "フレンチブラッサム",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "クルビデンス",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "マーゴットデウス",
+        "rank": 9,
+        "note": null
+      },
+      {
+        "name": "サンオブザサン",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "ジャストグレース",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "ショウナンタヅナ",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "リベンジャー",
+        "rank": 11,
+        "note": null
+      },
+      {
+        "name": "アンタレス",
+        "rank": null,
+        "note": "競走除外"
+      },
+      {
+        "name": "ニットウエース",
+        "rank": null,
+        "note": "競走除外"
+      },
+      {
+        "name": "フェンリル",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "ロードクローザー",
+        "rank": 12,
+        "note": null
+      },
+      {
+        "name": "メイショウシンガン",
+        "rank": 8,
+        "note": null
+      },
+      {
+        "name": "ゴーントゥファー",
+        "rank": 7,
+        "note": null
+      }
+    ],
     "unmatched": [],
-    "unmatched_n": 13
+    "bet": {
+      "tier": "none",
+      "axis": "フレンチブラッサム",
+      "axis_rank": 5,
+      "axis_odds": 4.0,
+      "partners": [
+        "クルビデンス",
+        "マーゴットデウス",
+        "サンオブザサン"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 0.0,
+      "hit": null,
+      "payout": 0.0,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない"
+    }
   }
 }
