@@ -1,0 +1,386 @@
+{
+  "schema": "format_prediction.v2",
+  "generated_at": "2026-08-22T05:41:37",
+  "race_id": "20260821_新芝1400_OP",
+  "header": {
+    "date": "2026-08-21",
+    "venue": "新",
+    "surface": "芝",
+    "distance": 1400.0,
+    "race_class": "OP",
+    "baba": "良",
+    "N": 18
+  },
+  "race": {
+    "date": "2026-08-22",
+    "no": 7,
+    "venue_code": "新",
+    "venue_name": "新潟",
+    "labeled": true,
+    "draft": false,
+    "warnings": []
+  },
+  "verdict": {
+    "value": "⚠️慎重",
+    "reason": "Elo格差小(gap一致条件を満たさない) / 較正フォールバック中→本命サイズを落とす(物差し④)",
+    "bet_tier": "seihai_fukusho"
+  },
+  "bets": [
+    "第一推奨: ◎複勝 タガノアラリア (的中~49%・回収88%/F5 83%=全買い方最良)",
+    "第二推奨: 標準形馬連3点 タガノアラリア×ヤブサメ・クルゼイロドスル・ガロンヌ (的中20%・配当妙味)"
+  ],
+  "bet_notes": [],
+  "venue_guidance": {
+    "mark": null,
+    "note": "物差し無し(控えめ)"
+  },
+  "seihai": {
+    "fired": true,
+    "axis": "タガノアラリア",
+    "n_fired": 2,
+    "is_ultimate": false,
+    "skills_str": "🤔【要検討】 🌟調教(1.06倍) 💨展開利",
+    "c_buff": 40.292823330642136,
+    "p_buff": 21.473465878356354,
+    "b_buff": -43.77479890164594,
+    "raw_elo_rank": 1
+  },
+  "gap": {
+    "elo_gap_top2": 4.3,
+    "v27_gap_top2": 9.3,
+    "elo_top2": [
+      "タガノアラリア",
+      "ヤブサメ"
+    ],
+    "v27_top2": [
+      "セフィロ",
+      "マサノカナリア"
+    ],
+    "big_e": false,
+    "big_v": true,
+    "overlap": 0,
+    "state": "中間",
+    "v27_missing": false,
+    "v27_reason": null,
+    "v27_source_latest": "2026-08-16"
+  },
+  "fallback": true,
+  "calib": {
+    "calib_ok_30R": false,
+    "calib_sample_n": 28,
+    "calibrated_temp": null,
+    "using_calibrated_mc": false
+  },
+  "learning_profile": {
+    "available": true,
+    "cell": "新芝1400・ELITE",
+    "build_date": "2026-07-24",
+    "pin": 36.6,
+    "pkl": "phase1_cache_新_芝_1400m_ELITE.pkl",
+    "systems": [
+      {
+        "label": "展開",
+        "pct": 53.9,
+        "bars": "◉◉◉◎◎"
+      },
+      {
+        "label": "騎手",
+        "pct": 11.2,
+        "bars": "◉◎◎◎◎"
+      },
+      {
+        "label": "調教",
+        "pinned": true,
+        "pin": 36.6
+      },
+      {
+        "label": "厩舎",
+        "pct": 88.3,
+        "bars": "◉◉◉◉◎"
+      },
+      {
+        "label": "斤量",
+        "pct": 96.7,
+        "bars": "◉◉◉◉◉"
+      },
+      {
+        "label": "減衰",
+        "pct": 16.1,
+        "bars": "◉◎◎◎◎"
+      }
+    ],
+    "note": "※学習された係数の相対配置。係数の大小が予測寄与を保証するものではない"
+  },
+  "horses": [
+    {
+      "umaban": 18,
+      "mark": "◎",
+      "name": "タガノアラリア",
+      "style": "追込",
+      "chokyo": "🌟調教(1.06倍)",
+      "mc_win": 0.169,
+      "top3_est": 0.44906526149783155,
+      "jitsuryoku": 1651.5570677804874,
+      "zenjitsu": 1667.589347032931,
+      "adjust": 16.032279252443686,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 3,
+      "mark": "○",
+      "name": "ヤブサメ",
+      "style": "追込",
+      "chokyo": "🌟調教(1.14倍)",
+      "mc_win": 0.0932,
+      "top3_est": 0.27464933544664677,
+      "jitsuryoku": 1560.7448906467487,
+      "zenjitsu": 1596.5401858266719,
+      "adjust": 35.79529517992319,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 9,
+      "mark": "▲",
+      "name": "クルゼイロドスル",
+      "style": "追込",
+      "chokyo": null,
+      "mc_win": 0.0833,
+      "top3_est": 0.24852545635760584,
+      "jitsuryoku": 1529.4124853063986,
+      "zenjitsu": 1583.4049837921275,
+      "adjust": 53.9924984857289,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 5,
+      "mark": "△",
+      "name": "ガロンヌ",
+      "style": "追込",
+      "chokyo": "🌟調教(1.13倍)",
+      "mc_win": 0.0741,
+      "top3_est": 0.22357114953980847,
+      "jitsuryoku": 1493.6490597871193,
+      "zenjitsu": 1564.2512084553382,
+      "adjust": 70.60214866821889,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 13,
+      "mark": "",
+      "name": "アルテヴェローチェ",
+      "style": "追込",
+      "chokyo": "🌟調教(1.10倍)",
+      "mc_win": 0.0679,
+      "top3_est": 0.2063903981963561,
+      "jitsuryoku": 1493.708633728419,
+      "zenjitsu": 1551.221799140055,
+      "adjust": 57.51316541163601,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 15,
+      "mark": "",
+      "name": "スリールミニョン",
+      "style": "逃げ",
+      "chokyo": "🌟調教(1.06倍)",
+      "mc_win": 0.0593,
+      "top3_est": 0.1820803601214681,
+      "jitsuryoku": 1556.4459541780384,
+      "zenjitsu": 1540.3318739376957,
+      "adjust": -16.114080240342673,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 1,
+      "mark": "",
+      "name": "ララマセラシオン",
+      "style": "差し",
+      "chokyo": "🌟調教(1.20倍)",
+      "mc_win": 0.0576,
+      "top3_est": 0.17720965421253043,
+      "jitsuryoku": 1512.7604732299185,
+      "zenjitsu": 1539.5183180776462,
+      "adjust": 26.75784484772771,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 8,
+      "mark": "",
+      "name": "タガノエルピーダ",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.053,
+      "top3_est": 0.16392309122800747,
+      "jitsuryoku": 1544.9304568778773,
+      "zenjitsu": 1524.3108735924216,
+      "adjust": -20.619583285455747,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 6,
+      "mark": "",
+      "name": "セフィロ",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.0512,
+      "top3_est": 0.15868167734035624,
+      "jitsuryoku": 1546.9682929774374,
+      "zenjitsu": 1526.8942431700639,
+      "adjust": -20.074049807373513,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 10,
+      "mark": "",
+      "name": "レッドシュヴェルト",
+      "style": "追込",
+      "chokyo": null,
+      "mc_win": 0.05050000000000001,
+      "top3_est": 0.15663694890952934,
+      "jitsuryoku": 1532.4864373208968,
+      "zenjitsu": 1524.4940695758432,
+      "adjust": -7.992367745053571,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 2,
+      "mark": "",
+      "name": "グレイイングリーン",
+      "style": "差し",
+      "chokyo": "🌟調教(1.14倍)",
+      "mc_win": 0.0496,
+      "top3_est": 0.15400275679683567,
+      "jitsuryoku": 1516.5230395680305,
+      "zenjitsu": 1521.5086541592132,
+      "adjust": 4.985614591182639,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 7,
+      "mark": "",
+      "name": "カルチャーデイ",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.0405,
+      "top3_est": 0.1270383227624589,
+      "jitsuryoku": 1519.828219537674,
+      "zenjitsu": 1495.865708218169,
+      "adjust": -23.962511319504983,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 11,
+      "mark": "",
+      "name": "デイトナモード",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.0371,
+      "top3_est": 0.11681102248605013,
+      "jitsuryoku": 1506.9668700906573,
+      "zenjitsu": 1491.2988327829808,
+      "adjust": -15.668037307676514,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 17,
+      "mark": "",
+      "name": "マサノカナリア",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.0371,
+      "top3_est": 0.11681102248605013,
+      "jitsuryoku": 1548.7564327142616,
+      "zenjitsu": 1476.5691891449542,
+      "adjust": -72.18724356930738,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 16,
+      "mark": "",
+      "name": "ショウナンザナドゥ",
+      "style": "先行",
+      "chokyo": "🌟調教(1.20倍)",
+      "mc_win": 0.0285,
+      "top3_est": 0.0905765411615605,
+      "jitsuryoku": 1477.6723518842275,
+      "zenjitsu": 1467.8901216182933,
+      "adjust": -9.782230265934231,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 14,
+      "mark": "",
+      "name": "ランフォーヴァウ",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.0256,
+      "top3_est": 0.08161317011552077,
+      "jitsuryoku": 1502.4126085548503,
+      "zenjitsu": 1460.5007295848109,
+      "adjust": -41.911878970039425,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 4,
+      "mark": "",
+      "name": "ビーアストニッシド",
+      "style": "追込",
+      "chokyo": null,
+      "mc_win": 0.019,
+      "top3_est": 0.06099691483106276,
+      "jitsuryoku": 1480.7282074647162,
+      "zenjitsu": 1432.7872836665888,
+      "adjust": -47.940923798127415,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 12,
+      "mark": "",
+      "name": "レディマリオン",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.0035000000000000005,
+      "top3_est": 0.011416916510321989,
+      "jitsuryoku": 1337.8074499734166,
+      "zenjitsu": 1283.7617451789079,
+      "adjust": -54.045704794508765,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    }
+  ]
+}
