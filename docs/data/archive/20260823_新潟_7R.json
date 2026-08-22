@@ -1,0 +1,266 @@
+{
+  "schema": "format_prediction.v2",
+  "generated_at": "2026-08-23T03:27:39",
+  "race_id": "20260823_新芝1600_G3",
+  "header": {
+    "date": "2026-08-23",
+    "venue": "新",
+    "surface": "芝",
+    "distance": 1600.0,
+    "race_class": "G3",
+    "baba": "良",
+    "N": 10
+  },
+  "race": {
+    "date": "2026-08-23",
+    "no": 7,
+    "venue_code": "新",
+    "venue_name": "新潟",
+    "labeled": true,
+    "draft": false,
+    "warnings": []
+  },
+  "verdict": {
+    "value": "⚠️慎重",
+    "reason": "Elo格差小(gap一致条件を満たさない)",
+    "bet_tier": "seihai_fukusho"
+  },
+  "bets": [
+    "第一推奨: ◎複勝 トップチェッカー (的中~49%・回収88%/F5 83%=全買い方最良)",
+    "第二推奨: 標準形馬連3点 トップチェッカー×シャンデヴァーグ・レッチュベルク・インカルナータ (的中20%・配当妙味)"
+  ],
+  "bet_notes": [],
+  "venue_guidance": {
+    "mark": null,
+    "note": "物差し無し(控えめ)"
+  },
+  "seihai": {
+    "fired": true,
+    "axis": "トップチェッカー",
+    "n_fired": 1,
+    "is_ultimate": false,
+    "skills_str": "🌟調教(1.17倍) 💨展開利",
+    "c_buff": 47.19415789392134,
+    "p_buff": 4.18480879160526,
+    "b_buff": -29.087325897350038,
+    "raw_elo_rank": 2
+  },
+  "gap": {
+    "elo_gap_top2": 0.6,
+    "v27_gap_top2": 19.7,
+    "elo_top2": [
+      "インカルナータ",
+      "トップチェッカー"
+    ],
+    "v27_top2": [
+      "インカルナータ",
+      "レッチュベルク"
+    ],
+    "big_e": false,
+    "big_v": true,
+    "overlap": 1,
+    "state": "中間",
+    "v27_missing": false,
+    "v27_reason": null,
+    "v27_source_latest": "2026-08-16"
+  },
+  "fallback": false,
+  "calib": {
+    "calib_ok_30R": true,
+    "calib_sample_n": 35,
+    "calibrated_temp": 43.69629393307848,
+    "using_calibrated_mc": true
+  },
+  "learning_profile": {
+    "available": true,
+    "cell": "新芝1600・ELITE",
+    "build_date": "2026-07-23",
+    "pin": 36.6,
+    "pkl": "phase1_cache_新_芝_1600m_ELITE.pkl",
+    "systems": [
+      {
+        "label": "展開",
+        "pct": 42.4,
+        "bars": "◉◉◎◎◎"
+      },
+      {
+        "label": "騎手",
+        "pct": 44.7,
+        "bars": "◉◉◎◎◎"
+      },
+      {
+        "label": "調教",
+        "pinned": true,
+        "pin": 36.6
+      },
+      {
+        "label": "厩舎",
+        "pct": 54.5,
+        "bars": "◉◉◉◎◎"
+      },
+      {
+        "label": "斤量",
+        "pct": 84.4,
+        "bars": "◉◉◉◉◎"
+      },
+      {
+        "label": "減衰",
+        "pct": 37.8,
+        "bars": "◉◉◎◎◎"
+      }
+    ],
+    "note": "※学習された係数の相対配置。係数の大小が予測寄与を保証するものではない"
+  },
+  "horses": [
+    {
+      "umaban": 1,
+      "mark": "○",
+      "name": "シャンデヴァーグ",
+      "style": "先行",
+      "chokyo": "🌟調教(1.16倍)",
+      "mc_win": 0.46960570005015484,
+      "top3_est": 0.9077933326092142,
+      "jitsuryoku": 1519.3395522483804,
+      "zenjitsu": 1609.362522379954,
+      "adjust": 90.02297013157363,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 2,
+      "mark": "▲",
+      "name": "レッチュベルク",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.18491455392041545,
+      "top3_est": 0.6496031300785493,
+      "jitsuryoku": 1531.276961603977,
+      "zenjitsu": 1568.6375957107675,
+      "adjust": 37.360634106790485,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 3,
+      "mark": "◎",
+      "name": "トップチェッカー",
+      "style": "逃げ",
+      "chokyo": "🌟調教(1.17倍)",
+      "mc_win": 0.14407125990831302,
+      "top3_est": 0.5547696713288958,
+      "jitsuryoku": 1534.3507611249067,
+      "zenjitsu": 1557.7316207939348,
+      "adjust": 23.38085966902804,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 10,
+      "mark": "△",
+      "name": "インカルナータ",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.08995508966517618,
+      "top3_est": 0.3804292856852951,
+      "jitsuryoku": 1542.5954027297403,
+      "zenjitsu": 1537.1507757852783,
+      "adjust": -5.444626944462016,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 4,
+      "mark": "",
+      "name": "アイデアルカット",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.04209296767515391,
+      "top3_est": 0.18994790540936335,
+      "jitsuryoku": 1506.5540676087926,
+      "zenjitsu": 1503.9665056666038,
+      "adjust": -2.587561942188813,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 7,
+      "mark": "",
+      "name": "トウシンマジック",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.04116744365382491,
+      "top3_est": 0.1859806140521288,
+      "jitsuryoku": 1533.7685932398294,
+      "zenjitsu": 1502.9950082909797,
+      "adjust": -30.773584948849702,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 9,
+      "mark": "",
+      "name": "スイートアリッサム",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.01801820897478232,
+      "top3_est": 0.08361093904494005,
+      "jitsuryoku": 1509.4571315762712,
+      "zenjitsu": 1466.8902950037675,
+      "adjust": -42.56683657250369,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 8,
+      "mark": "",
+      "name": "マイホームパパ",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.006581040172092959,
+      "top3_est": 0.03091775451772593,
+      "jitsuryoku": 1502.757671202583,
+      "zenjitsu": 1422.879822857375,
+      "adjust": -79.8778483452079,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 5,
+      "mark": "",
+      "name": "エレスレイプニル",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.0032495215723094095,
+      "top3_est": 0.015319694659221346,
+      "jitsuryoku": 1486.372564247998,
+      "zenjitsu": 1392.0440020685198,
+      "adjust": -94.32856217947824,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 6,
+      "mark": "",
+      "name": "マインドフルネス",
+      "style": "—",
+      "chokyo": null,
+      "mc_win": 0.00034421440777681695,
+      "top3_est": 0.0016276726146663347,
+      "jitsuryoku": 1368.0735667932247,
+      "zenjitsu": 1293.945895846277,
+      "adjust": -74.12767094694777,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    }
+  ]
+}
