@@ -1,0 +1,283 @@
+{
+  "schema": "format_prediction.v2",
+  "generated_at": "2026-09-06T02:33:53",
+  "race_id": "20260906_中芝2000_G3",
+  "header": {
+    "date": "2026-09-06",
+    "venue": "中",
+    "surface": "芝",
+    "distance": 2000.0,
+    "race_class": "G3",
+    "baba": "良",
+    "N": 11
+  },
+  "race": {
+    "date": "2026-09-06",
+    "no": 11,
+    "venue_code": "中",
+    "venue_name": "中山",
+    "labeled": true,
+    "draft": false,
+    "warnings": []
+  },
+  "verdict": {
+    "value": "⚠️慎重",
+    "reason": "Elo格差小(gap一致条件を満たさない)",
+    "bet_tier": "seihai_fukusho"
+  },
+  "bets": [
+    "第一推奨: ◎複勝 サムシングスイート (的中~49%・回収88%/F5 83%=全買い方最良)",
+    "第二推奨: 標準形馬連3点 サムシングスイート×ドリームコア・リアライズルミナス・ジッピーチューン (的中20%・配当妙味)"
+  ],
+  "bet_notes": [
+    "中山につき本命サイズ半分"
+  ],
+  "venue_guidance": {
+    "mark": "△",
+    "note": "慎重・本命サイズ半分(※中=中山として保守適用/中京は物差し無し)"
+  },
+  "seihai": {
+    "fired": true,
+    "axis": "サムシングスイート",
+    "n_fired": 1,
+    "is_ultimate": false,
+    "skills_str": "🤔【要検討】 🌟調教(1.19倍) 💨展開利",
+    "c_buff": 48.36370215097149,
+    "p_buff": 6.2617258070826205,
+    "b_buff": -35.104292008457705,
+    "raw_elo_rank": 3
+  },
+  "gap": {
+    "elo_gap_top2": 0.1,
+    "v27_gap_top2": 12.8,
+    "elo_top2": [
+      "ジッピーチューン",
+      "ドリームコア"
+    ],
+    "v27_top2": [
+      "ドリームコア",
+      "リアライズルミナス"
+    ],
+    "big_e": false,
+    "big_v": true,
+    "overlap": 1,
+    "state": "中間",
+    "v27_missing": false,
+    "v27_reason": null,
+    "v27_source_latest": "2026-08-23"
+  },
+  "fallback": false,
+  "calib": {
+    "calib_ok_30R": true,
+    "calib_sample_n": 58,
+    "calibrated_temp": 122.48792607812887,
+    "using_calibrated_mc": true
+  },
+  "learning_profile": {
+    "available": true,
+    "cell": "中芝2000・ELITE",
+    "build_date": "2026-09-05",
+    "pin": 36.6,
+    "pkl": "phase1_cache_中_芝_2000m_ELITE.pkl",
+    "systems": [
+      {
+        "label": "展開",
+        "pct": 26.6,
+        "bars": "◉◎◎◎◎"
+      },
+      {
+        "label": "騎手",
+        "pct": 25.9,
+        "bars": "◉◎◎◎◎"
+      },
+      {
+        "label": "調教",
+        "pinned": true,
+        "pin": 36.6
+      },
+      {
+        "label": "厩舎",
+        "pct": 10.3,
+        "bars": "◉◎◎◎◎"
+      },
+      {
+        "label": "斤量",
+        "pct": 5.3,
+        "bars": "◎◎◎◎◎"
+      },
+      {
+        "label": "減衰",
+        "pct": 55.2,
+        "bars": "◉◉◉◎◎"
+      }
+    ],
+    "note": "※学習された係数の相対配置。係数の大小が予測寄与を保証するものではない"
+  },
+  "horses": [
+    {
+      "umaban": 2,
+      "mark": "◎",
+      "name": "サムシングスイート",
+      "style": "先行",
+      "chokyo": "🌟調教(1.19倍)",
+      "mc_win": 0.1731090602449092,
+      "top3_est": 0.48418222819533935,
+      "jitsuryoku": 1726.1508793967848,
+      "zenjitsu": 1745.9437670313825,
+      "adjust": 19.79288763459772,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 9,
+      "mark": "○",
+      "name": "ドリームコア",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.16130406759485905,
+      "top3_est": 0.4593011151421834,
+      "jitsuryoku": 1726.272973765865,
+      "zenjitsu": 1737.2923713776627,
+      "adjust": 11.019397611797785,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 3,
+      "mark": "▲",
+      "name": "リアライズルミナス",
+      "style": "逃げ",
+      "chokyo": "🌟調教(1.06倍)",
+      "mc_win": 0.1446047043029518,
+      "top3_est": 0.4220131664064897,
+      "jitsuryoku": 1680.264115959984,
+      "zenjitsu": 1723.9059893074805,
+      "adjust": 43.64187334749636,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 10,
+      "mark": "△",
+      "name": "ジッピーチューン",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.1414490353259602,
+      "top3_est": 0.41468901813581893,
+      "jitsuryoku": 1730.594783672883,
+      "zenjitsu": 1721.203371049744,
+      "adjust": -9.391412623139104,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 6,
+      "mark": "",
+      "name": "アストリル",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.12000275793960459,
+      "top3_est": 0.36257113941556995,
+      "jitsuryoku": 1717.8772549053726,
+      "zenjitsu": 1701.0633241223018,
+      "adjust": -16.813930783070873,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 8,
+      "mark": "",
+      "name": "ナイスプレーアスク",
+      "style": "逃げ",
+      "chokyo": "🌟調教(1.20倍)",
+      "mc_win": 0.07381041962449142,
+      "top3_est": 0.23671807884456492,
+      "jitsuryoku": 1601.9247934426335,
+      "zenjitsu": 1641.5323772202055,
+      "adjust": 39.60758377757202,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 11,
+      "mark": "",
+      "name": "ベンヴェヌータ",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.046026540987662005,
+      "top3_est": 0.15249203312646942,
+      "jitsuryoku": 1575.8737998292877,
+      "zenjitsu": 1583.6835711559606,
+      "adjust": 7.809771326672944,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 1,
+      "mark": "",
+      "name": "ジワタネホ",
+      "style": "先行",
+      "chokyo": "🌟調教(1.15倍)",
+      "mc_win": 0.041191660098594346,
+      "top3_est": 0.13721422357905264,
+      "jitsuryoku": 1533.7580691142243,
+      "zenjitsu": 1570.089567513737,
+      "adjust": 36.33149839951261,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 4,
+      "mark": "",
+      "name": "マスターソアラ",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.040329390221803575,
+      "top3_est": 0.13447066008173789,
+      "jitsuryoku": 1583.9403489098336,
+      "zenjitsu": 1567.4982959940303,
+      "adjust": -16.442052915803288,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 7,
+      "mark": "",
+      "name": "ロングトールサリー",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.030471447616626523,
+      "top3_est": 0.10270380132026721,
+      "jitsuryoku": 1545.1867089977172,
+      "zenjitsu": 1533.1661077155914,
+      "adjust": -12.020601282125881,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 5,
+      "mark": "",
+      "name": "ファムクラジューズ",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.027700916042537264,
+      "top3_est": 0.09364453575250667,
+      "jitsuryoku": 1535.0489653305453,
+      "zenjitsu": 1521.4899928710258,
+      "adjust": -13.55897245951951,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    }
+  ]
+}
