@@ -442,6 +442,22 @@ function renderVerdictCard(d, idx) {
   return html;
 }
 
+/* 調教セルの表記を詰める(2026-09-06)。
+   「🌟調教(1.14倍)」→「🌟1.14」。列見出しが既に「調教」なので、
+   セル内の「調教」3文字は重複しており、落としても情報は減らない。
+   馬番列を足したぶん馬名列が 102→82px に痩せて表が126px縦に伸びたが、
+   この短縮で 685px 水準へ戻る(先週直した「開いた中身が長すぎる」問題に逆行させない)。
+   data.json は書き換えず表示時に詰める。過去のアーカイブにも同じ表記が適用される。
+   想定外の書式が来たら元の文字列をそのまま出す(消さない)。 */
+function shortChokyo(v) {
+  var t = String(v || '');
+  if (!t) return '';
+  // 先頭の記号は決め打ちしない。今は🌟だけだが、別の記号でランクを表すように
+  // なった時に🌟へ潰してしまわないよう、「調教(…倍)」の部分だけを削る。
+  var m = t.match(/^(.*?)調教\(([0-9]+\.[0-9]+)倍\)$/);
+  return m ? m[1] + m[2] : t;
+}
+
 function renderHorsesTable(rows) {
   // 死んでいる列は出さない: オッズが全行空ならオッズ列ごと省く
   var hasOdds = rows.some(function (r) { return r.odds !== null && r.odds !== undefined; });
@@ -481,7 +497,7 @@ function renderHorsesTable(rows) {
     // 馬番。実際に馬券を買うときに必要なので馬名の前に置く(競馬新聞と同じ 印→番→馬名)
     html += '<td class="c uma">' + esc(r.umaban || '') + '</td>';
     html += '<td>' + esc(r.name) + style + sw + '</td>';
-    if (hasChokyo) html += '<td class="seihai">' + esc(r.chokyo || '') + '</td>';
+    if (hasChokyo) html += '<td class="seihai">' + esc(shortChokyo(r.chokyo)) + '</td>';
     html += '<td class="num">' + pct(r.mc_win) + '</td>';
     html += '<td class="num">' + pct(r.top3_est) + '</td>';
     html += '<td class="num col-drop">' + num(r.jitsuryoku) + '</td>';
