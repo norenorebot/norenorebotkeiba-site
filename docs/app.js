@@ -292,7 +292,7 @@ function renderDaySummary(rows) {
       var what = TIER_LABEL[tier] || '';
       html += '<li><a href="#' + esc(raceAnchor(x.idx)) + '">' +
               esc(venueLabel(d)) + (d.race && d.race.no ? esc(d.race.no) + 'R' : '') + '</a>' +
-              '　◎' + esc(axis) +
+              '　◎' + esc(axisUmaban(d, axis) ? axisUmaban(d, axis) + '番 ' + axis : axis) +
               '　<span class="note">' + esc(sign) + (what ? '／' + esc(what) : '') + '</span></li>';
     });
     html += '</ul>';
@@ -302,6 +302,50 @@ function renderDaySummary(rows) {
   return html;
 }
 /* ◎の馬名は seihai.axis が無い時(実力差サイン等)に表から拾う */
+/* ◎の馬番。実際に馬券を買うときに必要なので、買い目とサマリーにも出す。
+   data.json の horses[] は umaban を持っている(prob_log から素通しされている)。 */
+function axisUmaban(d, name) {
+  var rows = d.horses || [];
+  var hit = null;
+  if (name) {
+    hit = rows.filter(function (x) { return x.name === name; })[0];
+  }
+  if (!hit) hit = rows.filter(function (x) { return x.mark === '◎'; })[0];
+  return hit && hit.umaban ? hit.umaban : null;
+}
+/* 買い目の文中の馬名すべてに「N番」を添える。エンジンが出した文言は組み替えず、
+   馬名の直前に番号を差し込むだけにする(表示層の加工に留める)。
+   馬連3点は相手の馬番も無いと実際に買えないので、軸だけでなく全馬名を対象にする。
+   ※長い名前から先に置換する(短い名前が長い名前の一部に含まれる場合の二重置換を防ぐ)。
+     一度の走査で置き換えるため、差し込んだ「N番」がさらに置換されることもない。 */
+function withUmaban(text, d) {
+  var rows = (d.horses || []).filter(function (x) { return x.name && x.umaban; });
+  if (!rows.length) return text;
+  // 長い名前から先に照合する(短い名前が長い名前の一部でも誤爆しない)
+  var names = rows.map(function (x) { return x.name; })
+                  .sort(function (a, b) { return b.length - a.length; });
+  var byName = {};
+  rows.forEach(function (x) { byName[x.name] = x.umaban; });
+
+  // 正規表現は使わない(馬名のエスケープが事故の元)。左から1回だけ走査して置き換える。
+  // 差し込んだ「N番」を再度走査しないので、二重置換も起きない。
+  var src = String(text), out = '', i = 0;
+  while (i < src.length) {
+    var matched = null;
+    for (var k = 0; k < names.length; k++) {
+      if (src.startsWith(names[k], i)) { matched = names[k]; break; }
+    }
+    if (matched) {
+      out += lookup(byName, matched, '') + '番 ' + matched;
+      i += matched.length;
+    } else {
+      out += src.charAt(i);
+      i += 1;
+    }
+  }
+  return out;
+}
+
 function axisFromRows(d) {
   var r = (d.horses || []).filter(function (x) { return x.mark === '◎'; })[0];
   return r ? r.name : null;
@@ -351,7 +395,7 @@ function renderVerdictCard(d, idx) {
   }
 
   html += '<div class="bet">買い目:</div><ul>';
-  (d.bets || []).forEach(function (b) { html += '<li>' + esc(soften(b)) + '</li>'; });
+  (d.bets || []).forEach(function (b) { html += '<li>' + esc(withUmaban(soften(b), d)) + '</li>'; });
   html += '</ul>';
   html += renderResultLine(d);
   if ((d.bet_notes || []).length) {
@@ -421,7 +465,7 @@ function renderHorsesTable(rows) {
     return '<span class="lbl-full">' + full + '</span><span class="lbl-short">' + short + '</span>';
   };
   html += '<div class="tablewrap"><table>';
-  html += '<tr><th>印</th><th>馬名</th>' + (hasChokyo ? '<th>調教</th>' : '') +
+  html += '<tr><th>印</th><th class="c uma">番</th><th>馬名</th>' + (hasChokyo ? '<th>調教</th>' : '') +
           '<th class="num">' + h2('勝つ確率', '勝率') + '</th>' +
           '<th class="num">' + h2('3着内に入る率(推定)', '3着内') + '</th>' +
           '<th class="num col-drop">実力の点数</th>' +
@@ -434,6 +478,8 @@ function renderHorsesTable(rows) {
     var style = (r.style && r.style !== '—') ? '(' + esc(r.style) + ')' : '';
     html += '<tr>';
     html += '<td class="c">' + esc(r.mark || '') + '</td>';
+    // 馬番。実際に馬券を買うときに必要なので馬名の前に置く(競馬新聞と同じ 印→番→馬名)
+    html += '<td class="c uma">' + esc(r.umaban || '') + '</td>';
     html += '<td>' + esc(r.name) + style + sw + '</td>';
     if (hasChokyo) html += '<td class="seihai">' + esc(r.chokyo || '') + '</td>';
     html += '<td class="num">' + pct(r.mc_win) + '</td>';

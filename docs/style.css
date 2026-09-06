@@ -45,6 +45,10 @@ td.wrapcell { white-space: normal; word-break: break-word; }
 /* th は既定 nowrap。長いラベルを入れる見出し列だけ折り返させる */
 th.wraphead { white-space: normal; word-break: break-word; }
 td.c, th.c { text-align: center; }
+
+/* 馬番セル(2026-09-06追加)。馬券購入時に必要なので馬柱に出す。
+   最大2桁なので幅を固定して、スマホで他列を圧迫しないようにする。 */
+td.uma, th.c.uma { white-space: nowrap; width: 2.2em; }
 tr.year-total td, tr.year-total th { background: #f3f3f3; font-weight: bold; }
 
 /* --- 判定色(強調は太字と判定文字色のみ・§6) --- */
