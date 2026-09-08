@@ -616,6 +616,7 @@ function initLatest() {
         // 上部にその日の要約(買い目のあるレース/見送り)、続けて従来どおりカードを縦に並べる
         el.innerHTML = renderDaySummary(rows) +
                        list.map(function (d, i) { return renderVerdictCard(d, i); }).join('');
+          if (window.initRacePicker) window.initRacePicker(el, list);
       });
   }).catch(function (e) { el.innerHTML = '<p>読み込みエラー: ' + esc(e.message) + '</p>'; });
 }

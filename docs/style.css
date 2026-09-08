@@ -177,3 +177,23 @@ footer { border-top: 1px solid #000; margin-top: 16px; padding-top: 6px; font-si
   /* 月別の折りたたみはスマホでのみ出す */
   .mobile-only { display: block; }
 }
+
+/* Latest page only: desktop retains the original continuous race cards. */
+#latest .race-picker, #latest .race-return, #latest .race-other { display: none; }
+@media (max-width: 640px) {
+  #latest.race-picker-ready .race-picker { display: block; }
+  #latest.race-picker-ready > .verdict-block { display: none; }
+  #latest.race-detail-mode > .verdict-block.race-selected { display: block; }
+  #latest.race-detail-mode .race-overview { display: none; }
+  #latest.race-detail-mode .race-return, #latest.race-detail-mode .race-other { display: block; }
+  #latest .race-grid { width: 100%; table-layout: fixed; border-collapse: collapse; }
+  #latest .race-grid th:first-child { width: 38px; }
+  #latest .race-grid th, #latest .race-grid td { padding: 0; text-align: center; white-space: normal; overflow-wrap: anywhere; }
+  #latest .race-grid th { padding: 7px 2px; }
+  #latest .race-grid button { display: block; width: 100%; min-height: 46px; padding: 5px 2px; border: 0; border-radius: 0; background: #fff; color: #555; font: inherit; font-size: 13px; cursor: pointer; }
+  #latest .race-grid button.race-buy { background: #fffbe6; color: #000; font-weight: bold; }
+  #latest .race-grid .race-absent { color: #555; font-size: 12px; }
+  #latest .race-return, #latest .race-other button { min-height: 44px; border: 0; border-radius: 0; padding: 8px 0; background: transparent; color: #0000aa; text-decoration: underline; font: inherit; cursor: pointer; }
+  #latest .race-other { border-top: 1px solid #999; margin-top: 8px; }
+  #latest .race-other button { margin-right: 14px; }
+}
