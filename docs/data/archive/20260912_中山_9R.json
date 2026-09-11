@@ -1,0 +1,329 @@
+{
+  "schema": "format_prediction.v2",
+  "generated_at": "2026-09-12T02:31:52",
+  "predicted_at": "2026-09-12T01:08:18",
+  "race_id": "20260912_中芝1600_2勝",
+  "header": {
+    "date": "2026-09-12",
+    "venue": "中",
+    "surface": "芝",
+    "distance": 1600.0,
+    "race_class": "2勝",
+    "baba": "重",
+    "N": 14
+  },
+  "race": {
+    "date": "2026-09-12",
+    "no": 9,
+    "venue_code": "中",
+    "venue_name": "中山",
+    "labeled": true,
+    "draft": false,
+    "warnings": []
+  },
+  "verdict": {
+    "value": "⚠️慎重",
+    "reason": "Elo格差小(gap一致条件を満たさない)",
+    "bet_tier": "seihai_fukusho"
+  },
+  "bets": [
+    "第一推奨: ◎複勝 ミーントゥビー (的中~49%・回収88%/F5 83%=全買い方最良)",
+    "第二推奨: 標準形馬連3点 ミーントゥビー×シャンソンドール・ロケベンドラ・レイユール (的中20%・配当妙味)"
+  ],
+  "bet_notes": [
+    "中山につき本命サイズ半分"
+  ],
+  "venue_guidance": {
+    "mark": "△",
+    "note": "慎重・本命サイズ半分(※中=中山として保守適用/中京は物差し無し)"
+  },
+  "seihai": {
+    "fired": true,
+    "axis": "ミーントゥビー",
+    "n_fired": 1,
+    "is_ultimate": false,
+    "skills_str": "🌟調教(1.18倍) 💨展開利",
+    "c_buff": 55.72979355079343,
+    "p_buff": 6.923857519869733,
+    "b_buff": -96.67267569003116,
+    "raw_elo_rank": 3
+  },
+  "gap": {
+    "elo_gap_top2": 7.2,
+    "v27_gap_top2": 0.3,
+    "elo_top2": [
+      "シャンソンドール",
+      "ロケベンドラ"
+    ],
+    "v27_top2": [
+      "シャンソンドール",
+      "ミーントゥビー"
+    ],
+    "big_e": false,
+    "big_v": false,
+    "overlap": 1,
+    "state": "中間",
+    "v27_missing": false,
+    "v27_reason": null,
+    "v27_source_latest": "2026-09-06"
+  },
+  "fallback": false,
+  "calib": {
+    "calib_ok_30R": true,
+    "calib_sample_n": 119,
+    "calibrated_temp": 95.15996581120602,
+    "using_calibrated_mc": true
+  },
+  "learning_profile": {
+    "available": true,
+    "cell": "中芝1600・STANDARD",
+    "build_date": "2026-09-11",
+    "pin": 36.6,
+    "pkl": "phase1_cache_中_芝_1600m_STANDARD.pkl",
+    "systems": [
+      {
+        "label": "展開",
+        "pct": 56.5,
+        "bars": "◉◉◉◎◎"
+      },
+      {
+        "label": "騎手",
+        "pct": 58.4,
+        "bars": "◉◉◉◎◎"
+      },
+      {
+        "label": "調教",
+        "pinned": true,
+        "pin": 36.6
+      },
+      {
+        "label": "厩舎",
+        "pct": 97.7,
+        "bars": "◉◉◉◉◉"
+      },
+      {
+        "label": "斤量",
+        "pct": 7.6,
+        "bars": "◎◎◎◎◎"
+      },
+      {
+        "label": "減衰",
+        "pct": 2.6,
+        "bars": "◎◎◎◎◎"
+      }
+    ],
+    "note": "※学習された係数の相対配置。係数の大小が予測寄与を保証するものではない"
+  },
+  "horses": [
+    {
+      "umaban": 12,
+      "mark": "○",
+      "name": "シャンソンドール",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.19565662762415134,
+      "top3_est": 0.5316132577640154,
+      "jitsuryoku": 1609.776902744951,
+      "zenjitsu": 1603.163570331445,
+      "adjust": -6.6133324135059866,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 2,
+      "mark": "▲",
+      "name": "ロケベンドラ",
+      "style": "逃げ",
+      "chokyo": "🌟調教(1.16倍)",
+      "mc_win": 0.17960246004101296,
+      "top3_est": 0.500481783864021,
+      "jitsuryoku": 1601.2341733019305,
+      "zenjitsu": 1595.016414661209,
+      "adjust": -6.217758640721513,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 7,
+      "mark": "△",
+      "name": "レイユール",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.13531378032052835,
+      "top3_est": 0.40289393259038186,
+      "jitsuryoku": 1557.9496092031209,
+      "zenjitsu": 1568.07192049086,
+      "adjust": 10.122311287739194,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 8,
+      "mark": "◎",
+      "name": "ミーントゥビー",
+      "style": "差し",
+      "chokyo": "🌟調教(1.18倍)",
+      "mc_win": 0.1222052292559433,
+      "top3_est": 0.37062546735022217,
+      "jitsuryoku": 1594.0219250734085,
+      "zenjitsu": 1558.37563938811,
+      "adjust": -35.64628568529861,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 1,
+      "mark": "",
+      "name": "ホウオウシンデレラ",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.09854279570616449,
+      "top3_est": 0.3085028292397841,
+      "jitsuryoku": 1580.3592223029582,
+      "zenjitsu": 1537.8961765095812,
+      "adjust": -42.46304579337698,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 10,
+      "mark": "",
+      "name": "ルナルーチェット",
+      "style": "先行",
+      "chokyo": "🌟調教(1.15倍)",
+      "mc_win": 0.06634412060921314,
+      "top3_est": 0.21620779712918325,
+      "jitsuryoku": 1532.162547156147,
+      "zenjitsu": 1500.2474889340365,
+      "adjust": -31.915058222110474,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 13,
+      "mark": "",
+      "name": "キスアンドクライ",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.06561282039561994,
+      "top3_est": 0.21401106205887105,
+      "jitsuryoku": 1550.618084236624,
+      "zenjitsu": 1499.1927325073034,
+      "adjust": -51.42535172932071,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 6,
+      "mark": "",
+      "name": "マルカオペラ",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.062034518322640765,
+      "top3_est": 0.20319948417319408,
+      "jitsuryoku": 1494.251436794599,
+      "zenjitsu": 1493.856149019977,
+      "adjust": -0.3952877746219201,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 14,
+      "mark": "",
+      "name": "ギフテッド",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.03857251023761607,
+      "top3_est": 0.12977903469561683,
+      "jitsuryoku": 1514.2734291365314,
+      "zenjitsu": 1448.640784256358,
+      "adjust": -65.6326448801733,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 3,
+      "mark": "",
+      "name": "ベルビースタローン",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.03259287838003033,
+      "top3_est": 0.11038170189262539,
+      "jitsuryoku": 1532.5002378270267,
+      "zenjitsu": 1432.611464578706,
+      "adjust": -99.8887732483206,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 9,
+      "mark": "",
+      "name": "イブニングタイド",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.0032253925657126656,
+      "top3_est": 0.01126373277212855,
+      "jitsuryoku": 1240.019558458108,
+      "zenjitsu": 1212.5027389758945,
+      "adjust": -27.51681948221335,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 4,
+      "mark": "",
+      "name": "エリム",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.00016619184134583024,
+      "top3_est": 0.0005821525270026618,
+      "jitsuryoku": 996.9187633621959,
+      "zenjitsu": 930.2899538241572,
+      "adjust": -66.6288095380387,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 11,
+      "mark": "",
+      "name": "ミラーダカリエンテ",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.00012113970102764082,
+      "top3_est": 0.00042435864030128487,
+      "jitsuryoku": 944.4778580736806,
+      "zenjitsu": 900.2005288605,
+      "adjust": -44.27732921318068,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 5,
+      "mark": "",
+      "name": "オーロラアーク",
+      "style": "追込",
+      "chokyo": null,
+      "mc_win": 9.534998992980408e-06,
+      "top3_est": 3.340530265205407e-05,
+      "jitsuryoku": 739.0150709066199,
+      "zenjitsu": 658.306246208158,
+      "adjust": -80.70882469846197,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    }
+  ]
+}

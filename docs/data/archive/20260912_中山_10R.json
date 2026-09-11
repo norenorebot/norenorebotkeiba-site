@@ -1,0 +1,281 @@
+{
+  "schema": "format_prediction.v2",
+  "generated_at": "2026-09-12T02:31:52",
+  "predicted_at": "2026-09-12T01:11:11",
+  "race_id": "20260912_中芝2000_3勝",
+  "header": {
+    "date": "2026-09-12",
+    "venue": "中",
+    "surface": "芝",
+    "distance": 2000.0,
+    "race_class": "3勝",
+    "baba": "重",
+    "N": 11
+  },
+  "race": {
+    "date": "2026-09-12",
+    "no": 10,
+    "venue_code": "中",
+    "venue_name": "中山",
+    "labeled": true,
+    "draft": false,
+    "warnings": []
+  },
+  "verdict": {
+    "value": "🚫見送り",
+    "reason": "gap食い違い(Elo gap81≥15 × V27 gap17≥8・上位2頭不一致)",
+    "bet_tier": "none"
+  },
+  "bets": [
+    "🚫見送り(gap食い違い): Elo/V27が上位2頭で不一致 → 聖杯発火でも買わない"
+  ],
+  "bet_notes": [],
+  "venue_guidance": {
+    "mark": "△",
+    "note": "慎重・本命サイズ半分(※中=中山として保守適用/中京は物差し無し)"
+  },
+  "seihai": {
+    "fired": true,
+    "axis": "ルールーリマ",
+    "n_fired": 1,
+    "is_ultimate": false,
+    "skills_str": "🌟調教(1.16倍) 💨展開利",
+    "c_buff": 58.79784637405365,
+    "p_buff": 6.2617258070826205,
+    "b_buff": -16.85672734849772,
+    "raw_elo_rank": 3
+  },
+  "gap": {
+    "elo_gap_top2": 81.3,
+    "v27_gap_top2": 17.2,
+    "elo_top2": [
+      "ダンツファイター",
+      "デルアヴァー"
+    ],
+    "v27_top2": [
+      "ショウナンサムデイ",
+      "ダノンジャイアン"
+    ],
+    "big_e": true,
+    "big_v": true,
+    "overlap": 0,
+    "state": "食い違い",
+    "v27_missing": false,
+    "v27_reason": null,
+    "v27_source_latest": "2026-09-06"
+  },
+  "fallback": false,
+  "calib": {
+    "calib_ok_30R": true,
+    "calib_sample_n": 59,
+    "calibrated_temp": 130.01741599009208,
+    "using_calibrated_mc": true
+  },
+  "learning_profile": {
+    "available": true,
+    "cell": "中芝2000・ELITE",
+    "build_date": "2026-09-05",
+    "pin": 36.6,
+    "pkl": "phase1_cache_中_芝_2000m_ELITE.pkl",
+    "systems": [
+      {
+        "label": "展開",
+        "pct": 26.6,
+        "bars": "◉◎◎◎◎"
+      },
+      {
+        "label": "騎手",
+        "pct": 25.9,
+        "bars": "◉◎◎◎◎"
+      },
+      {
+        "label": "調教",
+        "pinned": true,
+        "pin": 36.6
+      },
+      {
+        "label": "厩舎",
+        "pct": 10.3,
+        "bars": "◉◎◎◎◎"
+      },
+      {
+        "label": "斤量",
+        "pct": 5.3,
+        "bars": "◎◎◎◎◎"
+      },
+      {
+        "label": "減衰",
+        "pct": 55.2,
+        "bars": "◉◉◉◎◎"
+      }
+    ],
+    "note": "※学習された係数の相対配置。係数の大小が予測寄与を保証するものではない"
+  },
+  "horses": [
+    {
+      "umaban": 1,
+      "mark": "○",
+      "name": "デルアヴァー",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.2241729204751128,
+      "top3_est": 0.5904477604077197,
+      "jitsuryoku": 1791.842895972132,
+      "zenjitsu": 1781.2697674209846,
+      "adjust": -10.57312855114742,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 10,
+      "mark": "▲",
+      "name": "ダンツファイター",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.2003359455445073,
+      "top3_est": 0.5488622412572464,
+      "jitsuryoku": 1754.6415272990964,
+      "zenjitsu": 1766.6529448853105,
+      "adjust": 12.011417586214066,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 3,
+      "mark": "◎",
+      "name": "ルールーリマ",
+      "style": "逃げ",
+      "chokyo": "🌟調教(1.16倍)",
+      "mc_win": 0.14024952654807424,
+      "top3_est": 0.4220111287889765,
+      "jitsuryoku": 1673.3436695487824,
+      "zenjitsu": 1720.292307679503,
+      "adjust": 46.94863813072061,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 8,
+      "mark": "△",
+      "name": "ショウナンサムデイ",
+      "style": "差し",
+      "chokyo": "🌟調教(1.20倍)",
+      "mc_win": 0.09958899834305174,
+      "top3_est": 0.31707665754229825,
+      "jitsuryoku": 1639.828843306569,
+      "zenjitsu": 1675.7780540312872,
+      "adjust": 35.949210724718114,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 9,
+      "mark": "",
+      "name": "ダノンジャイアン",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.08716584300404541,
+      "top3_est": 0.28201703283152224,
+      "jitsuryoku": 1664.560744271152,
+      "zenjitsu": 1658.4546434442693,
+      "adjust": -6.106100826882766,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 4,
+      "mark": "",
+      "name": "マイネルフーガ",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.07140890356153014,
+      "top3_est": 0.23560783814502428,
+      "jitsuryoku": 1630.4009865789778,
+      "zenjitsu": 1632.5304729248835,
+      "adjust": 2.1294863459056614,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 2,
+      "mark": "",
+      "name": "マイネルブリックス",
+      "style": "追込",
+      "chokyo": "🌟調教(1.11倍)",
+      "mc_win": 0.05630127877494497,
+      "top3_est": 0.18913291874403015,
+      "jitsuryoku": 1570.9541192989159,
+      "zenjitsu": 1601.6246423825896,
+      "adjust": 30.670523083673743,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 6,
+      "mark": "",
+      "name": "トーアライデン",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.04207095773433876,
+      "top3_est": 0.14364497853525415,
+      "jitsuryoku": 1575.017915170623,
+      "zenjitsu": 1563.7428219031935,
+      "adjust": -11.275093267429384,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 11,
+      "mark": "",
+      "name": "キーパフォーマー",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.03812359114630273,
+      "top3_est": 0.13074052041210002,
+      "jitsuryoku": 1559.4371383158002,
+      "zenjitsu": 1550.9329363572397,
+      "adjust": -8.504201958560543,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 7,
+      "mark": "",
+      "name": "キントリヒ",
+      "style": "先行",
+      "chokyo": "🌟調教(1.16倍)",
+      "mc_win": 0.03404742499035386,
+      "top3_est": 0.11728678613814301,
+      "jitsuryoku": 1516.1373051896492,
+      "zenjitsu": 1536.2307131831371,
+      "adjust": 20.093407993487972,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 5,
+      "mark": "",
+      "name": "アマイ",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.006534609877737927,
+      "top3_est": 0.023172137197685794,
+      "jitsuryoku": 1340.3227188364253,
+      "zenjitsu": 1321.6185371556628,
+      "adjust": -18.70418168076253,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    }
+  ]
+}
