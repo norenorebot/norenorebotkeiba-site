@@ -1,0 +1,348 @@
+{
+  "schema": "format_prediction.v2",
+  "generated_at": "2026-09-13T02:08:30",
+  "predicted_at": "2026-09-13T01:27:04",
+  "race_id": "20260913_中芝2200_G2",
+  "header": {
+    "date": "2026-09-13",
+    "venue": "中",
+    "surface": "芝",
+    "distance": 2200.0,
+    "race_class": "G2",
+    "baba": "重",
+    "N": 16
+  },
+  "race": {
+    "date": "2026-09-13",
+    "no": 11,
+    "venue_code": "中",
+    "venue_name": "中山",
+    "labeled": true,
+    "draft": false,
+    "warnings": []
+  },
+  "verdict": {
+    "value": "⚠️慎重",
+    "reason": "Elo格差小(gap一致条件を満たさない) / 較正フォールバック中→本命サイズを落とす(物差し④)",
+    "bet_tier": "none"
+  },
+  "bets": [
+    "買い目なし(推奨なしを明示=判断支援)"
+  ],
+  "bet_notes": [],
+  "venue_guidance": {
+    "mark": "△",
+    "note": "慎重・本命サイズ半分(※中=中山として保守適用/中京は物差し無し)"
+  },
+  "seihai": {
+    "fired": false
+  },
+  "gap": {
+    "elo_gap_top2": 1.4,
+    "v27_gap_top2": 8.8,
+    "elo_top2": [
+      "アスクエジンバラ",
+      "ゴーイントゥスカイ"
+    ],
+    "v27_top2": [
+      "ゴーイントゥスカイ",
+      "バステール"
+    ],
+    "big_e": false,
+    "big_v": true,
+    "overlap": 1,
+    "state": "中間",
+    "v27_missing": false,
+    "v27_reason": null,
+    "v27_source_latest": "2026-09-06"
+  },
+  "fallback": true,
+  "calib": {
+    "calib_ok_30R": false,
+    "calib_sample_n": 28,
+    "calibrated_temp": null,
+    "using_calibrated_mc": false
+  },
+  "learning_profile": {
+    "available": true,
+    "cell": "中芝2200・ELITE",
+    "build_date": "2026-09-08",
+    "pin": 36.6,
+    "pkl": "phase1_cache_中_芝_2200m_ELITE.pkl",
+    "systems": [
+      {
+        "label": "展開",
+        "pct": 44.4,
+        "bars": "◉◉◎◎◎"
+      },
+      {
+        "label": "騎手",
+        "pct": 61.2,
+        "bars": "◉◉◉◎◎"
+      },
+      {
+        "label": "調教",
+        "pinned": true,
+        "pin": 36.6
+      },
+      {
+        "label": "厩舎",
+        "pct": 40.7,
+        "bars": "◉◉◎◎◎"
+      },
+      {
+        "label": "斤量",
+        "pct": 7.5,
+        "bars": "◎◎◎◎◎"
+      },
+      {
+        "label": "減衰",
+        "pct": 44.5,
+        "bars": "◉◉◎◎◎"
+      }
+    ],
+    "note": "※学習された係数の相対配置。係数の大小が予測寄与を保証するものではない"
+  },
+  "horses": [
+    {
+      "umaban": 8,
+      "mark": "◎",
+      "name": "ゴーイントゥスカイ",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.1153,
+      "top3_est": 0.33038407511893836,
+      "jitsuryoku": 1700.7009699846665,
+      "zenjitsu": 1706.7333173631512,
+      "adjust": 6.032347378484701,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 16,
+      "mark": "○",
+      "name": "ラディアントスター",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.0969,
+      "top3_est": 0.2843572574519698,
+      "jitsuryoku": 1686.393548264658,
+      "zenjitsu": 1685.9600176623762,
+      "adjust": -0.4335306022817349,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 12,
+      "mark": "▲",
+      "name": "ラージアンサンブル",
+      "style": "差し",
+      "chokyo": "🌟調教(1.17倍)",
+      "mc_win": 0.0904,
+      "top3_est": 0.2674634450430985,
+      "jitsuryoku": 1642.4691494571102,
+      "zenjitsu": 1672.0602337239893,
+      "adjust": 29.59108426687908,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 5,
+      "mark": "△",
+      "name": "アスクエジンバラ",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.0888,
+      "top3_est": 0.26325460727990124,
+      "jitsuryoku": 1687.8403643742074,
+      "zenjitsu": 1682.0875977677547,
+      "adjust": -5.752766606452724,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 10,
+      "mark": "",
+      "name": "バステール",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.0876,
+      "top3_est": 0.26008496936925,
+      "jitsuryoku": 1665.6481527708486,
+      "zenjitsu": 1671.3828424396518,
+      "adjust": 5.734689668803185,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 2,
+      "mark": "",
+      "name": "アウダーシア",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.08559999999999998,
+      "top3_est": 0.2547775081200401,
+      "jitsuryoku": 1643.2531577637965,
+      "zenjitsu": 1667.9468886203051,
+      "adjust": 24.693730856508637,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 4,
+      "mark": "",
+      "name": "リッツパーティー",
+      "style": "逃げ",
+      "chokyo": "🌟調教(1.16倍)",
+      "mc_win": 0.0821,
+      "top3_est": 0.2454152758685638,
+      "jitsuryoku": 1631.9631097998167,
+      "zenjitsu": 1670.594329648769,
+      "adjust": 38.63121984895224,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 6,
+      "mark": "",
+      "name": "サヴォアフェール",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.0697,
+      "top3_est": 0.2114927629923287,
+      "jitsuryoku": 1639.4911818879534,
+      "zenjitsu": 1655.0236611434962,
+      "adjust": 15.53247925554274,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 9,
+      "mark": "",
+      "name": "サノノグレーター",
+      "style": "追込",
+      "chokyo": "🌟調教(1.17倍)",
+      "mc_win": 0.0696,
+      "top3_est": 0.21121445488955048,
+      "jitsuryoku": 1631.0285884828727,
+      "zenjitsu": 1646.8311843092806,
+      "adjust": 15.802595826407924,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 3,
+      "mark": "",
+      "name": "バドリナート",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.0541,
+      "top3_est": 0.16717367249738438,
+      "jitsuryoku": 1600.0115891179546,
+      "zenjitsu": 1622.452128009677,
+      "adjust": 22.440538891722326,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 13,
+      "mark": "",
+      "name": "フウセン",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.0536,
+      "top3_est": 0.1657234030184181,
+      "jitsuryoku": 1598.1949713283202,
+      "zenjitsu": 1615.5252646290892,
+      "adjust": 17.33029330076897,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 7,
+      "mark": "",
+      "name": "ジャスティンシカゴ",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.033,
+      "top3_est": 0.10440033660281955,
+      "jitsuryoku": 1558.6673197591201,
+      "zenjitsu": 1569.0891409238384,
+      "adjust": 10.421821164718267,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 15,
+      "mark": "",
+      "name": "エリプティクカーブ",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.0326,
+      "top3_est": 0.10317964757639339,
+      "jitsuryoku": 1568.5979293282337,
+      "zenjitsu": 1577.9065149084472,
+      "adjust": 9.308585580213503,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 11,
+      "mark": "",
+      "name": "ミリオンクラウン",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.0195,
+      "top3_est": 0.06258625627072398,
+      "jitsuryoku": 1573.3921974051677,
+      "zenjitsu": 1522.9985727929497,
+      "adjust": -50.39362461221799,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 1,
+      "mark": "",
+      "name": "ウェイクフィールド",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.0158,
+      "top3_est": 0.05090716295700522,
+      "jitsuryoku": 1472.8136718078867,
+      "zenjitsu": 1503.8622496022522,
+      "adjust": 31.04857779436543,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 14,
+      "mark": "",
+      "name": "ティラーノ",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.0054,
+      "top3_est": 0.017585164943614402,
+      "jitsuryoku": 1447.4144455082203,
+      "zenjitsu": 1409.150088126819,
+      "adjust": -38.264357381401396,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    }
+  ]
+}

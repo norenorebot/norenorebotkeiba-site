@@ -1,0 +1,378 @@
+{
+  "schema": "format_prediction.v2",
+  "generated_at": "2026-09-13T02:08:30",
+  "predicted_at": "2026-09-13T01:41:09",
+  "race_id": "20260913_阪芝2200_未勝利",
+  "header": {
+    "date": "2026-09-13",
+    "venue": "阪",
+    "surface": "芝",
+    "distance": 2200.0,
+    "race_class": "未勝利",
+    "baba": "良",
+    "N": 18
+  },
+  "race": {
+    "date": "2026-09-13",
+    "no": 4,
+    "venue_code": "阪",
+    "venue_name": "阪神",
+    "labeled": true,
+    "draft": false,
+    "warnings": []
+  },
+  "verdict": {
+    "value": "🚫見送り",
+    "reason": "gap食い違い(Elo gap22≥15 × V27 gap12≥8・上位2頭不一致)",
+    "bet_tier": "none"
+  },
+  "bets": [
+    "🚫見送り(gap食い違い): Elo/V27が上位2頭で不一致 → 聖杯発火でも買わない"
+  ],
+  "bet_notes": [],
+  "venue_guidance": {
+    "mark": "○",
+    "note": "傾向"
+  },
+  "seihai": {
+    "fired": false
+  },
+  "gap": {
+    "elo_gap_top2": 22.5,
+    "v27_gap_top2": 12.1,
+    "elo_top2": [
+      "オープンザパンドラ",
+      "オーマイラッキーン"
+    ],
+    "v27_top2": [
+      "ノブレスラブリエ",
+      "ワンダーデリエール"
+    ],
+    "big_e": true,
+    "big_v": true,
+    "overlap": 0,
+    "state": "食い違い",
+    "v27_missing": false,
+    "v27_reason": null,
+    "v27_source_latest": "2026-09-06"
+  },
+  "fallback": true,
+  "calib": {
+    "calib_ok_30R": false,
+    "calib_sample_n": 14,
+    "calibrated_temp": null,
+    "using_calibrated_mc": false
+  },
+  "learning_profile": {
+    "available": true,
+    "cell": "阪芝2200・MAIDEN",
+    "build_date": "2026-09-11",
+    "pin": 36.6,
+    "pkl": "phase1_cache_阪_芝_2200m_MAIDEN.pkl",
+    "systems": [
+      {
+        "label": "展開",
+        "pct": 52.6,
+        "bars": "◉◉◉◎◎"
+      },
+      {
+        "label": "騎手",
+        "pct": 38.8,
+        "bars": "◉◉◎◎◎"
+      },
+      {
+        "label": "調教",
+        "pinned": true,
+        "pin": 36.6
+      },
+      {
+        "label": "厩舎",
+        "pct": 34.4,
+        "bars": "◉◉◎◎◎"
+      },
+      {
+        "label": "斤量",
+        "pct": 19.7,
+        "bars": "◉◎◎◎◎"
+      },
+      {
+        "label": "減衰",
+        "pct": 30.9,
+        "bars": "◉◉◎◎◎"
+      }
+    ],
+    "note": "※学習された係数の相対配置。係数の大小が予測寄与を保証するものではない"
+  },
+  "horses": [
+    {
+      "umaban": 5,
+      "mark": "◎",
+      "name": "オーマイラッキーン",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.1054,
+      "top3_est": 0.3037268366969742,
+      "jitsuryoku": 1619.406179196501,
+      "zenjitsu": 1585.8978968890503,
+      "adjust": -33.5082823074506,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 6,
+      "mark": "○",
+      "name": "ヴィスメンティス",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.1005,
+      "top3_est": 0.2914331451300159,
+      "jitsuryoku": 1577.3124182152424,
+      "zenjitsu": 1571.915815920603,
+      "adjust": -5.396602294639251,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 11,
+      "mark": "▲",
+      "name": "ロールスワン",
+      "style": "追込",
+      "chokyo": null,
+      "mc_win": 0.0808,
+      "top3_est": 0.24013890413028505,
+      "jitsuryoku": 1521.8643144004188,
+      "zenjitsu": 1544.6094564585355,
+      "adjust": 22.7451420581167,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 18,
+      "mark": "△",
+      "name": "ベルトナリテ",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.0783,
+      "top3_est": 0.2334175711435204,
+      "jitsuryoku": 1545.7841383462592,
+      "zenjitsu": 1546.768846150726,
+      "adjust": 0.9847078044667796,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 12,
+      "mark": "",
+      "name": "オープンザパンドラ",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.0749,
+      "top3_est": 0.22420079333817886,
+      "jitsuryoku": 1605.8432567783495,
+      "zenjitsu": 1547.7218132323283,
+      "adjust": -58.12144354602128,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 15,
+      "mark": "",
+      "name": "クールドリオン",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.074,
+      "top3_est": 0.22174648835427285,
+      "jitsuryoku": 1583.3653567915649,
+      "zenjitsu": 1546.371848616092,
+      "adjust": -36.993508175472925,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 1,
+      "mark": "",
+      "name": "レイワノキセキ",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.0719,
+      "top3_est": 0.21599613265317008,
+      "jitsuryoku": 1573.6240293500302,
+      "zenjitsu": 1542.849320838002,
+      "adjust": -30.774708512028155,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 3,
+      "mark": "",
+      "name": "ワンダーシャッフル",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.0705,
+      "top3_est": 0.21214421283531942,
+      "jitsuryoku": 1556.5254421479615,
+      "zenjitsu": 1535.7738052615666,
+      "adjust": -20.751636886394863,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 9,
+      "mark": "",
+      "name": "リボンインザスカイ",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.0668,
+      "top3_est": 0.2018937360265412,
+      "jitsuryoku": 1529.1974156109245,
+      "zenjitsu": 1529.4630823519822,
+      "adjust": 0.2656667410576574,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 2,
+      "mark": "",
+      "name": "テイエムプレミラン",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.0584,
+      "top3_est": 0.17824590337517338,
+      "jitsuryoku": 1550.8939631290477,
+      "zenjitsu": 1526.6143790843112,
+      "adjust": -24.279584044736566,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 10,
+      "mark": "",
+      "name": "ノブレスラブリエ",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.0546,
+      "top3_est": 0.16737787746329819,
+      "jitsuryoku": 1534.7106557231355,
+      "zenjitsu": 1516.9098682697186,
+      "adjust": -17.800787453416888,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 16,
+      "mark": "",
+      "name": "ルーチェブリラーレ",
+      "style": "差し",
+      "chokyo": "🌟調教(1.13倍)",
+      "mc_win": 0.04939999999999999,
+      "top3_est": 0.15233577764871706,
+      "jitsuryoku": 1501.9100578698838,
+      "zenjitsu": 1512.4066428153023,
+      "adjust": 10.49658494541859,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 8,
+      "mark": "",
+      "name": "ダノンオブアイデア",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.04850000000000001,
+      "top3_est": 0.14971250745297973,
+      "jitsuryoku": 1488.4773618307518,
+      "zenjitsu": 1488.2705936319203,
+      "adjust": -0.2067681988314689,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 14,
+      "mark": "",
+      "name": "ワンダーデリエール",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.0434,
+      "top3_est": 0.1347375546562964,
+      "jitsuryoku": 1523.9643215380408,
+      "zenjitsu": 1494.0255750099827,
+      "adjust": -29.938746528058118,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 4,
+      "mark": "",
+      "name": "シャリキモン",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.0104,
+      "top3_est": 0.03344644907610468,
+      "jitsuryoku": 1389.0723013020597,
+      "zenjitsu": 1355.3345697725738,
+      "adjust": -33.73773152948593,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 7,
+      "mark": "",
+      "name": "ヴァンドゥーヴル",
+      "style": "追込",
+      "chokyo": null,
+      "mc_win": 0.0066,
+      "top3_est": 0.02130805393554678,
+      "jitsuryoku": 1336.725840964416,
+      "zenjitsu": 1304.3465271305495,
+      "adjust": -32.37931383386649,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 13,
+      "mark": "",
+      "name": "ジュンヴァッテッド",
+      "style": "追込",
+      "chokyo": null,
+      "mc_win": 0.0041,
+      "top3_est": 0.013270345690724609,
+      "jitsuryoku": 1324.6196405995474,
+      "zenjitsu": 1294.1628923414482,
+      "adjust": -30.456748258099196,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 17,
+      "mark": "",
+      "name": "フローマジック",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.0015,
+      "top3_est": 0.00486771039288221,
+      "jitsuryoku": 1169.9681442150222,
+      "zenjitsu": 1174.0149365362304,
+      "adjust": 4.046792321208159,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    }
+  ]
+}

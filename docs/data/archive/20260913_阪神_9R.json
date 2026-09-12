@@ -1,0 +1,282 @@
+{
+  "schema": "format_prediction.v2",
+  "generated_at": "2026-09-13T02:08:30",
+  "predicted_at": "2026-09-13T01:52:40",
+  "race_id": "20260913_阪芝2000_2勝",
+  "header": {
+    "date": "2026-09-13",
+    "venue": "阪",
+    "surface": "芝",
+    "distance": 2000.0,
+    "race_class": "2勝",
+    "baba": "良",
+    "N": 11
+  },
+  "race": {
+    "date": "2026-09-13",
+    "no": 9,
+    "venue_code": "阪",
+    "venue_name": "阪神",
+    "labeled": true,
+    "draft": false,
+    "warnings": []
+  },
+  "verdict": {
+    "value": "⚠️慎重",
+    "reason": "Elo格差小(gap一致条件を満たさない)",
+    "bet_tier": "seihai_fukusho"
+  },
+  "bets": [
+    "第一推奨: ◎複勝 サミダレナイツ (的中~49%・回収88%/F5 83%=全買い方最良)",
+    "第二推奨: 標準形馬連3点 サミダレナイツ×ミッキージャンプ・マジョレルブルー・タンテドヴィーヴル (的中20%・配当妙味)"
+  ],
+  "bet_notes": [],
+  "venue_guidance": {
+    "mark": "○",
+    "note": "傾向"
+  },
+  "seihai": {
+    "fired": true,
+    "axis": "サミダレナイツ",
+    "n_fired": 1,
+    "is_ultimate": false,
+    "skills_str": "🌟調教(1.18倍) 💨展開利",
+    "c_buff": 45.877022777067765,
+    "p_buff": 4.345135239849313,
+    "b_buff": -41.38299712623105,
+    "raw_elo_rank": 3
+  },
+  "gap": {
+    "elo_gap_top2": 7.2,
+    "v27_gap_top2": 22.0,
+    "elo_top2": [
+      "マジョレルブルー",
+      "ミッキージャンプ"
+    ],
+    "v27_top2": [
+      "シーミハットク",
+      "ヴァイザーバルコ"
+    ],
+    "big_e": false,
+    "big_v": true,
+    "overlap": 0,
+    "state": "中間",
+    "v27_missing": false,
+    "v27_reason": null,
+    "v27_source_latest": "2026-09-06"
+  },
+  "fallback": false,
+  "calib": {
+    "calib_ok_30R": true,
+    "calib_sample_n": 63,
+    "calibrated_temp": 112.08985057796177,
+    "using_calibrated_mc": true
+  },
+  "learning_profile": {
+    "available": true,
+    "cell": "阪芝2000・STANDARD",
+    "build_date": "2026-09-05",
+    "pin": 36.6,
+    "pkl": "phase1_cache_阪_芝_2000m_STANDARD.pkl",
+    "systems": [
+      {
+        "label": "展開",
+        "pct": 17.1,
+        "bars": "◉◎◎◎◎"
+      },
+      {
+        "label": "騎手",
+        "pct": 86.4,
+        "bars": "◉◉◉◉◎"
+      },
+      {
+        "label": "調教",
+        "pinned": true,
+        "pin": 36.6
+      },
+      {
+        "label": "厩舎",
+        "pct": 62.0,
+        "bars": "◉◉◉◎◎"
+      },
+      {
+        "label": "斤量",
+        "pct": 71.6,
+        "bars": "◉◉◉◉◎"
+      },
+      {
+        "label": "減衰",
+        "pct": 32.0,
+        "bars": "◉◉◎◎◎"
+      }
+    ],
+    "note": "※学習された係数の相対配置。係数の大小が予測寄与を保証するものではない"
+  },
+  "horses": [
+    {
+      "umaban": 10,
+      "mark": "○",
+      "name": "ミッキージャンプ",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.2547363159047369,
+      "top3_est": 0.6604585768579395,
+      "jitsuryoku": 1694.9029782183425,
+      "zenjitsu": 1708.1922751902334,
+      "adjust": 13.289296971890963,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 2,
+      "mark": "▲",
+      "name": "マジョレルブルー",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.217616091667494,
+      "top3_est": 0.6022824165010462,
+      "jitsuryoku": 1650.5027162390154,
+      "zenjitsu": 1690.5385169406138,
+      "adjust": 40.03580070159842,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 11,
+      "mark": "◎",
+      "name": "サミダレナイツ",
+      "style": "逃げ",
+      "chokyo": "🌟調教(1.18倍)",
+      "mc_win": 0.1535433900060564,
+      "top3_est": 0.4727253580002282,
+      "jitsuryoku": 1643.2866977059498,
+      "zenjitsu": 1651.4472639608096,
+      "adjust": 8.16056625485976,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 5,
+      "mark": "△",
+      "name": "タンテドヴィーヴル",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.12047045465085404,
+      "top3_est": 0.38948330739895815,
+      "jitsuryoku": 1598.6655435471816,
+      "zenjitsu": 1624.2566576604268,
+      "adjust": 25.591114113245112,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 7,
+      "mark": "",
+      "name": "シーミハットク",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.08065690404041295,
+      "top3_est": 0.2749624659517861,
+      "jitsuryoku": 1595.6346089580347,
+      "zenjitsu": 1579.2861953310805,
+      "adjust": -16.348413626954198,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 4,
+      "mark": "",
+      "name": "ダイヤモンドハンズ",
+      "style": "先行",
+      "chokyo": "🌟調教(1.07倍)",
+      "mc_win": 0.07466832228747437,
+      "top3_est": 0.2564500900889981,
+      "jitsuryoku": 1535.9118295869123,
+      "zenjitsu": 1570.6386349194474,
+      "adjust": 34.72680533253515,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 3,
+      "mark": "",
+      "name": "サンライズバブル",
+      "style": "差し",
+      "chokyo": "🌟調教(1.12倍)",
+      "mc_win": 0.07412551332184766,
+      "top3_est": 0.2547560599098036,
+      "jitsuryoku": 1586.5792118594636,
+      "zenjitsu": 1569.8208101014939,
+      "adjust": -16.75840175796975,
+      "odds": null,
+      "swap": true,
+      "rank_result": null
+    },
+    {
+      "umaban": 8,
+      "mark": "",
+      "name": "コスモスプモーニ",
+      "style": "先行",
+      "chokyo": null,
+      "mc_win": 0.01787644078209538,
+      "top3_est": 0.06548238903886168,
+      "jitsuryoku": 1456.3791711095628,
+      "zenjitsu": 1410.3980952610268,
+      "adjust": -45.981075848535966,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 6,
+      "mark": "",
+      "name": "ヴァイザーバルコ",
+      "style": "追込",
+      "chokyo": null,
+      "mc_win": 0.0057945349696968615,
+      "top3_est": 0.021489867015734736,
+      "jitsuryoku": 1316.7918643732885,
+      "zenjitsu": 1284.1212047152767,
+      "adjust": -32.6706596580118,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 9,
+      "mark": "",
+      "name": "バセリーナ",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.00025759308651656396,
+      "top3_est": 0.0009606137047481502,
+      "jitsuryoku": 1007.1555523446075,
+      "zenjitsu": 935.1530666763462,
+      "adjust": -72.00248566826133,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    },
+    {
+      "umaban": 1,
+      "mark": "",
+      "name": "ヨシヒロ",
+      "style": "追込",
+      "chokyo": null,
+      "mc_win": 0.00025443928281489067,
+      "top3_est": 0.0009488555318970952,
+      "jitsuryoku": 967.6567867039405,
+      "zenjitsu": 933.7722404730484,
+      "adjust": -33.884546230892056,
+      "odds": null,
+      "swap": false,
+      "rank_result": null
+    }
+  ]
+}
