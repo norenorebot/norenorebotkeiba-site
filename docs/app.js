@@ -15,10 +15,13 @@ var VENUE_MAP = {
   '福': ['◎', '単勝回収105%（参考記録）'],
   '小': ['○', '悪くない傾向'],
   '阪': ['○', '悪くない傾向'],
-  '中': ['△', '慎重に・本命は少なめに（中山向けの数字。中京は目安なし）']
+  '中': ['△', '慎重に・本命は少なめに']
 };
 
 /* ---------- 小道具 ---------- */
+/* ◎の決め方を切り替えた時刻(format_prediction.MARK_RULE_FROM と同値) */
+var MARK_RULE_FROM = '2026-09-27T00:00:00';
+
 function esc(s) {
   if (s === null || s === undefined) return '';
   return String(s).replace(/[&<>"']/g, function (c) {
@@ -104,6 +107,7 @@ var SOFTEN = [
   ['的中用', '当てにいく用'],
   ['クラス注記', 'クラス補足'],
   ['gap感度最大', '強さ・時計の差がいちばん効く'],
+  ['OP=gap鈍い', '3勝以上=gap鈍い'],   // 条件は 3勝とOP(tier ELITE)。旧文言の「OP=」を表示で読み替え(2026-09-26)
   ['gap鈍い・割引', '強さ・時計の差が効きにくいので低めに見る'],
   ['gap鈍い', '強さ・時計の差が効きにくい'],
   ['勝負56.5%の軸', '1対1なら勝てる割合56.5%の軸'],
@@ -163,7 +167,7 @@ function plainReason(d) {
     return '「強さ」と「持ち時計」の上位馬がバラバラです（検証済みの危険サイン）。こういうレースは当てにくいので、買わずに見送ります。';
   }
   if (av.kind === 'nosignal') {
-    return '買う条件がそろっていません。無理に買わず、このレースは見送ります。';
+    return '買う条件がそろっていないので見送ります。';
   }
   if (v.indexOf('勝負') >= 0) {
     return '「強さ」で見ても「持ち時計」で見ても同じ上位2頭。特別な条件もそろっていて、自信のある一戦です。';
@@ -394,13 +398,24 @@ function renderVerdictCard(d, idx) {
             (se.skills_str ? ' <span class="note">' + esc(se.skills_str) + '</span>' : '') + '</div>';
   }
 
-  html += '<div class="bet">買い目:</div><ul>';
-  (d.bets || []).forEach(function (b) { html += '<li>' + esc(withUmaban(soften(b), d)) + '</li>'; });
-  html += '</ul>';
+  if (av.kind === 'bet') {
+    html += '<div class="bet">買い目:</div><ul>';
+    (d.bets || []).forEach(function (b) { html += '<li>' + esc(withUmaban(soften(b), d)) + '</li>'; });
+    html += '</ul>';
+  } else {
+    // 見送り: 定型の「買い目なし」は省き、参考の本命(◎)と勝つ確率だけ1行で出す(2026-09-26)
+    // 参考の本命は新しい決め方(勝つ確率1位)の予想だけに出す。従来の◎(強さ1位)は勝つ確率が低いことがあり、1行で目立たせると誤解を招く
+    var ax = String(d.predicted_at || '') >= MARK_RULE_FROM ? (d.horses || []).filter(function (x) { return x.mark === '◎'; })[0] : null;
+    if (ax) {
+      html += '<div class="line note">参考の本命: ◎' + (ax.umaban ? esc(ax.umaban) + '番 ' : '') + esc(ax.name) +
+              (ax.mc_win !== null && ax.mc_win !== undefined ? '（勝つ確率 ' + pct(ax.mc_win) + '）' : '') +
+              '　買い目はありません</div>';
+    }
+  }
   html += renderResultLine(d);
   if ((d.bet_notes || []).length) {
     html += '<div class="note">';
-    (d.bet_notes || []).forEach(function (n) { html += '※ ' + esc(soften(n)) + '<br>'; });
+    (d.bet_notes || []).forEach(function (n) { var t = soften(n); html += (t.charAt(0) === '※' ? '' : '※ ') + esc(t) + '<br>'; });
     html += '</div>';
   }
   // やめる目安(8〜15倍帯は検証済みの死角)。買い目が無いレースでは
@@ -428,7 +443,7 @@ function renderVerdictCard(d, idx) {
   html += '<details><summary>くわしい根拠を見る（各馬の点数・強さと時計の見方）</summary>';
   html += '<div class="note">' + plainGap(g) + '</div>';
   html += modelNote(d);
-  html += renderHorsesTable(d.horses || []);
+  html += renderHorsesTable(d.horses || [], d);
   html += renderLearningProfile(d.learning_profile || {});
 
   /* ブロック3【詳細】深折りたたみ */
@@ -515,7 +530,7 @@ function bigSwaps(rows) {
   return out;
 }
 
-function renderHorsesTable(rows) {
+function renderHorsesTable(rows, d) {
   // 死んでいる列は出さない: オッズが全行空ならオッズ列ごと省く
   var hasOdds = rows.some(function (r) { return r.odds !== null && r.odds !== undefined; });
   var swaps = bigSwaps(rows);
@@ -528,9 +543,16 @@ function renderHorsesTable(rows) {
   //       公開済み351件で全件この規則どおり(聖杯28・強さ1位323)。勝つ確率1位とは限らない(38%で不一致)。
   //   ○▲△ = 勝つ確率の順。表も勝つ確率の順(僅差だと計算の揺れで前後しうる)。
   //   旧文「印はレース全体の評価順」は◎について成り立たないので置き換えた。
-  var html = '<div class="note">◎は🌈特別サインの馬（出ていなければ「強さ」がいちばん高い馬）で、' +
-             '勝つ確率が1位とは限りません。○▲△と表の並びは勝つ確率の高い順です' +
-             '（僅差だと順番が前後することがあります）。</div>';
+  //   2026-09-27 以降に確定した予想(predicted_at)は、特別サインも実力差サインも無いレースの◎を「勝つ確率1位」にした
+  //   (format_prediction.mark_axis / MARK_RULE_FROM。公開済みの予想は従来の決め方のまま)。
+  var newMark = String((d && d.predicted_at) || '') >= MARK_RULE_FROM;
+  var html = newMark
+    ? '<div class="note">◎は🌈特別サインの馬、📐実力差サインで買うレースは「強さ」がいちばん高い馬、' +
+      'それ以外は勝つ確率がいちばん高い馬です。○▲△と表の並びは勝つ確率の高い順です' +
+      '（僅差だと順番が前後することがあります）。</div>'
+    : '<div class="note">◎は🌈特別サインの馬（出ていなければ「強さ」がいちばん高い馬）で、' +
+      '勝つ確率が1位とは限りません。○▲△と表の並びは勝つ確率の高い順です' +
+      '（僅差だと順番が前後することがあります）。</div>';
   // スマホでは 実力の点数 と 上げ下げ の2列を隠す(2026-08-02改訂)。
   //   ・「上げ下げ」だけ残すと基準の総合点が見えず増減の意味が読めないため、
   //     残すのは最終評価である「前日の総合点」にする(印の並び順とも対応する)。
@@ -769,7 +791,7 @@ function renderSeriesTable(series, unitLabel) {
   }
 
   if (series.summer_weak_flag) {
-    html += '<p class="frozen-note">⚠️ 夏(6-8月)が沈んでいます → 聖杯を1段階割引を検討(§6モニタ)。</p>';
+    html += '<p class="frozen-note">⚠️ 夏(6-8月)の成績が沈んでいます → 特別サインを1ランク低く見るかを検討中（引き続き確認）。</p>';
   }
   return html;
 }
@@ -823,6 +845,27 @@ function renderForward(fw) {
             thin.map(function (v) { return esc(soften(v.label)) + ' N=' + esc(v.all.n); }).join(' / ') +
             '）。この数字で良し悪しを判断できる段階ではありません。' +
             '表のグレーは「参考外」を表しています。</p>';
+  }
+  // 計算の版ごとの内訳(2026-09-26 追加)。V9.3〜V9.5 で計算が変わったので、前後を分けて見られるようにする。
+  if ((fw.by_era || []).length) {
+    html += '<div class="tablewrap"><table>';
+    html += '<caption>計算の版ごとの内訳（当たった率 / 回収率・件数つき）</caption>';
+    html += '<tr><th class="wraphead">買い方</th>' +
+            fw.by_era.map(function (e) { return '<th class="num">' + esc(e.label) + '</th>'; }).join('') + '</tr>';
+    keys.forEach(function (k) {
+      if (!s[k]) return;
+      html += '<tr><th class="wraphead">' + esc(soften(s[k].label)) + '</th>' +
+              fw.by_era.map(function (e) { return fwdCell(((e.series || {})[k] || {}).all); }).join('') + '</tr>';
+    });
+    html += '<tr><th class="wraphead">見送ったレースの本命が3着以内（参考）</th>' +
+            fw.by_era.map(function (e) {
+              var k = e.skipped || {};
+              return '<td class="num">' + (k.n ? esc(k.axis_top3) + ' / ' + esc(k.n) + ' 件' : '—') + '</td>';
+            }).join('') + '</tr>';
+    html += '</table></div>';
+    html += '<p class="note">2026-09-26 の予想から計算の材料を増やしました（くわしくは「このサイトについて」）。' +
+            '見送ったレースの本命は、2026-09-27 以降に確定した予想から「勝つ確率がいちばん高い馬」です。' +
+            '新しい計算の件数が少ないうちは判断材料にしません。</p>';
   }
   var sr = fw.skipped_reference || {};
   if (sr.n) {
