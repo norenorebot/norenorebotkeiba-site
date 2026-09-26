@@ -439,6 +439,8 @@ function renderVerdictCard(d, idx) {
     html += '<div class="checklist">⏰ 当日チェック: ' + checks.join('　') + '</div>';
   }
 
+  html += renderFormation(d);
+
   /* ブロック2【根拠】折りたたみ */
   html += '<details><summary>くわしい根拠を見る（各馬の点数・強さと時計の見方）</summary>';
   html += '<div class="note">' + plainGap(g) + '</div>';
@@ -634,6 +636,34 @@ function plainCell(cell) {
   var full = CODE_TO_NAME[head.charAt(0)];
   if (full) head = full + ' ' + head.slice(1);
   return esc(head) + '・' + esc(lookup(TIER_JA, tier, tier));
+}
+
+/* 展開予想図(2026-09-27〜・勝負レースだけ)。隊列の予想を JRA の通過順の書き方で出す参考表示。
+   計算は競馬リポジトリの formation_predict.py(本体とは独立)。的中の根拠ではないことと、当たり具合の目安を必ず添える。
+   data.json の formation が無い予想(それ以前・勝負以外)では何も出さない。 */
+function renderFormation(d) {
+  var f = d.formation;
+  if (!f || !f.first || !f.last) return '';
+  var byNo = {};
+  (d.horses || []).forEach(function (x) { if (x.umaban) byNo[x.umaban] = x.name; });
+  var nm = function (u) { return esc(u) + '番' + (byNo[u] ? ' ' + esc(byNo[u]) : ''); };
+  var html = '<details class="formation"><summary>展開予想図（参考・隊列の予想）</summary>';
+  html += '<pre class="formation-fig">' +
+          '1角(最初のコーナー)  ' + esc(f.first) + '\n' +
+          '4角(最後のコーナー)  ' + esc(f.last) + '</pre>';
+  html += '<div class="line">逃げそうな馬: ' + nm(f.leader) +
+          (f.leader_2nd ? '　（次に前へ行きそうな馬: ' + nm(f.leader_2nd) + '）' : '') + '</div>';
+  if ((f.wide || []).length) {
+    html += '<div class="line">4角で外を回る可能性が高めの馬: ' + f.wide.map(nm).join('・') + '</div>';
+  }
+  if ((f.no_hist || []).length) {
+    html += '<div class="line note">位置取りの記録が無い馬（予想が特に不確か）: ' + f.no_hist.map(function (u) { return esc(u) + '番'; }).join('・') + '</div>';
+  }
+  html += '<div class="note">読み方: 左ほど前、数字は馬番。( ) は並んで走る組（4角は内→外の順）、「-」は少し離れる。<br>' +
+          '※ 各馬の過去の位置取り・枠順・距離・コースの傾向から作った予想で、この予想の買い目の根拠ではありません。<br>' +
+          '※ ' + esc(f.accuracy_note || '') + '</div>';
+  html += CLOSE_LINK + '</details>';
+  return html;
 }
 
 function renderLearningProfile(lp) {
