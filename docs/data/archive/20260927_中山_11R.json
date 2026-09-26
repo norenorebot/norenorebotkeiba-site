@@ -1,0 +1,587 @@
+{
+  "schema": "format_prediction.v2",
+  "generated_at": "2026-09-26T17:15:49",
+  "predicted_at": "2026-09-26T16:41:06",
+  "race_id": "20260926_中芝1200_G1",
+  "header": {
+    "date": "2026-09-26",
+    "venue": "中",
+    "surface": "芝",
+    "distance": 1200.0,
+    "race_class": "G1",
+    "baba": "良",
+    "N": 16
+  },
+  "race": {
+    "date": "2026-09-27",
+    "no": 11,
+    "venue_code": "中",
+    "venue_name": "中山",
+    "labeled": true,
+    "draft": false,
+    "warnings": []
+  },
+  "verdict": {
+    "value": "⚠️慎重",
+    "reason": "gap部分一致 or 場別物差し無し",
+    "bet_tier": "none"
+  },
+  "bets": [
+    "買い目なし(推奨なしを明示=判断支援)"
+  ],
+  "bet_notes": [],
+  "venue_guidance": {
+    "mark": "△",
+    "note": "慎重・本命サイズ半分(※中=中山として保守適用/中京は物差し無し)"
+  },
+  "seihai": {
+    "fired": false
+  },
+  "gap": {
+    "elo_gap_top2": 18.6,
+    "v27_gap_top2": 18.2,
+    "elo_top2": [
+      "フリッカージャブ",
+      "レイピア"
+    ],
+    "v27_top2": [
+      "ピューロマジック",
+      "フリッカージャブ"
+    ],
+    "big_e": true,
+    "big_v": true,
+    "overlap": 1,
+    "state": "中間",
+    "v27_missing": false,
+    "v27_reason": null,
+    "v27_source_latest": "2026-09-22"
+  },
+  "fallback": false,
+  "calib": {
+    "calib_ok_30R": true,
+    "calib_sample_n": 73,
+    "calibrated_temp": 79.0025504897202,
+    "using_calibrated_mc": true
+  },
+  "learning_profile": {
+    "available": true,
+    "cell": "中芝1200・ELITE",
+    "build_date": "2026-09-04",
+    "pin": 36.6,
+    "pkl": "phase1_cache_中_芝_1200m_ELITE.pkl",
+    "systems": [
+      {
+        "label": "展開",
+        "pct": 35.0,
+        "bars": "◉◉◎◎◎"
+      },
+      {
+        "label": "騎手",
+        "pct": 51.0,
+        "bars": "◉◉◉◎◎"
+      },
+      {
+        "label": "調教",
+        "pinned": true,
+        "pin": 36.6
+      },
+      {
+        "label": "厩舎",
+        "pct": 42.9,
+        "bars": "◉◉◎◎◎"
+      },
+      {
+        "label": "斤量",
+        "pct": 85.3,
+        "bars": "◉◉◉◉◎"
+      },
+      {
+        "label": "減衰",
+        "pct": 57.8,
+        "bars": "◉◉◉◎◎"
+      }
+    ],
+    "note": "※学習された係数の相対配置。係数の大小が予測寄与を保証するものではない"
+  },
+  "model": {
+    "engine": "V9.5.1",
+    "applied": {
+      "time": true,
+      "ped": false,
+      "trip": true,
+      "jstr": true,
+      "career": true
+    },
+    "inferred": true,
+    "display_calib": {
+      "enabled": true,
+      "k": 1.94,
+      "eps": 0.12
+    }
+  },
+  "horses": [
+    {
+      "umaban": 15,
+      "mark": "○",
+      "name": "フリッカージャブ",
+      "style": "逃げ",
+      "chokyo": "🌟調教(1.19倍)",
+      "mc_win": 0.1635223966929719,
+      "top3_est": 0.44711209861583445,
+      "jitsuryoku": 1695.4727961480248,
+      "zenjitsu": 1876.0295178419253,
+      "adjust": 180.5567216939005,
+      "odds": null,
+      "swap": true,
+      "rank_result": null,
+      "breakdown": {
+        "env": 44.85067178873649,
+        "time": 83.22970665272415,
+        "ped": 0.0,
+        "trip": 12.038750000000002,
+        "trip_flags": [],
+        "jockey": 15.465761270509477,
+        "jockey_rate": 0.3401346153846154,
+        "jockey_n": 782,
+        "career": 24.97183198193037,
+        "career_flags": []
+      }
+    },
+    {
+      "umaban": 9,
+      "mark": "▲",
+      "name": "スターアニス",
+      "style": "差し",
+      "chokyo": "🌟調教(1.17倍)",
+      "mc_win": 0.14785944719843522,
+      "top3_est": 0.4135609314494675,
+      "jitsuryoku": 1658.468635264597,
+      "zenjitsu": 1859.8151663705519,
+      "adjust": 201.3465311059549,
+      "odds": null,
+      "swap": true,
+      "rank_result": null,
+      "breakdown": {
+        "env": 78.70711928957672,
+        "time": -29.587573843782554,
+        "ped": 0.0,
+        "trip": 24.538749999999993,
+        "trip_flags": [
+          "6着以下",
+          "人気大敗"
+        ],
+        "jockey": 113.04078278934149,
+        "jockey_rate": 0.5741499202551834,
+        "jockey_n": 577,
+        "career": 14.647452870819254,
+        "career_flags": [
+          "短縮",
+          "休み明け"
+        ]
+      }
+    },
+    {
+      "umaban": 10,
+      "mark": "◎",
+      "name": "レイピア",
+      "style": "差し",
+      "chokyo": null,
+      "mc_win": 0.11257501090472358,
+      "top3_est": 0.330583097028618,
+      "jitsuryoku": 1711.3258940737708,
+      "zenjitsu": 1815.4400399070491,
+      "adjust": 104.11414583327837,
+      "odds": null,
+      "swap": true,
+      "rank_result": null,
+      "breakdown": {
+        "env": 4.430361664690807,
+        "time": 19.75685046264455,
+        "ped": 0.0,
+        "trip": 26.258750000000003,
+        "trip_flags": [
+          "包まれ"
+        ],
+        "jockey": 24.899203781983665,
+        "jockey_rate": 0.36275894988066826,
+        "jockey_n": 788,
+        "career": 28.768979923959346,
+        "career_flags": []
+      }
+    },
+    {
+      "umaban": 13,
+      "mark": "△",
+      "name": "パンジャタワー",
+      "style": "先行",
+      "chokyo": "🌟調教(1.10倍)",
+      "mc_win": 0.09312293925077272,
+      "top3_est": 0.28045667246251926,
+      "jitsuryoku": 1669.174862358397,
+      "zenjitsu": 1784.0634473350392,
+      "adjust": 114.88858497664228,
+      "odds": null,
+      "swap": false,
+      "rank_result": null,
+      "breakdown": {
+        "env": 55.547203703234345,
+        "time": 15.855433833939436,
+        "ped": 0.0,
+        "trip": 12.038750000000002,
+        "trip_flags": [],
+        "jockey": 32.59366679087147,
+        "jockey_rate": 0.38121266968325795,
+        "jockey_n": 834,
+        "career": -1.146469351402967,
+        "career_flags": []
+      }
+    },
+    {
+      "umaban": 16,
+      "mark": "",
+      "name": "ピューロマジック",
+      "style": "逃げ",
+      "chokyo": "🌟調教(1.11倍)",
+      "mc_win": 0.07229929000674129,
+      "top3_est": 0.22342215286034045,
+      "jitsuryoku": 1642.4818052262651,
+      "zenjitsu": 1741.3548541867615,
+      "adjust": 98.87304896049636,
+      "odds": null,
+      "swap": true,
+      "rank_result": null,
+      "breakdown": {
+        "env": 42.075363311320345,
+        "time": 44.57097262901371,
+        "ped": 0.0,
+        "trip": 12.038750000000002,
+        "trip_flags": [],
+        "jockey": 39.19710570489861,
+        "jockey_rate": 0.39704977375565614,
+        "jockey_n": 834,
+        "career": -39.009142684736304,
+        "career_flags": []
+      }
+    },
+    {
+      "umaban": 3,
+      "mark": "",
+      "name": "ママコチャ",
+      "style": "先行",
+      "chokyo": "🌟調教(1.16倍)",
+      "mc_win": 0.07164444896074945,
+      "top3_est": 0.2215731075994151,
+      "jitsuryoku": 1639.3974492869293,
+      "zenjitsu": 1739.7981280908145,
+      "adjust": 100.40067880388528,
+      "odds": null,
+      "swap": true,
+      "rank_result": null,
+      "breakdown": {
+        "env": 26.818592571965596,
+        "time": 32.664011951574686,
+        "ped": 0.0,
+        "trip": 12.038750000000002,
+        "trip_flags": [],
+        "jockey": 26.263581447839922,
+        "jockey_rate": 0.3660311526479751,
+        "jockey_n": 592,
+        "career": 2.6157428325050773,
+        "career_flags": []
+      }
+    },
+    {
+      "umaban": 14,
+      "mark": "",
+      "name": "ウインカーネリアン",
+      "style": "逃げ",
+      "chokyo": "🌟調教(1.19倍)",
+      "mc_win": 0.06351995042464714,
+      "top3_est": 0.1983555916641857,
+      "jitsuryoku": 1616.6628708904893,
+      "zenjitsu": 1719.0415067266708,
+      "adjust": 102.3786358361815,
+      "odds": null,
+      "swap": true,
+      "rank_result": null,
+      "breakdown": {
+        "env": 43.08026533772238,
+        "time": 24.13988139754893,
+        "ped": 0.0,
+        "trip": 12.038750000000002,
+        "trip_flags": [],
+        "jockey": -1.8156895187013367,
+        "jockey_rate": 0.29868831168831167,
+        "jockey_n": 566,
+        "career": 24.935428619611518,
+        "career_flags": []
+      }
+    },
+    {
+      "umaban": 6,
+      "mark": "",
+      "name": "ワールズエンド",
+      "style": "逃げ",
+      "chokyo": "🌟調教(1.15倍)",
+      "mc_win": 0.05976656168118144,
+      "top3_est": 0.1874578089716778,
+      "jitsuryoku": 1643.7932923298802,
+      "zenjitsu": 1708.412417937149,
+      "adjust": 64.61912560726887,
+      "odds": null,
+      "swap": true,
+      "rank_result": null,
+      "breakdown": {
+        "env": 7.301071066790314,
+        "time": 20.731515835001012,
+        "ped": 0.0,
+        "trip": 12.038750000000002,
+        "trip_flags": [],
+        "jockey": -5.053568609786165,
+        "jockey_rate": 0.2909228687415426,
+        "jockey_n": 689,
+        "career": 29.60135731526371,
+        "career_flags": [
+          "短縮",
+          "休み明け"
+        ]
+      }
+    },
+    {
+      "umaban": 8,
+      "mark": "",
+      "name": "エーティーマクフィ",
+      "style": "差し",
+      "chokyo": "🌟調教(1.10倍)",
+      "mc_win": 0.04509284817807036,
+      "top3_est": 0.14382973374292454,
+      "jitsuryoku": 1663.1672812523398,
+      "zenjitsu": 1657.9050292913007,
+      "adjust": -5.2622519610390555,
+      "odds": null,
+      "swap": true,
+      "rank_result": null,
+      "breakdown": {
+        "env": 21.904145558228613,
+        "time": 5.770870506764342,
+        "ped": 0.0,
+        "trip": 12.038750000000002,
+        "trip_flags": [],
+        "jockey": -46.68414398994436,
+        "jockey_rate": 0.19107977736549167,
+        "jockey_n": 489,
+        "career": 1.7081259639123498,
+        "career_flags": []
+      }
+    },
+    {
+      "umaban": 5,
+      "mark": "",
+      "name": "サウンドモリアーナ",
+      "style": "逃げ",
+      "chokyo": "🌟調教(1.09倍)",
+      "mc_win": 0.04080305970628049,
+      "top3_est": 0.13077196508639574,
+      "jitsuryoku": 1676.9170747499786,
+      "zenjitsu": 1639.334751081701,
+      "adjust": -37.582323668277695,
+      "odds": null,
+      "swap": true,
+      "rank_result": null,
+      "breakdown": {
+        "env": -1.9608293085704958,
+        "time": 2.60633778216471,
+        "ped": 0.0,
+        "trip": 12.038750000000002,
+        "trip_flags": [],
+        "jockey": -29.516023901580052,
+        "jockey_rate": 0.23225427872860638,
+        "jockey_n": 359,
+        "career": -20.750558240291863,
+        "career_flags": []
+      }
+    },
+    {
+      "umaban": 11,
+      "mark": "",
+      "name": "ルガル",
+      "style": "逃げ",
+      "chokyo": "🌟調教(1.17倍)",
+      "mc_win": 0.04064164438634874,
+      "top3_est": 0.13027798636857532,
+      "jitsuryoku": 1613.2670371127365,
+      "zenjitsu": 1638.5900910034372,
+      "adjust": 25.32305389070075,
+      "odds": null,
+      "swap": true,
+      "rank_result": null,
+      "breakdown": {
+        "env": 17.39523563754298,
+        "time": -14.60467893041761,
+        "ped": 0.0,
+        "trip": 12.038750000000002,
+        "trip_flags": [],
+        "jockey": -34.692281560259765,
+        "jockey_rate": 0.21984,
+        "jockey_n": 0,
+        "career": 45.18602874383514,
+        "career_flags": [
+          "休み明け"
+        ]
+      }
+    },
+    {
+      "umaban": 2,
+      "mark": "",
+      "name": "アイサンサン",
+      "style": "逃げ",
+      "chokyo": "🌟調教(1.15倍)",
+      "mc_win": 0.021646687831776243,
+      "top3_est": 0.07083149264091307,
+      "jitsuryoku": 1616.3200004493422,
+      "zenjitsu": 1508.1140914652692,
+      "adjust": -108.20590898407295,
+      "odds": null,
+      "swap": true,
+      "rank_result": null,
+      "breakdown": {
+        "env": 11.823504947334342,
+        "time": -11.926256002266795,
+        "ped": 0.0,
+        "trip": -45.92125,
+        "trip_flags": [
+          "6着以下"
+        ],
+        "jockey": -41.922695244404196,
+        "jockey_rate": 0.20249921507064364,
+        "jockey_n": 587,
+        "career": -20.2592126847363,
+        "career_flags": [
+          "短縮",
+          "休み明け"
+        ]
+      }
+    },
+    {
+      "umaban": 7,
+      "mark": "",
+      "name": "ペアポルックス",
+      "style": "追込",
+      "chokyo": "🌟調教(1.10倍)",
+      "mc_win": 0.020833928702399328,
+      "top3_est": 0.0682305076175521,
+      "jitsuryoku": 1595.2717883401958,
+      "zenjitsu": 1499.0456031160788,
+      "adjust": -96.22618522411699,
+      "odds": null,
+      "swap": false,
+      "rank_result": null,
+      "breakdown": {
+        "env": 20.133880313629277,
+        "time": -11.71573908629858,
+        "ped": 0.0,
+        "trip": -45.92125,
+        "trip_flags": [
+          "6着以下"
+        ],
+        "jockey": -40.70511376671138,
+        "jockey_rate": 0.20541935483870968,
+        "jockey_n": 539,
+        "career": -18.017962684736297,
+        "career_flags": [
+          "休み明け"
+        ]
+      }
+    },
+    {
+      "umaban": 12,
+      "mark": "",
+      "name": "ブラックチャリス",
+      "style": "逃げ",
+      "chokyo": null,
+      "mc_win": 0.02079977547870062,
+      "top3_est": 0.06812110920333515,
+      "jitsuryoku": 1565.296205143198,
+      "zenjitsu": 1498.6525301220956,
+      "adjust": -66.64367502110235,
+      "odds": null,
+      "swap": true,
+      "rank_result": null,
+      "breakdown": {
+        "env": -10.241496675990078,
+        "time": -35.66778930699581,
+        "ped": 0.0,
+        "trip": 24.538749999999993,
+        "trip_flags": [
+          "6着以下",
+          "人気大敗"
+        ],
+        "jockey": -11.624128353380168,
+        "jockey_rate": 0.27516461916461915,
+        "jockey_n": 357,
+        "career": -33.6490106847363,
+        "career_flags": []
+      }
+    },
+    {
+      "umaban": 1,
+      "mark": "",
+      "name": "レッドモンレーヴ",
+      "style": "追込",
+      "chokyo": null,
+      "mc_win": 0.014430638282585371,
+      "top3_est": 0.04757732185545145,
+      "jitsuryoku": 1574.413964431133,
+      "zenjitsu": 1398.7551665043593,
+      "adjust": -175.6587979267738,
+      "odds": null,
+      "swap": true,
+      "rank_result": null,
+      "breakdown": {
+        "env": -26.291963619407824,
+        "time": -21.08596275071999,
+        "ped": 0.0,
+        "trip": -45.92125,
+        "trip_flags": [
+          "6着以下"
+        ],
+        "jockey": -66.79724232018555,
+        "jockey_rate": 0.14284230055658628,
+        "jockey_n": 489,
+        "career": -15.56237923646044,
+        "career_flags": []
+      }
+    },
+    {
+      "umaban": 4,
+      "mark": "",
+      "name": "ジューンブレア",
+      "style": "逃げ",
+      "chokyo": "🌟調教(1.18倍)",
+      "mc_win": 0.011441372313616246,
+      "top3_est": 0.03783842283279536,
+      "jitsuryoku": 1383.659885482357,
+      "zenjitsu": 1312.2489128163422,
+      "adjust": -71.41097266601469,
+      "odds": null,
+      "swap": false,
+      "rank_result": null,
+      "breakdown": {
+        "env": 12.577285670107955,
+        "time": -41.37758113089434,
+        "ped": 0.0,
+        "trip": -45.92125,
+        "trip_flags": [
+          "6着以下"
+        ],
+        "jockey": 27.350785479508005,
+        "jockey_rate": 0.3686386066763425,
+        "jockey_n": 639,
+        "career": -24.0402126847363,
+        "career_flags": [
+          "休み明け"
+        ]
+      }
+    }
+  ]
+}
