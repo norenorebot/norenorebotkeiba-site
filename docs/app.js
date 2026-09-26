@@ -427,6 +427,7 @@ function renderVerdictCard(d, idx) {
   /* ブロック2【根拠】折りたたみ */
   html += '<details><summary>くわしい根拠を見る（各馬の点数・強さと時計の見方）</summary>';
   html += '<div class="note">' + plainGap(g) + '</div>';
+  html += modelNote(d);
   html += renderHorsesTable(d.horses || []);
   html += renderLearningProfile(d.learning_profile || {});
 
@@ -440,6 +441,38 @@ function renderVerdictCard(d, idx) {
 
   html += '</div>';
   return html;
+}
+
+/* この予想の計算に入っている追加項目(2026-09-26)。
+   about の「2026年9月から順に加えています」だけでは、どの予想に入っているか分からないため。
+   data.json の model は format_prediction.model_info が公開時に記録する(公開済みの予想には無い)。
+     model 無し / engine V9.0 → 9月の追加項目が入る前の計算(公開済み351件は全件これで確認済み)
+     applied … 実際に効いた項目だけを並べる(V9.3 は corner_src が無いと黙って外れるため、
+               版の名前ではなく「効いたかどうか」で書く)。
+   新馬戦は前走・戦績が無いので、前走の内容・戦績が入らないのが正常(「入っていない」と書かない)。 */
+var MODEL_ITEMS = [['time', '時計'], ['ped', '新馬戦の血統'], ['trip', '前走の内容'],
+                   ['jstr', '騎手の過去1年の成績'], ['career', 'これまでの戦績と条件替わり']];
+function modelNote(d) {
+  var m = d.model;
+  if (!m || m.engine === 'V9.0' || !m.applied) {
+    return '<div class="note">この予想は、2026年9月に足した項目（時計・前走の内容・騎手の過去1年の成績・' +
+           'これまでの戦績など）が入る前の計算です。</div>';
+  }
+  var a = m.applied;
+  var rc = String((d.header || {}).race_class || '');
+  var shinba = rc.indexOf('新馬') >= 0 || rc.indexOf('メイクデビュー') >= 0;
+  var on = MODEL_ITEMS.filter(function (it) { return a[it[0]]; }).map(function (it) { return it[1]; });
+  // 本来入るはずなのに入らなかった項目(新馬戦の前走・戦績、新馬戦以外の血統は対象外なので除く)
+  var miss = MODEL_ITEMS.filter(function (it) {
+    if (!(it[0] in a) || a[it[0]]) return false;
+    if (it[0] === 'ped') return shinba;
+    if (it[0] === 'trip' || it[0] === 'career') return !shinba;
+    return true;
+  }).map(function (it) { return it[1]; });
+  var html = '<div class="note">この予想の計算に入っている追加項目: ' +
+             (on.length ? esc(on.join('・')) : 'なし');
+  if (miss.length) html += '（' + esc(miss.join('・')) + 'は、データが無く入っていません）';
+  return html + '</div>';
 }
 
 /* 調教セルの表記を詰める(2026-09-06)。
@@ -458,10 +491,35 @@ function shortChokyo(v) {
   return m ? m[1] + m[2] : t;
 }
 
+/* ⇅ = 実力の点数の順位と前日の総合点の順位が SWAP_MIN 以上動いた馬(2026-09-26)。
+   data.json の swap は「1つでも順位が違えば真」で、公開済み351件の 57% の馬に付いていた
+   (順位差 0:43% / 1:31% / 2:15% / 3以上:11%)。2026-09 に本体へ足した項で前日の総合点の
+   上下が大きくなり、推定で 7割超に増える → 目印として働かないので、サイト側で数え直す。
+   3つ以上なら現状 11%(足した項の後で推定 25% 前後)。data.json は書き換えないので
+   公開済みの予想にも同じ基準で表示される(表示上の注記であって予想の中身ではない)。 */
+var SWAP_MIN = 3;
+function bigSwaps(rows) {
+  var ok = rows.filter(function (r) {
+    return r.jitsuryoku !== null && r.jitsuryoku !== undefined &&
+           r.zenjitsu !== null && r.zenjitsu !== undefined;
+  });
+  var rankOf = function (key) {
+    var order = ok.slice().sort(function (a, b) { return b[key] - a[key]; });
+    var m = {};
+    order.forEach(function (r, i) { m[r.name] = i; });
+    return m;
+  };
+  var jr = rankOf('jitsuryoku'), zr = rankOf('zenjitsu');
+  var out = {};
+  ok.forEach(function (r) { if (Math.abs(jr[r.name] - zr[r.name]) >= SWAP_MIN) out[r.name] = true; });
+  return out;
+}
+
 function renderHorsesTable(rows) {
   // 死んでいる列は出さない: オッズが全行空ならオッズ列ごと省く
   var hasOdds = rows.some(function (r) { return r.odds !== null && r.odds !== undefined; });
-  var hasSwap = rows.some(function (r) { return r.swap; });
+  var swaps = bigSwaps(rows);
+  var hasSwap = rows.some(function (r) { return swaps[r.name]; });
   // 調教は「このシステムで唯一 独立した価値が検証済みの軸」なので、該当馬がいれば列を出す
   var hasChokyo = rows.some(function (r) { return r.chokyo; });
 
@@ -494,7 +552,7 @@ function renderHorsesTable(rows) {
           '<th class="num col-drop">条件による上げ下げ</th>' +
           (hasOdds ? '<th class="num">オッズ</th>' : '') + '</tr>';
   rows.forEach(function (r) {
-    var sw = r.swap ? ' ⇅' : '';
+    var sw = swaps[r.name] ? ' ⇅' : '';
     // 脚質は不明なことが多い(運用日はparquet未収録)。不明なら括弧ごと出さない
     var style = (r.style && r.style !== '—') ? '(' + esc(r.style) + ')' : '';
     html += '<tr>';
@@ -524,8 +582,8 @@ function renderHorsesTable(rows) {
     // 調教は同じ表に見えている)。ただしスマホでは「実力の点数」列が無く
     // 「実力の順位と」と書いても確かめられないので、説明文だけ言い換える。
     html += '<div class="note">' +
-            '<span class="lbl-full">⇅ = 実力の順位と前日の総合点の順位が入れ替わっている馬</span>' +
-            '<span class="lbl-short">⇅ = 調教・展開・前走の内容などの評価で、素の実力から順位が入れ替わった馬</span>' +
+            '<span class="lbl-full">⇅ = 実力の点数の順位と前日の総合点の順位が3つ以上入れ替わっている馬</span>' +
+            '<span class="lbl-short">⇅ = 調教・展開・前走の内容などの評価で、素の実力から順位が3つ以上動いた馬</span>' +
             '</div>';
   }
   return html;
