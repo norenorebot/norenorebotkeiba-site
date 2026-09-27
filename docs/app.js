@@ -697,11 +697,13 @@ function renderFormation(d) {
 
 /* 展開を再生（参考）: renderFormation が data.json をここに預け、ボタンで replay.js を読み込んで開く(2026-09-27) */
 var RP_SEQ = 0, RP_DATA = {}, RP_LOADING = null;
+/* replay.js を直したら上げる（ブラウザに残った古い版を読まないように） */
+var RP_JS_VER = '2';
 function loadReplayJs() {
   if (window.KeibaReplay) return Promise.resolve();
   if (RP_LOADING) return RP_LOADING;
   RP_LOADING = new Promise(function (res, rej) {
-    var s = document.createElement('script'); s.src = 'replay.js'; s.onload = res; s.onerror = rej; document.head.appendChild(s);
+    var s = document.createElement('script'); s.src = 'replay.js?v=' + RP_JS_VER; s.onload = res; s.onerror = rej; document.head.appendChild(s);
   });
   return RP_LOADING;
 }
