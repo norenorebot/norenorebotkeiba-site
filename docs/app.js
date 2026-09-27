@@ -439,14 +439,14 @@ function renderVerdictCard(d, idx) {
     html += '<div class="checklist">⏰ 当日チェック: ' + checks.join('　') + '</div>';
   }
 
-  html += renderFormation(d);
-
   /* ブロック2【根拠】折りたたみ */
   html += '<details><summary>くわしい根拠を見る（各馬の点数・強さと時計の見方）</summary>';
   html += '<div class="note">' + plainGap(g) + '</div>';
   html += modelNote(d);
   html += renderHorsesTable(d.horses || [], d);
   html += renderLearningProfile(d.learning_profile || {});
+  // 展開予想図は根拠の中(能力の表を見てから展開を見る順)。入れ子なのでスマホのアコーディオンで閉じられない
+  html += renderFormation(d);
 
   /* ブロック3【詳細】深折りたたみ */
   html += '<details><summary>くわしい数字（競馬に詳しい方向け）</summary>';
@@ -651,6 +651,28 @@ function renderFormation(d) {
   html += '<pre class="formation-fig">' +
           '1角(最初のコーナー)  ' + esc(f.first) + '\n' +
           '4角(最後のコーナー)  ' + esc(f.last) + '</pre>';
+  // 馬ごとの表: 予想の番手(1=先頭)で並べる。通過順の文字列だけでは読みづらいため(2026-09-27)
+  var fh = (f.horses || []).slice();
+  if (fh.length) {
+    var rk = function (key) {
+      var m = {};
+      fh.slice().sort(function (a, b) { return a[key] - b[key]; }).forEach(function (x, i) { m[x.umaban] = i + 1; });
+      return m;
+    };
+    var r1 = rk('first'), r4 = rk('last');
+    var wide = {}; (f.wide || []).forEach(function (u) { wide[u] = true; });
+    var mk = {}; (d.horses || []).forEach(function (x) { if (x.umaban) mk[x.umaban] = x.mark || ''; });
+    fh.sort(function (a, b) { return r1[a.umaban] - r1[b.umaban]; });
+    html += '<div class="tablewrap"><table><tr><th>1角の予想番手</th><th>馬番</th><th>印</th><th>馬名</th><th>4角の予想番手</th><th>4角</th></tr>';
+    fh.forEach(function (x) {
+      var mv = r1[x.umaban] - r4[x.umaban];
+      html += '<tr><td>' + r1[x.umaban] + '</td><td>' + esc(x.umaban) + '</td><td>' + esc(mk[x.umaban] || '') + '</td><td>' +
+              esc(byNo[x.umaban] || '') + '</td><td>' + r4[x.umaban] + (mv >= 2 ? ' ↑' : (mv <= -2 ? ' ↓' : '')) + '</td><td>' +
+              (wide[x.umaban] ? '外を回りやすい' : '') + '</td></tr>';
+    });
+    html += '</table></div>';
+    html += '<div class="note">↑↓ = 1角から4角で予想の番手が2つ以上上がる/下がる馬。</div>';
+  }
   html += '<div class="line">逃げそうな馬: ' + nm(f.leader) +
           (f.leader_2nd ? '　（次に前へ行きそうな馬: ' + nm(f.leader_2nd) + '）' : '') + '</div>';
   if ((f.wide || []).length) {
@@ -662,9 +684,37 @@ function renderFormation(d) {
   html += '<div class="note">読み方: 左ほど前、数字は馬番。( ) は並んで走る組（4角は内→外の順）、「-」は少し離れる。<br>' +
           '※ 各馬の過去の位置取り・枠順・距離・コースの傾向から作った予想で、この予想の買い目の根拠ではありません。<br>' +
           '※ ' + esc(f.accuracy_note || '') + '</div>';
+  if (f.replay) {
+    // 展開を再生（参考）: 押した時だけ replay.js と courses.json を読み込む（予想だけ・実際の結果は含まない）
+    var key = 'rp' + (++RP_SEQ);
+    RP_DATA[key] = d;
+    html += '<div class="rp-open-wrap"><button type="button" class="rp-open" data-rp="' + key + '">▶ 展開を再生（参考）</button></div>' +
+            '<div class="rp-host" data-rp-host="' + key + '"></div>';
+  }
   html += CLOSE_LINK + '</details>';
   return html;
 }
+
+/* 展開を再生（参考）: renderFormation が data.json をここに預け、ボタンで replay.js を読み込んで開く(2026-09-27) */
+var RP_SEQ = 0, RP_DATA = {}, RP_LOADING = null;
+function loadReplayJs() {
+  if (window.KeibaReplay) return Promise.resolve();
+  if (RP_LOADING) return RP_LOADING;
+  RP_LOADING = new Promise(function (res, rej) {
+    var s = document.createElement('script'); s.src = 'replay.js'; s.onload = res; s.onerror = rej; document.head.appendChild(s);
+  });
+  return RP_LOADING;
+}
+document.addEventListener('click', function (ev) {
+  var btn = ev.target && ev.target.closest ? ev.target.closest('.rp-open') : null;
+  if (!btn) return;
+  var key = btn.getAttribute('data-rp'), host = document.querySelector('[data-rp-host="' + key + '"]');
+  if (!host) return;
+  if (host.getAttribute('data-open') === '1') { host.innerHTML = ''; host.removeAttribute('data-open'); btn.textContent = '▶ 展開を再生（参考）'; return; }
+  host.setAttribute('data-open', '1'); btn.textContent = '✕ 再生を閉じる';
+  loadReplayJs().then(function () { window.KeibaReplay.open(host, RP_DATA[key]); })
+    .catch(function () { host.textContent = '再生の部品を読み込めませんでした。'; });
+});
 
 function renderLearningProfile(lp) {
   if (!lp || !lp.available) return '<div class="note">計算のクセ: このレース用のデータがありません</div>';

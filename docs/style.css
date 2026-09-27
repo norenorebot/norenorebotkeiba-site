@@ -199,3 +199,37 @@ footer { border-top: 1px solid #000; margin-top: 16px; padding-top: 6px; font-si
 }
 /* 展開予想図: 等幅で通過順の文字列をそのまま見せる(装飾しない) */
 .formation-fig { font-family: monospace; font-size: 14px; margin: 4px 0; white-space: pre-wrap; word-break: break-all; }
+
+/* 展開を再生（参考）replay.js。スマホは縦に積む、デスクトップ(641px以上)はコース図と「いまの順番」を横に並べる */
+.rp-open-wrap { margin: 6px 0; }
+.rp-open { font-size: 15px; padding: 6px 12px; }
+.rp { border: 1px solid #ccc; padding: 6px; margin: 6px 0; background: #fff; }
+.rp:focus { outline: 2px solid #9bd; }
+.rp-stage { display: block; }
+.rp-track { width: 100%; height: auto; display: block; background: #fafaf7; }
+.rp-horse { cursor: pointer; }
+.rp-board { margin-top: 6px; }
+.rp-board-h { font-size: 13px; color: #555; margin-bottom: 2px; }
+.rp-list { list-style: none; margin: 0; padding: 0; font-size: 14px; max-height: 260px; overflow-y: auto; }
+.rp-row { display: flex; align-items: center; gap: 6px; padding: 2px 0; border-bottom: 1px dotted #ddd; cursor: pointer; }
+.rp-row.rp-sel { background: #ffe08a; }
+.rp-no { display: inline-block; min-width: 22px; text-align: center; font-weight: bold; border: 1px solid #555; border-radius: 3px; font-size: 13px; }
+.rp-f0 { background: #fff; color: #000; } .rp-f1 { background: #222; color: #fff; } .rp-f2 { background: #d33; color: #fff; } .rp-f3 { background: #26c; color: #fff; }
+.rp-f4 { background: #ec3; color: #000; } .rp-f5 { background: #2a4; color: #fff; } .rp-f6 { background: #f80; color: #000; } .rp-f7 { background: #f7a; color: #000; }
+.rp-mk { min-width: 1.2em; color: #c00; font-weight: bold; }
+.rp-nm { flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.rp-gap { color: #777; font-size: 12px; white-space: nowrap; }
+.rp-ctrl { display: flex; align-items: center; gap: 8px; margin: 8px 0 4px; }
+.rp-ctrl .rp-seek { flex: 1; min-width: 0; }
+.rp-play { font-size: 16px; padding: 6px 14px; min-width: 7em; }
+.rp-pos { font-size: 13px; min-width: 5.5em; text-align: right; }
+.rp-ctrl2 { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13px; }
+.rp-ctrl2 button { font-size: 14px; padding: 4px 10px; }
+.rp-elev { width: 100%; height: auto; display: block; margin-top: 6px; }
+.rp-note { margin-top: 6px; }
+.rp-loading { color: #777; padding: 12px; }
+@media (min-width: 641px) {
+  .rp-stage { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 10px; align-items: start; }
+  .rp-board { margin-top: 0; }
+  .rp-list { max-height: 360px; }
+}
