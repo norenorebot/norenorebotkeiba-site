@@ -219,7 +219,8 @@
     }
     function tick(ts) {
       if (!st.playing) return;
-      var dt = st.last ? Math.min(0.5, (ts - st.last) / 1000) : 0;   // 描画が遅い端末でも速度を保つ st.last = ts;
+      var dt = st.last ? Math.min(0.5, (ts - st.last) / 1000) : 0;   // 描画が遅い端末でも速度を保つ（上限0.5秒）
+      st.last = ts;
       st.t = Math.min(K.tmax, st.t + dt * SPEED * st.speed);
       if (st.t >= K.tmax) { st.playing = false; $('.rp-play').textContent = '▶ もう一度'; }
       draw();
