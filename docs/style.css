@@ -233,3 +233,27 @@ footer { border-top: 1px solid #000; margin-top: 16px; padding-top: 6px; font-si
   .rp-board { margin-top: 0; }
   .rp-list { max-height: 360px; }
 }
+
+/* 最新予想のデスクトップ表示(641px以上, 2026-09-27): 左=その日の要約とレース選択の表(追従)、右=選んだレースのカード。
+   スマホと同じ race-picker.js の選択を使い、横幅を活かして一覧と詳細を同時に見せる */
+@media (min-width: 641px) {
+  #latest.race-picker-ready.race-desk { display: grid; grid-template-columns: minmax(280px, 360px) minmax(0, 1fr); gap: 16px; align-items: start; }
+  #latest.race-desk .race-overview { position: sticky; top: 8px; max-height: calc(100vh - 16px); overflow-y: auto; }
+  #latest.race-desk .race-picker { display: block; }
+  #latest.race-desk > .verdict-block { display: none; margin-top: 0; }
+  #latest.race-desk > .verdict-block.race-selected { display: block; }
+  #latest.race-desk .race-other { display: block; border-top: 1px solid #999; margin-top: 8px; }
+  #latest.race-desk .race-other button { margin-right: 14px; border: 0; background: transparent; color: #0000aa; text-decoration: underline; font: inherit; cursor: pointer; padding: 6px 0; }
+  #latest.race-desk .race-grid { width: 100%; table-layout: fixed; border-collapse: collapse; }
+  #latest.race-desk .race-grid th:first-child { width: 36px; }
+  #latest.race-desk .race-grid th, #latest.race-desk .race-grid td { padding: 0; text-align: center; }
+  #latest.race-desk .race-grid th { padding: 4px 2px; }
+  #latest.race-desk .race-grid button { display: block; width: 100%; min-height: 30px; padding: 3px 2px; border: 0; border-radius: 0; background: #fff; color: #555; font: inherit; font-size: 13px; cursor: pointer; }
+  #latest.race-desk .race-grid button.race-buy { background: #fffbe6; color: #000; font-weight: bold; }
+  #latest.race-desk .race-grid button:hover { background: #eef3ff; }
+  #latest.race-desk .race-grid button.race-cur { outline: 3px solid #26c; outline-offset: -3px; background: #e8f0ff; color: #000; }
+  #latest.race-desk .race-grid .race-absent { color: #777; font-size: 12px; }
+}
+@media (max-width: 640px) {
+  #latest .race-grid button.race-cur { outline: 3px solid #26c; outline-offset: -3px; }
+}
