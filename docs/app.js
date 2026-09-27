@@ -468,7 +468,8 @@ function renderVerdictCard(d, idx) {
                版の名前ではなく「効いたかどうか」で書く)。
    新馬戦は前走・戦績が無いので、前走の内容・戦績が入らないのが正常(「入っていない」と書かない)。 */
 var MODEL_ITEMS = [['time', '時計'], ['ped', '新馬戦の血統'], ['trip', '前走の内容'],
-                   ['jstr', '騎手の過去1年の成績'], ['career', 'これまでの戦績と条件替わり']];
+                   ['jstr', '騎手の過去1年の成績'], ['career', 'これまでの戦績と条件替わり'],
+                   ['draw', '枠の有利不利（開催日目・馬場）']];
 function modelNote(d) {
   var m = d.model;
   if (!m || m.engine === 'V9.0' || !m.applied) {
@@ -484,6 +485,7 @@ function modelNote(d) {
     if (!(it[0] in a) || a[it[0]]) return false;
     if (it[0] === 'ped') return shinba;
     if (it[0] === 'trip' || it[0] === 'career') return !shinba;
+    if (it[0] === 'draw') return false;   // 芝の開催5日目以降・良などは当てはまる条件が無いだけ(データ不足ではない)
     return true;
   }).map(function (it) { return it[1]; });
   var html = '<div class="note">この予想の計算に入っている追加項目: ' +
@@ -698,7 +700,7 @@ function renderFormation(d) {
 /* 展開を再生（参考）: renderFormation が data.json をここに預け、ボタンで replay.js を読み込んで開く(2026-09-27) */
 var RP_SEQ = 0, RP_DATA = {}, RP_LOADING = null;
 /* replay.js を直したら上げる（ブラウザに残った古い版を読まないように） */
-var RP_JS_VER = '3';
+var RP_JS_VER = '4';
 function loadReplayJs() {
   if (window.KeibaReplay) return Promise.resolve();
   if (RP_LOADING) return RP_LOADING;

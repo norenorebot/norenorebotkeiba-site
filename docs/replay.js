@@ -68,17 +68,37 @@
   }
 
   /* ── 予想の動き: 各馬 [先頭の距離, 先頭からの遅れ(m), 内外(レーン)] ── */
+  /* 直線で内を空ける量（レーン、1レーン≒1.2m）: 芝は開催が進むほど・馬場が悪いほど内の荒れた所を避ける（見た目の目安。
+     量はデータに無いので固定値。有利不利の向きは TRACK_BIAS.md の測定に合わせる）。ダートは 0。 */
+  function railShift(rp) {
+    if (!/芝/.test(rp.surface || '')) return 0;
+    var d = rp.meeting_day, b = String(rp.baba || '').charAt(0), s = 0;
+    if (d) s = d <= 4 ? 0 : (d <= 6 ? 1 : (d <= 8 ? 1.5 : 2));
+    if (b === '稍') s += 0.5; else if (b === '重' || b === '不') s += 1;
+    return s;
+  }
   function buildKeys(rp, g, goalMode) {
-    var D = rp.distance, N = rp.N, cr = crossings(D, g);
+    var D = rp.distance, N = rp.N, cr = crossings(D, g), rs = railShift(rp);
     var firstS = cr.length ? cr[0].s : D * 0.3, lastS = cr.length ? cr[cr.length - 1].s : D * 0.75;
-    var v3 = (D - 600) / rp.pace.pred, vend = 600 / 35.5, keys = {}, tmax = D;
+    var v3 = (D - 600) / rp.pace.pred, vend = 600 / 35.5, keys = {}, tmax = D, pre = {};
     rp.horses.forEach(function (h) {
       var K = [[0, 0, (h.u - 1) * 0.95], [firstS, h.first * 1.18 * (N - 1) * BL, 0.3]];
       var mids = [[D - 600, h.g3 * v3, h.lane * 0.8], [lastS, h.g3 * v3, h.lane * 1.2]].filter(function (x) { return x[0] > firstS + 20; })
         .sort(function (a, b) { return a[0] - b[0]; });
       var goal = (goalMode === 'time' ? h.goal_time : h.goal_v9) * vend;
-      K = K.concat(mids).concat([[D, goal, 1]]);
-      keys[h.u] = K; tmax = Math.max(tmax, D + goal + 30);
+      pre[h.u] = { K: K.concat(mids), b4: mids.length ? mids[mids.length - 1][1] : goal, lane4: h.lane * 1.2, goal: goal };
+    });
+    // 直線の横の広がり: 4角で前にいた馬は内寄りのまま、後ろにいた馬ほど前をかわすために外へ（順位1つにつき0.7レーン≒0.84m）、
+    // 差を詰める馬ほどさらに外へ（15m詰めるごとに+1レーン）。芝で内が荒れていれば全体が内を空ける（rs）。量は見た目の目安。
+    var order = rp.horses.map(function (h) { return h.u; }).sort(function (a, b) { return pre[a].b4 - pre[b].b4; });
+    var rank4 = {}; order.forEach(function (u, i) { rank4[u] = i; });
+    rp.horses.forEach(function (h) {
+      var q = pre[h.u], gain = Math.max(0, q.b4 - q.goal);
+      var fan = Math.min(12, rank4[h.u] * 0.7 + gain / 15);
+      var laneGoal = rs + q.lane4 * 0.4 + fan;
+      var K = q.K.concat([[D - Math.min(250, D * 0.14), q.b4 * 0.6 + q.goal * 0.4, rs * 0.8 + q.lane4 * 0.7 + fan * 0.6],
+                          [D, q.goal, laneGoal]]);
+      keys[h.u] = K; tmax = Math.max(tmax, D + q.goal + 30);
     });
     return { keys: keys, tmax: tmax };
   }
