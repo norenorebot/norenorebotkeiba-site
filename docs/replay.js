@@ -10,6 +10,9 @@
      ・横に動けるのは、動く先の進路の前後1馬身に馬がいない時だけ（斜行しない・馬をすり抜けない）。横の速さは約1.7m/秒まで。
      ・前が詰まったら（2馬身先に遅い馬がいる時も先読みして）、外が空いていれば外へ持ち出し、無理なら内、どちらも無理なら前が空くのを待つ。
        持ち出した分は少しずつしか戻さない。最初の角から各馬の内外（展開予想図の4角の内外）を目標にする。
+     ・速さは実際の馬に近づける（2026-09-29）: 最高 時速68.4km、加速は1秒に2.5m/秒（スタート直後は5）、減速は3m/秒（詰まりそうな時は6）。
+       前の馬に3馬身以内まで近づいたら先読みでその馬の速さに合わせる。1馬身を切った時は急停止せず、前の馬より少し遅い速さに落として
+       1秒ほどで間隔を戻す（カクッと下がる動きを防ぐ）。横に動く判定では、まだ動いていない馬の進む分も見込む（重なりを防ぐ）。
      ・詰まった時に横へ動くのは、動く先の進路の前が今より1馬身以上空いている時だけ（抜けられない方へふくらんで戻る動きを抑える。2026-09-29）。
      ・横の速さ・並走の間隔・先読みの距離は、過去の実際のレース295Rに合わせて決めた（競馬リポジトリ course_transfer_research/sim_calib.py、
        実際の通過順・着差を目標に再生して 4角の順位・内外・着順が最も実際に近い組み合わせ）。
@@ -88,12 +91,13 @@
     if (b === '稍') s += 0.5; else if (b === '重' || b === '不') s += 1;
     return s;
   }
-  function buildKeys(rp, g, goalMode) {
+  function buildKeys(rp, g, goalMode, sl) {
     var D = rp.distance, N = rp.N, cr = crossings(D, g), rs = railShift(rp);
     var firstS = cr.length ? cr[0].s : D * 0.3, lastS = cr.length ? cr[cr.length - 1].s : D * 0.75;
     var v3 = (D - 600) / rp.pace.pred, vend = 600 / 35.5, keys = {}, tmax = D, pre = {};
     rp.horses.forEach(function (h) {
-      var K = [[0, 0, (h.u - 1) * 0.95], [firstS, h.first * 1.18 * (N - 1) * BL, h.lane * 0.8]];
+      var f1 = sl && sl[h.u] ? Math.min(1, h.first + 0.48) : h.first;   // 出遅れた馬: 最初の角で頭数の約半分後ろ（実際の出遅れの中央値 0.48）
+      var K = [[0, 0, (h.u - 1) * 0.95], [firstS, f1 * 1.18 * (N - 1) * BL, h.lane * 0.8]];
       var mids = [[D - 600, h.g3 * v3, h.lane * 0.8], [lastS, h.g3 * v3, h.lane * 1.2]].filter(function (x) { return x[0] > firstS + 20; })
         .sort(function (a, b) { return a[0] - b[0]; });
       var goal = (goalMode === 'time' ? h.goal_time : h.goal_v9) * vend;
@@ -132,16 +136,29 @@
       return s + (t - tt) * vEnd * 0.85;
     };
   }
-  function simulate(rp, g, goalMode) {
-    var KK = buildKeys(rp, g, goalMode), D = rp.distance, lead = leaderPlan(rp), DT = 0.1;
+  function simulate(rp, g, goalMode, sl) {
+    var KK = buildKeys(rp, g, goalMode, sl), D = rp.distance, lead = leaderPlan(rp), DT = 0.1;
     var H = rp.horses.map(function (h) { return { u: h.u, K: KK.keys[h.u], s: 0, lane: (h.u - 1) * 0.95, v: 0, lo: 0 }; })
       .sort(function (a, b) { return a.u - b.u; });        // 記録は馬番順（描画側の hidx と合わせる）
-    var frames = [], t = 0, LAT = 0.14, GAPL = 0.75, LOOK = 2;
+    var frames = [], t = 0, LAT = 0.14, GAPL = 0.75, LOOK = 3;
+    var VMAX = 19.0, TAU = 0.8, ACC = 2.5, ACC_LOW = 5.0, DEC = 3.0, DEC_HARD = 6.0;
+    // 馬ごとの最高速（2026-09-29）: 残り600mからは、その馬の上がり3F（先頭の上がり＋ゴールの遅れ−残り600mの遅れ）を先頭の上がり3ハロンの形に
+    // 伸ばした最速の1ハロンの1.03倍まで。それより前は、先頭の最速ラップ（最初の半端な区間を除く）の1.03倍まで。
+    var L3 = (rp.laps && rp.laps.length >= 4) ? rp.laps.slice(-3) : [35.5 / 3, 35.5 / 3, 35.5 / 3];
+    var sL3 = L3[0] + L3[1] + L3[2], mL3 = Math.min.apply(null, L3);
+    var eL = (rp.laps && rp.laps.length >= 5) ? rp.laps.slice(1, -3) : [rp.pace.pred / Math.max(1, (D - 600) / 200)];
+    var capE = Math.min(VMAX, 200 / Math.min.apply(null, eL) * 1.03), byU = {};
+    rp.horses.forEach(function (h) { byU[h.u] = h; });
+    H.forEach(function (h) {
+      var o = byU[h.u], gs = goalMode === 'time' ? o.goal_time : o.goal_v9, A = sL3 + Math.max(gs - o.g3, -0.1 * sL3);   // 差を詰める馬は先頭より速い
+      h.cap = Math.min(VMAX, 200 / (mL3 * A / sL3) * 1.03); h.capE = Math.max(h.cap, capE);
+    });
     var clear = function (me, lane) {
       if (lane < 0 || lane > 16) return false;
       for (var k = 0; k < H.length; k++) {
         var o = H[k]; if (o === me) continue;
-        if (Math.abs(o.lane - lane) < GAPL && Math.abs(o.s - me.s) < BL) return false;
+        var os = o.upd ? o.s : o.s + o.v * DT;               // まだこのコマで動いていない馬は、進む分も見込む
+        if (Math.abs(o.lane - lane) < GAPL && Math.abs(os - me.s) < BL) return false;
       }
       return true;
     };
@@ -150,6 +167,7 @@
       t += DT;
       var x = lead(t), xn = lead(t + DT), vl = (xn - x) / DT;
       H.sort(function (a, b) { return b.s - a.s; });
+      H.forEach(function (h) { h.upd = false; });
       H.forEach(function (h) {
         if (h.ft !== undefined) {                              // ゴール後: その場の速さから自然に減速して走り抜ける（並び・間隔を保つ）
           h.v = Math.max(0, h.v - 1.2 * DT);
@@ -158,19 +176,33 @@
             var o4 = H[k2]; if (o4 === h || o4.s < h.s) continue;
             if (Math.abs(o4.lane - h.lane) < GAPL && o4.s - sF < BL) sF = Math.min(sF, o4.s - BL);
           }
-          sF = Math.max(h.s, sF); h.v = (sF - h.s) / DT; h.s = sF; return;
+          sF = Math.max(h.s, sF); h.v = (sF - h.s) / DT; h.s = sF; h.upd = true; return;
         }
         var tg = interp(h.K, x), sT = x - tg[0];
-        var vd = Math.max(0, Math.min(19.5, vl + (sT - h.s) / 0.8));
-        var v = Math.max(h.v - 8 * DT, Math.min(h.v + 7 * DT, vd));
-        var sN = h.s + v * DT, blocked = false;
+        // 速さ（2026-09-29 実際の馬に近づける）: 最高 時速68.4km（馬ごとの上限は上）、加速 2m/秒²（秒速12mまでのスタート直後は 5）、減速 3m/秒²。
+        var vd = Math.max(0, Math.min(h.s > D - 600 ? h.cap : h.capE, vl + (sT - h.s) / TAU)), fol = false;
+        if (sl && sl[h.u] && t < 0.5) vd = 0;                  // 出遅れ: ゲートを出るのが0.5秒遅れる
+        var nr = null;                                         // 先読みのブレーキ: 同じ進路の前の馬に3馬身以内まで近づいたら、その馬の速さに合わせる
+        for (var k0 = 0; k0 < H.length; k0++) {
+          var o0 = H[k0]; if (o0 === h || o0.s <= h.s || Math.abs(o0.lane - h.lane) >= GAPL) continue;
+          if (!nr || o0.s < nr.s) nr = o0;
+        }
+        if (nr && nr.s - h.s < 3 * BL) { vd = Math.min(vd, Math.max(0, nr.v + (nr.s - h.s - 1.2 * BL) / 1.0)); fol = true; }
+        var dec = (fol && vd < h.v - DEC * DT) ? DEC_HARD : DEC, acc = h.v < 12 ? ACC_LOW : ACC;
+        var v = Math.max(h.v - dec * DT, Math.min(h.v + acc * DT, vd));
+        var sN = h.s + v * DT, blocked = false, vAhead = 99, gMin = 99;
         for (var k = 0; k < H.length; k++) {                  // 前の馬（同じ進路・1馬身以内）より前には出ない
           var o = H[k]; if (o === h || o.s < h.s) continue;
-          if (Math.abs(o.lane - h.lane) < GAPL && o.s - sN < BL) { sN = Math.min(sN, o.s - BL); blocked = true; }
+          if (Math.abs(o.lane - h.lane) < GAPL && o.s - sN < BL) { blocked = true; vAhead = Math.min(vAhead, o.v); gMin = Math.min(gMin, o.s - h.s); }
+        }
+        if (blocked) {                                         // 急停止せず、前の馬より少し遅い速さまで強め（最大8m/秒²）に落として1秒ほどで1馬身に戻す
+          var vt = Math.max(0, vAhead - Math.max(0, BL - gMin) / 1.0);
+          v = Math.max(h.v - 8 * DT, Math.min(v, vt));
+          sN = h.s + v * DT;
         }
         sN = Math.max(h.s, sN);
         if (sN >= D && h.s < D) { h.ft = t - DT * (sN - D) / Math.max(1e-6, sN - h.s); h.vf = (sN - h.s) / DT; }   // ゴールを通過した時刻と速さ
-        h.v = (sN - h.s) / DT; h.s = sN;
+        h.v = (sN - h.s) / DT; h.s = sN; h.upd = true;
         var want = blocked && sT - h.s > BL * 0.5;
         if (!want && sT - h.s > BL * 0.3) {                   // 先読み: 2馬身先の同じ進路に遅い馬がいれば、詰まる前に進路を探す
           for (var q = 0; q < H.length; q++) {
@@ -221,8 +253,9 @@
     var names = {}, marks = {};
     (d.horses || []).forEach(function (h) { names[h.umaban] = h.name; marks[h.umaban] = h.mark || ''; });
     var mobile = window.matchMedia && window.matchMedia('(max-width: 640px)').matches;
-    var st = { t: 0, playing: false, speed: 2, follow: mobile, goal: 'v9', sel: null, last: 0 };
-    var K = simulate(rp, g, st.goal);
+    var st = { t: 0, playing: false, speed: 2, follow: mobile, goal: 'v9', sel: null, last: 0, sl: null };
+    var K = simulate(rp, g, st.goal, st.sl);
+    var slipOf = {}; rp.horses.forEach(function (h) { slipOf[h.u] = h.slip; });
     var hidx = {}; rp.horses.slice().sort(function (a, b) { return a.u - b.u; }).forEach(function (h, i) { hidx[h.u] = i; });
     var df = rp.pace.pred - rp.pace.base, tag = Math.abs(df) < 0.3 ? '標準並み' : (df < 0 ? '標準より速い' : '標準より遅い');
 
@@ -235,6 +268,7 @@
       '<span class="rp-pos"></span></div>' +
       '<div class="rp-ctrl2"><button type="button" class="rp-speed">×2</button>' +
       '<button type="button" class="rp-view">' + (st.follow ? '全体を見る' : '馬群を追う') + '</button>' +
+      '<button type="button" class="rp-slip">出遅れを抽選</button><button type="button" class="rp-slip-off" hidden>出遅れなしに戻す</button>' +
       '<label class="rp-goal-l">ゴールの並び <select class="rp-goal"><option value="v9">勝つ確率の順</option><option value="time">予想時計の順</option></select></label></div>' +
       '<svg class="rp-elev" viewBox="0 0 1000 90" role="img" aria-label="コースの高低"></svg></div>' +
       '<div class="rp-board"><div class="rp-board-h">いまの順番（予想）</div><ol class="rp-list"></ol></div></div>' +
@@ -244,6 +278,8 @@
       '※ 各馬の過去の位置取りと予想の時計から作った<b>参考の動き</b>で、実際のレースの映像ではありません。' +
       '最初のコーナーまでは展開予想図の隊列、残り600mは予想の時計の順（間隔は過去のレースの典型的な差）、ゴールは勝つ確率の順を目標に動きます。' +
       '先頭の速さはコースの典型的なラップの緩急、前が詰まった馬は1馬身以上空いた所にしか動けない（外へ持ち出すか前が空くのを待つ）ため、目標の順とずれることがあります。' +
+      '「出遅れを抽選」は、各馬の過去の出遅れ率（最初のコーナーでいつもより大きく後ろになった割合）で出遅れる馬をくじ引きし、その馬はスタートが0.5秒遅れて最初のコーナーで頭数の約半分後ろから走ります（押すたびに引き直し）。' +
+      '⚠は出遅れ率が20%以上の馬（全体は約13%）。' +
       'コースの形・距離・高低は、公開されている情報をもとに書き起こした概略です。</div>' +
       '</div>';
     var $ = function (c) { return host.querySelector(c); };
@@ -328,7 +364,9 @@
         if (fin[u].t <= st.t) gap = i === 0 ? '🏁1着' : '🏁+' + ((fin[u].t - w0.t) / SEC_PER_BL).toFixed(1) + '馬身';
         else gap = i === 0 ? '' : '+' + ((order[0].s - it.s) / V_DISP / SEC_PER_BL).toFixed(1) + '馬身';
         return '<li class="rp-row' + (st.sel === u ? ' rp-sel' : '') + '" data-u="' + u + '"><span class="rp-no rp-f' + f + '">' + u + '</span>' +
-               '<span class="rp-mk">' + esc(marks[u]) + '</span><span class="rp-nm">' + esc(names[u] || '') + '</span><span class="rp-gap">' + gap + '</span></li>';
+               '<span class="rp-mk">' + esc(marks[u]) + '</span><span class="rp-nm">' + esc(names[u] || '') +
+               (st.sl && st.sl[u] ? '<span class="rp-slipped">出遅れ</span>' : (slipOf[u] >= 0.2 ? '<span class="rp-slipw" title="出遅れ率 ' + Math.round(slipOf[u] * 100) + '%">⚠</span>' : '')) +
+               '</span><span class="rp-gap">' + gap + '</span></li>';
       }).join('');
       pos.textContent = t <= D ? '残り ' + Math.max(0, D - t).toFixed(0) + 'm' : 'ゴール後';
       seek.value = Math.round(st.t / K.T * 1000);
@@ -351,7 +389,18 @@
     seek.addEventListener('input', function () { play(false); st.t = +seek.value / 1000 * K.T; draw(); });
     $('.rp-speed').addEventListener('click', function () { st.speed = st.speed === 1 ? 2 : (st.speed === 2 ? 4 : 1); this.textContent = '×' + st.speed; });
     $('.rp-view').addEventListener('click', function () { st.follow = !st.follow; this.textContent = st.follow ? '全体を見る' : '馬群を追う'; draw(); });
-    $('.rp-goal').addEventListener('change', function () { st.goal = this.value; K = simulate(rp, g, st.goal); draw(); });
+    $('.rp-goal').addEventListener('change', function () { st.goal = this.value; K = simulate(rp, g, st.goal, st.sl); draw(); });
+    var reslip = function (sl) {
+      st.sl = sl; K = simulate(rp, g, st.goal, st.sl); st.t = 0; play(false); draw();
+      var us = sl ? Object.keys(sl).map(Number).sort(function (a, b) { return a - b; }) : [];
+      $('.rp-slip').textContent = sl ? (us.length ? '出遅れ: ' + us.join('・') + '番（引き直す）' : '出遅れなし（引き直す）') : '出遅れを抽選';
+      $('.rp-slip-off').hidden = !sl;
+    };
+    $('.rp-slip').addEventListener('click', function () {
+      var sl = {}; rp.horses.forEach(function (h) { if (Math.random() < (h.slip === undefined ? 0.13 : h.slip)) sl[h.u] = true; });
+      reslip(sl);
+    });
+    $('.rp-slip-off').addEventListener('click', function () { reslip(null); });
     var pick = function (ev) { var el = ev.target.closest('[data-u]'); if (!el) return; var u = +el.getAttribute('data-u'); st.sel = st.sel === u ? null : u; draw(); };
     svg.addEventListener('click', pick); list.addEventListener('click', pick);
     host.querySelector('.rp').setAttribute('tabindex', '0');
