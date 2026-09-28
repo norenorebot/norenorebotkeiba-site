@@ -10,6 +10,7 @@
      ・横に動けるのは、動く先の進路の前後1馬身に馬がいない時だけ（斜行しない・馬をすり抜けない）。横の速さは約1.7m/秒まで。
      ・前が詰まったら（2馬身先に遅い馬がいる時も先読みして）、外が空いていれば外へ持ち出し、無理なら内、どちらも無理なら前が空くのを待つ。
        持ち出した分は少しずつしか戻さない。最初の角から各馬の内外（展開予想図の4角の内外）を目標にする。
+     ・詰まった時に横へ動くのは、動く先の進路の前が今より1馬身以上空いている時だけ（抜けられない方へふくらんで戻る動きを抑える。2026-09-29）。
      ・横の速さ・並走の間隔・先読みの距離は、過去の実際のレース295Rに合わせて決めた（競馬リポジトリ course_transfer_research/sim_calib.py、
        実際の通過順・着差を目標に再生して 4角の順位・内外・着順が最も実際に近い組み合わせ）。
    CSP(style-src 'self') のため style 属性は使わない（SVG は属性だけ、見た目は style.css の .rp-*）。
@@ -17,6 +18,7 @@
 'use strict';
 (function () {
   var BL = 2.4, LANE_M = 1.2;
+  var SEC_PER_BL = 0.2, V_DISP = 16.5;   // 着差の表示は JRA の目安（1馬身 ≒ 0.2秒）。走っている間は距離を 16.5m/秒 で秒に直す
   var FRAME = ['#fff', '#222', '#d33', '#26c', '#ec3', '#2a4', '#f80', '#f7a'];
   var FTXT = ['#000', '#fff', '#fff', '#fff', '#000', '#fff', '#000', '#000'];
   var COURSES = null;
@@ -150,7 +152,13 @@
       H.sort(function (a, b) { return b.s - a.s; });
       H.forEach(function (h) {
         if (h.ft !== undefined) {                              // ゴール後: その場の速さから自然に減速して走り抜ける（並び・間隔を保つ）
-          h.v = Math.max(0, h.v - 1.2 * DT); h.s += h.v * DT; return;
+          h.v = Math.max(0, h.v - 1.2 * DT);
+          var sF = h.s + h.v * DT;
+          for (var k2 = 0; k2 < H.length; k2++) {             // ゴール後も前の馬（同じ進路）に1馬身以上は近づかない
+            var o4 = H[k2]; if (o4 === h || o4.s < h.s) continue;
+            if (Math.abs(o4.lane - h.lane) < GAPL && o4.s - sF < BL) sF = Math.min(sF, o4.s - BL);
+          }
+          sF = Math.max(h.s, sF); h.v = (sF - h.s) / DT; h.s = sF; return;
         }
         var tg = interp(h.K, x), sT = x - tg[0];
         var vd = Math.max(0, Math.min(19.5, vl + (sT - h.s) / 0.8));
@@ -170,9 +178,14 @@
             if (o2.s > h.s && o2.s - h.s < BL * LOOK && Math.abs(o2.lane - h.lane) < GAPL && o2.v < vd - 0.3) { want = true; break; }
           }
         }
-        if (want) {                                            // 詰まった: 外 → 内 → 待つ
-          if (clear(h, h.lane + LAT)) { h.lane += LAT; h.lo += LAT; }
-          else if (clear(h, h.lane - LAT)) { h.lane -= LAT; h.lo -= LAT; }
+        if (want) {                                            // 詰まった: 前が今より空いている側へ（外 → 内）、どちらも無理なら待つ
+          var room = function (L) {                            // その進路の前の空き(m)
+            var r = 99; for (var q2 = 0; q2 < H.length; q2++) { var o3 = H[q2]; if (o3 !== h && o3.s > h.s && Math.abs(o3.lane - L) < GAPL) r = Math.min(r, o3.s - h.s); }
+            return r;
+          };
+          var here = room(h.lane);                             // 抜けられない方へはふくらまない（2026-09-29、はじき出されて戻る動きを抑える）
+          if (room(h.lane + LAT * 7) > here + BL && clear(h, h.lane + LAT)) { h.lane += LAT; h.lo += LAT; }
+          else if (room(h.lane - LAT * 7) > here + BL && clear(h, h.lane - LAT)) { h.lane -= LAT; h.lo -= LAT; }
         } else {
           var L = tg[1] + h.lo, d = L - h.lane;
           if (Math.abs(d) > 0.02) { var st = Math.max(-LAT, Math.min(LAT, d)); if (clear(h, h.lane + st)) h.lane += st; }
@@ -312,8 +325,8 @@
       var order = done.concat(run), w0 = done.length ? fin[done[0].h.u] : null;
       list.innerHTML = order.map(function (it, i) {
         var u = it.h.u, f = frameOf(u, N) - 1, gap;
-        if (fin[u].t <= st.t) gap = i === 0 ? '🏁1着' : '🏁+' + ((fin[u].t - w0.t) * w0.v / BL).toFixed(1) + '馬身';
-        else gap = i === 0 ? '' : '+' + ((order[0].s - it.s) / BL).toFixed(1) + '馬身';
+        if (fin[u].t <= st.t) gap = i === 0 ? '🏁1着' : '🏁+' + ((fin[u].t - w0.t) / SEC_PER_BL).toFixed(1) + '馬身';
+        else gap = i === 0 ? '' : '+' + ((order[0].s - it.s) / V_DISP / SEC_PER_BL).toFixed(1) + '馬身';
         return '<li class="rp-row' + (st.sel === u ? ' rp-sel' : '') + '" data-u="' + u + '"><span class="rp-no rp-f' + f + '">' + u + '</span>' +
                '<span class="rp-mk">' + esc(marks[u]) + '</span><span class="rp-nm">' + esc(names[u] || '') + '</span><span class="rp-gap">' + gap + '</span></li>';
       }).join('');
