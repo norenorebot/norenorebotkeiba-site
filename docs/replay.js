@@ -7,8 +7,11 @@
    物理の制約（simulate、0.1秒刻みで一度だけ計算して再生はそれをなぞる）:
      ・先頭の速さはコースの典型的なラップ（先頭の1ハロン毎、予想ペースに合わせたもの）。無ければ残り600mまで一定・後3F 35.5秒。
      ・前（同じ進路で1馬身以内）に馬がいれば、その馬より前には出られない（1馬身あける）。
-     ・横に動けるのは、動く先の進路の前後1馬身に馬がいない時だけ（斜行しない・馬をすり抜けない）。横の速さは約0.8m/秒まで。
-     ・前が詰まったら、外が空いていれば外へ持ち出し、無理なら内、どちらも無理なら前が空くのを待つ。持ち出した分は少しずつしか戻さない。
+     ・横に動けるのは、動く先の進路の前後1馬身に馬がいない時だけ（斜行しない・馬をすり抜けない）。横の速さは約1.7m/秒まで。
+     ・前が詰まったら（2馬身先に遅い馬がいる時も先読みして）、外が空いていれば外へ持ち出し、無理なら内、どちらも無理なら前が空くのを待つ。
+       持ち出した分は少しずつしか戻さない。最初の角から各馬の内外（展開予想図の4角の内外）を目標にする。
+     ・横の速さ・並走の間隔・先読みの距離は、過去の実際のレース295Rに合わせて決めた（競馬リポジトリ course_transfer_research/sim_calib.py、
+       実際の通過順・着差を目標に再生して 4角の順位・内外・着順が最も実際に近い組み合わせ）。
    CSP(style-src 'self') のため style 属性は使わない（SVG は属性だけ、見た目は style.css の .rp-*）。
    ============================================================================ */
 'use strict';
@@ -88,7 +91,7 @@
     var firstS = cr.length ? cr[0].s : D * 0.3, lastS = cr.length ? cr[cr.length - 1].s : D * 0.75;
     var v3 = (D - 600) / rp.pace.pred, vend = 600 / 35.5, keys = {}, tmax = D, pre = {};
     rp.horses.forEach(function (h) {
-      var K = [[0, 0, (h.u - 1) * 0.95], [firstS, h.first * 1.18 * (N - 1) * BL, 0.3]];
+      var K = [[0, 0, (h.u - 1) * 0.95], [firstS, h.first * 1.18 * (N - 1) * BL, h.lane * 0.8]];
       var mids = [[D - 600, h.g3 * v3, h.lane * 0.8], [lastS, h.g3 * v3, h.lane * 1.2]].filter(function (x) { return x[0] > firstS + 20; })
         .sort(function (a, b) { return a[0] - b[0]; });
       var goal = (goalMode === 'time' ? h.goal_time : h.goal_v9) * vend;
@@ -131,7 +134,7 @@
     var KK = buildKeys(rp, g, goalMode), D = rp.distance, lead = leaderPlan(rp), DT = 0.1;
     var H = rp.horses.map(function (h) { return { u: h.u, K: KK.keys[h.u], s: 0, lane: (h.u - 1) * 0.95, v: 0, lo: 0 }; })
       .sort(function (a, b) { return a.u - b.u; });        // 記録は馬番順（描画側の hidx と合わせる）
-    var frames = [], t = 0, LAT = 0.07, GAPL = 0.9;
+    var frames = [], t = 0, LAT = 0.14, GAPL = 0.75, LOOK = 2;
     var clear = function (me, lane) {
       if (lane < 0 || lane > 16) return false;
       for (var k = 0; k < H.length; k++) {
@@ -157,6 +160,12 @@
         sN = Math.max(h.s, sN);
         h.v = (sN - h.s) / DT; h.s = sN;
         var want = blocked && sT - h.s > BL * 0.5;
+        if (!want && sT - h.s > BL * 0.3) {                   // 先読み: 2馬身先の同じ進路に遅い馬がいれば、詰まる前に進路を探す
+          for (var q = 0; q < H.length; q++) {
+            var o2 = H[q]; if (o2 === h) continue;
+            if (o2.s > h.s && o2.s - h.s < BL * LOOK && Math.abs(o2.lane - h.lane) < GAPL && o2.v < vd - 0.3) { want = true; break; }
+          }
+        }
         if (want) {                                            // 詰まった: 外 → 内 → 待つ
           if (clear(h, h.lane + LAT)) { h.lane += LAT; h.lo += LAT; }
           else if (clear(h, h.lane - LAT)) { h.lane -= LAT; h.lo -= LAT; }
