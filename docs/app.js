@@ -229,8 +229,16 @@ function raceTitle(d) {
 var TIER_LABEL = {
   seihai_fukusho: '複勝',
   gap_fukusho: '複勝',
-  seihai_umaren: '馬連3点'
+  seihai_umaren: '馬連3点',
+  group_fukusho: '複勝（試験運用）',
+  step_umaren: '馬連1点（試験運用）'
 };
+/* 買い目の種類 → サインの名前(2026-09-28 試験運用の2つを追加。📐実力差サインは研究終了で新しい予想には出ない) */
+var SIGN_LABEL = {
+  seihai_fukusho: '🌈特別サイン', seihai_umaren: '🌈特別サイン', gap_fukusho: '📐実力差サイン',
+  group_fukusho: '🧪上位一致サイン', step_umaren: '🧪段差サイン'
+};
+var TRIAL_FROM = '2026-09-28T00:00:00';
 function renderResultLine(d) {
   var res = d.result;
   if (!res) return '';
@@ -292,7 +300,7 @@ function renderDaySummary(rows) {
     bets.forEach(function (x) {
       var d = x.d, se = d.seihai || {}, tier = (d.verdict || {}).bet_tier;
       var axis = se.axis || axisFromRows(d) || '—';
-      var sign = se.fired ? '🌈特別サイン' : '📐実力差サイン';
+      var sign = se.fired ? '🌈特別サイン' : (SIGN_LABEL[tier] || '');
       var what = TIER_LABEL[tier] || '';
       html += '<li><a href="#' + esc(raceAnchor(x.idx)) + '">' +
               esc(venueLabel(d)) + (d.race && d.race.no ? esc(d.race.no) + 'R' : '') + '</a>' +
@@ -396,6 +404,12 @@ function renderVerdictCard(d, idx) {
     var u = se.is_ultimate ? '🌈特別サイン(最上位)' : '🌈特別サイン';
     html += '<div class="line"><span class="seihai">' + u + '点灯: ◎' + esc(se.axis) + '</span>' +
             (se.skills_str ? ' <span class="note">' + esc(se.skills_str) + '</span>' : '') + '</div>';
+  }
+
+  // ◎の調教と時計の裏付け(2026-09-28〜・表示だけ、買い目は変えない)。未勝利〜2勝で ◎が時計2位以内かつ調教あり。
+  var ab = d.axis_backing;
+  if (ab && ab.on) {
+    html += '<div class="line"><span class="backing">🛡️調教と時計の裏付け</span> <span class="note">' + esc(ab.note || '') + '</span></div>';
   }
 
   if (av.kind === 'bet') {
@@ -550,7 +564,12 @@ function renderHorsesTable(rows, d) {
   //   2026-09-27 以降に確定した予想(predicted_at)は、特別サインも実力差サインも無いレースの◎を「勝つ確率1位」にした
   //   (format_prediction.mark_axis / MARK_RULE_FROM。公開済みの予想は従来の決め方のまま)。
   var newMark = String((d && d.predicted_at) || '') >= MARK_RULE_FROM;
-  var html = newMark
+  var trialMark = String((d && d.predicted_at) || '') >= TRIAL_FROM;
+  var html = trialMark
+    ? '<div class="note">◎は🌈特別サインの馬、🧪上位一致サインで買うレースは「強さ」がいちばん高い馬、' +
+      '🧪段差サインで買うレースは総合点がいちばん高い馬、それ以外は勝つ確率がいちばん高い馬です。' +
+      '○▲△と表の並びは勝つ確率の高い順です（僅差だと順番が前後することがあります）。</div>'
+    : newMark
     ? '<div class="note">◎は🌈特別サインの馬、📐実力差サインで買うレースは「強さ」がいちばん高い馬、' +
       'それ以外は勝つ確率がいちばん高い馬です。○▲△と表の並びは勝つ確率の高い順です' +
       '（僅差だと順番が前後することがあります）。</div>'
@@ -700,7 +719,7 @@ function renderFormation(d) {
 /* 展開を再生（参考）: renderFormation が data.json をここに預け、ボタンで replay.js を読み込んで開く(2026-09-27) */
 var RP_SEQ = 0, RP_DATA = {}, RP_LOADING = null;
 /* replay.js を直したら上げる（ブラウザに残った古い版を読まないように） */
-var RP_JS_VER = '7';
+var RP_JS_VER = '8';
 function loadReplayJs() {
   if (window.KeibaReplay) return Promise.resolve();
   if (RP_LOADING) return RP_LOADING;
@@ -892,7 +911,9 @@ function renderForward(fw) {
     return '<p class="note">前向き実績はまだありません（結果の突合が未実行）。</p>';
   }
   var s = fw.series || {};
-  var keys = ['seihai_fukusho', 'seihai_umaren', 'gap_fukusho'];
+  var keys = ['seihai_fukusho', 'seihai_umaren', 'group_fukusho', 'step_umaren', 'gap_fukusho'];
+  // 研究終了の系列(retired)はグレーで出す。試験運用(trial)は件数が少ないうちは参考。
+  var rowCls = function (v) { return v && v.retired ? ' class="retired"' : ''; };
   var html = '';
   html += '<p class="note">' + esc(fw.period_from) + ' 以降に<b>このサイトに載せた予想</b>だけを、' +
           '公開した買い目のまま採点しています（あとから買い目を変えることはしません）。' +
@@ -906,10 +927,13 @@ function renderForward(fw) {
   keys.forEach(function (k) {
     var v = s[k];
     if (!v) return;
-    html += '<tr><th class="wraphead">' + esc(soften(v.label)) + '</th>' +
+    html += '<tr' + rowCls(v) + '><th class="wraphead">' + esc(soften(v.label)) + '</th>' +
             fwdCell(v.all) + fwdCell(v.rule_8_15) + '</tr>';
   });
   html += '</table></div>';
+  html += '<p class="note">🧪上位一致サイン・🧪段差サインは 2026-09-28 から試験運用で出している買い目です（過去のデータで2つの期間とも確かめた条件。' +
+          '小さめのサイズで、件数がたまってから続けるかを判断します）。🧪段差サインは◎の単勝が3倍未満のレースでは買わないので、集計にも入れていません。' +
+          '📐実力差サイン（格差シグナル）は成績が振るわず研究を終えたため、2026-09-28 から買い目に出していません（グレーは過去の記録です）。</p>';
 
   // 参考外(N<10)の判定は**系列ごと**に行う(2026-08-03修正)。
   //   以前は全系列のNを合算して判定していたため、たとえば N=7 と N=5 で
@@ -938,7 +962,7 @@ function renderForward(fw) {
             fw.by_era.map(function (e) { return '<th class="num">' + esc(e.label) + '</th>'; }).join('') + '</tr>';
     keys.forEach(function (k) {
       if (!s[k]) return;
-      html += '<tr><th class="wraphead">' + esc(soften(s[k].label)) + '</th>' +
+      html += '<tr' + rowCls(s[k]) + '><th class="wraphead">' + esc(soften(s[k].label)) + '</th>' +
               fw.by_era.map(function (e) { return fwdCell(((e.series || {})[k] || {}).all); }).join('') + '</tr>';
     });
     html += '<tr><th class="wraphead">見送ったレースの本命が3着以内（参考）</th>' +

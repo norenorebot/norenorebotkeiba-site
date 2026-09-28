@@ -149,6 +149,9 @@
       var x = lead(t), xn = lead(t + DT), vl = (xn - x) / DT;
       H.sort(function (a, b) { return b.s - a.s; });
       H.forEach(function (h) {
+        if (h.ft !== undefined) {                              // ゴール後: その場の速さから自然に減速して走り抜ける（並び・間隔を保つ）
+          h.v = Math.max(0, h.v - 1.2 * DT); h.s += h.v * DT; return;
+        }
         var tg = interp(h.K, x), sT = x - tg[0];
         var vd = Math.max(0, Math.min(19.5, vl + (sT - h.s) / 0.8));
         var v = Math.max(h.v - 8 * DT, Math.min(h.v + 7 * DT, vd));
@@ -158,6 +161,7 @@
           if (Math.abs(o.lane - h.lane) < GAPL && o.s - sN < BL) { sN = Math.min(sN, o.s - BL); blocked = true; }
         }
         sN = Math.max(h.s, sN);
+        if (sN >= D && h.s < D) { h.ft = t - DT * (sN - D) / Math.max(1e-6, sN - h.s); h.vf = (sN - h.s) / DT; }   // ゴールを通過した時刻と速さ
         h.v = (sN - h.s) / DT; h.s = sN;
         var want = blocked && sT - h.s > BL * 0.5;
         if (!want && sT - h.s > BL * 0.3) {                   // 先読み: 2馬身先の同じ進路に遅い馬がいれば、詰まる前に進路を探す
@@ -177,9 +181,11 @@
       });
       H.sort(function (a, b) { return a.u - b.u; });
       frames.push(H.map(function (h) { return [h.s, h.lane]; }));
-      if (H.every(function (h) { return h.s > D + 30; })) break;
+      if (H.every(function (h) { return h.ft !== undefined; }) &&
+          t >= Math.max.apply(null, H.map(function (h) { return h.ft; })) + 2.5) break;   // 最後の馬がゴールして少ししたら終わり
     }
-    return { frames: frames, dt: DT, T: t };
+    var fin = {}; H.forEach(function (h) { fin[h.u] = { t: h.ft === undefined ? 1e9 : h.ft, v: h.vf || 16 }; });
+    return { frames: frames, dt: DT, T: t, fin: fin };
   }
   function interp(K, t) {
     if (t <= K[0][0]) return [K[0][1], K[0][2]];
@@ -269,7 +275,7 @@
       var f = Math.min(K.frames.length - 1, st.t / K.dt), i0 = Math.floor(f), i1 = Math.min(K.frames.length - 1, i0 + 1), w = f - i0, items = [];
       rp.horses.forEach(function (h) {
         var a = K.frames[i0][hidx[h.u]], b = K.frames[i1][hidx[h.u]];
-        items.push({ h: h, s: Math.min(a[0] + (b[0] - a[0]) * w, D + 40), lane: a[1] + (b[1] - a[1]) * w });
+        items.push({ h: h, s: a[0] + (b[0] - a[0]) * w, lane: a[1] + (b[1] - a[1]) * w });
       });
       var t = Math.max.apply(null, items.map(function (i) { return i.s; }));
       items.forEach(function (it) { it.p = g.pt(it.s - D, 1 + it.lane * LANE_M); });
@@ -299,9 +305,15 @@
       fg.innerHTML = s;
       elev.innerHTML = elevBase.s + '<line x1="' + elevBase.X(Math.min(t, D)) + '" y1="16" x2="' + elevBase.X(Math.min(t, D)) + '" y2="75" stroke="#e33" stroke-width="2"/>';
       // いまの順番
-      var order = items.slice().sort(function (a, b) { return b.s - a.s; });
+      // ゴールした馬は通過した順で固定し、着差はゴールの時点の差（馬身）。まだの馬はその後ろに今の位置の順。
+      var fin = K.fin, done = items.filter(function (it) { return fin[it.h.u].t <= st.t; })
+        .sort(function (a, b) { return fin[a.h.u].t - fin[b.h.u].t; });
+      var run = items.filter(function (it) { return fin[it.h.u].t > st.t; }).sort(function (a, b) { return b.s - a.s; });
+      var order = done.concat(run), w0 = done.length ? fin[done[0].h.u] : null;
       list.innerHTML = order.map(function (it, i) {
-        var u = it.h.u, f = frameOf(u, N) - 1, gap = i === 0 ? '' : '+' + ((order[0].s - it.s) / BL).toFixed(1) + '馬身';
+        var u = it.h.u, f = frameOf(u, N) - 1, gap;
+        if (fin[u].t <= st.t) gap = i === 0 ? '🏁1着' : '🏁+' + ((fin[u].t - w0.t) * w0.v / BL).toFixed(1) + '馬身';
+        else gap = i === 0 ? '' : '+' + ((order[0].s - it.s) / BL).toFixed(1) + '馬身';
         return '<li class="rp-row' + (st.sel === u ? ' rp-sel' : '') + '" data-u="' + u + '"><span class="rp-no rp-f' + f + '">' + u + '</span>' +
                '<span class="rp-mk">' + esc(marks[u]) + '</span><span class="rp-nm">' + esc(names[u] || '') + '</span><span class="rp-gap">' + gap + '</span></li>';
       }).join('');

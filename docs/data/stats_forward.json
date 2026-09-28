@@ -1,12 +1,14 @@
 {
   "schema": "stats_forward.v1",
-  "generated_at": "2026-09-14T15:37:57",
+  "generated_at": "2026-09-28T21:32:48",
   "period_from": "2026-07-19",
-  "results_latest_date": "20260913",
+  "results_latest_date": "20260922",
   "source": "docs/archive/*.json(公開した買い目) ⋈ jra_data_*.csv(確定着順・払戻)",
   "series": {
     "seihai_fukusho": {
       "label": "聖杯◎複勝(100円/1点)",
+      "retired": false,
+      "trial": false,
       "all": {
         "n": 24,
         "hit_rate": 58.3,
@@ -24,6 +26,8 @@
     },
     "seihai_umaren": {
       "label": "聖杯 標準形馬連3点(300円)",
+      "retired": false,
+      "trial": false,
       "all": {
         "n": 0,
         "hit_rate": null,
@@ -40,7 +44,9 @@
       }
     },
     "gap_fukusho": {
-      "label": "📐格差シグナル◎複勝(100円/1点)",
+      "label": "📐格差シグナル◎複勝(100円/1点)【研究終了・成績不振のため2026-09-28で買い目から外しました】",
+      "retired": true,
+      "trial": false,
       "all": {
         "n": 11,
         "hit_rate": 54.5,
@@ -54,6 +60,44 @@
         "roi": 67.0,
         "f5_roi": 61.1,
         "color": "light_傾向"
+      }
+    },
+    "group_fukusho": {
+      "label": "🧪上位一致サイン◎複勝(100円/1点・試験運用 2026-09-28〜)",
+      "retired": false,
+      "trial": true,
+      "all": {
+        "n": 0,
+        "hit_rate": null,
+        "roi": null,
+        "f5_roi": null,
+        "color": "gray_参考外"
+      },
+      "rule_8_15": {
+        "n": 0,
+        "hit_rate": null,
+        "roi": null,
+        "f5_roi": null,
+        "color": "gray_参考外"
+      }
+    },
+    "step_umaren": {
+      "label": "🧪段差サイン 馬連◎-○(100円/1点・◎の単勝3倍以上だけ・試験運用 2026-09-28〜)",
+      "retired": false,
+      "trial": true,
+      "all": {
+        "n": 0,
+        "hit_rate": null,
+        "roi": null,
+        "f5_roi": null,
+        "color": "gray_参考外"
+      },
+      "rule_8_15": {
+        "n": 0,
+        "hit_rate": null,
+        "roi": null,
+        "f5_roi": null,
+        "color": "gray_参考外"
       }
     }
   },
@@ -80,6 +124,20 @@
         "roi": 110.0,
         "f5_roi": null,
         "color": "gray_参考外"
+      },
+      "group_fukusho": {
+        "n": 0,
+        "hit_rate": null,
+        "roi": null,
+        "f5_roi": null,
+        "color": "gray_参考外"
+      },
+      "step_umaren": {
+        "n": 0,
+        "hit_rate": null,
+        "roi": null,
+        "f5_roi": null,
+        "color": "gray_参考外"
       }
     },
     {
@@ -103,6 +161,20 @@
         "hit_rate": 55.6,
         "roi": 62.2,
         "f5_roi": 55.0,
+        "color": "gray_参考外"
+      },
+      "group_fukusho": {
+        "n": 0,
+        "hit_rate": null,
+        "roi": null,
+        "f5_roi": null,
+        "color": "gray_参考外"
+      },
+      "step_umaren": {
+        "n": 0,
+        "hit_rate": null,
+        "roi": null,
+        "f5_roi": null,
         "color": "gray_参考外"
       }
     },
@@ -128,6 +200,20 @@
         "roi": 0.0,
         "f5_roi": null,
         "color": "gray_参考外"
+      },
+      "group_fukusho": {
+        "n": 0,
+        "hit_rate": null,
+        "roi": null,
+        "f5_roi": null,
+        "color": "gray_参考外"
+      },
+      "step_umaren": {
+        "n": 0,
+        "hit_rate": null,
+        "roi": null,
+        "f5_roi": null,
+        "color": "gray_参考外"
       }
     }
   ],
@@ -151,7 +237,195 @@
     },
     "note": "見送った判断の事後確認(参考)。買い目としては提示せず、回収率にも一切含めない。 gap_disagree=上位2頭が食い違い(危険サイン回避) / no_signal=買う条件が不足。"
   },
-  "pending": 0,
+  "by_era": [
+    {
+      "era": "v90",
+      "label": "2026-09-13 までの予想（旧計算）",
+      "from": "2026-07-19",
+      "to": "2026-09-26",
+      "series": {
+        "seihai_fukusho": {
+          "all": {
+            "n": 24,
+            "hit_rate": 58.3,
+            "roi": 99.2,
+            "f5_roi": 87.8,
+            "color": "normal"
+          },
+          "rule_8_15": {
+            "n": 17,
+            "hit_rate": 64.7,
+            "roi": 102.4,
+            "f5_roi": 86.2,
+            "color": "light_傾向"
+          }
+        },
+        "seihai_umaren": {
+          "all": {
+            "n": 0,
+            "hit_rate": null,
+            "roi": null,
+            "f5_roi": null,
+            "color": "gray_参考外"
+          },
+          "rule_8_15": {
+            "n": 0,
+            "hit_rate": null,
+            "roi": null,
+            "f5_roi": null,
+            "color": "gray_参考外"
+          }
+        },
+        "gap_fukusho": {
+          "all": {
+            "n": 11,
+            "hit_rate": 54.5,
+            "roi": 60.9,
+            "f5_roi": 55.0,
+            "color": "light_傾向"
+          },
+          "rule_8_15": {
+            "n": 10,
+            "hit_rate": 60.0,
+            "roi": 67.0,
+            "f5_roi": 61.1,
+            "color": "light_傾向"
+          }
+        },
+        "group_fukusho": {
+          "all": {
+            "n": 0,
+            "hit_rate": null,
+            "roi": null,
+            "f5_roi": null,
+            "color": "gray_参考外"
+          },
+          "rule_8_15": {
+            "n": 0,
+            "hit_rate": null,
+            "roi": null,
+            "f5_roi": null,
+            "color": "gray_参考外"
+          }
+        },
+        "step_umaren": {
+          "all": {
+            "n": 0,
+            "hit_rate": null,
+            "roi": null,
+            "f5_roi": null,
+            "color": "gray_参考外"
+          },
+          "rule_8_15": {
+            "n": 0,
+            "hit_rate": null,
+            "roi": null,
+            "f5_roi": null,
+            "color": "gray_参考外"
+          }
+        }
+      },
+      "skipped": {
+        "n": 315,
+        "axis_top3": 147,
+        "axis_win": 74
+      }
+    },
+    {
+      "era": "v95",
+      "label": "2026-09-26 からの予想（新計算）",
+      "from": "2026-09-26",
+      "to": null,
+      "series": {
+        "seihai_fukusho": {
+          "all": {
+            "n": 0,
+            "hit_rate": null,
+            "roi": null,
+            "f5_roi": null,
+            "color": "gray_参考外"
+          },
+          "rule_8_15": {
+            "n": 0,
+            "hit_rate": null,
+            "roi": null,
+            "f5_roi": null,
+            "color": "gray_参考外"
+          }
+        },
+        "seihai_umaren": {
+          "all": {
+            "n": 0,
+            "hit_rate": null,
+            "roi": null,
+            "f5_roi": null,
+            "color": "gray_参考外"
+          },
+          "rule_8_15": {
+            "n": 0,
+            "hit_rate": null,
+            "roi": null,
+            "f5_roi": null,
+            "color": "gray_参考外"
+          }
+        },
+        "gap_fukusho": {
+          "all": {
+            "n": 0,
+            "hit_rate": null,
+            "roi": null,
+            "f5_roi": null,
+            "color": "gray_参考外"
+          },
+          "rule_8_15": {
+            "n": 0,
+            "hit_rate": null,
+            "roi": null,
+            "f5_roi": null,
+            "color": "gray_参考外"
+          }
+        },
+        "group_fukusho": {
+          "all": {
+            "n": 0,
+            "hit_rate": null,
+            "roi": null,
+            "f5_roi": null,
+            "color": "gray_参考外"
+          },
+          "rule_8_15": {
+            "n": 0,
+            "hit_rate": null,
+            "roi": null,
+            "f5_roi": null,
+            "color": "gray_参考外"
+          }
+        },
+        "step_umaren": {
+          "all": {
+            "n": 0,
+            "hit_rate": null,
+            "roi": null,
+            "f5_roi": null,
+            "color": "gray_参考外"
+          },
+          "rule_8_15": {
+            "n": 0,
+            "hit_rate": null,
+            "roi": null,
+            "f5_roi": null,
+            "color": "gray_参考外"
+          }
+        }
+      },
+      "skipped": {
+        "n": 0,
+        "axis_top3": 0,
+        "axis_win": 0
+      }
+    }
+  ],
+  "pending": 19,
   "pre_period_excluded": 1,
   "races": [
     {
