@@ -4,11 +4,16 @@
            data/courses.json（公開されている情報をもとに書き起こしたコースの形・距離・起伏の概略）
    動きの作り方: スタート → 最初の角＝展開予想図の予想位置 → 残り600mと4角＝予想時計の順番（間隔は過去の同じ頭数の典型的な秒差）
                  → ゴール＝勝つ確率の順（切り替えで予想時計の順）。馬の横位置はゲート順から4角の予想の内外へ。
+   物理の制約（simulate、0.1秒刻みで一度だけ計算して再生はそれをなぞる）:
+     ・先頭の速さはコースの典型的なラップ（先頭の1ハロン毎、予想ペースに合わせたもの）。無ければ残り600mまで一定・後3F 35.5秒。
+     ・前（同じ進路で1馬身以内）に馬がいれば、その馬より前には出られない（1馬身あける）。
+     ・横に動けるのは、動く先の進路の前後1馬身に馬がいない時だけ（斜行しない・馬をすり抜けない）。横の速さは約0.8m/秒まで。
+     ・前が詰まったら、外が空いていれば外へ持ち出し、無理なら内、どちらも無理なら前が空くのを待つ。持ち出した分は少しずつしか戻さない。
    CSP(style-src 'self') のため style 属性は使わない（SVG は属性だけ、見た目は style.css の .rp-*）。
    ============================================================================ */
 'use strict';
 (function () {
-  var BL = 2.4, LANE_M = 1.2, SPEED = 16.5;
+  var BL = 2.4, LANE_M = 1.2;
   var FRAME = ['#fff', '#222', '#d33', '#26c', '#ec3', '#2a4', '#f80', '#f7a'];
   var FTXT = ['#000', '#fff', '#fff', '#fff', '#000', '#fff', '#000', '#000'];
   var COURSES = null;
@@ -103,20 +108,74 @@
     });
     return { keys: keys, tmax: tmax };
   }
+  /* 先頭の走った距離 → 時刻（秒）の表。laps があればハロン毎、無ければ 残り600mまで一定＋後3F */
+  function leaderPlan(rp) {
+    var D = rp.distance, segs = [];
+    if (rp.laps && rp.laps.length >= 4) {
+      var n = rp.laps.length, first = D - 200 * (n - 1);
+      rp.laps.forEach(function (x, i) { segs.push([i === 0 ? (first > 0 ? first : 200) : 200, x]); });
+    } else {
+      segs.push([D - 600, rp.pace.pred]); segs.push([600, 35.5]);
+    }
+    var last = segs[segs.length - 1], vEnd = last[0] / last[1];
+    return function (t) {                       // 時刻 t の先頭の距離
+      var s = 0, tt = 0;
+      for (var i = 0; i < segs.length; i++) {
+        if (t <= tt + segs[i][1]) return s + segs[i][0] * (t - tt) / segs[i][1];
+        s += segs[i][0]; tt += segs[i][1];
+      }
+      return s + (t - tt) * vEnd * 0.85;
+    };
+  }
+  function simulate(rp, g, goalMode) {
+    var KK = buildKeys(rp, g, goalMode), D = rp.distance, lead = leaderPlan(rp), DT = 0.1;
+    var H = rp.horses.map(function (h) { return { u: h.u, K: KK.keys[h.u], s: 0, lane: (h.u - 1) * 0.95, v: 0, lo: 0 }; })
+      .sort(function (a, b) { return a.u - b.u; });        // 記録は馬番順（描画側の hidx と合わせる）
+    var frames = [], t = 0, LAT = 0.07, GAPL = 0.9;
+    var clear = function (me, lane) {
+      if (lane < 0 || lane > 16) return false;
+      for (var k = 0; k < H.length; k++) {
+        var o = H[k]; if (o === me) continue;
+        if (Math.abs(o.lane - lane) < GAPL && Math.abs(o.s - me.s) < BL) return false;
+      }
+      return true;
+    };
+    frames.push(H.map(function (h) { return [h.s, h.lane]; }));
+    while (t < 400) {
+      t += DT;
+      var x = lead(t), xn = lead(t + DT), vl = (xn - x) / DT;
+      H.sort(function (a, b) { return b.s - a.s; });
+      H.forEach(function (h) {
+        var tg = interp(h.K, x), sT = x - tg[0];
+        var vd = Math.max(0, Math.min(19.5, vl + (sT - h.s) / 0.8));
+        var v = Math.max(h.v - 8 * DT, Math.min(h.v + 7 * DT, vd));
+        var sN = h.s + v * DT, blocked = false;
+        for (var k = 0; k < H.length; k++) {                  // 前の馬（同じ進路・1馬身以内）より前には出ない
+          var o = H[k]; if (o === h || o.s < h.s) continue;
+          if (Math.abs(o.lane - h.lane) < GAPL && o.s - sN < BL) { sN = Math.min(sN, o.s - BL); blocked = true; }
+        }
+        sN = Math.max(h.s, sN);
+        h.v = (sN - h.s) / DT; h.s = sN;
+        var want = blocked && sT - h.s > BL * 0.5;
+        if (want) {                                            // 詰まった: 外 → 内 → 待つ
+          if (clear(h, h.lane + LAT)) { h.lane += LAT; h.lo += LAT; }
+          else if (clear(h, h.lane - LAT)) { h.lane -= LAT; h.lo -= LAT; }
+        } else {
+          var L = tg[1] + h.lo, d = L - h.lane;
+          if (Math.abs(d) > 0.02) { var st = Math.max(-LAT, Math.min(LAT, d)); if (clear(h, h.lane + st)) h.lane += st; }
+          h.lo *= 0.995;                                        // 持ち出した分は少しずつしか戻さない
+        }
+      });
+      H.sort(function (a, b) { return a.u - b.u; });
+      frames.push(H.map(function (h) { return [h.s, h.lane]; }));
+      if (H.every(function (h) { return h.s > D + 30; })) break;
+    }
+    return { frames: frames, dt: DT, T: t };
+  }
   function interp(K, t) {
     if (t <= K[0][0]) return [K[0][1], K[0][2]];
     for (var i = 1; i < K.length; i++) if (t <= K[i][0]) { var a = K[i - 1], b = K[i], w = (t - a[0]) / (b[0] - a[0]); return [a[1] + (b[1] - a[1]) * w, a[2] + (b[2] - a[2]) * w]; }
     var z = K[K.length - 1]; return [z[1], z[2]];
-  }
-  function pack(list) {
-    list.sort(function (a, b) { return a.s === b.s ? a.lane - b.lane : b.s - a.s; });
-    var placed = [];
-    list.forEach(function (h) {
-      var lane = Math.max(0, h.lane);
-      for (var k = 0; k < 20; k++) { if (!placed.some(function (p) { return Math.abs(p.s - h.s) < 2.4 && Math.abs(p.lane - lane) < 0.8; })) break; lane += 1; }
-      h.lane = Math.min(lane, 16.5); placed.push(h);
-    });
-    return list;
   }
 
   /* ── 本体 ── */
@@ -135,7 +194,8 @@
     (d.horses || []).forEach(function (h) { names[h.umaban] = h.name; marks[h.umaban] = h.mark || ''; });
     var mobile = window.matchMedia && window.matchMedia('(max-width: 640px)').matches;
     var st = { t: 0, playing: false, speed: 2, follow: mobile, goal: 'v9', sel: null, last: 0 };
-    var K = buildKeys(rp, g, st.goal);
+    var K = simulate(rp, g, st.goal);
+    var hidx = {}; rp.horses.slice().sort(function (a, b) { return a.u - b.u; }).forEach(function (h, i) { hidx[h.u] = i; });
     var df = rp.pace.pred - rp.pace.base, tag = Math.abs(df) < 0.3 ? '標準並み' : (df < 0 ? '標準より速い' : '標準より遅い');
 
     host.innerHTML =
@@ -154,7 +214,8 @@
       (rp.course_guess ? '・内回り/外回りは推定' : '') + '）　予想ペース: ' + tag +
       '（先頭が残り600mに着くまで 予想' + rp.pace.pred.toFixed(1) + '秒／標準' + rp.pace.base.toFixed(1) + '秒）<br>' +
       '※ 各馬の過去の位置取りと予想の時計から作った<b>参考の動き</b>で、実際のレースの映像ではありません。' +
-      '最初のコーナーまでは展開予想図の隊列、残り600mは予想の時計の順（間隔は過去のレースの典型的な差）、ゴールは勝つ確率の順です。' +
+      '最初のコーナーまでは展開予想図の隊列、残り600mは予想の時計の順（間隔は過去のレースの典型的な差）、ゴールは勝つ確率の順を目標に動きます。' +
+      '先頭の速さはコースの典型的なラップの緩急、前が詰まった馬は1馬身以上空いた所にしか動けない（外へ持ち出すか前が空くのを待つ）ため、目標の順とずれることがあります。' +
       'コースの形・距離・高低は、公開されている情報をもとに書き起こした概略です。</div>' +
       '</div>';
     var $ = function (c) { return host.querySelector(c); };
@@ -196,12 +257,12 @@
     })();
 
     function draw() {
-      var t = st.t, items = [];
+      var f = Math.min(K.frames.length - 1, st.t / K.dt), i0 = Math.floor(f), i1 = Math.min(K.frames.length - 1, i0 + 1), w = f - i0, items = [];
       rp.horses.forEach(function (h) {
-        var v = interp(K.keys[h.u], t);
-        items.push({ h: h, s: Math.min(t - v[0], D + 40), lane: v[1] });
+        var a = K.frames[i0][hidx[h.u]], b = K.frames[i1][hidx[h.u]];
+        items.push({ h: h, s: Math.min(a[0] + (b[0] - a[0]) * w, D + 40), lane: a[1] + (b[1] - a[1]) * w });
       });
-      pack(items);
+      var t = Math.max.apply(null, items.map(function (i) { return i.s; }));
       items.forEach(function (it) { it.p = g.pt(it.s - D, 1 + it.lane * LANE_M); });
       var vx = 0, vy = 0, vw = 1000, vh = 520;
       if (st.follow) {
@@ -236,33 +297,33 @@
                '<span class="rp-mk">' + esc(marks[u]) + '</span><span class="rp-nm">' + esc(names[u] || '') + '</span><span class="rp-gap">' + gap + '</span></li>';
       }).join('');
       pos.textContent = t <= D ? '残り ' + Math.max(0, D - t).toFixed(0) + 'm' : 'ゴール後';
-      seek.value = Math.round(t / K.tmax * 1000);
+      seek.value = Math.round(st.t / K.T * 1000);
     }
     function tick(ts) {
       if (!st.playing) return;
       var dt = st.last ? Math.min(0.5, (ts - st.last) / 1000) : 0;   // 描画が遅い端末でも速度を保つ（上限0.5秒）
       st.last = ts;
-      st.t = Math.min(K.tmax, st.t + dt * SPEED * st.speed);
-      if (st.t >= K.tmax) { st.playing = false; $('.rp-play').textContent = '▶ もう一度'; }
+      st.t = Math.min(K.T, st.t + dt * st.speed);
+      if (st.t >= K.T) { st.playing = false; $('.rp-play').textContent = '▶ もう一度'; }
       draw();
       if (st.playing) requestAnimationFrame(tick);
     }
     function play(on) {
       st.playing = on === undefined ? !st.playing : on;
       $('.rp-play').textContent = st.playing ? '❚❚ 止める' : '▶ 再生';
-      if (st.playing) { if (st.t >= K.tmax) st.t = 0; st.last = 0; requestAnimationFrame(tick); }
+      if (st.playing) { if (st.t >= K.T) st.t = 0; st.last = 0; requestAnimationFrame(tick); }
     }
     $('.rp-play').addEventListener('click', function () { play(); });
-    seek.addEventListener('input', function () { play(false); st.t = +seek.value / 1000 * K.tmax; draw(); });
+    seek.addEventListener('input', function () { play(false); st.t = +seek.value / 1000 * K.T; draw(); });
     $('.rp-speed').addEventListener('click', function () { st.speed = st.speed === 1 ? 2 : (st.speed === 2 ? 4 : 1); this.textContent = '×' + st.speed; });
     $('.rp-view').addEventListener('click', function () { st.follow = !st.follow; this.textContent = st.follow ? '全体を見る' : '馬群を追う'; draw(); });
-    $('.rp-goal').addEventListener('change', function () { st.goal = this.value; K = buildKeys(rp, g, st.goal); draw(); });
+    $('.rp-goal').addEventListener('change', function () { st.goal = this.value; K = simulate(rp, g, st.goal); draw(); });
     var pick = function (ev) { var el = ev.target.closest('[data-u]'); if (!el) return; var u = +el.getAttribute('data-u'); st.sel = st.sel === u ? null : u; draw(); };
     svg.addEventListener('click', pick); list.addEventListener('click', pick);
     host.querySelector('.rp').setAttribute('tabindex', '0');
     host.querySelector('.rp').addEventListener('keydown', function (ev) {
       if (ev.key === ' ') { ev.preventDefault(); play(); }
-      else if (ev.key === 'ArrowRight' || ev.key === 'ArrowLeft') { ev.preventDefault(); play(false); st.t = Math.max(0, Math.min(K.tmax, st.t + (ev.key === 'ArrowRight' ? 50 : -50))); draw(); }
+      else if (ev.key === 'ArrowRight' || ev.key === 'ArrowLeft') { ev.preventDefault(); play(false); st.t = Math.max(0, Math.min(K.T, st.t + (ev.key === 'ArrowRight' ? 3 : -3))); draw(); }
     });
     draw();
   }
