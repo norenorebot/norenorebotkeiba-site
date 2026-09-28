@@ -640,9 +640,9 @@ function plainCell(cell) {
   return esc(head) + '・' + esc(lookup(TIER_JA, tier, tier));
 }
 
-/* 展開予想図(2026-09-27〜・勝負レースだけ)。隊列の予想を JRA の通過順の書き方で出す参考表示。
+/* 展開予想図(2026-09-27〜・買い目のあるレース＝勝負・慎重の買い)。隊列の予想を JRA の通過順の書き方で出す参考表示。
    計算は競馬リポジトリの formation_predict.py(本体とは独立)。的中の根拠ではないことと、当たり具合の目安を必ず添える。
-   data.json の formation が無い予想(それ以前・勝負以外)では何も出さない。 */
+   data.json の formation が無い予想(それ以前・買い目なし)では何も出さない。 */
 function renderFormation(d) {
   var f = d.formation;
   if (!f || !f.first || !f.last) return '';
