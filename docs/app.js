@@ -719,7 +719,7 @@ function renderFormation(d) {
 /* 展開を再生（参考）: renderFormation が data.json をここに預け、ボタンで replay.js を読み込んで開く(2026-09-27) */
 var RP_SEQ = 0, RP_DATA = {}, RP_LOADING = null;
 /* replay.js を直したら上げる（ブラウザに残った古い版を読まないように） */
-var RP_JS_VER = '16';
+var RP_JS_VER = '20';
 function loadReplayJs() {
   if (window.KeibaReplay) return Promise.resolve();
   if (RP_LOADING) return RP_LOADING;
