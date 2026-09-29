@@ -154,7 +154,7 @@
       h.cap = Math.min(VMAX, 200 / (mL3 * A / sL3) * 1.03); h.capE = Math.max(h.cap, capE);
     });
     var clear = function (me, lane) {
-      if (lane < 0 || lane > 16) return false;
+      if (lane < 0 || lane > 20) return false;                // 18頭の大外はゲートで16.15レーン目（2026-09-29: 上限16で大外が内へ一度も動けなかった）
       for (var k = 0; k < H.length; k++) {
         var o = H[k]; if (o === me) continue;
         var os = o.upd ? o.s : o.s + o.v * DT;               // まだこのコマで動いていない馬は、進む分も見込む
@@ -232,6 +232,149 @@
     var fin = {}; H.forEach(function (h) { fin[h.u] = { t: h.ft === undefined ? 1e9 : h.ft, v: h.vf || 16 }; });
     return { frames: frames, dt: DT, T: t, fin: fin };
   }
+  /* ── 物理で走らせる（試験, 2026-09-29, course_transfer_research/phys_sim2.py の simulate_cp を移植・PHYS_SIM.md）──
+     着順・位置の目標は入れず、能力と作戦だけで走らせる。隊列・ペース・並走・外を回す・詰まり・着順は物理で決まる。
+     能力: T = ふつうのペースでの走破タイム（構成要素の予想）→ 臨界速度 CS = 基準の前半の速さ×0.93、余力 W = 距離 − CS×T（予想は縮むので T の差は2倍に広げる）。
+       速さ v で走ると 余力が (v − CS)×時間 減る（CS より遅ければ戻る）。残り600mからは、ゴールまでに余力を使い切る速さ CS×R/(R−W) で追う。
+     作戦: スタート〜最初の角は テンの速さ（出せる速さの上限）と脚質（行きたい位置: 先頭から 脚質×(頭数−1)×0.8馬身）。
+       道中は最初の角の位置を保つ（先頭は基準の残り600mまでの時計を、前に行きたい馬の数と強さで速めた予定に合わせる）。
+       3〜4角（残り1000〜600m）で後ろの馬が差を詰める。差し馬（脚質の後ろ3割）は残り1000mから前に馬がいれば外へ。直線は前6馬身以内に馬がいれば早めに外へ。
+     物理: 同じ進路で1馬身以内の前の馬は抜けない・3馬身以内で先読みのブレーキ・横は空いている所だけ・コーナーでは外ほど長く走る（曲がり具合×ラチからの距離）。 */
+  var PHYS = { kcs: 0.93, push: 0.06, tau: 2.0, duel: 0.015, spurt: 600, acc: 2.5, acc_lo: 5.0, dec: 3.0, lat: 0.14, gapl: 0.75, look: 3, vmax: 19.0,
+               spread: 2, max_wide: 3.5, ten_k: 0.03, gap_start: 0.8, front_pp: 0.25, ten_top: 0.05, lat_sp: 7.0, fan_bl: 6.0,
+               closer_pp: 0.7, closer_pre: 400, closer_bl: 3.0, compress: 0.4, pre: 400, inward_early: 2.0, move_up: 2.0 };
+  function curvature(course) {                  // コースの点列（一周を等間隔）から 1点ごとの曲がり具合（1/m、前後3点の平均）
+    var P = course.pts, n = P.length, step = course.circ / n, th = [], k = [], out = [];
+    for (var i = 0; i < n; i++) { var a = P[i], b = P[(i + 1) % n]; th.push(Math.atan2(b[1] - a[1], b[0] - a[0])); }
+    for (var i2 = 0; i2 < n; i2++) { var d = th[(i2 + 1) % n] - th[i2]; d = Math.atan2(Math.sin(d), Math.cos(d)); k.push(Math.abs(d) / step); }
+    for (var j = 0; j < n; j++) { var m = 0; for (var q = -3; q <= 3; q++) m += k[((j + q) % n + n) % n]; out.push(m / 7); }
+    return { k: out, step: step };
+  }
+  function simulatePhys(rp, g, course, sl) {
+    var P = PHYS, D = rp.distance, H = rp.horses.slice().sort(function (a, b) { return a.u - b.u; }), n = H.length, DT = 0.1;
+    var KP = curvature(course), kap = KP.k, step = KP.step, nk = kap.length, C = course.circ;
+    var fstd = rp.phys.f, CS = fstd * P.kcs;
+    var Tm = H.reduce(function (a, h) { return a + h.T; }, 0) / n;
+    var W0 = H.map(function (h) { return D - CS * (Tm + (h.T - Tm) * P.spread); }), W = W0.slice();
+    var pp = H.map(function (h) { return h.pp; }), dz = H.map(function (h) { return h.dz; });
+    var s = H.map(function () { return 0; }), v = s.slice(), lane = H.map(function (h) { return (h.u - 1) * 1.0; });
+    var ppmin = Math.min.apply(null, pp), nf = pp.filter(function (x) { return x < 0.25; }).length;
+    var T3plan = rp.phys.T3 * (1 - P.push * 0.3 * (0.4 - ppmin) - P.duel * Math.max(0, nf - 1));
+    var cr = crossings(D, g), firstS = cr.length ? cr[0].s : Math.min(400, D * 0.3);
+    var ft = H.map(function () { return NaN; }), frames = [], t = 0, upd = [];
+    var hold = H.map(function (h) { return sl && sl[h.u] ? 0.5 : 0; });   // 出遅れ（抽選）: ゲートを出るのが0.5秒遅れる
+    frames.push(H.map(function (h, i) { return [s[i], lane[i]]; }));
+    var clear = function (i, L) {
+      if (L < 0 || L > 20) return false;                              // 18頭の大外はゲートで17レーン目
+      for (var k2 = 0; k2 < n; k2++) {
+        if (k2 === i) continue;
+        var sx = upd[k2] ? s[k2] : s[k2] + v[k2] * DT;               // まだこのコマで動いていない馬は、進む分も見込む
+        if (Math.abs(lane[k2] - L) < P.gapl + 0.05 && Math.abs(sx - s[i]) < BL) return false;   // 横に並ぶ時は少し間隔をあける
+      }
+      return true;
+    };
+    var room = function (i, L) {                                      // その進路の前の空き（m）
+      var r = 99;
+      for (var k2 = 0; k2 < n; k2++) if (k2 !== i && s[k2] > s[i] && Math.abs(lane[k2] - L) < P.gapl) r = Math.min(r, s[k2] - s[i]);
+      return r;
+    };
+    while (t < 400) {
+      t += DT;
+      var lead = -1, il = 0;
+      for (var a = 0; a < n; a++) if (s[a] > lead) { lead = s[a]; il = a; }
+      var ord = [];
+      for (var a2 = 0; a2 < n; a2++) ord.push(a2);
+      ord.sort(function (x, y) { return s[y] - s[x] || x - y; });      // 前の馬から順に動かす（同じ位置なら馬番順）
+      for (var a3 = 0; a3 < n; a3++) upd[a3] = false;
+      for (var oi = 0; oi < n; oi++) {
+        var i = ord[oi]; upd[i] = true;
+        if (!isNaN(ft[i])) { v[i] = Math.max(0, v[i] - 1.2 * DT); s[i] += v[i] * DT; continue; }   // ゴール後は減速して走り抜ける
+        var R = D - s[i], vd, bp = 0, sBefore = s[i], laneBefore = lane[i];
+        if (R <= P.spurt) {
+          vd = W[i] > 0 ? CS * R / Math.max(R - W[i], 1.0) : CS;          // 残り600m: 余力をゴールまでに使い切る速さ
+        } else {
+          if (s[i] < firstS) {
+            var vmaxI = fstd * (1 + P.ten_k * dz[i] + P.ten_top);          // スタートで出せる速さ（テンの速さ）
+            if (pp[i] < P.front_pp || i === il) vd = vmaxI;
+            else vd = Math.min(vmaxI, v[il] + ((lead - pp[i] * (n - 1) * P.gap_start * BL) - s[i]) / 2.0);
+          } else if (i === il) {
+            if (D - 600 - s[i] > 50 && T3plan - t > 3) vd = (D - 600 - s[i]) / (T3plan - t);   // 先頭: 残り600mまでの予定の時計
+            else vd = fstd * (1 + P.push * 0.5 * (0.4 - pp[i]));
+          } else {
+            var gapM = lead - s[i], pre0 = D - P.spurt - P.pre;             // 道中は今の位置を保つ。3〜4角で差を詰める
+            if (s[i] > pre0) gapM *= 1 - P.compress * Math.min(1, (s[i] - pre0) / P.pre);
+            vd = v[il] + ((lead - gapM) - s[i]) / P.tau;
+            bp = (lead - gapM) - s[i];
+          }
+          if (pp[i] < 0.25) {                                               // 前に行きたい馬どうしが並ぶと少し速くなる
+            for (var k3 = 0; k3 < n; k3++) if (k3 !== i && Math.abs(s[k3] - s[i]) < BL && Math.abs(lane[k3] - lane[i]) < 2.0 && pp[k3] < 0.25) { vd *= 1 + P.duel; break; }
+          }
+        }
+        if (t < hold[i]) vd = 0;
+        vd = Math.min(vd, P.vmax);
+        var fol = false, jn = -1;                                           // 先読みのブレーキ: 同じ進路の前の馬に3馬身以内まで近づいたら、その馬の速さに合わせる
+        for (var k4 = 0; k4 < n; k4++) if (k4 !== i && s[k4] > s[i] && Math.abs(lane[k4] - lane[i]) < P.gapl && (jn < 0 || s[k4] < s[jn])) jn = k4;
+        if (jn >= 0) { var gp = s[jn] - s[i]; if (gp < P.look * BL) { vd = Math.min(vd, Math.max(0, v[jn] + (gp - 1.2 * BL) / 1.0)); fol = true; } }
+        var acc = (v[i] < 12 ? P.acc_lo : P.acc) * (1 + 0.1 * Math.max(-2, Math.min(2, dz[i])));
+        var dec = fol && vd < v[i] - P.dec * DT ? 6.0 : P.dec;
+        var vi = Math.max(v[i] - dec * DT, Math.min(v[i] + acc * DT, vd));
+        var u = ((s[i] - D) % C + C) % C, kx = kap[Math.floor(u / step) % nk], fac = 1 + kx * lane[i] * LANE_M;   // コーナーでは外ほど長く走る
+        if (kx > 2e-4 && lane[i] > P.max_wide && D - s[i] > P.spurt) {   // コーナーで外4頭より外: 内へ入れる隙を探し、無ければ少し下げる
+          if (clear(i, lane[i] - P.lat * 2)) lane[i] -= P.lat * 2;
+          else {                                                          // 内の馬より少し遅い速さまで下げて後ろに入る（基準の9割より下げない）
+            var vIn = 1e9;
+            for (var kw = 0; kw < n; kw++) if (kw !== i && Math.abs(s[kw] - s[i]) < 2 * BL && lane[kw] < lane[i]) vIn = Math.min(vIn, v[kw]);
+            var tv = vIn < 1e9 ? Math.max(vIn - 0.3, fstd * 0.9) : vi;
+            vi = Math.max(v[i] - 1.0 * DT, Math.min(vi, tv));
+          }
+        }
+        var sN = s[i] + vi * DT / fac, blk = false, gmin = 1e9, vah = 1e9;   // 同じ進路の1馬身以内の前の馬は抜けない
+        for (var k5 = 0; k5 < n; k5++) if (k5 !== i && s[k5] > s[i] && Math.abs(lane[k5] - lane[i]) < P.gapl && s[k5] - sN < BL) { gmin = Math.min(gmin, s[k5] - s[i]); vah = Math.min(vah, v[k5]); }
+        if (gmin < 1e9) {
+          var vt = Math.max(0, vah - Math.max(0, BL - gmin) / 1.0);
+          vi = Math.max(v[i] - 8.0 * DT, Math.min(vi, vt)); sN = s[i] + vi * DT / fac; blk = true;
+        }
+        W[i] -= (vi - CS) * DT;                                             // 余力 = 走った距離 − CS×時間 の勘定
+        v[i] = vi; s[i] = Math.max(s[i], sN);
+        if (s[i] >= D && isNaN(ft[i])) ft[i] = t;
+        // 横の動き
+        var settle = s[i] < D - P.spurt && !(bp > P.move_up * BL);
+        if (s[i] > D - P.spurt - P.pre) settle = false;
+        var fan = false;
+        if (D - s[i] <= P.spurt && kx < 2e-4) {                           // 直線: 前6馬身以内に馬がいれば早めに外へ
+          for (var k6 = 0; k6 < n; k6++) if (k6 !== i && s[k6] > s[i] && s[k6] - s[i] < P.fan_bl * BL && Math.abs(lane[k6] - lane[i]) < 1.0) { fan = true; break; }
+        }
+        if (!fan && pp[i] >= P.closer_pp && D - P.spurt - P.closer_pre < s[i]) {   // 差し馬: 4角の手前から、前に馬がいれば外へ
+          for (var k7 = 0; k7 < n; k7++) if (k7 !== i && s[k7] > s[i] && s[k7] - s[i] < P.closer_bl * BL && Math.abs(lane[k7] - lane[i]) < 1.0) { fan = true; break; }
+        }
+        var vSame = 1e9;                                                    // 同じ進路の前にいる馬の最も遅い速さ
+        for (var kq = 0; kq < n; kq++) if (kq !== i && Math.abs(lane[kq] - laneBefore) < P.gapl && sBefore < s[kq]) vSame = Math.min(vSame, v[kq]);
+        var sameAhead = !settle && jn >= 0 && s[jn] - s[i] < P.look * BL && vSame < vd - 0.3;
+        var want = fan || (blk && !settle) || sameAhead;
+        if (want && s[i] > 30) {
+          var here = room(i, lane[i]), spurtNow = D - s[i] <= P.spurt + 100, LATs = P.lat * (spurtNow ? P.lat_sp : 1.0), cand;
+          if (spurtNow) cand = [LATs, -LATs].filter(function (dd) { return room(i, lane[i] + dd * 3) >= here; });
+          else cand = [P.lat, -P.lat].filter(function (dd) { return room(i, lane[i] + dd * 7) > here + BL; });
+          for (var c2 = 0; c2 < cand.length; c2++) if (clear(i, lane[i] + cand[c2])) { lane[i] += cand[c2]; break; }
+        } else if (s[i] < D - 250) {                                        // 空いていれば内へ（最初の角までは強めに）
+          var stp = P.lat * (s[i] < firstS ? P.inward_early : 1.0);
+          if (lane[i] > 0.05 && clear(i, Math.max(0, lane[i] - stp))) lane[i] = Math.max(0, lane[i] - stp);
+        }
+      }
+      var ord2 = [];                                                          // 毎コマの最後: 同じ進路で前後が1馬身の9割より近い2頭は、後ろの馬をそこまで下げる（まれな食い違いの安全策）
+      for (var b1 = 0; b1 < n; b1++) ord2.push(b1);
+      ord2.sort(function (x, y) { return s[y] - s[x] || x - y; });
+      for (var b2 = 0; b2 < n; b2++) for (var b3 = b2 + 1; b3 < n; b3++) {
+        var ia = ord2[b2], ib = ord2[b3];
+        if (isNaN(ft[ib]) && Math.abs(lane[ia] - lane[ib]) < P.gapl && s[ia] - s[ib] < 0.9 * BL) { s[ib] = s[ia] - 0.9 * BL; v[ib] = Math.min(v[ib], v[ia]); }
+      }
+      frames.push(H.map(function (h, k8) { return [s[k8], lane[k8]]; }));
+      if (ft.every(function (x) { return !isNaN(x); }) && t >= Math.max.apply(null, ft) + 2.5) break;
+    }
+    var fin = {};
+    H.forEach(function (h, k9) { fin[h.u] = { t: isNaN(ft[k9]) ? 1e9 : ft[k9], v: v[k9] }; });
+    return { frames: frames, dt: DT, T: frames.length * DT, fin: fin, ft: ft };
+  }
   function interp(K, t) {
     if (t <= K[0][0]) return [K[0][1], K[0][2]];
     for (var i = 1; i < K.length; i++) if (t <= K[i][0]) { var a = K[i - 1], b = K[i], w = (t - a[0]) / (b[0] - a[0]); return [a[1] + (b[1] - a[1]) * w, a[2] + (b[2] - a[2]) * w]; }
@@ -253,8 +396,10 @@
     var names = {}, marks = {};
     (d.horses || []).forEach(function (h) { names[h.umaban] = h.name; marks[h.umaban] = h.mark || ''; });
     var mobile = window.matchMedia && window.matchMedia('(max-width: 640px)').matches;
-    var st = { t: 0, playing: false, speed: 2, follow: mobile, goal: 'v9', sel: null, last: 0, sl: null };
-    var K = simulate(rp, g, st.goal, st.sl);
+    var st = { t: 0, playing: false, speed: 2, follow: mobile, goal: 'v9', mode: 'goal', sel: null, last: 0, sl: null };
+    var physOK = !!(rp.phys && rp.horses.every(function (h) { return typeof h.T === 'number'; }));
+    var runSim = function () { return st.mode === 'phys' && physOK ? simulatePhys(rp, g, course, st.sl) : simulate(rp, g, st.goal, st.sl); };
+    var K = runSim();
     var slipOf = {}; rp.horses.forEach(function (h) { slipOf[h.u] = h.slip; });
     var hidx = {}; rp.horses.slice().sort(function (a, b) { return a.u - b.u; }).forEach(function (h, i) { hidx[h.u] = i; });
     var df = rp.pace.pred - rp.pace.base, tag = Math.abs(df) < 0.3 ? '標準並み' : (df < 0 ? '標準より速い' : '標準より遅い');
@@ -269,14 +414,18 @@
       '<div class="rp-ctrl2"><button type="button" class="rp-speed">×2</button>' +
       '<button type="button" class="rp-view">' + (st.follow ? '全体を見る' : '馬群を追う') + '</button>' +
       '<button type="button" class="rp-slip">出遅れを抽選</button><button type="button" class="rp-slip-off" hidden>出遅れなしに戻す</button>' +
-      '<label class="rp-goal-l">ゴールの並び <select class="rp-goal"><option value="v9">勝つ確率の順</option><option value="time">予想時計の順</option></select></label></div>' +
+      '<label class="rp-goal-l">ゴールの並び <select class="rp-goal"><option value="v9">総合点（勝つ確率）の順</option><option value="time">材料から予想した時計の順</option></select></label>' +
+      (physOK ? '<label class="rp-mode-l">動き <select class="rp-mode"><option value="goal">予想の並びへ向かう</option><option value="phys">物理で走らせる（試験）</option></select></label>' : '') + '</div>' +
       '<svg class="rp-elev" viewBox="0 0 1000 90" role="img" aria-label="コースの高低"></svg></div>' +
       '<div class="rp-board"><div class="rp-board-h">いまの順番（予想）</div><ol class="rp-list"></ol></div></div>' +
       '<div class="note rp-note">' + esc(course.name) + '（一周' + course.circ + 'm・直線' + course.straight + 'm・高低差' + course.elev + 'm' +
       (rp.course_guess ? '・内回り/外回りは推定' : '') + '）　予想ペース: ' + tag +
       '（先頭が残り600mに着くまで 予想' + rp.pace.pred.toFixed(1) + '秒／標準' + rp.pace.base.toFixed(1) + '秒）<br>' +
       '※ 各馬の過去の位置取りと予想の時計から作った<b>参考の動き</b>で、実際のレースの映像ではありません。' +
-      '最初のコーナーまでは展開予想図の隊列、残り600mは予想の時計の順（間隔は過去のレースの典型的な差）、ゴールは勝つ確率の順を目標に動きます。' +
+      '最初のコーナーまでは展開予想図の隊列、残り600mは各馬の材料（持ちタイム・前半と上がりの速さ・経験したペース・位置取りの履歴・騎手と調教師の強さ・調教）から予想した時計の順、ゴールは総合点（勝つ確率）の順を目標に動きます（間隔は過去のレースの典型的な差）。' +
+      '「ゴールの並び」で、材料から予想した時計の順にも切り替えられます。' +
+      (physOK ? '「物理で走らせる（試験）」は、着順や位置の目標を入れずに、各馬の能力（材料から予想した時計）・テンの速さ・脚質だけで走らせます。' +
+        '隊列・ペース・並走・外を回す距離・詰まり・着順は、走った結果で決まります（前が詰まれば抜けない、外を回れば長く走る、速く走れば末脚の余力が減る）。まだ試験中の動きです。' : '') +
       '先頭の速さはコースの典型的なラップの緩急、前が詰まった馬は1馬身以上空いた所にしか動けない（外へ持ち出すか前が空くのを待つ）ため、目標の順とずれることがあります。' +
       '「出遅れを抽選」は、各馬の過去の出遅れ率（最初のコーナーでいつもより大きく後ろになった割合）で出遅れる馬をくじ引きし、その馬はスタートが0.5秒遅れて最初のコーナーで頭数の約半分後ろから走ります（押すたびに引き直し）。' +
       '⚠は出遅れ率が20%以上の馬（全体は約13%）。' +
@@ -389,9 +538,12 @@
     seek.addEventListener('input', function () { play(false); st.t = +seek.value / 1000 * K.T; draw(); });
     $('.rp-speed').addEventListener('click', function () { st.speed = st.speed === 1 ? 2 : (st.speed === 2 ? 4 : 1); this.textContent = '×' + st.speed; });
     $('.rp-view').addEventListener('click', function () { st.follow = !st.follow; this.textContent = st.follow ? '全体を見る' : '馬群を追う'; draw(); });
-    $('.rp-goal').addEventListener('change', function () { st.goal = this.value; K = simulate(rp, g, st.goal, st.sl); draw(); });
+    $('.rp-goal').addEventListener('change', function () { st.goal = this.value; K = runSim(); draw(); });
+    if (physOK) $('.rp-mode').addEventListener('change', function () {
+      st.mode = this.value; $('.rp-goal').disabled = st.mode === 'phys'; K = runSim(); st.t = 0; play(false); draw();
+    });
     var reslip = function (sl) {
-      st.sl = sl; K = simulate(rp, g, st.goal, st.sl); st.t = 0; play(false); draw();
+      st.sl = sl; K = runSim(); st.t = 0; play(false); draw();
       var us = sl ? Object.keys(sl).map(Number).sort(function (a, b) { return a - b; }) : [];
       $('.rp-slip').textContent = sl ? (us.length ? '出遅れ: ' + us.join('・') + '番（引き直す）' : '出遅れなし（引き直す）') : '出遅れを抽選';
       $('.rp-slip-off').hidden = !sl;
