@@ -242,10 +242,10 @@
        3〜4角（残り1000〜600m）で先頭から6馬身以内の馬は先頭に並びかけ（間隔を最大8割詰める）、後ろの馬は1割だけ詰める。ハナを取った馬は2番手に0.2馬身差を付けたら息を入れる。差し馬（脚質の後ろ3割）は残り1000mから前に馬がいれば外へ。直線は前6馬身以内に馬がいれば早めに外へ。
      物理: 同じ進路で1馬身以内の前の馬は抜けない・3馬身以内で先読みのブレーキ・横は空いている所だけ・コーナーでは外ほど長く走る（曲がり具合×ラチからの距離）。 */
   var PHYS = { kcs: 0.87, push: 0.06, tau: 2.0, duel: 0.015, spurt: 600, acc: 2.5, acc_lo: 5.0, dec: 3.0, lat: 0.14, gapl: 0.75, look: 3, vmax: 19.0,
-               spread: 2, max_wide: 2.5, ten_k: 0.03, gap_start: 0.8, front_pp: 0.25, ten_top: 0.05, lat_sp: 7.0, fan_bl: 6.0,
+               spread: 1.8, max_wide: 2.5, ten_k: 0.03, gap_start: 0.8, front_pp: 0.25, ten_top: 0.05, lat_sp: 7.0, fan_bl: 6.0,
                closer_pp: 0.7, closer_pre: 400, closer_bl: 3.0, compress: 0.1, compress_front: 0.6, front_gap: 4.0, lead_settle: 0.2, pre: 400, inward_early: 0.5, move_up: 2.0,
                path_sp: 2.0, path_cost: 2.0, path_out: 6.0, path_wait: 0.3, draft: 0.02, crowd: 3.0, room_cap: 60, spread_re: 1.0,
-               wide_eff: 0.5, top_cap: 0, lap_fb: 0.05 };   // 版22（2026-09-30）: 外を回る損の効き（実際は幾何の1/3〜1/4。形との兼ね合いで0.5）・最高の速さの上限（着順の再現が下がるので使わない=0）・ラップの形に沿う予定の戻し方
+               wide_eff: 0.5, top_cap: 0, lap_fb: 0.05, t_add: 1.0 };   // t_add（2026-09-30 追記）: 体力の戻り・風よけの分だけ予想の時計より速く走れてしまうのを戻す（勝ち時計 −1.21→−0.16秒）   // 版22（2026-09-30）: 外を回る損の効き（実際は幾何の1/3〜1/4。形との兼ね合いで0.5）・最高の速さの上限（着順の再現が下がるので使わない=0）・ラップの形に沿う予定の戻し方
   function curvature(course) {                  // コースの点列（一周を等間隔）から 1点ごとの曲がり具合（1/m）
     // 向きを付けたまま前後11点でならし、回る向きと逆の小さな曲がりは0、一周の合計がちょうど360度になるように合わせる
     // （2026-09-29: 点列のギザギザで一周 744〜1539度になり、外を回る損が2〜4倍に出ていた）
@@ -262,7 +262,7 @@
     var KP = curvature(course), kap = KP.k, step = KP.step, nk = kap.length, C = course.circ;
     var fstd = rp.phys.f, CS = fstd * P.kcs;
     var Tm = H.reduce(function (a, h) { return a + h.T; }, 0) / n;
-    var W0 = H.map(function (h) { return D - CS * (Tm + (h.T - Tm) * P.spread); }), W = W0.slice();
+    var W0 = H.map(function (h) { return D - CS * (Tm + (h.T - Tm) * P.spread + P.t_add); }), W = W0.slice();
     // 脚質の代わりに、展開予想図の「最初の角の予想位置」（first）を使う（2026-09-29: 最初の角 0.464→0.488・着順 0.366→0.406、250R）
     var pp = H.map(function (h) { return typeof h.first === 'number' ? h.first : h.pp; }), dz = H.map(function (h) { return h.dz; });
     var s = H.map(function () { return 0; }), v = s.slice(), lane = H.map(function (h) { return (h.u - 1) * 1.0; });
