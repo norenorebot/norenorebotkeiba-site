@@ -242,12 +242,17 @@
      物理: 同じ進路で1馬身以内の前の馬は抜けない・3馬身以内で先読みのブレーキ・横は空いている所だけ・コーナーでは外ほど長く走る（曲がり具合×ラチからの距離）。 */
   var PHYS = { kcs: 0.93, push: 0.06, tau: 2.0, duel: 0.015, spurt: 600, acc: 2.5, acc_lo: 5.0, dec: 3.0, lat: 0.14, gapl: 0.75, look: 3, vmax: 19.0,
                spread: 2, max_wide: 3.5, ten_k: 0.03, gap_start: 0.8, front_pp: 0.25, ten_top: 0.05, lat_sp: 7.0, fan_bl: 6.0,
-               closer_pp: 0.7, closer_pre: 400, closer_bl: 3.0, compress: 0.4, pre: 400, inward_early: 2.0, move_up: 2.0 };
-  function curvature(course) {                  // コースの点列（一周を等間隔）から 1点ごとの曲がり具合（1/m、前後3点の平均）
-    var P = course.pts, n = P.length, step = course.circ / n, th = [], k = [], out = [];
+               closer_pp: 0.7, closer_pre: 400, closer_bl: 3.0, compress: 0.4, pre: 400, inward_early: 0.5, move_up: 2.0,
+               path_sp: 1.5, path_cost: 2.0 };
+  function curvature(course) {                  // コースの点列（一周を等間隔）から 1点ごとの曲がり具合（1/m）
+    // 向きを付けたまま前後11点でならし、回る向きと逆の小さな曲がりは0、一周の合計がちょうど360度になるように合わせる
+    // （2026-09-29: 点列のギザギザで一周 744〜1539度になり、外を回る損が2〜4倍に出ていた）
+    var P = course.pts, n = P.length, step = course.circ / n, th = [], d = [], out = [], tot = 0, sum = 0;
     for (var i = 0; i < n; i++) { var a = P[i], b = P[(i + 1) % n]; th.push(Math.atan2(b[1] - a[1], b[0] - a[0])); }
-    for (var i2 = 0; i2 < n; i2++) { var d = th[(i2 + 1) % n] - th[i2]; d = Math.atan2(Math.sin(d), Math.cos(d)); k.push(Math.abs(d) / step); }
-    for (var j = 0; j < n; j++) { var m = 0; for (var q = -3; q <= 3; q++) m += k[((j + q) % n + n) % n]; out.push(m / 7); }
+    for (var i2 = 0; i2 < n; i2++) { var x = th[(i2 + 1) % n] - th[i2]; x = Math.atan2(Math.sin(x), Math.cos(x)); d.push(x); tot += x; }
+    var sgn = tot >= 0 ? 1 : -1;
+    for (var j = 0; j < n; j++) { var m = 0; for (var q = -5; q <= 5; q++) m += d[((j + q) % n + n) % n]; m = Math.max(0, sgn * m / 11); out.push(m); sum += m; }
+    for (var j2 = 0; j2 < n; j2++) out[j2] = out[j2] * (2 * Math.PI) / Math.max(sum, 1e-9) / step;
     return { k: out, step: step };
   }
   function simulatePhys(rp, g, course, sl) {
@@ -262,7 +267,8 @@
     var T3plan = rp.phys.T3 * (1 - P.push * 0.3 * (0.4 - ppmin) - P.duel * Math.max(0, nf - 1));
     var cr = crossings(D, g), firstS = cr.length ? cr[0].s : Math.min(400, D * 0.3);
     var ft = H.map(function () { return NaN; }), frames = [], t = 0, upd = [];
-    var hold = H.map(function (h) { return sl && sl[h.u] ? 0.5 : 0; });   // 出遅れ（抽選）: ゲートを出るのが0.5秒遅れる
+    var hold = H.map(function (h) { return sl && sl[h.u] ? 0.5 : 0; });
+    var tgt = H.map(function () { return NaN; }), tpick = H.map(function () { return -99; }), blkSince = H.map(function () { return NaN; });   // 出遅れ（抽選）: ゲートを出るのが0.5秒遅れる
     frames.push(H.map(function (h, i) { return [s[i], lane[i]]; }));
     var clear = function (i, L) {
       if (L < 0 || L > 20) return false;                              // 18頭の大外はゲートで17レーン目
@@ -319,7 +325,7 @@
         var dec = fol && vd < v[i] - P.dec * DT ? 6.0 : P.dec;
         var vi = Math.max(v[i] - dec * DT, Math.min(v[i] + acc * DT, vd));
         var u = ((s[i] - D) % C + C) % C, kx = kap[Math.floor(u / step) % nk], fac = 1 + kx * lane[i] * LANE_M;   // コーナーでは外ほど長く走る
-        if (kx > 2e-4 && lane[i] > P.max_wide && D - s[i] > P.spurt) {   // コーナーで外4頭より外: 内へ入れる隙を探し、無ければ少し下げる
+        if (kx > 2e-4 && lane[i] > P.max_wide && D - s[i] > P.spurt && s[i] >= firstS) {   // 最初の角より前（スタート直後）は寄せない   // コーナーで外4頭より外: 内へ入れる隙を探し、無ければ少し下げる
           if (clear(i, lane[i] - P.lat * 2)) lane[i] -= P.lat * 2;
           else {                                                          // 内の馬より少し遅い速さまで下げて後ろに入る（基準の9割より下げない）
             var vIn = 1e9;
@@ -347,6 +353,23 @@
         if (!fan && pp[i] >= P.closer_pp && D - P.spurt - P.closer_pre < s[i]) {   // 差し馬: 4角の手前から、前に馬がいれば外へ
           for (var k7 = 0; k7 < n; k7++) if (k7 !== i && s[k7] > s[i] && s[k7] - s[i] < P.closer_bl * BL && Math.abs(lane[k7] - lane[i]) < 1.0) { fan = true; break; }
         }
+        if (D - s[i] <= P.spurt && (kx < 2e-4 || pp[i] >= P.closer_pp)) {
+          // 直線（差し馬は4角から）: 進む先の進路を決めて、そこへなめらかに移る。選び直すのは前がふさがって0.5秒たった時だけ
+          if (blk) { if (isNaN(blkSince[i])) blkSince[i] = t; } else blkSince[i] = NaN;
+          if (isNaN(tgt[i]) || (!isNaN(blkSince[i]) && t - blkSince[i] > 0.5 && t - tpick[i] > 0.5)) {
+            var best = lane[i], bsc = -1e9, c0 = Math.max(0, lane[i] - 1.0);
+            for (var kc = 0; c0 + kc * 0.5 < lane[i] + 4.01; kc++) {
+              var cc = c0 + kc * 0.5, rm = 30;
+              for (var kr = 0; kr < n; kr++) if (kr !== i && s[kr] > s[i] && Math.abs(lane[kr] - cc) < P.gapl) rm = Math.min(rm, s[kr] - s[i]);
+              var sc = rm - P.path_cost * Math.abs(cc - lane[i]) - (cc < lane[i] ? 1.0 : 0.0);
+              if (sc > bsc) { best = cc; bsc = sc; }
+            }
+            tgt[i] = best; tpick[i] = t;
+          }
+          var dl = tgt[i] - lane[i];
+          if (Math.abs(dl) > 0.02) { var mv = (dl > 0 ? 1 : -1) * Math.min(Math.abs(dl), P.lat * P.path_sp); if (clear(i, lane[i] + mv)) lane[i] += mv; }
+          continue;
+        }
         var vSame = 1e9;                                                    // 同じ進路の前にいる馬の最も遅い速さ
         for (var kq = 0; kq < n; kq++) if (kq !== i && Math.abs(lane[kq] - laneBefore) < P.gapl && sBefore < s[kq]) vSame = Math.min(vSame, v[kq]);
         var sameAhead = !settle && jn >= 0 && s[jn] - s[i] < P.look * BL && vSame < vd - 0.3;
@@ -356,7 +379,7 @@
           if (spurtNow) cand = [LATs, -LATs].filter(function (dd) { return room(i, lane[i] + dd * 3) >= here; });
           else cand = [P.lat, -P.lat].filter(function (dd) { return room(i, lane[i] + dd * 7) > here + BL; });
           for (var c2 = 0; c2 < cand.length; c2++) if (clear(i, lane[i] + cand[c2])) { lane[i] += cand[c2]; break; }
-        } else if (s[i] < D - 250) {                                        // 空いていれば内へ（最初の角までは強めに）
+        } else if (s[i] < D - P.spurt) {                                    // 空いていれば内へ（直線では寄らない）
           var stp = P.lat * (s[i] < firstS ? P.inward_early : 1.0);
           if (lane[i] > 0.05 && clear(i, Math.max(0, lane[i] - stp))) lane[i] = Math.max(0, lane[i] - stp);
         }
