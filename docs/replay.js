@@ -239,11 +239,11 @@
        速さ v で走ると 余力が (v − CS)×時間 減る（CS より遅ければ戻る）。残り600mからは、ゴールまでに余力を使い切る速さ CS×R/(R−W) で追う。
      作戦: スタート〜最初の角は テンの速さ（出せる速さの上限）と行きたい位置（展開予想図の最初の角の予想位置: 先頭から 予想位置×(頭数−1)×0.8馬身）。
        道中は最初の角の位置を保つ（先頭は基準の残り600mまでの時計を、前に行きたい馬の数と強さで速めた予定に合わせる）。
-       3〜4角（残り1000〜600m）で後ろの馬が差を詰める。差し馬（脚質の後ろ3割）は残り1000mから前に馬がいれば外へ。直線は前6馬身以内に馬がいれば早めに外へ。
+       3〜4角（残り1000〜600m）で先頭から6馬身以内の馬は先頭に並びかけ（間隔を最大8割詰める）、後ろの馬は1割だけ詰める。ハナを取った馬は2番手に0.2馬身差を付けたら息を入れる。差し馬（脚質の後ろ3割）は残り1000mから前に馬がいれば外へ。直線は前6馬身以内に馬がいれば早めに外へ。
      物理: 同じ進路で1馬身以内の前の馬は抜けない・3馬身以内で先読みのブレーキ・横は空いている所だけ・コーナーでは外ほど長く走る（曲がり具合×ラチからの距離）。 */
   var PHYS = { kcs: 0.87, push: 0.06, tau: 2.0, duel: 0.015, spurt: 600, acc: 2.5, acc_lo: 5.0, dec: 3.0, lat: 0.14, gapl: 0.75, look: 3, vmax: 19.0,
                spread: 2, max_wide: 3.5, ten_k: 0.03, gap_start: 0.8, front_pp: 0.25, ten_top: 0.05, lat_sp: 7.0, fan_bl: 6.0,
-               closer_pp: 0.7, closer_pre: 400, closer_bl: 3.0, compress: 0.4, pre: 400, inward_early: 0.5, move_up: 2.0,
+               closer_pp: 0.7, closer_pre: 400, closer_bl: 3.0, compress: 0.1, compress_front: 0.8, front_gap: 6.0, lead_settle: 0.2, pre: 400, inward_early: 0.5, move_up: 2.0,
                path_sp: 2.0, path_cost: 2.0, path_out: 6.0, path_wait: 0.3, draft: 0.02, crowd: 3.0, room_cap: 60, spread_re: 1.0 };
   function curvature(course) {                  // コースの点列（一周を等間隔）から 1点ごとの曲がり具合（1/m）
     // 向きを付けたまま前後11点でならし、回る向きと逆の小さな曲がりは0、一周の合計がちょうど360度になるように合わせる
@@ -303,14 +303,20 @@
         } else {
           if (s[i] < firstS) {
             var vmaxI = fstd * (1 + P.ten_k * dz[i] + P.ten_top);          // スタートで出せる速さ（テンの速さ）
-            if (pp[i] < P.front_pp || i === il) vd = vmaxI;
+            if (pp[i] < P.front_pp || i === il) {
+              vd = vmaxI;
+              if (i === il) {                                                 // ハナを取って2番手に0.2馬身の差を付けたら、ペースの予定の速さまで落として息を入れる
+                var s2 = -1e9; for (var k2b = 0; k2b < n; k2b++) if (k2b !== i && s[k2b] > s2) s2 = s[k2b];
+                if (s[i] - s2 > P.lead_settle * BL && T3plan - t > 3) vd = Math.min(vd, (D - 600 - s[i]) / (T3plan - t));
+              }
+            }
             else vd = Math.min(vmaxI, v[il] + ((lead - pp[i] * (n - 1) * P.gap_start * BL) - s[i]) / 2.0);
           } else if (i === il) {
             if (D - 600 - s[i] > 50 && T3plan - t > 3) vd = (D - 600 - s[i]) / (T3plan - t);   // 先頭: 残り600mまでの予定の時計
             else vd = fstd * (1 + P.push * 0.5 * (0.4 - pp[i]));
           } else {
             var gapM = lead - s[i], pre0 = D - P.spurt - P.pre;             // 道中は今の位置を保つ。3〜4角で差を詰める
-            if (s[i] > pre0) gapM *= 1 - P.compress * Math.min(1, (s[i] - pre0) / P.pre);
+            if (s[i] > pre0) gapM *= 1 - (lead - s[i] < P.front_gap * BL ? P.compress_front : P.compress) * Math.min(1, (s[i] - pre0) / P.pre);   // 先頭の近く（6馬身以内）は強く詰めて並びかける、後ろは弱く
             vd = v[il] + ((lead - gapM) - s[i]) / P.tau;
             bp = (lead - gapM) - s[i];
           }
