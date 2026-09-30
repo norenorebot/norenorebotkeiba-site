@@ -477,7 +477,8 @@
     host.innerHTML =
       '<div class="rp">' +
       '<div class="rp-stage"><div class="rp-left">' +
-      '<svg class="rp-track" viewBox="0 0 1000 520" role="img" aria-label="予想の展開の再生"></svg>' +
+      '<div class="rp-trackwrap"><svg class="rp-track" viewBox="0 0 1000 520" role="img" aria-label="予想の展開の再生"></svg>' +
+      '<div class="rp-timer" aria-hidden="true">0.0</div></div>' +   // 左上のタイマー（スタートからの経過。勝ち馬がゴールしたら止めて🏁）
       '<div class="rp-ctrl"><button type="button" class="rp-play">▶ 再生</button>' +
       '<input type="range" class="rp-seek" min="0" max="1000" step="1" value="0" aria-label="位置">' +
       '<span class="rp-pos"></span></div>' +
@@ -591,6 +592,11 @@
                '</span><span class="rp-gap">' + gap + '</span></li>';
       }).join('');
       pos.textContent = t <= D ? '残り ' + Math.max(0, D - t).toFixed(0) + 'm' : 'ゴール後';
+      var tmr = $('.rp-timer');
+      if (tmr) {
+        var twin = null; Object.keys(fin).forEach(function (u) { if (fin[u].t < 1e8 && (twin === null || fin[u].t < twin)) twin = fin[u].t; });
+        tmr.textContent = (twin !== null && st.t >= twin) ? '🏁 ' + fmtT(twin) : fmtT(Math.max(0, st.t));
+      }
       var clk = $('.rp-clock');
       if (clk) {
         if (st.mode === 'phys' && physOK) {                               // 物理で走らせた時計: 経過・先頭が残り600mを通った時計・勝ち時計

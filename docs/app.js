@@ -454,7 +454,9 @@ function renderVerdictCard(d, idx) {
   }
 
   /* ブロック2【根拠】折りたたみ */
-  html += '<details><summary>くわしい根拠を見る（各馬の点数・強さと時計の見方）</summary>';
+  // PC（641px以上）では最初から開いておく（スマホは縦に長くなるので閉じたまま）
+  var pcOpen = window.matchMedia && window.matchMedia('(min-width: 641px)').matches;
+  html += '<details' + (pcOpen ? ' open' : '') + '><summary>くわしい根拠を見る（各馬の点数・強さと時計の見方）</summary>';
   html += '<div class="note">' + plainGap(g) + '</div>';
   html += modelNote(d);
   html += renderHorsesTable(d.horses || [], d);
@@ -719,7 +721,7 @@ function renderFormation(d) {
 /* 展開を再生（参考）: renderFormation が data.json をここに預け、ボタンで replay.js を読み込んで開く(2026-09-27) */
 var RP_SEQ = 0, RP_DATA = {}, RP_LOADING = null;
 /* replay.js を直したら上げる（ブラウザに残った古い版を読まないように） */
-var RP_JS_VER = '24';
+var RP_JS_VER = '25';
 function loadReplayJs() {
   if (window.KeibaReplay) return Promise.resolve();
   if (RP_LOADING) return RP_LOADING;
