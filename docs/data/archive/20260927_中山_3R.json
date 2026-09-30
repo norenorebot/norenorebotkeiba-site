@@ -136,7 +136,7 @@
       "adjust": 287.06637834377193,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 2,
       "breakdown": {
         "env": 33.51667391757826,
         "time": -2.8622764618830088,
@@ -165,7 +165,7 @@
       "adjust": 123.53579948360243,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 1,
       "breakdown": {
         "env": 4.13930900603404,
         "time": 24.9262461455446,
@@ -196,7 +196,7 @@
       "adjust": 70.54134262417665,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 6,
       "breakdown": {
         "env": -30.665599970252885,
         "time": 50.448565598811285,
@@ -223,7 +223,7 @@
       "adjust": -47.17362545959463,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 5,
       "breakdown": {
         "env": -31.674780194986543,
         "time": 20.44569536614727,
@@ -252,7 +252,7 @@
       "adjust": -90.41534967658527,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 9,
       "breakdown": {
         "env": -69.97245459288514,
         "time": 19.450825097351096,
@@ -279,7 +279,7 @@
       "adjust": -146.1135148514952,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 7,
       "breakdown": {
         "env": -45.70816649957462,
         "time": -24.65095949879937,
@@ -311,7 +311,7 @@
       "adjust": -77.79026644531132,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 4,
       "breakdown": {
         "env": -18.103954931489447,
         "time": 41.10142279780889,
@@ -343,7 +343,7 @@
       "adjust": -185.5698908959198,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 3,
       "breakdown": {
         "env": -97.87211435950289,
         "time": -31.44101187971159,
@@ -370,7 +370,7 @@
       "adjust": -118.26137431748509,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 8,
       "breakdown": {
         "env": -11.19941356976102,
         "time": -14.05850716526926,
@@ -388,10 +388,85 @@
     }
   ],
   "result": {
-    "status": "結果待ち",
+    "status": "確定",
     "reconciled_at": "2026-09-30",
-    "reason": "結果データ未更新(最新 20260922 < 20260927)",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "4中9",
+      "r": "3",
+      "race_name": "未勝利*",
+      "atama": 9
+    },
+    "finish": [
+      "ファブリック",
+      "レッドマウロア",
+      "フレンドミラノ"
+    ],
+    "horses": [
+      {
+        "name": "レッドマウロア",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "ファブリック",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "イキフン",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "メイプルカモーン",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "ニシノマキロイ",
+        "rank": 9,
+        "note": null
+      },
+      {
+        "name": "ナムラアラバイ",
+        "rank": 7,
+        "note": null
+      },
+      {
+        "name": "ファウナード",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "フレンドミラノ",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "グラスクラージュ",
+        "rank": 8,
+        "note": null
+      }
+    ],
     "unmatched": [],
-    "unmatched_n": 9
+    "bet": {
+      "tier": "none",
+      "axis": "レッドマウロア",
+      "axis_rank": 2,
+      "axis_odds": 1.6,
+      "partners": [
+        "ファブリック",
+        "イキフン",
+        "メイプルカモーン"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 0.0,
+      "hit": null,
+      "payout": 0.0,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない"
+    },
+    "trials": []
   }
 }

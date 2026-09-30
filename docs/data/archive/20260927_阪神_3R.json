@@ -136,7 +136,7 @@
       "adjust": 295.5579998860578,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 1,
       "breakdown": {
         "env": 51.430994126095385,
         "time": 111.07072992127185,
@@ -165,7 +165,7 @@
       "adjust": 179.83018907189467,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 4,
       "breakdown": {
         "env": 9.82610301712154,
         "time": 60.366221104910444,
@@ -194,7 +194,7 @@
       "adjust": 149.3002264567765,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 3,
       "breakdown": {
         "env": 31.35243520591645,
         "time": 26.654548252807164,
@@ -225,7 +225,7 @@
       "adjust": 62.45001486576689,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 2,
       "breakdown": {
         "env": 34.69378260373492,
         "time": -7.117866082961663,
@@ -256,7 +256,7 @@
       "adjust": -12.303380731334755,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 7,
       "breakdown": {
         "env": -30.873691180893587,
         "time": 77.44653792327625,
@@ -288,7 +288,7 @@
       "adjust": -37.91180143223551,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 6,
       "breakdown": {
         "env": -20.4183612513067,
         "time": -40.649489846450315,
@@ -321,7 +321,7 @@
       "adjust": -48.07030768937466,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 5,
       "breakdown": {
         "env": 42.090480057054606,
         "time": -33.44293674012757,
@@ -353,7 +353,7 @@
       "adjust": -133.6415512079477,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 9,
       "breakdown": {
         "env": 37.695269836637294,
         "time": -54.80884492706612,
@@ -384,7 +384,7 @@
       "adjust": -234.86955946379464,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 8,
       "breakdown": {
         "env": -18.815182658551038,
         "time": -56.15889960566025,
@@ -404,10 +404,85 @@
     }
   ],
   "result": {
-    "status": "結果待ち",
+    "status": "確定",
     "reconciled_at": "2026-09-30",
-    "reason": "結果データ未更新(最新 20260922 < 20260927)",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "4阪9",
+      "r": "3",
+      "race_name": "未勝利*",
+      "atama": 9
+    },
+    "finish": [
+      "ブックオブケルズ",
+      "ナオミガサイキョウ",
+      "ボーオーブ"
+    ],
+    "horses": [
+      {
+        "name": "ブックオブケルズ",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "ミンコフスキー",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "ボーオーブ",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "ナオミガサイキョウ",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "セブンサークル",
+        "rank": 7,
+        "note": null
+      },
+      {
+        "name": "ダンスコマンド",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "ロードメガロポリス",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "メイクアマーク",
+        "rank": 9,
+        "note": null
+      },
+      {
+        "name": "カクシンゴールド",
+        "rank": 8,
+        "note": null
+      }
+    ],
     "unmatched": [],
-    "unmatched_n": 9
+    "bet": {
+      "tier": "none",
+      "axis": "ミンコフスキー",
+      "axis_rank": 4,
+      "axis_odds": 7.0,
+      "partners": [
+        "ブックオブケルズ",
+        "ボーオーブ",
+        "ナオミガサイキョウ"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 0.0,
+      "hit": null,
+      "payout": 0.0,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない"
+    },
+    "trials": []
   }
 }

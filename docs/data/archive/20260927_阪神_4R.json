@@ -136,7 +136,7 @@
       "adjust": 169.28755437528162,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 4,
       "breakdown": {
         "env": 50.64367704131921,
         "time": -19.957159349836367,
@@ -167,7 +167,7 @@
       "adjust": 84.08519332566857,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 2,
       "breakdown": {
         "env": -9.046886571634701,
         "time": -0.5917393646031304,
@@ -196,7 +196,7 @@
       "adjust": 113.80402352200258,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 1,
       "breakdown": {
         "env": 15.694046003869516,
         "time": 27.464955411234396,
@@ -226,7 +226,7 @@
       "adjust": 14.10970819664567,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 3,
       "breakdown": {
         "env": -32.832739161811354,
         "time": 38.3620956516819,
@@ -255,7 +255,7 @@
       "adjust": -118.66537830777361,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 5,
       "breakdown": {
         "env": -63.41213811881571,
         "time": 0.9755493020768995,
@@ -284,7 +284,7 @@
       "adjust": -132.47741755017728,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 7,
       "breakdown": {
         "env": -19.051415029735693,
         "time": -10.32706578234797,
@@ -313,7 +313,7 @@
       "adjust": -162.46054443138837,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 6,
       "breakdown": {
         "env": -57.67140503293237,
         "time": 47.43336413179448,
@@ -331,10 +331,75 @@
     }
   ],
   "result": {
-    "status": "結果待ち",
+    "status": "確定",
     "reconciled_at": "2026-09-30",
-    "reason": "結果データ未更新(最新 20260922 < 20260927)",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "4阪9",
+      "r": "4",
+      "race_name": "未勝利*",
+      "atama": 7
+    },
+    "finish": [
+      "ガリアルダ",
+      "エトワールハマー",
+      "クラリスバローズ"
+    ],
+    "horses": [
+      {
+        "name": "ダイナマイク",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "エトワールハマー",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "ガリアルダ",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "クラリスバローズ",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "ロクメイカン",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "ヤマニンイハナ",
+        "rank": 7,
+        "note": null
+      },
+      {
+        "name": "パーセンタイル",
+        "rank": 6,
+        "note": null
+      }
+    ],
     "unmatched": [],
-    "unmatched_n": 7
+    "bet": {
+      "tier": "none",
+      "axis": "クラリスバローズ",
+      "axis_rank": 3,
+      "axis_odds": 2.6,
+      "partners": [
+        "ダイナマイク",
+        "エトワールハマー",
+        "ガリアルダ"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 0.0,
+      "hit": null,
+      "payout": 0.0,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない"
+    },
+    "trials": []
   }
 }

@@ -1,8 +1,8 @@
 {
   "schema": "stats_forward.v1",
-  "generated_at": "2026-09-30T14:00:02",
+  "generated_at": "2026-09-30T14:43:00",
   "period_from": "2026-07-19",
-  "results_latest_date": "20260922",
+  "results_latest_date": "20260927",
   "source": "docs/archive/*.json(公開した買い目) ⋈ jra_data_*.csv(確定着順・払戻)",
   "series": {
     "seihai_fukusho": {
@@ -10,17 +10,17 @@
       "retired": false,
       "trial": false,
       "all": {
-        "n": 24,
-        "hit_rate": 58.3,
-        "roi": 99.2,
-        "f5_roi": 87.8,
+        "n": 25,
+        "hit_rate": 56.0,
+        "roi": 95.2,
+        "f5_roi": 84.2,
         "color": "normal"
       },
       "rule_8_15": {
-        "n": 17,
-        "hit_rate": 64.7,
-        "roi": 102.4,
-        "f5_roi": 86.2,
+        "n": 18,
+        "hit_rate": 61.1,
+        "roi": 96.7,
+        "f5_roi": 81.2,
         "color": "light_傾向"
       }
     },
@@ -48,17 +48,17 @@
       "retired": true,
       "trial": false,
       "all": {
+        "n": 12,
+        "hit_rate": 50.0,
+        "roi": 55.8,
+        "f5_roi": 50.0,
+        "color": "light_傾向"
+      },
+      "rule_8_15": {
         "n": 11,
         "hit_rate": 54.5,
         "roi": 60.9,
         "f5_roi": 55.0,
-        "color": "light_傾向"
-      },
-      "rule_8_15": {
-        "n": 10,
-        "hit_rate": 60.0,
-        "roi": 67.0,
-        "f5_roi": 61.1,
         "color": "light_傾向"
       }
     },
@@ -181,10 +181,10 @@
     {
       "month": "2026-09",
       "seihai_fukusho": {
-        "n": 6,
-        "hit_rate": 50.0,
-        "roi": 73.3,
-        "f5_roi": 48.0,
+        "n": 7,
+        "hit_rate": 42.9,
+        "roi": 62.9,
+        "f5_roi": 40.0,
         "color": "gray_参考外"
       },
       "seihai_umaren": {
@@ -195,7 +195,7 @@
         "color": "gray_参考外"
       },
       "gap_fukusho": {
-        "n": 1,
+        "n": 2,
         "hit_rate": 0.0,
         "roi": 0.0,
         "f5_roi": null,
@@ -218,22 +218,22 @@
     }
   ],
   "skipped_reference": {
-    "n": 315,
-    "axis_top3": 147,
-    "axis_win": 74,
+    "n": 332,
+    "axis_top3": 152,
+    "axis_win": 77,
     "gap_disagree": {
-      "n": 32,
-      "axis_top3": 10,
-      "axis_win": 6
+      "n": 33,
+      "axis_top3": 11,
+      "axis_win": 7
     },
     "no_signal": {
-      "n": 283,
-      "axis_top3": 137,
-      "axis_win": 68
+      "n": 299,
+      "axis_top3": 141,
+      "axis_win": 70
     },
     "by_verdict": {
-      "⚠️慎重": 283,
-      "🚫見送り": 32
+      "⚠️慎重": 299,
+      "🚫見送り": 33
     },
     "note": "見送った判断の事後確認(参考)。買い目としては提示せず、回収率にも一切含めない。 gap_disagree=上位2頭が食い違い(危険サイン回避) / no_signal=買う条件が不足。"
   },
@@ -339,16 +339,16 @@
       "series": {
         "seihai_fukusho": {
           "all": {
-            "n": 0,
-            "hit_rate": null,
-            "roi": null,
+            "n": 1,
+            "hit_rate": 0.0,
+            "roi": 0.0,
             "f5_roi": null,
             "color": "gray_参考外"
           },
           "rule_8_15": {
-            "n": 0,
-            "hit_rate": null,
-            "roi": null,
+            "n": 1,
+            "hit_rate": 0.0,
+            "roi": 0.0,
             "f5_roi": null,
             "color": "gray_参考外"
           }
@@ -371,16 +371,16 @@
         },
         "gap_fukusho": {
           "all": {
-            "n": 0,
-            "hit_rate": null,
-            "roi": null,
+            "n": 1,
+            "hit_rate": 0.0,
+            "roi": 0.0,
             "f5_roi": null,
             "color": "gray_参考外"
           },
           "rule_8_15": {
-            "n": 0,
-            "hit_rate": null,
-            "roi": null,
+            "n": 1,
+            "hit_rate": 0.0,
+            "roi": 0.0,
             "f5_roi": null,
             "color": "gray_参考外"
           }
@@ -419,13 +419,13 @@
         }
       },
       "skipped": {
-        "n": 0,
-        "axis_top3": 0,
-        "axis_win": 0
+        "n": 17,
+        "axis_top3": 5,
+        "axis_win": 3
       }
     }
   ],
-  "pending": 19,
+  "pending": 0,
   "pre_period_excluded": 1,
   "races": [
     {
@@ -6342,6 +6342,327 @@
       "payout": 0.0,
       "in_odds_band": false,
       "note": "複勝は3着まで(頭数11)"
+    },
+    {
+      "date": "2026-09-26",
+      "file": "20260927_中山_10R.json",
+      "venue": "中山",
+      "race_no": 10,
+      "verdict": "⚠️慎重",
+      "tier": "seihai_fukusho",
+      "axis": "スイートオレンジ",
+      "axis_rank": 5,
+      "axis_odds": 6.8,
+      "hit": false,
+      "cost": 100.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "複勝は3着まで(頭数18)"
+    },
+    {
+      "date": "2026-09-26",
+      "file": "20260927_中山_11R.json",
+      "venue": "中山",
+      "race_no": 11,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "レイピア",
+      "axis_rank": 13,
+      "axis_odds": 25.2,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": true,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-09-26",
+      "file": "20260927_中山_12R.json",
+      "venue": "中山",
+      "race_no": 12,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "マーゴットゲイン",
+      "axis_rank": 1,
+      "axis_odds": 9.6,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": true,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-09-26",
+      "file": "20260927_中山_1R.json",
+      "venue": "中山",
+      "race_no": 1,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "マリノエスプレッソ",
+      "axis_rank": 1,
+      "axis_odds": 6.7,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-09-26",
+      "file": "20260927_中山_2R.json",
+      "venue": "中山",
+      "race_no": 2,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "コウサイリクリ",
+      "axis_rank": 6,
+      "axis_odds": 7.6,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-09-26",
+      "file": "20260927_中山_3R.json",
+      "venue": "中山",
+      "race_no": 3,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "レッドマウロア",
+      "axis_rank": 2,
+      "axis_odds": 1.6,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-09-26",
+      "file": "20260927_中山_6R.json",
+      "venue": "中山",
+      "race_no": 6,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "ワンダーブリッツ",
+      "axis_rank": 14,
+      "axis_odds": 2.9,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-09-26",
+      "file": "20260927_中山_7R.json",
+      "venue": "中山",
+      "race_no": 7,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "ナハトナナレオン",
+      "axis_rank": 16,
+      "axis_odds": 6.5,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-09-26",
+      "file": "20260927_中山_8R.json",
+      "venue": "中山",
+      "race_no": 8,
+      "verdict": "🚫見送り",
+      "tier": "none",
+      "axis": "メディチパワー",
+      "axis_rank": 1,
+      "axis_odds": 3.3,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "gap_disagree"
+    },
+    {
+      "date": "2026-09-26",
+      "file": "20260927_中山_9R.json",
+      "venue": "中山",
+      "race_no": 9,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "リリカルフレア",
+      "axis_rank": 4,
+      "axis_odds": 17.2,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": true,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-09-26",
+      "file": "20260927_阪神_10R.json",
+      "venue": "阪神",
+      "race_no": 10,
+      "verdict": "🔥勝負",
+      "tier": "gap_fukusho",
+      "axis": "ダンツシタン",
+      "axis_rank": 7,
+      "axis_odds": 6.0,
+      "hit": false,
+      "cost": 100.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "複勝は3着まで(頭数12)"
+    },
+    {
+      "date": "2026-09-26",
+      "file": "20260927_阪神_11R.json",
+      "venue": "阪神",
+      "race_no": 11,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "インヴォーグ",
+      "axis_rank": 4,
+      "axis_odds": 6.8,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-09-26",
+      "file": "20260927_阪神_12R.json",
+      "venue": "阪神",
+      "race_no": 12,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "ソウルアンドジャズ",
+      "axis_rank": 5,
+      "axis_odds": 3.7,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-09-26",
+      "file": "20260927_阪神_2R.json",
+      "venue": "阪神",
+      "race_no": 2,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "シュプレヒコール",
+      "axis_rank": 5,
+      "axis_odds": 3.8,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-09-26",
+      "file": "20260927_阪神_3R.json",
+      "venue": "阪神",
+      "race_no": 3,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "ミンコフスキー",
+      "axis_rank": 4,
+      "axis_odds": 7.0,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-09-26",
+      "file": "20260927_阪神_4R.json",
+      "venue": "阪神",
+      "race_no": 4,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "クラリスバローズ",
+      "axis_rank": 3,
+      "axis_odds": 2.6,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-09-26",
+      "file": "20260927_阪神_7R.json",
+      "venue": "阪神",
+      "race_no": 7,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "ハグレジョー",
+      "axis_rank": 4,
+      "axis_odds": 1.8,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-09-26",
+      "file": "20260927_阪神_8R.json",
+      "venue": "阪神",
+      "race_no": 8,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "バースデイフライト",
+      "axis_rank": 4,
+      "axis_odds": 3.3,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-09-26",
+      "file": "20260927_阪神_9R.json",
+      "venue": "阪神",
+      "race_no": 9,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "ビップヴォルフ",
+      "axis_rank": 9,
+      "axis_odds": 10.0,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": true,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
     }
   ],
   "notes": [
