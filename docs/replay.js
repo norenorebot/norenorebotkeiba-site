@@ -245,7 +245,7 @@
                spread: 1.8, max_wide: 2.5, ten_k: 0.03, gap_start: 0.8, front_pp: 0.25, ten_top: 0.05, lat_sp: 7.0, fan_bl: 6.0,
                closer_pp: 0.7, closer_pre: 400, closer_bl: 3.0, compress: 0.1, compress_front: 0.6, front_gap: 4.0, lead_settle: 0.2, pre: 400, inward_early: 0.5, move_up: 2.0,
                path_sp: 2.0, path_cost: 2.0, path_out: 6.0, path_wait: 0.3, draft: 0.02, crowd: 3.0, room_cap: 60, spread_re: 1.0,
-               wide_eff: 0.5, top_cap: 0, lap_fb: 0.05, t_add: 1.0 };   // t_add（2026-09-30 追記）: 体力の戻り・風よけの分だけ予想の時計より速く走れてしまうのを戻す（勝ち時計 −1.21→−0.16秒）   // 版22（2026-09-30）: 外を回る損の効き（実際は幾何の1/3〜1/4。形との兼ね合いで0.5）・最高の速さの上限（着順の再現が下がるので使わない=0）・ラップの形に沿う予定の戻し方
+               wide_eff: 0.5, top_cap: 0, lap_fb: 0.05, t_add: 0.6, agari_cap: 1.2, agari_k: 1.5 };   // 版24: 上がりの上限（予想の上がりの差を1.5倍に広げ、1.2秒速いまで）。体力の補正は 1.0→0.6（勝ち馬の上がりのずれ −0.22→−0.12秒、上がりの当たり 0.68→0.77）   // t_add（2026-09-30 追記）: 体力の戻り・風よけの分だけ予想の時計より速く走れてしまうのを戻す（勝ち時計 −1.21→−0.16秒）   // 版22（2026-09-30）: 外を回る損の効き（実際は幾何の1/3〜1/4。形との兼ね合いで0.5）・最高の速さの上限（着順の再現が下がるので使わない=0）・ラップの形に沿う予定の戻し方
   function curvature(course) {                  // コースの点列（一周を等間隔）から 1点ごとの曲がり具合（1/m）
     // 向きを付けたまま前後11点でならし、回る向きと逆の小さな曲がりは0、一周の合計がちょうど360度になるように合わせる
     // （2026-09-29: 点列のギザギザで一周 744〜1539度になり、外を回る損が2〜4倍に出ていた）
@@ -270,6 +270,11 @@
     var T3plan = rp.phys.T3 * (1 - P.push * 0.3 * (0.4 - ppmin) - P.duel * Math.max(0, nf - 1));
     if (typeof rp.phys.T3pred === 'number') T3plan = rp.phys.T3pred;   // 顔ぶれからのペースの予想（pace_predict.py、実際との相関 0.47〜0.49）
     var vtop = H.every(function (h) { return typeof h.vtop === 'number'; }) ? H.map(function (h) { return h.vtop; }) : null;   // 出せる最高の速さ
+    var acap = null;                                                  // 上がりの上限: その馬の予想の上がり（能力・実績から）を agari_k 倍に広げ、agari_cap 秒速いまで
+    if (P.agari_cap !== null && typeof rp.phys.Am === 'number' && H.every(function (h) { return typeof h.agari === 'number'; })) {
+      var adm = H.reduce(function (a, h) { return a + h.agari; }, 0) / n;
+      acap = H.map(function (h) { return 600 / Math.max(rp.phys.Am + (h.agari - adm) * P.agari_k + adm - P.agari_cap, 25); });
+    }
     var lapV = null;                                                  // ラップの形: 先頭の残り600mまでの速さをハロンごとの緩急に沿わせる（合計は T3plan）
     if (rp.laps && rp.laps.length >= 5) {
       var Lp = rp.laps, nL = Lp.length, x0 = D - 200 * (nL - 1), lapX = [0], lapT = [0], lapSp = [], sumF = 0;
@@ -320,6 +325,7 @@
         var R = D - s[i], vd, bp = 0, sBefore = s[i], laneBefore = lane[i];
         if (R <= P.spurt) {
           vd = W[i] > 0 ? CS * R / Math.max(R - W[i], 1.0) : CS;          // 残り600m: 余力をゴールまでに使い切る速さ
+          if (acap) vd = Math.min(vd, acap[i]);                              // その馬の予想の上がりから決めた上限まで
           if (vtop && P.top_cap) vd = Math.min(vd, vtop[i] * P.top_cap);                  // ただし出せる最高の速さまで
         } else {
           if (s[i] < firstS) {
