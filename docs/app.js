@@ -437,6 +437,12 @@ function renderVerdictCard(d, idx) {
   if (av.kind === 'bet') {
     html += '<div class="line note">やめる目安: 本命の単勝オッズが8倍以上なら買わない（8倍未満ならオッズが動いても判断は変えない）</div>';
   }
+  // 考察（2026-09-30〜、買い目のあるレースだけ）: 予想の時点のデータ（race_notes.py の事実の一覧）だけから書いた短い文章。公開後は書き換えない
+  if (d.commentary && d.commentary.text) {
+    html += '<div class="commentary"><div class="commentary-h">考察（参考）</div>' +
+      String(d.commentary.text).split(/\n+/).map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') +
+      '<div class="note">※ 予想の時点で分かるデータ（前走・前々走の成績、各馬の点数の内訳、ペースの予想、コースの形）だけから書いた参考の文章です。</div></div>';
+  }
 
   // 当日チェック — 検証済みの物差しだけを、該当する時だけ出す。
   //   ・馬体重±10kg は削除(休み明け等で日常的に起き、検証済みの物差しでもないため雑音)
