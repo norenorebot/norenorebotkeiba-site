@@ -556,6 +556,17 @@ function bigSwaps(rows) {
   return out;
 }
 
+/* このレースの◎の決め方（2026-10-04）。サインが無いレースの◎は「勝つ確率1位」というだけで、特別な推奨ではないことをはっきり書く。
+   決め方は format_prediction.mark_axis と同じ順: 特別サイン → 実力差サイン → 試験運用のサイン → 勝つ確率1位。 */
+function axisRuleNote(d) {
+  var se = d.seihai || {}, tier = (d.verdict || {}).bet_tier;
+  if (se.fired) return 'このレースの◎は🌈特別サインが出た馬です。';
+  if (tier === 'gap_fukusho') return 'このレースは📐実力差サインで買うので、◎は「強さ」がいちばん高い馬です。';
+  if (tier === 'group_fukusho') return 'このレースは🧪上位一致サインで買うので、◎は「強さ」がいちばん高い馬です。';
+  if (tier === 'step_umaren') return 'このレースは🧪段差サインで買うので、◎は総合点（戦績・枠順の加点を除く）がいちばん高い馬です。';
+  return 'このレースはサインが出ていないので、◎は勝つ確率がいちばん高い馬という意味だけで、特別に推している馬ではありません。';
+}
+
 function renderHorsesTable(rows, d) {
   // 死んでいる列は出さない: オッズが全行空ならオッズ列ごと省く
   var hasOdds = rows.some(function (r) { return r.odds !== null && r.odds !== undefined; });
@@ -573,9 +584,9 @@ function renderHorsesTable(rows, d) {
   //   (format_prediction.mark_axis / MARK_RULE_FROM。公開済みの予想は従来の決め方のまま)。
   var newMark = String((d && d.predicted_at) || '') >= MARK_RULE_FROM;
   var trialMark = String((d && d.predicted_at) || '') >= TRIAL_FROM;
+  // 2026-10-04: 決め方を全部並べると「◎＝特別サインの馬」と読めてしまうので、このレースの◎の決め方だけを書く
   var html = trialMark
-    ? '<div class="note">◎は🌈特別サインの馬、🧪上位一致サインで買うレースは「強さ」がいちばん高い馬、' +
-      '🧪段差サインで買うレースは総合点（戦績・枠順の加点を除く）がいちばん高い馬、それ以外は勝つ確率がいちばん高い馬です。' +
+    ? '<div class="note">' + axisRuleNote(d) +
       '○▲△と表の並びは勝つ確率の高い順です（僅差だと順番が前後することがあります）。</div>'
     : newMark
     ? '<div class="note">◎は🌈特別サインの馬、📐実力差サインで買うレースは「強さ」がいちばん高い馬、' +
@@ -612,7 +623,8 @@ function renderHorsesTable(rows, d) {
     html += '<td class="c">' + esc(r.mark || '') + '</td>';
     // 馬番。実際に馬券を買うときに必要なので馬名の前に置く(競馬新聞と同じ 印→番→馬名)
     html += '<td class="c uma">' + esc(r.umaban || '') + '</td>';
-    html += '<td>' + esc(r.name) + style + sw + '</td>';
+    // 騎手名（2026-10-04〜。make_commands の出馬表から。無い予想は出さない）
+    html += '<td>' + esc(r.name) + style + sw + (r.jockey ? ' <span class="jk">' + esc(r.jockey) + '</span>' : '') + '</td>';
     if (hasChokyo) html += '<td class="seihai">' + esc(shortChokyo(r.chokyo)) + '</td>';
     html += '<td class="num">' + pct(r.mc_win) + '</td>';
     html += '<td class="num">' + pct(r.top3_est) + '</td>';
