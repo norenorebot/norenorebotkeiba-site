@@ -780,14 +780,34 @@ function renderDetail(d, rawReason) {
   var se = d.seihai || {}, g = d.gap || {};
   var html = '<div class="note">';
 
+  // 2026-10-12〜: 強さ・持ち時計・上がりの上位4頭（表示だけ。判定は従来どおり上位2頭の重なり）
+  var rk = d.rankings;
+  if (rk) {
+    var fmt = function (lst) {
+      return (lst || []).map(function (x, i) {
+        return (i + 1) + '位 ' + (x.umaban ? esc(x.umaban) + '番 ' : '') + esc(x.name);
+      }).join('　');
+    };
+    html += '「強さ」上位4頭: ' + (fmt(rk.strength) || '—') + '<br>';
+    html += '「持ち時計」上位4頭: ' + (rk.time ? fmt(rk.time) : '測れず（過去の記録がある馬が少ない）') + '<br>';
+    html += '「上がり」上位4頭: ' + (rk.agari ? fmt(rk.agari) : '測れず（過去の記録がある馬が少ない）') + '<br>';
+    if (rk.time && rk.agari) {
+      var top3 = function (lst) { return (lst || []).slice(0, 3).map(function (x) { return x.name; }); };
+      var t = top3(rk.time), a = top3(rk.agari);
+      var all3 = top3(rk.strength).filter(function (n) { return t.indexOf(n) >= 0 && a.indexOf(n) >= 0; });
+      if (all3.length) html += '3つとも3位以内: <b>' + all3.map(esc).join('・') + '</b><br>';
+    }
+    html += '<span class="dim">「上がり」は過去のレースの最後の3ハロンの速さから独自に推定した指標で、表示だけ（買い目の判定には使っていません）。</span><br>';
+  }
   // 「強さ」「持ち時計」の上位2頭と、その重なり(旧 gap内訳)
   var eloTop = (g.elo_top2 || []).map(esc).join('・');
-  html += '「強さ」上位2頭 = ' + (eloTop || '—');
+  if (!rk) html += '「強さ」上位2頭 = ' + (eloTop || '—');
   if (g.v27_missing) {
-    html += '　／　「持ち時計」= 測れず（' + esc(soften(g.v27_reason || 'データ不足')) + '）<br>';
+    if (!rk) html += '　／　「持ち時計」= 測れず（' + esc(soften(g.v27_reason || 'データ不足')) + '）<br>';
   } else {
-    html += '　／　「持ち時計」上位2頭 = ' + ((g.v27_top2 || []).map(esc).join('・') || '—') +
-            '　／　重なり ' + esc(g.overlap) + '頭<br>';
+    html += rk ? '判定に使う「強さ」と「持ち時計」の上位2頭の重なり: ' + esc(g.overlap) + '頭<br>'
+               : '　／　「持ち時計」上位2頭 = ' + ((g.v27_top2 || []).map(esc).join('・') || '—') +
+                 '　／　重なり ' + esc(g.overlap) + '頭<br>';
     html += '<span class="dim">2頭とも同じ＝評価が一致、0頭＝食い違い（食い違いは買いません）。</span><br>';
     // 2026-10-10: 本体の予想表の「時計」(本体の V27)とは作り方が違うことを明記（features_export の V27＝判定の基準 15/8 を決めた数字）
     html += '<span class="dim">「持ち時計」はこの判定のためにレース当日の時点で計算し直した値です。予想の計算の中の時計の点数とは少し違い、上がりは含みません。</span><br>';
