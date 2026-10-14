@@ -217,7 +217,7 @@
       "adjust": 428.08734636682425,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 1,
       "breakdown": {
         "env": 17.88697365065167,
         "time": 55.15594231791632,
@@ -269,7 +269,7 @@
       "adjust": 174.03007699252043,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 4,
       "breakdown": {
         "env": 67.91431782675951,
         "time": 34.01695426082739,
@@ -320,7 +320,7 @@
       "adjust": 85.68921437523977,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 3,
       "breakdown": {
         "env": -20.24181161278591,
         "time": 51.20892496674768,
@@ -371,7 +371,7 @@
       "adjust": -33.970036900288505,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 2,
       "breakdown": {
         "env": 5.863655728698205,
         "time": 16.867795075472657,
@@ -423,7 +423,7 @@
       "adjust": -570.5969523670306,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 6,
       "breakdown": {
         "env": -12.979520793673146,
         "time": -62.41393494038803,
@@ -475,7 +475,7 @@
       "adjust": -7.9731548360473425,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 5,
       "breakdown": {
         "env": -66.53806592364046,
         "time": -11.47568168057597,
@@ -696,5 +696,84 @@
         ]
       }
     }
+  },
+  "result": {
+    "status": "確定",
+    "reconciled_at": "2026-10-14",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "4東5",
+      "r": "8",
+      "race_name": "プラタナ･1勝",
+      "atama": 6
+    },
+    "finish": [
+      "ウィンターブリーズ",
+      "ユイノリュウギ",
+      "レガメデルヴェント"
+    ],
+    "horses": [
+      {
+        "name": "ウィンターブリーズ",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "リーチツモドライチ",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "レガメデルヴェント",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "ユイノリュウギ",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "ハイネスプラウド",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "ユイノヘラクレス",
+        "rank": 5,
+        "note": null
+      }
+    ],
+    "unmatched": [],
+    "bet": {
+      "tier": "step_umaren",
+      "axis": "ウィンターブリーズ",
+      "axis_rank": 1,
+      "axis_odds": 1.9,
+      "partners": [
+        "リーチツモドライチ",
+        "レガメデルヴェント",
+        "ユイノリュウギ"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 0.0,
+      "hit": null,
+      "payout": 0.0,
+      "note": "試験運用の買い目(種類ごとの集計は result.trials) / ◎の単勝が3.0倍未満 → 買わない条件(集計対象外)"
+    },
+    "trials": [
+      {
+        "kind": "step_umaren",
+        "axis": "ウィンターブリーズ",
+        "axis_rank": 1,
+        "axis_odds": 1.9,
+        "cost": 0.0,
+        "hit": null,
+        "payout": 0.0,
+        "note": "◎の単勝が3.0倍未満 → 買わない条件(集計対象外)",
+        "partner": "リーチツモドライチ"
+      }
+    ]
   }
 }
