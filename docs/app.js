@@ -457,6 +457,12 @@ function renderVerdictCard(d, idx) {
     checks.push('☐馬場が重・不良に悪化したら <b>' + kishin.map(esc).join('・') +
                 '</b> に注意（道悪(みちわる)で一変する条件を満たしています）');
   }
+  // 2026-10-14: ◎が休み明け（前走から3か月以上）なら当日の馬体重を確認（BODY_WEIGHT_20261014.md:
+  //   休み明けで−10kg以下の◎は3着内 約50%（ふつうの◎ 約60%）、複勝回収も 58〜59%（2021〜26 の両期間）。体重は発走の約1時間前に発表）
+  var axh = (d.horses || []).filter(function (x) { return x.mark === '◎'; })[0];
+  if (axh && ((axh.breakdown || {}).career_flags || []).indexOf('休み明け') >= 0) {
+    checks.push('☐◎<b>' + esc(axh.name) + '</b>は休み明け。当日の馬体重が前走から<b>10kg以上減っていたら見送り</b>（過去の◎の3着内は約50%、ふつうは約60%）');
+  }
   if (checks.length) {
     html += '<div class="checklist">⏰ 当日チェック: ' + checks.join('　') + '</div>';
   }
