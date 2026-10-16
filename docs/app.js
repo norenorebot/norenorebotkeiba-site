@@ -638,8 +638,10 @@ function renderHorsesTable(rows, d) {
     if (hasChokyo) {
       if (r.chokyo_rank !== undefined) {
         var ck = r.chokyo_rank || {pct: 999, n: 0, rank: 0, loc: '', kind: '', days: 14};
-        var pctTxt = ck.pct < 0.1 ? '0.1%未満' : (ck.pct < 1 ? ck.pct.toFixed(1) : Math.round(ck.pct)) + '%';
-        html += '<td class="seihai">' + (r.chokyo ? '🌟' : '') + (ckShow(r) ? '上位' + esc(pctTxt) +
+        var pTxt = function (v) { return v < 0.1 ? '0.1%未満' : (v < 1 ? v.toFixed(1) : Math.round(v)) + '%'; };
+        // 終い（その1本の最後の1F、同じ母数の中の順位）。2026-10-17〜
+        var f1Txt = ck.f1_pct !== undefined ? '・終い上位' + pTxt(ck.f1_pct) : '';
+        html += '<td class="seihai">' + (r.chokyo ? '🌟' : '') + (ckShow(r) ? '上位' + esc(pTxt(ck.pct)) + esc(f1Txt) +
                 '<br><span class="jk">' + esc(ck.loc + ck.kind + ' ' + (ck.days || 14) + '日間 ' + ck.n.toLocaleString() + '本中' + ck.rank.toLocaleString() + '位') + '</span>' : '') + '</td>';
       } else {
         html += '<td class="seihai">' + esc(shortChokyo(r.chokyo)) + '</td>';   // 2026-10-16 以前の予想（倍率の表示）
