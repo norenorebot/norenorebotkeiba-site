@@ -581,7 +581,9 @@ function renderHorsesTable(rows, d) {
   var swaps = bigSwaps(rows);
   var hasSwap = rows.some(function (r) { return swaps[r.name]; });
   // 調教は「このシステムで唯一 独立した価値が検証済みの軸」なので、該当馬がいれば列を出す
-  var hasChokyo = rows.some(function (r) { return r.chokyo; });
+  // 2026-10-17〜: 調教の順位（同じ日・同じトレセン・同じコースの中で何位か）。上位30%以内の馬だけ出す
+  var ckShow = function (r) { return r.chokyo_rank && r.chokyo_rank.pct <= 30; };
+  var hasChokyo = rows.some(function (r) { return r.chokyo || ckShow(r); });
 
   // ◎と表の並びは別の決め方なので先に断る(2026-09-26改訂)。
   //   ◎ = 🌈特別サインの馬、出ていなければ「強さ」(実力の点数)1位(format_prediction.build_race)。
@@ -633,7 +635,15 @@ function renderHorsesTable(rows, d) {
     html += '<td class="c uma">' + esc(r.umaban || '') + '</td>';
     // 騎手名（2026-10-04〜。make_commands の出馬表から。無い予想は出さない）
     html += '<td>' + esc(r.name) + style + sw + (r.jockey ? ' <span class="jk">' + esc(r.jockey) + '</span>' : '') + '</td>';
-    if (hasChokyo) html += '<td class="seihai">' + esc(shortChokyo(r.chokyo)) + '</td>';
+    if (hasChokyo) {
+      if (r.chokyo_rank !== undefined) {
+        var ck = r.chokyo_rank;
+        html += '<td class="seihai">' + (r.chokyo ? '🌟' : '') + (ckShow(r) ? '上位' + esc(ck.pct < 1 ? ck.pct.toFixed(1) : Math.round(ck.pct)) + '%' +
+                '<br><span class="jk">' + esc(ck.loc + ck.kind + ' ' + ck.date + ' ' + ck.n + '本中' + ck.rank + '位') + '</span>' : '') + '</td>';
+      } else {
+        html += '<td class="seihai">' + esc(shortChokyo(r.chokyo)) + '</td>';   // 2026-10-16 以前の予想（倍率の表示）
+      }
+    }
     html += '<td class="num">' + pct(r.mc_win) + '</td>';
     html += '<td class="num">' + pct(r.top3_est) + '</td>';
     html += '<td class="num col-drop">' + num(r.jitsuryoku) + '</td>';
