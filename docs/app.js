@@ -641,7 +641,10 @@ function renderHorsesTable(rows, d) {
         var pTxt = function (v) { return v < 0.1 ? '0.1%未満' : (v < 1 ? v.toFixed(1) : Math.round(v)) + '%'; };
         // 終い（その1本の最後の1F、同じ母数の中の順位）。2026-10-17〜
         var f1Txt = ck.f1_pct !== undefined ? '・終い上位' + pTxt(ck.f1_pct) : '';
-        html += '<td class="seihai">' + (r.chokyo ? '🌟' : '') + (ckShow(r) ? '上位' + esc(pTxt(ck.pct)) + esc(f1Txt) +
+        // 全体が上位5%以内でも終いが甘い馬は普通の調教の馬と同じ（SHIMAI_20261016: 終い15%超で3着内19〜20%、40%超は市場比−1.6/−3.7pt）
+        var amai = (ck.f1_pct !== undefined && ck.pct <= 5 && ck.f1_pct > 15)
+          ? ' <span class="jk">（終い甘め' + (ck.f1_pct > 40 ? '・割引' : '') + '）</span>' : '';
+        html += '<td class="seihai">' + (r.chokyo ? '🌟' : '') + (ckShow(r) ? '上位' + esc(pTxt(ck.pct)) + esc(f1Txt) + amai +
                 '<br><span class="jk">' + esc(ck.loc + ck.kind + ' ' + (ck.days || 14) + '日間 ' + ck.n.toLocaleString() + '本中' + ck.rank.toLocaleString() + '位') + '</span>' : '') + '</td>';
       } else {
         html += '<td class="seihai">' + esc(shortChokyo(r.chokyo)) + '</td>';   // 2026-10-16 以前の予想（倍率の表示）
