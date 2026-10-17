@@ -312,6 +312,17 @@ function renderDaySummary(rows) {
     html += '</ul>';
     html += '<div class="note">見送り: <b>' + skips.length + '</b> 件</div>';
   }
+  // 2026-10-18〜: 🎯 自信上位（折りたたみ）
+  var cl = [];
+  rows.forEach(function (x) {
+    var c = confPick(x.d);
+    if (c) cl.push('<li><a href="#' + esc(raceAnchor(x.idx)) + '">' + esc(venueLabel(x.d)) + (x.d.race && x.d.race.no ? esc(x.d.race.no) + 'R' : '') + '</a>' +
+                   '　' + (c.umaban ? esc(c.umaban) + '番 ' : '') + esc(c.name) + '　<span class="note">勝つ確率 ' + pct(c.mc_win) + '</span></li>');
+  });
+  if (cl.length) {
+    html += '<details class="note ks-box"><summary>🎯 自信上位 ' + cl.length + 'レース</summary>' +
+            '<div class="dim">勝つ確率1位の馬が45%以上のレース。過去は その馬の勝率 約52%・3着以内 約88%（ほぼ1番人気で配当は安め）。記録中の目安で、買いの合図ではありません。</div><ul class="ds-list">' + cl.join('') + '</ul></details>';
+  }
   // 2026-10-17〜: 検証中の注目（買い目とは別枠）
   var kl = [];
   rows.forEach(function (x) {
@@ -412,6 +423,11 @@ function renderVerdictCard(d, idx) {
           '　<span class="note">[' + esc(venueLabel(d)) + ': ' + esc(vgLabel) + ']</span></div>';
   html += incompleteNote(d);
   html += '<div class="line">判定: <span class="' + av.cls + '">' + esc(av.label) + '</span></div>';
+  var cp = confPick(d);
+  if (cp) {
+    html += '<div class="line">🎯 自信上位: ' + (cp.umaban ? esc(cp.umaban) + '番 ' : '') + '<b>' + esc(cp.name) + '</b>（勝つ確率 ' + pct(cp.mc_win) + '）' +
+            ' <span class="note">勝つ確率45%以上のレース。過去は この馬の勝率 約52%・3着以内 約88%。人気でも強い本命の目安で配当は安め。記録中の目安で、買いの合図ではありません</span></div>';
+  }
   // plainReason は動的部分に esc 済みの安全なHTMLを返す(強調と馬名を含むため二重エスケープしない)
   html += '<div class="line">' + plainReason(d) + '</div>';
 
@@ -810,6 +826,17 @@ function renderLearningProfile(lp) {
   html += '<span class="note">※ バーが多い＝その項目を大きく計算に使った、というだけの目安です。' +
           '数字の大小が「当たりやすさ」を保証するものではありません。</span></div>';
   return html;
+}
+
+/* 🎯 自信上位（2026-10-18〜）: 勝つ確率1位の馬の勝つ確率が45%以上のレース。v5（B-2 v5）の予想だけ（確率の出方が変わったため）。
+   過去（2024〜26、v5、年ごとに確かめ）: 該当はレースの約8%、その馬の勝率 約52%・3着以内 約88%。ほぼ1番人気で配当は安め。表示だけ・買い目は変えない。 */
+var CONF_TH = 0.45;
+function confPick(d) {
+  var dc = ((d && d.model) || {}).display_calib || {};
+  if (!dc.b2v5) return null;
+  var top = null;
+  (d.horses || []).forEach(function (h) { if (h.mc_win != null && (!top || h.mc_win > top.mc_win)) top = h; });
+  return (top && top.mc_win >= CONF_TH) ? top : null;
 }
 
 /* 検証中の注目（2026-10-17〜、METRIC_GAP_20261017）。調教の順位がある予想だけ。
