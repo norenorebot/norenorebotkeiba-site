@@ -321,7 +321,9 @@ function renderDaySummary(rows) {
     });
   });
   if (kl.length) {
-    html += '<div class="note" style="margin-top:.6em">🔍 検証中の注目（記録を付けている途中の条件で、<b>買いの合図ではありません</b>）</div><ul class="ds-list">' + kl.join('') + '</ul>';
+    // 折りたたみ（押すと開く）。トップで目立たせない
+    html += '<details class="note ks-box"><summary>🔍 検証中の注目 ' + kl.length + '頭（押すと表示・買いの合図ではありません）</summary>' +
+            '<div class="dim">記録を付けている途中の条件です。買い目の判定には使っていません。</div><ul class="ds-list">' + kl.join('') + '</ul></details>';
   }
   html += '</div>';
   return html;
