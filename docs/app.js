@@ -312,6 +312,17 @@ function renderDaySummary(rows) {
     html += '</ul>';
     html += '<div class="note">見送り: <b>' + skips.length + '</b> 件</div>';
   }
+  // 2026-10-17〜: 検証中の注目（買い目とは別枠）
+  var kl = [];
+  rows.forEach(function (x) {
+    kenshoPicks(x.d).forEach(function (k) {
+      kl.push('<li><a href="#' + esc(raceAnchor(x.idx)) + '">' + esc(venueLabel(x.d)) + (x.d.race && x.d.race.no ? esc(x.d.race.no) + 'R' : '') + '</a>' +
+              '　' + (k.umaban ? esc(k.umaban) + '番 ' : '') + esc(k.name) + '　<span class="note">' + esc(k.label) + '</span></li>');
+    });
+  });
+  if (kl.length) {
+    html += '<div class="note" style="margin-top:.6em">🔍 検証中の注目（記録を付けている途中の条件で、<b>買いの合図ではありません</b>）</div><ul class="ds-list">' + kl.join('') + '</ul>';
+  }
   html += '</div>';
   return html;
 }
@@ -576,6 +587,7 @@ function axisRuleNote(d) {
 }
 
 function renderHorsesTable(rows, d) {
+  var kNames = kenshoPicks(d || {}).map(function (k) { return k.name; });   // 🔍 検証中の注目（表示だけ）
   // 死んでいる列は出さない: オッズが全行空ならオッズ列ごと省く
   var hasOdds = rows.some(function (r) { return r.odds !== null && r.odds !== undefined; });
   var swaps = bigSwaps(rows);
@@ -634,7 +646,7 @@ function renderHorsesTable(rows, d) {
     // 馬番。実際に馬券を買うときに必要なので馬名の前に置く(競馬新聞と同じ 印→番→馬名)
     html += '<td class="c uma">' + esc(r.umaban || '') + '</td>';
     // 騎手名（2026-10-04〜。make_commands の出馬表から。無い予想は出さない）
-    html += '<td>' + esc(r.name) + style + sw + (r.jockey ? ' <span class="jk">' + esc(r.jockey) + '</span>' : '') + '</td>';
+    html += '<td>' + esc(r.name) + (kNames.indexOf(r.name) >= 0 ? ' <span title="検証中の注目（買いの合図ではありません）">🔍</span>' : '') + style + sw + (r.jockey ? ' <span class="jk">' + esc(r.jockey) + '</span>' : '') + '</td>';
     if (hasChokyo) {
       if (r.chokyo_rank !== undefined) {
         var ck = r.chokyo_rank || {pct: 999, n: 0, rank: 0, loc: '', kind: '', days: 14};
@@ -798,6 +810,31 @@ function renderLearningProfile(lp) {
   return html;
 }
 
+/* 検証中の注目（2026-10-17〜、METRIC_GAP_20261017）。調教の順位がある予想だけ。
+   ① 強さ1位かつ持ち時計1位 × 調教の終い上位1%以内、② 上がり1位 × 終い上位0.3%以内。表示だけ。 */
+function kenshoPicks(d) {
+  var rk = d.rankings, hs = d.horses || [];
+  if (!rk || !hs.some(function (h) { return h.chokyo_rank !== undefined; })) return [];
+  var tops = function (lst) {
+    if (!lst || !lst.length) return [];
+    return lst.filter(function (x) { return x.value === lst[0].value; }).map(function (x) { return x.name; });
+  };
+  var sT = tops(rk.strength), tT = tops(rk.time), aT = tops(rk.agari);
+  var pTx = function (v) { return v < 0.1 ? '0.1%未満' : (v < 1 ? v.toFixed(1) : Math.round(v)) + '%'; };
+  var out = [];
+  hs.forEach(function (h) {
+    var c = h.chokyo_rank;
+    if (!c || c.f1_pct === undefined) return;
+    if (sT.indexOf(h.name) >= 0 && tT.indexOf(h.name) >= 0 && c.f1_pct <= 1)
+      out.push({name: h.name, umaban: h.umaban, kind: 1, label: '強さ1位・持ち時計1位・調教の終い上位' + pTx(c.f1_pct),
+                past: '過去の同じ条件の馬は 1着 約35%・3着以内 約7割。人気になりやすい'});
+    if (aT.indexOf(h.name) >= 0 && c.f1_pct <= 0.3)
+      out.push({name: h.name, umaban: h.umaban, kind: 2, label: '上がり1位・調教の終い上位' + pTx(c.f1_pct),
+                past: '過去の同じ条件の馬は 1着 約26%・3着以内 約5割'});
+  });
+  return out;
+}
+
 /* くわしい数字(競馬に詳しい方向け)。
    以前は開発用の生値(較正温度T・bet_tier・overlap 等)を並べていたが、開こうとする
    読み手に価値が薄いので平文に入れ替えた(2026-07-27)。内部識別子は出さない。 */
@@ -822,31 +859,13 @@ function renderDetail(d, rawReason) {
       var all3 = top3(rk.strength).filter(function (n) { return t.indexOf(n) >= 0 && a.indexOf(n) >= 0; });
       if (all3.length) html += '3つとも3位以内: <b>' + all3.map(esc).join('・') + '</b><br>';
     }
-    // 2026-10-17〜: 検証中の注目（METRIC_GAP_20261017。表示だけ・買い目の判定には使わない。調教の順位がある予想だけ）
-    var hs = d.horses || [];
-    if (hs.some(function (h) { return h.chokyo_rank !== undefined; })) {
-      var tops = function (lst) {
-        if (!lst || !lst.length) return [];
-        return lst.filter(function (x) { return x.value === lst[0].value; }).map(function (x) { return x.name; });
-      };
-      var sT = tops(rk.strength), tT = tops(rk.time), aT = tops(rk.agari);
-      var pTx = function (v) { return v < 0.1 ? '0.1%未満' : (v < 1 ? v.toFixed(1) : Math.round(v)) + '%'; };
-      var notes = [];
-      hs.forEach(function (h) {
-        var c = h.chokyo_rank;
-        if (!c || c.f1_pct === undefined) return;
-        var who = (h.umaban ? esc(h.umaban) + '番 ' : '') + '<b>' + esc(h.name) + '</b>';
-        if (sT.indexOf(h.name) >= 0 && tT.indexOf(h.name) >= 0 && c.f1_pct <= 1)
-          notes.push(who + '：強さ1位・持ち時計1位・調教の終い上位' + pTx(c.f1_pct) +
-                     '<span class="dim">（過去の同じ条件の馬は 1着 約35%・3着以内 約7割。人気になりやすい）</span>');
-        if (aT.indexOf(h.name) >= 0 && c.f1_pct <= 0.3)
-          notes.push(who + '：上がり1位・調教の終い上位' + pTx(c.f1_pct) +
-                     '<span class="dim">（過去の同じ条件の馬は 1着 約26%・3着以内 約5割）</span>');
-      });
-      if (notes.length) {
-        html += '🔍 検証中の注目: ' + notes.join('<br>　') + '<br>' +
-                '<span class="dim">2021〜26年のデータで良かった組み合わせを、これからのレースで確かめている途中です。買いの合図ではありません（買い目の判定には使っていません）。</span><br>';
-      }
+    // 2026-10-17〜: 検証中の注目（METRIC_GAP_20261017。表示だけ・買い目の判定には使わない）
+    var kp = kenshoPicks(d);
+    if (kp.length) {
+      html += '🔍 検証中の注目: ' + kp.map(function (k) {
+        return (k.umaban ? esc(k.umaban) + '番 ' : '') + '<b>' + esc(k.name) + '</b>：' + esc(k.label) + '<span class="dim">（' + esc(k.past) + '）</span>';
+      }).join('<br>　') + '<br>' +
+      '<span class="dim">2021〜26年のデータで良かった組み合わせを、これからのレースで確かめている途中です。買いの合図ではありません（買い目の判定には使っていません）。</span><br>';
     }
     html += '<span class="dim">「上がり」は過去のレースの最後の3ハロンの速さから独自に推定した指標で、表示だけ（買い目の判定には使っていません）。</span><br>';
   }
