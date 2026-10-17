@@ -233,12 +233,13 @@ var TIER_LABEL = {
   gap_fukusho: '複勝',
   seihai_umaren: '馬連3点',
   group_fukusho: '複勝（試験運用）',
-  step_umaren: '馬連1点（試験運用）'
+  step_umaren: '馬連1点（試験運用）',
+  wide3: 'ワイド3点（試験運用）'
 };
 /* 買い目の種類 → サインの名前(2026-09-28 試験運用の2つを追加。📐実力差サインは研究終了で新しい予想には出ない) */
 var SIGN_LABEL = {
   seihai_fukusho: '🌈特別サイン', seihai_umaren: '🌈特別サイン', gap_fukusho: '📐実力差サイン',
-  group_fukusho: '🧪上位一致サイン', step_umaren: '🧪段差サイン'
+  group_fukusho: '🧪上位一致サイン', step_umaren: '🧪段差サイン', wide3: '🧪3頭ワイド'
 };
 var TRIAL_FROM = '2026-09-28T00:00:00';
 function renderResultLine(d) {
@@ -600,6 +601,7 @@ function axisRuleNote(d) {
   if (se.fired) return 'このレースの◎は🌈特別サインが出た馬です。';
   if (tier === 'gap_fukusho') return 'このレースは📐実力差サインで買うので、◎は「強さ」がいちばん高い馬です。';
   if (tier === 'group_fukusho') return 'このレースは🧪上位一致サインで買うので、◎は「強さ」がいちばん高い馬です。';
+  if (tier === 'wide3') return 'このレースは🧪3頭ワイドで買うので、◎は3頭の中で勝つ確率がいちばん高い馬です。';
   if (tier === 'step_umaren') return 'このレースは🧪段差サインで買うので、◎は総合点（戦績・枠順の加点を除く）がいちばん高い馬です。';
   return 'このレースはサインが出ていないので、◎は勝つ確率がいちばん高い馬という意味だけで、特別に推している馬ではありません。';
 }
@@ -1052,7 +1054,7 @@ function renderForward(fw) {
     return '<p class="note">前向き実績はまだありません（結果の突合が未実行）。</p>';
   }
   var s = fw.series || {};
-  var keys = ['seihai_fukusho', 'seihai_umaren', 'group_fukusho', 'step_umaren', 'gap_fukusho'];
+  var keys = ['seihai_fukusho', 'group_fukusho', 'wide3', 'step_umaren', 'seihai_umaren', 'gap_fukusho'];
   // 研究終了の系列(retired)はグレーで出す。試験運用(trial)は件数が少ないうちは参考。
   var rowCls = function (v) { return v && v.retired ? ' class="retired"' : ''; };
   var html = '';
