@@ -817,10 +817,8 @@ function renderLearningProfile(lp) {
 function kenshoPicks(d) {
   var rk = d.rankings, hs = d.horses || [];
   if (!rk || !hs.some(function (h) { return h.chokyo_rank !== undefined; })) return [];
-  var tops = function (lst) {
-    if (!lst || !lst.length) return [];
-    return lst.filter(function (x) { return x.value === lst[0].value; }).map(function (x) { return x.name; });
-  };
+  // 1位は表示の順どおり先頭の1頭だけ（data.json の値は小数1桁に丸めてあるので、同じ値に見えても先頭が本当の1位）
+  var tops = function (lst) { return lst && lst.length ? [lst[0].name] : []; };
   var sT = tops(rk.strength), tT = tops(rk.time), aT = tops(rk.agari);
   var pTx = function (v) { return v < 0.1 ? '0.1%未満' : (v < 1 ? v.toFixed(1) : Math.round(v)) + '%'; };
   var out = [];
