@@ -232,7 +232,7 @@
       "adjust": 559.2405628363633,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 3,
       "breakdown": {
         "env": 16.040081018693854,
         "time": 48.66390322211208,
@@ -298,7 +298,7 @@
       "adjust": 362.593338843365,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 1,
       "breakdown": {
         "env": -15.111248542807402,
         "time": 22.3243176480737,
@@ -364,7 +364,7 @@
       "adjust": -4.592613022486603,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 2,
       "breakdown": {
         "env": 50.125703783087665,
         "time": 33.26463234234165,
@@ -429,7 +429,7 @@
       "adjust": -86.17299576342657,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 4,
       "breakdown": {
         "env": -20.97117589708222,
         "time": 40.1152824598349,
@@ -495,7 +495,7 @@
       "adjust": -37.16078818841561,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 5,
       "breakdown": {
         "env": 52.19544707576992,
         "time": 4.247903177891296,
@@ -561,7 +561,7 @@
       "adjust": -199.25486902367652,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 6,
       "breakdown": {
         "env": -30.656913024700827,
         "time": 15.686698367309432,
@@ -613,7 +613,7 @@
       "adjust": -234.29250492904123,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 7,
       "breakdown": {
         "env": -17.4173428675864,
         "time": -58.119944758875135,
@@ -723,10 +723,80 @@
     }
   ],
   "result": {
-    "status": "結果待ち",
+    "status": "確定",
     "reconciled_at": "2026-10-18",
-    "reason": "結果データ未更新(最新 20261017 < 20261018)",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "4京7",
+      "r": "9",
+      "race_name": "宝ケ池特別",
+      "atama": 7
+    },
+    "finish": [
+      "リアンマヒナ",
+      "リカントロポ",
+      "サーディンラン"
+    ],
+    "horses": [
+      {
+        "name": "サーディンラン",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "リアンマヒナ",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "リカントロポ",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "テーオーシュタイン",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "コンテネレッツア",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "アロンソア",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "アメリカンポリス",
+        "rank": 7,
+        "note": null
+      },
+      {
+        "name": "ルトゥール",
+        "rank": null,
+        "note": "競走除外"
+      }
+    ],
     "unmatched": [],
-    "unmatched_n": 8
+    "bet": {
+      "tier": "none",
+      "axis": "サーディンラン",
+      "axis_rank": 3,
+      "axis_odds": 2.0,
+      "partners": [
+        "リアンマヒナ",
+        "リカントロポ",
+        "テーオーシュタイン"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 0.0,
+      "hit": null,
+      "payout": 0.0,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない"
+    },
+    "trials": []
   }
 }

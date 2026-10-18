@@ -251,7 +251,7 @@
       "adjust": 566.9668717138522,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 2,
       "breakdown": {
         "env": -2.097240199429052,
         "time": 43.38511660809737,
@@ -319,7 +319,7 @@
       "adjust": 379.7549989581523,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 3,
       "breakdown": {
         "env": -21.692570759758155,
         "time": 53.83897042426367,
@@ -381,7 +381,7 @@
       "adjust": 360.4959047977313,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 1,
       "breakdown": {
         "env": -3.751061117951167,
         "time": 62.69464498267125,
@@ -443,7 +443,7 @@
       "adjust": 121.76161783995349,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 4,
       "breakdown": {
         "env": 17.914547532436472,
         "time": 0.9412838487137527,
@@ -509,7 +509,7 @@
       "adjust": -328.3266176382865,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 5,
       "breakdown": {
         "env": -62.89895448604216,
         "time": -31.96112658844741,
@@ -571,7 +571,7 @@
       "adjust": -371.4623396486038,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 6,
       "breakdown": {
         "env": -35.158089924369165,
         "time": -15.755459441937564,
@@ -639,7 +639,7 @@
       "adjust": -732.9356606877325,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 7,
       "breakdown": {
         "env": 20.578421553772955,
         "time": -29.783429833361247,
@@ -882,10 +882,107 @@
     }
   },
   "result": {
-    "status": "結果待ち",
+    "status": "確定",
     "reconciled_at": "2026-10-18",
-    "reason": "結果データ未更新(最新 20261017 < 20261018)",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "4京7",
+      "r": "2",
+      "race_name": "２歳未勝利",
+      "atama": 7
+    },
+    "finish": [
+      "アイゼンフォルク",
+      "リズムオブサンダー",
+      "アレストラウム"
+    ],
+    "horses": [
+      {
+        "name": "リズムオブサンダー",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "アレストラウム",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "アイゼンフォルク",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "ダノンチャンピオン",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "ボードゥロレーヌ",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "スナークルーベンス",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "アテンド",
+        "rank": 7,
+        "note": null
+      }
+    ],
     "unmatched": [],
-    "unmatched_n": 7
+    "bet": {
+      "tier": "step_umaren",
+      "axis": "リズムオブサンダー",
+      "axis_rank": 2,
+      "axis_odds": 2.3,
+      "partners": [
+        "アレストラウム",
+        "アイゼンフォルク",
+        "ダノンチャンピオン"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 0.0,
+      "hit": null,
+      "payout": 0.0,
+      "note": "試験運用の買い目(種類ごとの集計は result.trials) / ◎の単勝が3.0倍未満 → 買わない条件(集計対象外)"
+    },
+    "trials": [
+      {
+        "kind": "step_umaren",
+        "axis": "リズムオブサンダー",
+        "axis_rank": 2,
+        "axis_odds": 2.3,
+        "cost": 0.0,
+        "hit": null,
+        "payout": 0.0,
+        "note": "◎の単勝が3.0倍未満 → 買わない条件(集計対象外)",
+        "partner": "アレストラウム"
+      },
+      {
+        "kind": "wide3",
+        "axis": "リズムオブサンダー",
+        "axis_rank": 2,
+        "axis_odds": 2.3,
+        "cost": 300.0,
+        "hit": true,
+        "payout": 600.0,
+        "note": "",
+        "horses": [
+          "リズムオブサンダー",
+          "アレストラウム",
+          "アイゼンフォルク"
+        ],
+        "pairs_hit": [
+          "0407",
+          "0104",
+          "0107"
+        ]
+      }
+    ]
   }
 }

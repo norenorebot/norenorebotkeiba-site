@@ -227,7 +227,7 @@
       "adjust": 373.24961135015405,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 1,
       "breakdown": {
         "env": 8.71334161092949,
         "time": 24.760922685927547,
@@ -291,7 +291,7 @@
       "adjust": 192.88558526034058,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 3,
       "breakdown": {
         "env": 49.30082324731407,
         "time": 4.024644307268464,
@@ -355,7 +355,7 @@
       "adjust": 257.0934390418074,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 6,
       "breakdown": {
         "env": 92.0229912652876,
         "time": -48.9097970240266,
@@ -420,7 +420,7 @@
       "adjust": 103.85519387305908,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 2,
       "breakdown": {
         "env": 42.110217553935186,
         "time": -21.89453407510583,
@@ -484,7 +484,7 @@
       "adjust": 60.77390301438868,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 8,
       "breakdown": {
         "env": 38.021808427844036,
         "time": 69.94060940927356,
@@ -549,7 +549,7 @@
       "adjust": -125.25961610559466,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 4,
       "breakdown": {
         "env": -15.149354290477902,
         "time": 21.805632162224143,
@@ -613,7 +613,7 @@
       "adjust": -215.05421182631267,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 7,
       "breakdown": {
         "env": -12.76695131559319,
         "time": 33.351308825351374,
@@ -679,7 +679,7 @@
       "adjust": -432.12454261017206,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 5,
       "breakdown": {
         "env": -70.19270586985277,
         "time": 0.28121370908730636,
@@ -720,10 +720,80 @@
     }
   ],
   "result": {
-    "status": "結果待ち",
+    "status": "確定",
     "reconciled_at": "2026-10-18",
-    "reason": "結果データ未更新(最新 20261017 < 20261018)",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "4東7",
+      "r": "6",
+      "race_name": "２歳１勝ｸﾗｽ",
+      "atama": 8
+    },
+    "finish": [
+      "ボーデコール",
+      "ソードオブステート",
+      "ルースソラール"
+    ],
+    "horses": [
+      {
+        "name": "ボーデコール",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "ルースソラール",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "タクティシアン",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "ソードオブステート",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "セタキト",
+        "rank": 8,
+        "note": null
+      },
+      {
+        "name": "ラヴィサンエール",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "ダマスク",
+        "rank": 7,
+        "note": null
+      },
+      {
+        "name": "ライーリーアース",
+        "rank": 5,
+        "note": null
+      }
+    ],
     "unmatched": [],
-    "unmatched_n": 8
+    "bet": {
+      "tier": "none",
+      "axis": "ボーデコール",
+      "axis_rank": 1,
+      "axis_odds": 2.0,
+      "partners": [
+        "ルースソラール",
+        "タクティシアン",
+        "ソードオブステート"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 0.0,
+      "hit": null,
+      "payout": 0.0,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない"
+    },
+    "trials": []
   }
 }

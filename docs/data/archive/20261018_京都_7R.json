@@ -232,7 +232,7 @@
       "adjust": 514.915923701345,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 3,
       "breakdown": {
         "env": 35.61688740060379,
         "time": 46.66062815808238,
@@ -296,7 +296,7 @@
       "adjust": 125.68972230356167,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 7,
       "breakdown": {
         "env": 8.911419974528854,
         "time": 17.3104466132136,
@@ -362,7 +362,7 @@
       "adjust": 77.99151493854197,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 4,
       "breakdown": {
         "env": 29.726701515087143,
         "time": 6.031573686508022,
@@ -427,7 +427,7 @@
       "adjust": -41.15752573552345,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 6,
       "breakdown": {
         "env": 42.21849274197157,
         "time": 1.166803162935821,
@@ -491,7 +491,7 @@
       "adjust": 27.432773143538043,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 5,
       "breakdown": {
         "env": 8.148523458267164,
         "time": 34.379677663013865,
@@ -558,7 +558,7 @@
       "adjust": 13.087950900302985,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 1,
       "breakdown": {
         "env": 22.195029124557564,
         "time": 4.821070833874319,
@@ -625,7 +625,7 @@
       "adjust": 164.55707384387574,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 2,
       "breakdown": {
         "env": 66.91808132306025,
         "time": 0.812493159892199,
@@ -692,7 +692,7 @@
       "adjust": -323.5122807253765,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 8,
       "breakdown": {
         "env": -14.959011285509234,
         "time": -16.365614044538624,
@@ -756,7 +756,7 @@
       "adjust": -274.1609051390219,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 9,
       "breakdown": {
         "env": 2.7081319869176355,
         "time": -11.457079232981508,
@@ -795,10 +795,85 @@
     }
   ],
   "result": {
-    "status": "結果待ち",
+    "status": "確定",
     "reconciled_at": "2026-10-18",
-    "reason": "結果データ未更新(最新 20261017 < 20261018)",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "4京7",
+      "r": "7",
+      "race_name": "３歳以上１勝ｸﾗｽ",
+      "atama": 9
+    },
+    "finish": [
+      "タガノアルトゥーラ",
+      "バリオス",
+      "エイシンマールス"
+    ],
+    "horses": [
+      {
+        "name": "エイシンマールス",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "ジャカルタバオ",
+        "rank": 7,
+        "note": null
+      },
+      {
+        "name": "ゴンタ",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "ゴールドコット",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "アンクルブラック",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "タガノアルトゥーラ",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "バリオス",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "ビナハイバン",
+        "rank": 8,
+        "note": null
+      },
+      {
+        "name": "シゲルオトヒメ",
+        "rank": 9,
+        "note": null
+      }
+    ],
     "unmatched": [],
-    "unmatched_n": 9
+    "bet": {
+      "tier": "none",
+      "axis": "エイシンマールス",
+      "axis_rank": 3,
+      "axis_odds": 2.9,
+      "partners": [
+        "ジャカルタバオ",
+        "ゴンタ",
+        "タガノアルトゥーラ"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 0.0,
+      "hit": null,
+      "payout": 0.0,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない"
+    },
+    "trials": []
   }
 }

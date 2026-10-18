@@ -241,7 +241,7 @@
       "adjust": 571.325285243727,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 1,
       "breakdown": {
         "env": 12.993999678648606,
         "time": 23.089263405894737,
@@ -307,7 +307,7 @@
       "adjust": 112.38312516218048,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 2,
       "breakdown": {
         "env": -32.36543439033687,
         "time": 43.307645204039005,
@@ -369,7 +369,7 @@
       "adjust": 39.699716311798966,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 3,
       "breakdown": {
         "env": -31.297364146102623,
         "time": 37.60226479052616,
@@ -433,7 +433,7 @@
       "adjust": 17.998258482610936,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 6,
       "breakdown": {
         "env": -49.97365058777498,
         "time": 17.535418205603374,
@@ -497,7 +497,7 @@
       "adjust": -333.19976089168154,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 4,
       "breakdown": {
         "env": -7.828285152625369,
         "time": 13.657299250475473,
@@ -561,7 +561,7 @@
       "adjust": -235.77452919269354,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 5,
       "breakdown": {
         "env": -36.207400743982674,
         "time": -3.483746473011651,
@@ -627,7 +627,7 @@
       "adjust": -262.68487060725283,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 8,
       "breakdown": {
         "env": -19.89568186548803,
         "time": -10.804813133089556,
@@ -692,7 +692,7 @@
       "adjust": -287.7503145514776,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 7,
       "breakdown": {
         "env": -52.42295638698161,
         "time": -24.165571995003155,
@@ -758,7 +758,7 @@
       "adjust": 174.70779498471188,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 9,
       "breakdown": {
         "env": -69.65762774136246,
         "time": -13.377759255434354,
@@ -1043,10 +1043,107 @@
     }
   },
   "result": {
-    "status": "結果待ち",
+    "status": "確定",
     "reconciled_at": "2026-10-18",
-    "reason": "結果データ未更新(最新 20261017 < 20261018)",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "4東7",
+      "r": "10",
+      "race_name": "西湖特別",
+      "atama": 9
+    },
+    "finish": [
+      "ヘリオトロープ",
+      "ファイアマン",
+      "コスモストーム"
+    ],
+    "horses": [
+      {
+        "name": "ヘリオトロープ",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "ファイアマン",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "コスモストーム",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "マンダリンボレロ",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "レッドベルダンス",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "マクミランテソーロ",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "ライジンマル",
+        "rank": 8,
+        "note": null
+      },
+      {
+        "name": "タイヨウフレア",
+        "rank": 7,
+        "note": null
+      },
+      {
+        "name": "ヨシヒロ",
+        "rank": 9,
+        "note": null
+      }
+    ],
     "unmatched": [],
-    "unmatched_n": 9
+    "bet": {
+      "tier": "group_fukusho",
+      "axis": "コスモストーム",
+      "axis_rank": 3,
+      "axis_odds": 3.5,
+      "partners": [
+        "ヘリオトロープ",
+        "ファイアマン",
+        "マンダリンボレロ"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 100.0,
+      "hit": true,
+      "payout": 110.0,
+      "note": "試験運用の買い目(種類ごとの集計は result.trials)"
+    },
+    "trials": [
+      {
+        "kind": "group_fukusho",
+        "axis": "コスモストーム",
+        "axis_rank": 3,
+        "axis_odds": 3.5,
+        "cost": 100.0,
+        "hit": true,
+        "payout": 110.0,
+        "note": ""
+      },
+      {
+        "kind": "step_umaren",
+        "axis": "ヘリオトロープ",
+        "axis_rank": 1,
+        "axis_odds": 3.0,
+        "cost": 100.0,
+        "hit": false,
+        "payout": 0.0,
+        "note": "",
+        "partner": "コスモストーム"
+      }
+    ]
   }
 }
