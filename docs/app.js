@@ -424,6 +424,9 @@ function renderVerdictCard(d, idx) {
           '　<span class="note">[' + esc(venueLabel(d)) + ': ' + esc(vgLabel) + ']</span></div>';
   html += incompleteNote(d);
   html += '<div class="line">判定: <span class="' + av.cls + '">' + esc(av.label) + '</span></div>';
+  if (isOpHandicap(d)) {
+    html += '<div class="line">⚠️ OP以上のハンデ戦: <span class="note">斤量で力の差を埋めるレースで荒れやすく、過去は1番人気の勝率 約18%（ふつうは約30%）、勝ち馬の3頭に1頭が6番人気以下。予想の◎も3着以内が4割前後に下がるので、自信の目安（🎯）は付けません</span></div>';
+  }
   var cp = confPick(d);
   if (cp) {
     html += '<div class="line">🎯 自信上位: ' + (cp.umaban ? esc(cp.umaban) + '番 ' : '') + '<b>' + esc(cp.name) + '</b>（勝つ確率 ' + pct(cp.mc_win) + '）' +
@@ -833,9 +836,15 @@ function renderLearningProfile(lp) {
 /* 🎯 自信上位（2026-10-18〜）: 勝つ確率1位の馬の勝つ確率が45%以上のレース。v5（B-2 v5）の予想だけ（確率の出方が変わったため）。
    過去（2024〜26、v5、年ごとに確かめ）: 該当はレースの約8%、その馬の勝率 約52%・3着以内 約88%。ほぼ1番人気で配当は安め。表示だけ・買い目は変えない。 */
 var CONF_TH = 0.45;
+/* OP以上のハンデ戦（2026-10-20〜、出馬表の「ハンデ」から。exp_handicap.py: 1番人気の勝率 17〜19%・勝ち馬の34%が6番人気以下、
+   v5 の◎の3着内 37〜46%で見込みより低い）。🎯自信上位は付けず、カードに注意を出す。 */
+function isOpHandicap(d) {
+  var rc = String(((d && d.header) || {}).race_class || '');
+  return !!(d && d.race && d.race.handicap) && /OP|オープン|G1|G2|G3|リステッド|\(L\)/.test(rc);
+}
 function confPick(d) {
   var dc = ((d && d.model) || {}).display_calib || {};
-  if (!dc.b2v5) return null;
+  if (!dc.b2v5 || isOpHandicap(d)) return null;
   var top = null;
   (d.horses || []).forEach(function (h) { if (h.mc_win != null && (!top || h.mc_win > top.mc_win)) top = h; });
   return (top && top.mc_win >= CONF_TH) ? top : null;
