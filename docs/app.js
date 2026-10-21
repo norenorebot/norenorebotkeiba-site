@@ -424,6 +424,9 @@ function renderVerdictCard(d, idx) {
           '　<span class="note">[' + esc(venueLabel(d)) + ': ' + esc(vgLabel) + ']</span></div>';
   html += incompleteNote(d);
   html += '<div class="line">判定: <span class="' + av.cls + '">' + esc(av.label) + '</span></div>';
+  if (isShinba(d)) {
+    html += '<div class="line">ℹ️ 新馬戦: <span class="note">初めて走る馬ばかりで、この予想の材料は血統・騎手・枠などに限られます。過去は予想の◎の3着以内 約56%に対し、1番人気は約73%で、市場の方がずっと正確です。参考程度に見てください（買い目は出しません）</span></div>';
+  }
   if (isOpHandicap(d)) {
     html += '<div class="line">⚠️ OP以上のハンデ戦: <span class="note">斤量で力の差を埋めるレースで荒れやすく、過去は1番人気の勝率 約18%（ふつうは約30%）、勝ち馬の3頭に1頭が6番人気以下。予想の◎も3着以内が4割前後に下がるので、自信の目安（🎯）は付けません</span></div>';
   }
@@ -836,6 +839,11 @@ function renderLearningProfile(lp) {
 /* 🎯 自信上位（2026-10-18〜）: 勝つ確率1位の馬の勝つ確率が45%以上のレース。v5（B-2 v5）の予想だけ（確率の出方が変わったため）。
    過去（2024〜26、v5、年ごとに確かめ）: 該当はレースの約8%、その馬の勝率 約52%・3着以内 約88%。ほぼ1番人気で配当は安め。表示だけ・買い目は変えない。 */
 var CONF_TH = 0.45;
+/* 新馬戦（2026-10-21〜の注意書き。血統項ありの過去 898R で ◎3着内 55.6% / 1番人気 73.2%。実予想 11R でも 45% / 73%） */
+function isShinba(d) {
+  var rc = String(((d && d.header) || {}).race_class || '');
+  return rc.indexOf('新馬') >= 0 || rc.indexOf('メイクデビュー') >= 0;
+}
 /* OP以上のハンデ戦（2026-10-20〜、出馬表の「ハンデ」から。exp_handicap.py: 1番人気の勝率 17〜19%・勝ち馬の34%が6番人気以下、
    v5 の◎の3着内 37〜46%で見込みより低い）。🎯自信上位は付けず、カードに注意を出す。 */
 function isOpHandicap(d) {
