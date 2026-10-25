@@ -233,7 +233,7 @@
       "adjust": 714.3526066794088,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 2,
       "breakdown": {
         "env": 47.65209760441462,
         "time": 79.94820445702884,
@@ -299,7 +299,7 @@
       "adjust": 283.77572969823154,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 1,
       "breakdown": {
         "env": -32.97435051471433,
         "time": 46.785269083686735,
@@ -363,7 +363,7 @@
       "adjust": 130.18332367410108,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 4,
       "breakdown": {
         "env": -30.561901757888307,
         "time": 18.25045999272246,
@@ -427,7 +427,7 @@
       "adjust": 50.714579055617605,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 8,
       "breakdown": {
         "env": 12.904199359203645,
         "time": 11.261459685104649,
@@ -491,7 +491,7 @@
       "adjust": 79.77090341710687,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 9,
       "breakdown": {
         "env": 20.405032127580817,
         "time": -22.864500068944658,
@@ -560,7 +560,7 @@
       "adjust": 210.47150958451562,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 6,
       "breakdown": {
         "env": -14.778108430437243,
         "time": 37.443543278741735,
@@ -625,7 +625,7 @@
       "adjust": -311.61346807643395,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 3,
       "breakdown": {
         "env": -32.87453062277558,
         "time": -11.724841391953316,
@@ -689,7 +689,7 @@
       "adjust": -302.02194115290786,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 7,
       "breakdown": {
         "env": 39.78329186683044,
         "time": -19.254319780564384,
@@ -755,7 +755,7 @@
       "adjust": -243.96156321246394,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 10,
       "breakdown": {
         "env": -86.86517601017104,
         "time": 13.723120622410054,
@@ -822,7 +822,7 @@
       "adjust": -665.2080099261791,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 5,
       "breakdown": {
         "env": -59.58690282984958,
         "time": -70.20839587823228,
@@ -863,10 +863,90 @@
     }
   ],
   "result": {
-    "status": "結果待ち",
-    "reconciled_at": "2026-10-24",
-    "reason": "結果データ未更新(最新 20261024 < 20261025)",
+    "status": "確定",
+    "reconciled_at": "2026-10-25",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "4京9",
+      "r": "2",
+      "race_name": "２歳未勝利",
+      "atama": 10
+    },
+    "finish": [
+      "タガノゲイル",
+      "サルトヴェローチェ",
+      "スナークモネ"
+    ],
+    "horses": [
+      {
+        "name": "サルトヴェローチェ",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "タガノゲイル",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "ランスオブナイト",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "マンノエンプレス",
+        "rank": 8,
+        "note": null
+      },
+      {
+        "name": "メイショウギフト",
+        "rank": 9,
+        "note": null
+      },
+      {
+        "name": "タナコクシテンホウ",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "スナークモネ",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "メイショウペルル",
+        "rank": 7,
+        "note": null
+      },
+      {
+        "name": "イザベル",
+        "rank": 10,
+        "note": null
+      },
+      {
+        "name": "メネルブ",
+        "rank": 5,
+        "note": null
+      }
+    ],
     "unmatched": [],
-    "unmatched_n": 10
+    "bet": {
+      "tier": "none",
+      "axis": "サルトヴェローチェ",
+      "axis_rank": 2,
+      "axis_odds": 1.5,
+      "partners": [
+        "タガノゲイル",
+        "ランスオブナイト",
+        "マンノエンプレス"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 0.0,
+      "hit": null,
+      "payout": 0.0,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない"
+    },
+    "trials": []
   }
 }
