@@ -1,0 +1,859 @@
+{
+  "schema": "format_prediction.v2",
+  "generated_at": "2026-10-30T19:22:55",
+  "predicted_at": "2026-10-30T18:44:27",
+  "race_id": "20261030_京芝1600_未勝利",
+  "header": {
+    "date": "2026-10-30",
+    "venue": "京",
+    "surface": "芝",
+    "distance": 1600.0,
+    "race_class": "未勝利",
+    "baba": "稍_B",
+    "N": 10
+  },
+  "race": {
+    "date": "2026-10-31",
+    "no": 2,
+    "venue_code": "京",
+    "venue_name": "京都",
+    "handicap": false,
+    "labeled": true,
+    "draft": false,
+    "warnings": []
+  },
+  "verdict": {
+    "value": "⚠️慎重",
+    "reason": "gap一致(Elo/V27上位2頭合致) × 場別◎ / 勝負は回収の見込める買い目(特別サイン)がある時だけ",
+    "bet_tier": "none",
+    "gap_signal": "ラガッタレアーレ",
+    "trials": []
+  },
+  "axis_backing": null,
+  "bets": [
+    "買い目なし(推奨なしを明示=判断支援)",
+    "📐格差シグナル(参考・買わない): ◎ラガッタレアーレ は実力と時計の上位2頭が一致した実力1位"
+  ],
+  "bet_notes": [
+    "※格差シグナル◎複勝は前向き11Rで的中54.5%・回収60.9%(払戻が110〜120円に集中)。信用できる条件を再検証するまで買い目にしない"
+  ],
+  "venue_guidance": {
+    "mark": "◎",
+    "note": "標準形フル適用(聖杯◎複勝 N=55 的中47% 回収103%)"
+  },
+  "seihai": {
+    "fired": false
+  },
+  "gap": {
+    "elo_gap_top2": 49.3,
+    "v27_gap_top2": 0.8,
+    "elo_top2": [
+      "コンセルノ",
+      "ラガッタレアーレ"
+    ],
+    "v27_top2": [
+      "コンセルノ",
+      "ラガッタレアーレ"
+    ],
+    "big_e": true,
+    "big_v": true,
+    "overlap": 2,
+    "state": "一致",
+    "v27_missing": false,
+    "v27_reason": null,
+    "v27_source_latest": null,
+    "time_kind": "time2"
+  },
+  "rankings": {
+    "strength": [
+      {
+        "name": "ラガッタレアーレ",
+        "umaban": 6,
+        "value": 1602.1
+      },
+      {
+        "name": "コンセルノ",
+        "umaban": 9,
+        "value": 1602.0
+      },
+      {
+        "name": "サウンドアミューズ",
+        "umaban": 5,
+        "value": 1552.7
+      },
+      {
+        "name": "フクノブルースカイ",
+        "umaban": 1,
+        "value": 1547.2
+      }
+    ],
+    "time": [
+      {
+        "name": "コンセルノ",
+        "umaban": 9,
+        "value": 5.9
+      },
+      {
+        "name": "ラガッタレアーレ",
+        "umaban": 6,
+        "value": 5.8
+      },
+      {
+        "name": "フクノブルースカイ",
+        "umaban": 1,
+        "value": 5.1
+      },
+      {
+        "name": "サウンドアミューズ",
+        "umaban": 5,
+        "value": 4.8
+      }
+    ],
+    "time_kind": "time2",
+    "agari": [
+      {
+        "name": "ラガッタレアーレ",
+        "umaban": 6,
+        "value": 1529.9
+      },
+      {
+        "name": "サウンドアミューズ",
+        "umaban": 5,
+        "value": 1517.8
+      },
+      {
+        "name": "コンセルノ",
+        "umaban": 9,
+        "value": 1508.2
+      },
+      {
+        "name": "フクノブルースカイ",
+        "umaban": 1,
+        "value": 1490.3
+      }
+    ]
+  },
+  "fallback": false,
+  "calib": {
+    "calib_ok_30R": true,
+    "calib_sample_n": 104,
+    "calibrated_temp": 82.82359227101527,
+    "using_calibrated_mc": true
+  },
+  "learning_profile": {
+    "available": true,
+    "cell": "京芝1600・MAIDEN",
+    "build_date": "2026-10-24",
+    "pin": 36.6,
+    "pkl": "phase1_cache_京_芝_1600m_MAIDEN.pkl",
+    "systems": [
+      {
+        "label": "展開",
+        "pct": 46.3,
+        "bars": "◉◉◎◎◎"
+      },
+      {
+        "label": "騎手",
+        "pct": 90.6,
+        "bars": "◉◉◉◉◉"
+      },
+      {
+        "label": "調教",
+        "pinned": true,
+        "pin": 36.6
+      },
+      {
+        "label": "厩舎",
+        "pct": 44.7,
+        "bars": "◉◉◎◎◎"
+      },
+      {
+        "label": "斤量",
+        "pct": 63.1,
+        "bars": "◉◉◉◎◎"
+      },
+      {
+        "label": "減衰",
+        "pct": 96.8,
+        "bars": "◉◉◉◉◉"
+      }
+    ],
+    "note": "※学習された係数の相対配置。係数の大小が予測寄与を保証するものではない"
+  },
+  "model": {
+    "engine": "V9.6",
+    "applied": {
+      "time": true,
+      "ped": false,
+      "trip": true,
+      "jstr": true,
+      "career": true,
+      "draw": true
+    },
+    "inferred": true,
+    "display_calib": {
+      "enabled": true,
+      "k": 1.94,
+      "eps": 0.12,
+      "cap": 0.5,
+      "b2": true,
+      "b2v2": true,
+      "b2v3": true,
+      "b2v4": true,
+      "b2v5": true,
+      "b2v6": true
+    }
+  },
+  "horses": [
+    {
+      "umaban": 6,
+      "mark": "◎",
+      "name": "ラガッタレアーレ",
+      "style": "先行",
+      "jockey": "Cデムーロ",
+      "chokyo": null,
+      "chokyo_rank": {
+        "loc": "栗東",
+        "kind": "ウッド",
+        "date": "10/21",
+        "rank": 767,
+        "n": 2405,
+        "pct": 31.9,
+        "time": 69.4,
+        "f1": 11.4,
+        "f1_rank": 93,
+        "f1_pct": 3.9,
+        "days": 14
+      },
+      "mc_win": 0.3908179245995739,
+      "top3_est": 0.7972972972972973,
+      "jitsuryoku": 1602.0859627758439,
+      "zenjitsu": 2349.2725437016943,
+      "adjust": 747.1865809258504,
+      "odds": null,
+      "swap": false,
+      "rank_result": null,
+      "breakdown": {
+        "env": 31.0576315712633,
+        "time": 60.65198225533263,
+        "ped": 0.0,
+        "trip": 28.98,
+        "trip_flags": [],
+        "jockey": 88.58086810577758,
+        "jockey_rate": 0.4571047619047619,
+        "jockey_n": 160,
+        "career": 74.29714613333334,
+        "career_flags": [],
+        "draw": 1.3787555555555562,
+        "early": -6.774346397106227,
+        "p_early": 0.5437449650778954,
+        "b2": 469.01454370169427,
+        "parts": {
+          "base": 1602.086,
+          "surf_dist": 0.0,
+          "mud": 0.0,
+          "cls": 0.0,
+          "peak": 0.0,
+          "kinryo": -3.027,
+          "weight": 0.0,
+          "chokyo": 0.0,
+          "jbonus": 0.0,
+          "trainer": 4.124,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": 29.758,
+          "pace": 0.202,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 9,
+      "mark": "○",
+      "name": "コンセルノ",
+      "style": "逃げ",
+      "jockey": "北村友",
+      "chokyo": null,
+      "chokyo_rank": {
+        "loc": "栗東",
+        "kind": "坂路",
+        "date": "10/21",
+        "rank": 1563,
+        "n": 10236,
+        "pct": 15.3,
+        "time": 57.0,
+        "f1": 13.2,
+        "f1_rank": 1489,
+        "f1_pct": 14.5,
+        "days": 14
+      },
+      "mc_win": 0.25938705282949054,
+      "top3_est": 0.7281553398058253,
+      "jitsuryoku": 1601.9884763398834,
+      "zenjitsu": 2196.367982188151,
+      "adjust": 594.3795058482676,
+      "odds": null,
+      "swap": false,
+      "rank_result": null,
+      "breakdown": {
+        "env": -0.3995885767000118,
+        "time": 85.9104372134879,
+        "ped": 0.0,
+        "trip": 28.98,
+        "trip_flags": [],
+        "jockey": 13.871914111379827,
+        "jockey_rate": 0.27792941176470587,
+        "jockey_n": 630,
+        "career": 58.23848613333333,
+        "career_flags": [],
+        "draw": 9.651288888888887,
+        "early": 32.991985889726614,
+        "p_early": 0.2713728261269855,
+        "b2": 365.13498218815107,
+        "parts": {
+          "base": 1601.988,
+          "surf_dist": 0.0,
+          "mud": 0.0,
+          "cls": 0.0,
+          "peak": 0.0,
+          "kinryo": -4.526,
+          "weight": 0.0,
+          "chokyo": 0.0,
+          "jbonus": 12.335,
+          "trainer": -6.39,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": -2.021,
+          "pace": 0.202,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 1,
+      "mark": "▲",
+      "name": "フクノブルースカイ",
+      "style": "先行",
+      "jockey": "浜中",
+      "chokyo": null,
+      "chokyo_rank": {
+        "loc": "栗東",
+        "kind": "ウッド",
+        "date": "10/22",
+        "rank": 230,
+        "n": 2405,
+        "pct": 9.6,
+        "time": 66.9,
+        "f1": 11.8,
+        "f1_rank": 444,
+        "f1_pct": 18.5,
+        "days": 14
+      },
+      "mc_win": 0.1469465916643472,
+      "top3_est": 0.5323076923076923,
+      "jitsuryoku": 1547.238072278883,
+      "zenjitsu": 1984.404045686012,
+      "adjust": 437.16597340712906,
+      "odds": null,
+      "swap": true,
+      "rank_result": null,
+      "breakdown": {
+        "env": -4.07539042129622,
+        "time": 42.256475898872246,
+        "ped": 0.0,
+        "trip": 28.98,
+        "trip_flags": [],
+        "jockey": 14.526284220522289,
+        "jockey_rate": 0.2794987951807229,
+        "jockey_n": 365,
+        "career": 79.62666213333335,
+        "career_flags": [
+          "昇級"
+        ],
+        "draw": -12.4088,
+        "early": 8.608695889685297,
+        "p_early": 0.43838166174370685,
+        "b2": 279.6520456860121,
+        "parts": {
+          "base": 1545.03,
+          "surf_dist": 2.208,
+          "mud": 0.0,
+          "cls": 0.0,
+          "peak": 0.0,
+          "kinryo": -1.331,
+          "weight": 0.0,
+          "chokyo": 0.0,
+          "jbonus": 18.399,
+          "trainer": -28.771,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": 7.426,
+          "pace": 0.202,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 8,
+      "mark": "△",
+      "name": "ダディーズレガリア",
+      "style": "逃げ",
+      "jockey": "岩田望",
+      "chokyo": null,
+      "chokyo_rank": {
+        "loc": "栗東",
+        "kind": "坂路",
+        "date": "10/18",
+        "rank": 989,
+        "n": 10236,
+        "pct": 9.7,
+        "time": 55.5,
+        "f1": 12.7,
+        "f1_rank": 683,
+        "f1_pct": 6.7,
+        "days": 14
+      },
+      "mc_win": 0.11819101923180186,
+      "top3_est": 0.4513031550068587,
+      "jitsuryoku": 1526.282213344242,
+      "zenjitsu": 1903.1746726251065,
+      "adjust": 376.8924592808644,
+      "odds": null,
+      "swap": true,
+      "rank_result": null,
+      "breakdown": {
+        "env": -29.968192283415306,
+        "time": -5.571608723884179,
+        "ped": 0.0,
+        "trip": 28.98,
+        "trip_flags": [],
+        "jockey": 67.85507389379603,
+        "jockey_rate": 0.4073978494623656,
+        "jockey_n": 787,
+        "career": 40.86982213333334,
+        "career_flags": [
+          "短縮",
+          "昇級"
+        ],
+        "draw": 6.893777777777777,
+        "early": 23.166913858150284,
+        "p_early": 0.3386678400418919,
+        "b2": 244.66667262510646,
+        "parts": {
+          "base": 1530.699,
+          "surf_dist": -4.417,
+          "mud": 0.0,
+          "cls": 0.0,
+          "peak": 0.0,
+          "kinryo": -2.505,
+          "weight": 0.0,
+          "chokyo": 0.0,
+          "jbonus": 13.017,
+          "trainer": -37.433,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": -3.25,
+          "pace": 0.202,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 5,
+      "mark": "",
+      "name": "サウンドアミューズ",
+      "style": "差し",
+      "jockey": "河原田",
+      "chokyo": null,
+      "chokyo_rank": {
+        "loc": "栗東",
+        "kind": "坂路",
+        "date": "10/16",
+        "rank": 702,
+        "n": 10236,
+        "pct": 6.9,
+        "time": 54.8,
+        "f1": 12.8,
+        "f1_rank": 869,
+        "f1_pct": 8.5,
+        "days": 14
+      },
+      "mc_win": 0.03351179623821546,
+      "top3_est": 0.16216216216216217,
+      "jitsuryoku": 1552.7017653089035,
+      "zenjitsu": 1433.0307056569425,
+      "adjust": -119.67105965196106,
+      "odds": null,
+      "swap": true,
+      "rank_result": null,
+      "breakdown": {
+        "env": -54.94608995424329,
+        "time": 5.958977422876551,
+        "ped": 0.0,
+        "trip": 28.98,
+        "trip_flags": [],
+        "jockey": -38.30579337308811,
+        "jockey_rate": 0.15279101123595507,
+        "jockey_n": 395,
+        "career": -65.84567786666666,
+        "career_flags": [
+          "延長",
+          "昇級"
+        ],
+        "draw": -1.3787555555555562,
+        "early": 3.39257401777356,
+        "p_early": 0.4741085238800886,
+        "b2": 2.4737056569424567,
+        "parts": {
+          "base": 1548.285,
+          "surf_dist": 4.417,
+          "mud": 0.0,
+          "cls": 0.0,
+          "peak": 0.0,
+          "kinryo": -4.424,
+          "weight": 0.0,
+          "chokyo": 0.0,
+          "jbonus": 0.438,
+          "trainer": -52.238,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": 6.532,
+          "pace": -5.255,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 10,
+      "mark": "",
+      "name": "トゥルーライフ",
+      "style": "追込",
+      "jockey": "富田",
+      "chokyo": null,
+      "chokyo_rank": {
+        "loc": "栗東",
+        "kind": "ウッド",
+        "date": "10/28",
+        "rank": 912,
+        "n": 2405,
+        "pct": 37.9,
+        "time": 70.4,
+        "f1": 12.0,
+        "f1_rank": 662,
+        "f1_pct": 27.5,
+        "days": 14
+      },
+      "mc_win": 0.01924373409868874,
+      "top3_est": 0.09510816604950305,
+      "jitsuryoku": 1525.9712921812725,
+      "zenjitsu": 1226.117390048759,
+      "adjust": -299.85390213251344,
+      "odds": null,
+      "swap": false,
+      "rank_result": null,
+      "breakdown": {
+        "env": -31.909310117969596,
+        "time": 1.7776378451435555,
+        "ped": 0.0,
+        "trip": -28.98,
+        "trip_flags": [
+          "6着以下"
+        ],
+        "jockey": -16.817974069026505,
+        "jockey_rate": 0.2043254972875226,
+        "jockey_n": 503,
+        "career": -18.641597866666668,
+        "career_flags": [
+          "昇級"
+        ],
+        "draw": 12.4088,
+        "early": -6.983847972753191,
+        "p_early": 0.5451799073768472,
+        "b2": -210.707609951241,
+        "parts": {
+          "base": 1525.971,
+          "surf_dist": 0.0,
+          "mud": 0.0,
+          "cls": 0.0,
+          "peak": 0.0,
+          "kinryo": -3.763,
+          "weight": 0.0,
+          "chokyo": 0.0,
+          "jbonus": 8.908,
+          "trainer": -47.703,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": 15.904,
+          "pace": -5.255,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 7,
+      "mark": "",
+      "name": "ヒノトリ",
+      "style": "逃げ",
+      "jockey": "斎藤",
+      "chokyo": null,
+      "chokyo_rank": {
+        "loc": "栗東",
+        "kind": "坂路",
+        "date": "10/22",
+        "rank": 222,
+        "n": 10236,
+        "pct": 2.2,
+        "time": 53.2,
+        "f1": 12.8,
+        "f1_rank": 869,
+        "f1_pct": 8.5,
+        "days": 14
+      },
+      "mc_win": 0.012370997458247582,
+      "top3_est": 0.036619718309859155,
+      "jitsuryoku": 1500.1395853653137,
+      "zenjitsu": 1061.3099709187895,
+      "adjust": -438.82961444652415,
+      "odds": null,
+      "swap": false,
+      "rank_result": null,
+      "breakdown": {
+        "env": -29.20570134609784,
+        "time": -20.654769358866844,
+        "ped": 0.0,
+        "trip": -28.98,
+        "trip_flags": [
+          "6着以下"
+        ],
+        "jockey": -3.352324434074718,
+        "jockey_rate": 0.23662032085561496,
+        "jockey_n": 698,
+        "career": -48.39103786666667,
+        "career_flags": [
+          "昇級"
+        ],
+        "draw": 4.136266666666666,
+        "early": 11.161980973725754,
+        "p_early": 0.42089340774342976,
+        "b2": -323.5440290812105,
+        "parts": {
+          "base": 1500.14,
+          "surf_dist": 0.0,
+          "mud": 0.0,
+          "cls": 0.0,
+          "peak": 0.0,
+          "kinryo": -3.208,
+          "weight": 0.0,
+          "chokyo": 0.0,
+          "jbonus": 4.594,
+          "trainer": -27.543,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": -3.25,
+          "pace": 0.202,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 4,
+      "mark": "",
+      "name": "ジューンルル",
+      "style": "差し",
+      "jockey": "高倉",
+      "chokyo": "🌟調教(1.04倍)",
+      "chokyo_rank": {
+        "loc": "栗東",
+        "kind": "坂路",
+        "date": "10/17",
+        "rank": 179,
+        "n": 10236,
+        "pct": 1.7,
+        "time": 53.0,
+        "f1": 12.6,
+        "f1_rank": 516,
+        "f1_pct": 5.0,
+        "days": 14
+      },
+      "mc_win": 0.009224577906438212,
+      "top3_est": 0.030173827484421118,
+      "jitsuryoku": 1487.985024290636,
+      "zenjitsu": 951.8376310665352,
+      "adjust": -536.1473932241007,
+      "odds": null,
+      "swap": false,
+      "rank_result": null,
+      "breakdown": {
+        "env": -0.3520532615493721,
+        "time": -36.94850911159895,
+        "ped": 0.0,
+        "trip": -28.98,
+        "trip_flags": [
+          "6着以下"
+        ],
+        "jockey": -44.93326653006512,
+        "jockey_rate": 0.136896265560166,
+        "jockey_n": 191,
+        "career": -8.407517866666664,
+        "career_flags": [
+          "昇級",
+          "休み明け"
+        ],
+        "draw": -4.136266666666667,
+        "early": -11.387410854089195,
+        "p_early": 0.575341296975039,
+        "b2": -401.0023689334647,
+        "parts": {
+          "base": 1485.777,
+          "surf_dist": 2.208,
+          "mud": 0.0,
+          "cls": 0.0,
+          "peak": 0.0,
+          "kinryo": -1.299,
+          "weight": 0.0,
+          "chokyo": 38.125,
+          "jbonus": 1.209,
+          "trainer": -17.332,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": -15.8,
+          "pace": -5.255,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 2,
+      "mark": "",
+      "name": "ルガルデ",
+      "style": "追込",
+      "jockey": "柴田裕",
+      "chokyo": null,
+      "chokyo_rank": {
+        "loc": "栗東",
+        "kind": "坂路",
+        "date": "10/28",
+        "rank": 624,
+        "n": 10236,
+        "pct": 6.1,
+        "time": 54.6,
+        "f1": 12.8,
+        "f1_rank": 869,
+        "f1_pct": 8.5,
+        "days": 14
+      },
+      "mc_win": 0.005470599947747332,
+      "top3_est": 0.013805309734513275,
+      "jitsuryoku": 895.1320248537902,
+      "zenjitsu": 756.9460113825882,
+      "adjust": -138.18601347120205,
+      "odds": null,
+      "swap": true,
+      "rank_result": null,
+      "breakdown": {
+        "env": -13.953178095983958,
+        "time": -34.09097256547118,
+        "ped": 0.0,
+        "trip": -28.98,
+        "trip_flags": [
+          "6着以下"
+        ],
+        "jockey": -64.21196082357349,
+        "jockey_rate": 0.09065994962216625,
+        "jockey_n": 347,
+        "career": 2.3650687999999964,
+        "career_flags": [
+          "短縮",
+          "芝ダ替"
+        ],
+        "draw": -9.651288888888889,
+        "early": -29.66569327987273,
+        "p_early": 0.7005350122201317,
+        "b2": 40.002011382588194,
+        "parts": {
+          "base": 1413.911,
+          "surf_dist": -298.767,
+          "mud": 0.0,
+          "cls": -20.012,
+          "peak": -200.0,
+          "kinryo": 1.539,
+          "weight": 0.0,
+          "chokyo": 0.0,
+          "jbonus": 2.65,
+          "trainer": -5.229,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": -7.657,
+          "pace": -5.255,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 3,
+      "mark": "",
+      "name": "ナムラサフラン",
+      "style": "追込",
+      "jockey": "幸",
+      "chokyo": null,
+      "chokyo_rank": {
+        "loc": "栗東",
+        "kind": "坂路",
+        "date": "10/28",
+        "rank": 736,
+        "n": 10236,
+        "pct": 7.2,
+        "time": 54.9,
+        "f1": 13.1,
+        "f1_rank": 1354,
+        "f1_pct": 13.2,
+        "days": 14
+      },
+      "mc_win": 0.004835706025449099,
+      "top3_est": 0.013805309734513275,
+      "jitsuryoku": 1439.8678759567854,
+      "zenjitsu": 710.9310265254118,
+      "adjust": -728.9368494313736,
+      "odds": null,
+      "swap": true,
+      "rank_result": null,
+      "breakdown": {
+        "env": -55.60942020956168,
+        "time": -15.929650875891502,
+        "ped": 0.0,
+        "trip": -28.98,
+        "trip_flags": [
+          "6着以下"
+        ],
+        "jockey": -17.21282110164776,
+        "jockey_rate": 0.2033785310734463,
+        "jockey_n": 658,
+        "career": -114.11135386666668,
+        "career_flags": [
+          "延長"
+        ],
+        "draw": -6.893777777777777,
+        "early": -24.510852125240095,
+        "p_early": 0.6652278810240178,
+        "b2": -465.6889734745881,
+        "parts": {
+          "base": 1431.035,
+          "surf_dist": 8.833,
+          "mud": 0.0,
+          "cls": 0.0,
+          "peak": 0.0,
+          "kinryo": -4.919,
+          "weight": 0.0,
+          "chokyo": 0.0,
+          "jbonus": 2.927,
+          "trainer": -40.705,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": -7.657,
+          "pace": -5.255,
+          "hl": 0.0
+        }
+      }
+    }
+  ]
+}
