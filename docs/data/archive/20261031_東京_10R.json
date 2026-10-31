@@ -252,7 +252,7 @@
       "adjust": 749.0552376949136,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 1,
       "breakdown": {
         "env": 35.36135562428353,
         "time": 25.855804962357755,
@@ -314,7 +314,7 @@
       "adjust": 620.8157830727455,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 2,
       "breakdown": {
         "env": 46.12551938936576,
         "time": 41.25771040761453,
@@ -376,7 +376,7 @@
       "adjust": 521.6524383123058,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 7,
       "breakdown": {
         "env": 102.63847692830603,
         "time": 11.506169539755035,
@@ -442,7 +442,7 @@
       "adjust": 35.895013356501295,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 5,
       "breakdown": {
         "env": 17.82383466088657,
         "time": 34.20589912350965,
@@ -506,7 +506,7 @@
       "adjust": -100.65610020948247,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 8,
       "breakdown": {
         "env": -11.8326915632003,
         "time": 17.820345954929916,
@@ -572,7 +572,7 @@
       "adjust": -275.42696205026573,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 3,
       "breakdown": {
         "env": -54.797414623861755,
         "time": 27.009079392159492,
@@ -638,7 +638,7 @@
       "adjust": -310.50694749632976,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 4,
       "breakdown": {
         "env": 18.744290539031454,
         "time": -4.0595790257063635,
@@ -690,7 +690,7 @@
       "adjust": -355.12271486999157,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 6,
       "breakdown": {
         "env": -4.684137484185385,
         "time": -18.276667881302,
@@ -756,7 +756,7 @@
       "adjust": -591.3981363653677,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 9,
       "breakdown": {
         "env": -18.686878384733063,
         "time": -19.575324438814302,
@@ -822,7 +822,7 @@
       "adjust": -108.82228348728404,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 10,
       "breakdown": {
         "env": -28.566113933309055,
         "time": -32.38343803450375,
@@ -1125,5 +1125,104 @@
         ]
       }
     }
+  },
+  "result": {
+    "status": "確定",
+    "reconciled_at": "2026-10-31",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "4東10",
+      "r": "10",
+      "race_name": "国立特別",
+      "atama": 10
+    },
+    "finish": [
+      "フジガイフウ",
+      "シャンソンドール",
+      "ケイケイ"
+    ],
+    "horses": [
+      {
+        "name": "フジガイフウ",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "シャンソンドール",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "キシダンチョウ",
+        "rank": 7,
+        "note": null
+      },
+      {
+        "name": "クールデイトナ",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "パワースナッチ",
+        "rank": 8,
+        "note": null
+      },
+      {
+        "name": "ケイケイ",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "シャンパンマーク",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "シャイニースイフト",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "ブライティアダイヤ",
+        "rank": 9,
+        "note": null
+      },
+      {
+        "name": "ホークマン",
+        "rank": 10,
+        "note": null
+      }
+    ],
+    "unmatched": [],
+    "bet": {
+      "tier": "seihai_fukusho",
+      "axis": "フジガイフウ",
+      "axis_rank": 1,
+      "axis_odds": 2.1,
+      "partners": [
+        "シャンソンドール",
+        "キシダンチョウ",
+        "クールデイトナ"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 100.0,
+      "hit": true,
+      "payout": 110.0,
+      "note": "複勝は3着まで(頭数10)"
+    },
+    "trials": [
+      {
+        "kind": "step_umaren",
+        "axis": "シャンソンドール",
+        "axis_rank": 2,
+        "axis_odds": 2.0,
+        "cost": 0.0,
+        "hit": null,
+        "payout": 0.0,
+        "note": "◎の単勝が3.0倍未満 → 買わない条件(集計対象外)",
+        "partner": "フジガイフウ"
+      }
+    ]
   }
 }
