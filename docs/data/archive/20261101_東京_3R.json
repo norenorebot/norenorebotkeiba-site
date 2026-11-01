@@ -253,7 +253,7 @@
       "adjust": 816.1710228114553,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 1,
       "breakdown": {
         "env": 87.97351011666456,
         "time": 48.02237722809662,
@@ -315,7 +315,7 @@
       "adjust": 614.3906641522976,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 2,
       "breakdown": {
         "env": -33.896553967205705,
         "time": 83.24884509864383,
@@ -379,7 +379,7 @@
       "adjust": 655.8374688570516,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 4,
       "breakdown": {
         "env": 53.73956106888727,
         "time": 49.6432343470811,
@@ -441,7 +441,7 @@
       "adjust": 653.7802181629356,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 3,
       "breakdown": {
         "env": 107.51429057167684,
         "time": 12.390583388493742,
@@ -509,7 +509,7 @@
       "adjust": -355.68937017635267,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 5,
       "breakdown": {
         "env": -70.88507614457103,
         "time": 19.938130324666048,
@@ -573,7 +573,7 @@
       "adjust": -389.4065539926048,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 7,
       "breakdown": {
         "env": -37.76619965536793,
         "time": -29.62457310980615,
@@ -639,7 +639,7 @@
       "adjust": -526.8438181211882,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 6,
       "breakdown": {
         "env": -16.393707640795014,
         "time": -15.270983425318985,
@@ -706,7 +706,7 @@
       "adjust": -593.4959815754801,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 8,
       "breakdown": {
         "env": -32.04376252752502,
         "time": -44.73560377122907,
@@ -774,7 +774,7 @@
       "adjust": -756.4589876489298,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 9,
       "breakdown": {
         "env": -23.3184745441597,
         "time": -40.25201008062733,
@@ -1059,5 +1059,106 @@
         ]
       }
     }
+  },
+  "result": {
+    "status": "確定",
+    "reconciled_at": "2026-11-01",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "4東11",
+      "r": "3",
+      "race_name": "２歳未勝利",
+      "atama": 9
+    },
+    "finish": [
+      "ハートノート",
+      "コスモバルムンク",
+      "ラニアケア"
+    ],
+    "horses": [
+      {
+        "name": "ハートノート",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "コスモバルムンク",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "マイネルリシャール",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "ラニアケア",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "マルガリート",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "アラヤシキ",
+        "rank": 7,
+        "note": null
+      },
+      {
+        "name": "ケイツーラリ",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "クラウンフラッグ",
+        "rank": 8,
+        "note": null
+      },
+      {
+        "name": "マリノフスキー",
+        "rank": 9,
+        "note": null
+      }
+    ],
+    "unmatched": [],
+    "bet": {
+      "tier": "wide3",
+      "axis": "ハートノート",
+      "axis_rank": 1,
+      "axis_odds": 1.5,
+      "partners": [
+        "コスモバルムンク",
+        "マイネルリシャール",
+        "ラニアケア"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 300.0,
+      "hit": true,
+      "payout": 150.0,
+      "note": "試験運用の買い目(種類ごとの集計は result.trials)"
+    },
+    "trials": [
+      {
+        "kind": "wide3",
+        "axis": "ハートノート",
+        "axis_rank": 1,
+        "axis_odds": 1.5,
+        "cost": 300.0,
+        "hit": true,
+        "payout": 150.0,
+        "note": "",
+        "horses": [
+          "ハートノート",
+          "コスモバルムンク",
+          "マイネルリシャール"
+        ],
+        "pairs_hit": [
+          "0409"
+        ]
+      }
+    ]
   }
 }
