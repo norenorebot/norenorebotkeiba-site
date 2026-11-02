@@ -21,6 +21,9 @@ var VENUE_MAP = {
 /* ---------- 小道具 ---------- */
 /* ◎の決め方を切り替えた時刻(format_prediction.MARK_RULE_FROM と同値) */
 var MARK_RULE_FROM = '2026-09-27T00:00:00';
+/* ◎をいつも勝つ確率1位にした時刻(format_prediction.MARK_PROB_FROM と同値、2026-11-02 判断)。
+   これ以降の予想は、サインの買い目の軸が◎と別の馬になることがある → その時は「軸」と書く */
+var MARK_PROB_FROM = '2026-11-03T00:00:00';
 
 function esc(s) {
   if (s === null || s === undefined) return '';
@@ -181,7 +184,7 @@ function plainReason(d) {
 
   if (se.fired) {
     // 聖杯発火時: 買い目が出る理由を明示して矛盾に見せない
-    return head + '。ただし ◎' + esc(se.axis || '本命') +
+    return head + '。ただし ' + axisSym(d, se.axis) + esc(se.axis || '本命') +
            ' に特別サインが点灯しているため、下記を<b>控えめのサイズで</b>。';
   }
   return head + '。控えめにします。';
@@ -252,7 +255,7 @@ function renderResultLine(d) {
   }
   var b = res.bet || {};
   var rk = (b.axis_rank === null || b.axis_rank === undefined) ? null : b.axis_rank;
-  var axisTxt = '◎' + esc(b.axis || '') + ' ' + (rk === null ? '着順なし' : esc(rk) + '着');
+  var axisTxt = axisSym(d, b.axis) + esc(b.axis || '') + ' ' + (rk === null ? '着順なし' : esc(rk) + '着');
 
   if (b.hit === null || b.hit === undefined) {
     // 買い目なし＝見送り。降りた判断の事後確認(参考)であり、買い目ではない。
@@ -302,12 +305,12 @@ function renderDaySummary(rows) {
     html += '<ul class="ds-list">';
     bets.forEach(function (x) {
       var d = x.d, se = d.seihai || {}, tier = (d.verdict || {}).bet_tier;
-      var axis = se.axis || axisFromRows(d) || '—';
+      var axis = betAxis(d) || '—';
       var sign = se.fired ? '🌈特別サイン' : (SIGN_LABEL[tier] || '');
       var what = TIER_LABEL[tier] || '';
       html += '<li><a href="#' + esc(raceAnchor(x.idx)) + '">' +
               esc(venueLabel(d)) + (d.race && d.race.no ? esc(d.race.no) + 'R' : '') + '</a>' +
-              '　◎' + esc(axisUmaban(d, axis) ? axisUmaban(d, axis) + '番 ' + axis : axis) +
+              '　' + axisSym(d, axis) + esc(axisUmaban(d, axis) ? axisUmaban(d, axis) + '番 ' + axis : axis) +
               '　<span class="note">' + esc(sign) + (what ? '／' + esc(what) : '') + '</span></li>';
     });
     html += '</ul>';
@@ -385,6 +388,18 @@ function withUmaban(text, d) {
   return out;
 }
 
+/* 買い目の軸: 特別サインは seihai.axis、試験運用のサインは verdict.trials の軸、それ以外は◎(reconcile_results.read_bet と同じ) */
+function betAxis(d) {
+  var se = d.seihai || {}, v = d.verdict || {}, tier = v.bet_tier;
+  if (se.fired && se.axis) return se.axis;
+  var t = (v.trials || []).filter(function (x) { return x.kind === tier && x.axis; })[0];
+  return t ? t.axis : axisFromRows(d);
+}
+/* 軸の馬に付ける記号。◎と同じ馬(または切り替え前の予想)なら◎、違えば「軸 」 */
+function axisSym(d, name) {
+  if (String(d.predicted_at || '') < MARK_PROB_FROM || !name || name === axisFromRows(d)) return '◎';
+  return '軸 ';
+}
 function axisFromRows(d) {
   var r = (d.horses || []).filter(function (x) { return x.mark === '◎'; })[0];
   return r ? r.name : null;
@@ -440,7 +455,7 @@ function renderVerdictCard(d, idx) {
 
   if (se.fired) {
     var u = se.is_ultimate ? '🌈特別サイン(最上位)' : '🌈特別サイン';
-    html += '<div class="line"><span class="seihai">' + u + '点灯: ◎' + esc(se.axis) + '</span>' +
+    html += '<div class="line"><span class="seihai">' + u + '点灯: ' + axisSym(d, se.axis) + esc(se.axis) + '</span>' +
             (se.skills_str ? ' <span class="note">' + esc(se.skills_str) + '</span>' : '') + '</div>';
   }
 
@@ -604,6 +619,16 @@ function bigSwaps(rows) {
    決め方は format_prediction.mark_axis と同じ順: 特別サイン → 実力差サイン → 試験運用のサイン → 勝つ確率1位。 */
 function axisRuleNote(d) {
   var se = d.seihai || {}, tier = (d.verdict || {}).bet_tier;
+  if (String(d.predicted_at || '') >= MARK_PROB_FROM) {
+    // 2026-11-03〜 ◎はいつも勝つ確率1位。サインの軸が別の馬なら書き分ける
+    var ba = betAxis(d), mk = axisFromRows(d);
+    var base = 'このレースの◎は勝つ確率がいちばん高い馬です。';
+    if ((se.fired || tier && tier !== 'none') && ba && ba !== mk) {
+      return base + 'サインの買い目の軸（軸 ' + esc(ba) + '）は◎とは別の馬です。';
+    }
+    if (se.fired || (tier && tier !== 'none')) return base + 'サインの買い目の軸も◎です。';
+    return base + 'サインは出ていないので、特別に推している馬ではありません。';
+  }
   if (se.fired) return 'このレースの◎は🌈特別サインが出た馬です。';
   if (tier === 'gap_fukusho') return 'このレースは📐実力差サインで買うので、◎は「強さ」がいちばん高い馬です。';
   if (tier === 'group_fukusho') return 'このレースは🧪上位一致サインで買うので、◎は「強さ」がいちばん高い馬です。';
