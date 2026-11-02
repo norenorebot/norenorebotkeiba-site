@@ -24,6 +24,8 @@ var MARK_RULE_FROM = '2026-09-27T00:00:00';
 /* ◎をいつも勝つ確率1位にした時刻(format_prediction.MARK_PROB_FROM と同値、2026-11-02 判断)。
    これ以降の予想は、サインの買い目の軸が◎と別の馬になることがある → その時は「軸」と書く */
 var MARK_PROB_FROM = '2026-11-03T00:00:00';
+/* 会場ごとの目安をやめ、中山の特別サインは買わない時刻(format_prediction.VENUE_RULE_FROM と同値、2026-11-02 判断) */
+var VENUE_RULE_FROM = '2026-11-03T00:00:00';
 
 function esc(s) {
   if (s === null || s === undefined) return '';
@@ -168,6 +170,9 @@ function plainReason(d) {
   // 買い目が無いレースは、理由文の側で「バラバラ(危険サイン)」と「条件不足」を区別する。
   if (av.kind === 'disagree') {
     return '「強さ」と「持ち時計」の上位馬がバラバラです（検証済みの危険サイン）。こういうレースは当てにくいので、買わずに見送ります。';
+  }
+  if (av.kind === 'nosignal' && se.fired && String(d.predicted_at || '') >= VENUE_RULE_FROM && (d.header || {}).venue && String(d.header.venue).charAt(0) === '中') {
+    return '🌈特別サインが出ていますが、中山の特別サインは過去の成績が見込みより悪い（2023〜26年の33レースで3着以内が見込みより約12ポイント低い）ので、買わずに見送ります。';
   }
   if (av.kind === 'nosignal') {
     return '買う条件がそろっていないので見送ります。';
@@ -429,6 +434,7 @@ function renderVerdictCard(d, idx) {
   var title = esc(raceTitle(d)) + '　' + course + ' ' + esc(h.race_class);
   var vm = VENUE_MAP[(h.venue || '').charAt(0)];
   var vgLabel = vm ? (vm[0] + ' ' + vm[1]) : ((vg.mark || '—') + ' ' + soften(vg.note || '目安なし'));
+  var vgNew = String(d.predicted_at || '') >= VENUE_RULE_FROM;   // 2026-11-03〜 会場の目安は出さない
 
   var html = '';
   // サマリーから飛べるようにアンカーを振り、見送りは淡色クラスを足す。
@@ -436,7 +442,7 @@ function renderVerdictCard(d, idx) {
   html += '<div class="verdict-block' + (av.kind === 'bet' ? '' : ' vb-skip') +
           (idx === undefined ? '">' : '" id="' + esc(raceAnchor(idx)) + '">');
   html += '<div class="rid">▼ ' + title +
-          '　<span class="note">[' + esc(venueLabel(d)) + ': ' + esc(vgLabel) + ']</span></div>';
+          (vgNew ? '' : '　<span class="note">[' + esc(venueLabel(d)) + ': ' + esc(vgLabel) + ']</span>') + '</div>';
   html += incompleteNote(d);
   html += '<div class="line">判定: <span class="' + av.cls + '">' + esc(av.label) + '</span></div>';
   if (isShinba(d)) {
@@ -623,10 +629,11 @@ function axisRuleNote(d) {
     // 2026-11-03〜 ◎はいつも勝つ確率1位。サインの軸が別の馬なら書き分ける
     var ba = betAxis(d), mk = axisFromRows(d);
     var base = 'このレースの◎は勝つ確率がいちばん高い馬です。';
-    if ((se.fired || tier && tier !== 'none') && ba && ba !== mk) {
+    if (hasBet(tier) && ba && ba !== mk) {
       return base + 'サインの買い目の軸（軸 ' + esc(ba) + '）は◎とは別の馬です。';
     }
-    if (se.fired || (tier && tier !== 'none')) return base + 'サインの買い目の軸も◎です。';
+    if (hasBet(tier)) return base + 'サインの買い目の軸も◎です。';
+    if (se.fired) return base + '🌈特別サインは出ていますが、このレースは買い目にしていません。';
     return base + 'サインは出ていないので、特別に推している馬ではありません。';
   }
   if (se.fired) return 'このレースの◎は🌈特別サインが出た馬です。';
