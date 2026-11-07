@@ -236,7 +236,7 @@
       "adjust": 288.4059976849703,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 1,
       "breakdown": {
         "env": 42.645204355435965,
         "time": -1.8657837621178435,
@@ -299,7 +299,7 @@
       "adjust": 168.29673690153413,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 2,
       "breakdown": {
         "env": -9.195987741162412,
         "time": 1.5716582655680333,
@@ -362,7 +362,7 @@
       "adjust": 91.17200932791616,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 4,
       "breakdown": {
         "env": 11.132126132427516,
         "time": 23.50748442983422,
@@ -427,7 +427,7 @@
       "adjust": 84.72333800244223,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 3,
       "breakdown": {
         "env": 3.9717930067383804,
         "time": 57.45788728459124,
@@ -492,7 +492,7 @@
       "adjust": 188.66447382125284,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 7,
       "breakdown": {
         "env": 29.029242099580358,
         "time": 1.6972084595206418,
@@ -557,7 +557,7 @@
       "adjust": -11.870158049282281,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 8,
       "breakdown": {
         "env": -82.78297816941063,
         "time": 54.46524678451529,
@@ -620,7 +620,7 @@
       "adjust": -37.454946601118536,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 9,
       "breakdown": {
         "env": -8.216358890160592,
         "time": -32.39966350135875,
@@ -686,7 +686,7 @@
       "adjust": -209.94730318708343,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 5,
       "breakdown": {
         "env": -31.030703781817834,
         "time": 24.704743842593402,
@@ -754,7 +754,7 @@
       "adjust": -308.16575047223114,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 6,
       "breakdown": {
         "env": -101.51159501861102,
         "time": -39.87387779521174,
@@ -820,7 +820,7 @@
       "adjust": -457.0382975432417,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 10,
       "breakdown": {
         "env": -140.61447906219695,
         "time": -5.904904007934653,
@@ -1124,5 +1124,103 @@
         ]
       }
     }
+  },
+  "result": {
+    "status": "確定",
+    "reconciled_at": "2026-11-07",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "5東1",
+      "r": "11",
+      "race_name": "京王杯２歳ステークス",
+      "atama": 10
+    },
+    "finish": [
+      "ブルージェイ",
+      "フレイコン",
+      "グルーヴェンス"
+    ],
+    "horses": [
+      {
+        "name": "ブルージェイ",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "フレイコン",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "ジオパークカツキ",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "グルーヴェンス",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "ノーセット",
+        "rank": 7,
+        "note": null
+      },
+      {
+        "name": "ロンドンガーズ",
+        "rank": 8,
+        "note": null
+      },
+      {
+        "name": "インパルスドライブ",
+        "rank": 9,
+        "note": null
+      },
+      {
+        "name": "ニシノトラノスケ",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "シルバーノリダー",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "アテナブレイブ",
+        "rank": 10,
+        "note": null
+      }
+    ],
+    "unmatched": [],
+    "bet": {
+      "tier": "group_fukusho",
+      "axis": "ジオパークカツキ",
+      "axis_rank": 4,
+      "axis_odds": 9.5,
+      "partners": [
+        "フレイコン",
+        "ジオパークカツキ",
+        "グルーヴェンス"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": true,
+      "cost": 100.0,
+      "hit": false,
+      "payout": 0.0,
+      "note": "試験運用の買い目(種類ごとの集計は result.trials)"
+    },
+    "trials": [
+      {
+        "kind": "group_fukusho",
+        "axis": "ジオパークカツキ",
+        "axis_rank": 4,
+        "axis_odds": 9.5,
+        "cost": 100.0,
+        "hit": false,
+        "payout": 0.0,
+        "note": ""
+      }
+    ]
   }
 }
