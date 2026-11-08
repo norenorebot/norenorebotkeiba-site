@@ -243,7 +243,7 @@
       "adjust": 525.2989559424145,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 5,
       "breakdown": {
         "env": -15.400023761296325,
         "time": 20.108286696335057,
@@ -306,7 +306,7 @@
       "adjust": 202.71360077556733,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 2,
       "breakdown": {
         "env": -25.200981129874464,
         "time": 4.211537601094729,
@@ -371,7 +371,7 @@
       "adjust": 207.4479934486203,
       "odds": null,
       "swap": false,
-      "rank_result": null,
+      "rank_result": 3,
       "breakdown": {
         "env": -16.98852090217784,
         "time": 34.047989489537876,
@@ -437,7 +437,7 @@
       "adjust": 34.51900720606409,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 1,
       "breakdown": {
         "env": -38.00943497264443,
         "time": 41.605869118916615,
@@ -502,7 +502,7 @@
       "adjust": -119.0986389906368,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 6,
       "breakdown": {
         "env": -27.34469628429568,
         "time": 3.1456220764284497,
@@ -570,7 +570,7 @@
       "adjust": -156.90453556655757,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 3,
       "breakdown": {
         "env": -33.977147458237965,
         "time": 40.87789249044232,
@@ -635,7 +635,7 @@
       "adjust": 107.60609712090786,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 9,
       "breakdown": {
         "env": -14.523206284725745,
         "time": -29.31321069563927,
@@ -705,7 +705,7 @@
       "adjust": -400.2187622435081,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 7,
       "breakdown": {
         "env": -36.36985113277052,
         "time": -15.330316513292722,
@@ -773,7 +773,7 @@
       "adjust": -542.5363433960814,
       "odds": null,
       "swap": true,
-      "rank_result": null,
+      "rank_result": 8,
       "breakdown": {
         "env": -16.717153375612952,
         "time": -15.993670263822784,
@@ -1060,5 +1060,109 @@
         ]
       }
     }
+  },
+  "result": {
+    "status": "確定",
+    "reconciled_at": "2026-11-08",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "5京2",
+      "r": "8",
+      "race_name": "３歳以上２勝ｸﾗｽ",
+      "atama": 9
+    },
+    "finish": [
+      "アットアブラスト",
+      "アロマフェリス",
+      "レッドヴァリアート"
+    ],
+    "horses": [
+      {
+        "name": "メディテラニアン",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "アロマフェリス",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "レッドヴァリアート",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "アットアブラスト",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "ランツフート",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "アメジストブラック",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "ナウオアネヴァー",
+        "rank": 9,
+        "note": null
+      },
+      {
+        "name": "ウインヘリオドール",
+        "rank": 7,
+        "note": null
+      },
+      {
+        "name": "ショウナンハウル",
+        "rank": 8,
+        "note": null
+      }
+    ],
+    "unmatched": [],
+    "bet": {
+      "tier": "group_fukusho",
+      "axis": "アロマフェリス",
+      "axis_rank": 2,
+      "axis_odds": 2.9,
+      "partners": [
+        "アロマフェリス",
+        "レッドヴァリアート",
+        "アットアブラスト"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": false,
+      "cost": 100.0,
+      "hit": true,
+      "payout": 170.0,
+      "note": "試験運用の買い目(種類ごとの集計は result.trials)"
+    },
+    "trials": [
+      {
+        "kind": "group_fukusho",
+        "axis": "アロマフェリス",
+        "axis_rank": 2,
+        "axis_odds": 2.9,
+        "cost": 100.0,
+        "hit": true,
+        "payout": 170.0,
+        "note": ""
+      },
+      {
+        "kind": "step_umaren",
+        "axis": "アロマフェリス",
+        "axis_rank": 2,
+        "axis_odds": 2.9,
+        "cost": 0.0,
+        "hit": null,
+        "payout": 0.0,
+        "note": "◎の単勝が3.0倍未満 → 買わない条件(集計対象外)",
+        "partner": "メディテラニアン"
+      }
+    ]
   }
 }
