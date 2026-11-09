@@ -3,14 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="Content-Security-Policy"
-      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' https://norenorebot.goatcounter.com; connect-src 'self'; base-uri 'none'; form-action 'none'">
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' https://norenorebot.goatcounter.com; connect-src 'self' https://norenorebot.goatcounter.com; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>競馬予想記録 — 最新予想</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="counter.css">
 </head>
 <body>
 <h1>競馬予想記録</h1>
 <div class="updated" id="updated">最終更新: —</div>
+<div class="kiriban" id="kiriban" hidden></div>
 <div class="nav">
   <a href="index.html">最新予想</a><span class="sep">|</span>
   <a href="seiseki.html">成績</a><span class="sep">|</span>
@@ -33,10 +35,11 @@
 <p class="disclaimer">本サイトは個人の予想記録です。的中・収支を保証するものではありません。
 馬券の購入は自己責任で。20歳未満の馬券購入は禁止されています。</p>
 <p>Since 2026</p>
-<img class="gc" src="https://norenorebot.goatcounter.com/count?p=/index.html" alt="" width="1" height="1" referrerpolicy="no-referrer-when-downgrade">
+<img class="gc" src="https://norenorebot.goatcounter.com/count?p=/norenorebotkeiba-site/index.html" alt="" width="1" height="1" referrerpolicy="no-referrer-when-downgrade">
 </footer>
 
 <script src="race-picker.js"></script>
 <script src="app.js"></script>
+<script src="counter.js"></script>
 </body>
 </html>
