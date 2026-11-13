@@ -238,6 +238,14 @@ footer { border-top: 1px solid #000; margin-top: 16px; padding-top: 6px; font-si
 .commentary { margin: 8px 0; padding: 8px 10px; border-left: 3px solid #6a8; background: rgba(100, 160, 120, 0.07); }
 .commentary-h { font-weight: 700; margin-bottom: 4px; }
 .commentary p { margin: 0 0 6px; line-height: 1.7; }
+.commentary.story { border-left-color: #a86; background: rgba(170, 130, 90, 0.07); }
+.st-sec { border-top: 1px solid rgba(128,128,128,0.2); padding: 4px 0; }
+.st-sec summary { cursor: pointer; font-weight: 600; padding: 2px 0; }
+.st-sec p { margin: 4px 0 4px 1em; white-space: normal; overflow-wrap: anywhere; }
+.st-n { display: inline-block; margin-left: 6px; font-size: 0.8em; font-weight: 400; opacity: 0.65; }
+.commentary.yomimono { border-left-color: #a86; background: rgba(170, 130, 90, 0.07); }
+.ym-table { border-collapse: collapse; font-size: 0.9em; margin: 4px 0; }
+.ym-table th, .ym-table td { padding: 2px 6px; border-bottom: 1px solid rgba(128,128,128,0.25); text-align: left; }
 .rp-pace { margin-top: 6px; font-size: 13px; line-height: 1.6; padding: 6px 8px; border-left: 3px solid #888; }
 .rp-clock { font-variant-numeric: tabular-nums; }
 .rp-loading { color: #777; padding: 12px; }
@@ -274,3 +282,33 @@ footer { border-top: 1px solid #000; margin-top: 16px; padding-top: 6px; font-si
 /* 🔍 検証中の注目（その日の要約の折りたたみ） */
 .ks-box { margin-top: .6em; }
 .ks-box summary { cursor: pointer; }
+
+/* デモ: 印の馬の小さな表 */
+.demo-marks { border-collapse: collapse; margin: 6px 0; font-size: 0.92em; }
+.demo-marks th, .demo-marks td { border: 1px solid #ddd; padding: 2px 8px; }
+.demo-marks td.num { text-align: right; }
+.demo-more > summary { font-weight: bold; margin-top: 6px; }
+
+/* 簡単なカード: 発走時刻・やさしい買い目（2026-11-10〜） */
+.post-time { font-size: 0.85em; font-weight: normal; color: #a33; white-space: nowrap; }
+.plain-bets li { margin-bottom: 4px; }
+.rp-time { display: block; font-size: 0.78em; color: #a33; line-height: 1.1; }
+
+/* 競馬場で使う（2026-11-11）: 見る場・次のレース・電波なし */
+.venue-filter { margin: 6px 0; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 0.9em; }
+.venue-filter button { padding: 6px 12px; border: 1px solid #bbb; border-radius: 16px; background: #fff; font-size: 1em; }
+.venue-filter button.vf-cur { background: #333; color: #fff; border-color: #333; }
+.next-race { margin: 6px 0 10px; }
+.next-race .next-btn { display: block; width: 100%; padding: 12px 10px; font-size: 1.05em; font-weight: bold; text-align: left;
+  border: 2px solid #a33; border-radius: 8px; background: #fff; color: #222; }
+.next-race .next-btn.race-buy { background: #fff8e1; }
+.offline-note { margin: 4px 0; padding: 6px 8px; background: #fde2e2; color: #900; font-size: 0.9em; border-radius: 4px; }
+>>>
+
+.day-check { margin: 8px 0; padding: 6px 10px; border-left: 4px solid #2a7; background: #f2faf5; }
+.day-check summary { font-weight: bold; font-size: 0.9em; cursor: pointer; }
+.day-check ul { margin: 4px 0 0; padding-left: 1.2em; font-size: 0.92em; }
+.day-check li { margin: 3px 0; }
+.howto-terms { list-style: none; padding-left: 0 !important; }
+.nav a { white-space: nowrap; }
+.howto-steps li { margin: 4px 0; }

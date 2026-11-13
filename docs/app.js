@@ -85,8 +85,10 @@ function actionVerdictOf(d) {
                        (d.gap || {}).state);
 }
 
+/* 'no-cache' = 毎回サーバーに「変わった？」だけ聞き、変わっていなければ手元の分を使う（2026-11-11。
+   以前の 'no-store' は開くたびに全部を読み直していた。競馬場の弱い電波・電池のため） */
 function loadJSON(url) {
-  return fetch(url, { cache: 'no-store' }).then(function (r) {
+  return fetch(url, { cache: 'no-cache' }).then(function (r) {
     if (!r.ok) throw new Error(url + ' が読めません (' + r.status + ')');
     return r.json();
   });
@@ -425,7 +427,8 @@ function incompleteNote(d) {
 }
 
 /* ---------- 結論カード(ブロック1 + 折りたたみ2/3) ---------- */
-function renderVerdictCard(d, idx) {
+function renderVerdictCard(d, idx, opt) {
+  opt = opt || {};
   var h = d.header || {}, v = d.verdict || {}, se = d.seihai || {}, g = d.gap || {};
   var vg = d.venue_guidance || {};
   var r = d.race || {};
@@ -441,10 +444,10 @@ function renderVerdictCard(d, idx) {
   // (色を足すのではなく引くことで、買い目ありを相対的に浮き上がらせる)
   html += '<div class="verdict-block' + (av.kind === 'bet' ? '' : ' vb-skip') +
           (idx === undefined ? '">' : '" id="' + esc(raceAnchor(idx)) + '">');
-  html += '<div class="rid">▼ ' + title +
+  if (!opt.noSokatsu) html += '<div class="rid">▼ ' + title +
           (vgNew ? '' : '　<span class="note">[' + esc(venueLabel(d)) + ': ' + esc(vgLabel) + ']</span>') + '</div>';
   html += incompleteNote(d);
-  html += '<div class="line">判定: <span class="' + av.cls + '">' + esc(av.label) + '</span></div>';
+  if (!opt.noSokatsu) html += '<div class="line">判定: <span class="' + av.cls + '">' + esc(av.label) + '</span></div>';   // 簡単なカードの中では上に出ている
   if (isShinba(d)) {
     html += '<div class="line">ℹ️ 新馬戦: <span class="note">初めて走る馬ばかりで、この予想の材料は血統・騎手・枠などに限られます。過去は予想の◎の3着以内 約56%に対し、1番人気は約73%で、市場の方がずっと正確です。参考程度に見てください（買い目は出しません）</span></div>';
   }
@@ -472,9 +475,11 @@ function renderVerdictCard(d, idx) {
   }
 
   if (av.kind === 'bet') {
-    html += '<div class="bet">買い目:</div><ul>';
-    (d.bets || []).forEach(function (b) { html += '<li>' + esc(withUmaban(soften(b), d)) + '</li>'; });
-    html += '</ul>';
+    {   // 簡単なカードの中では、上のやさしい買い目のくわしい元の文として出す
+      html += '<div class="bet">' + (opt.noSokatsu ? '買い目（くわしく）:' : '買い目:') + '</div><ul>';
+      (d.bets || []).forEach(function (b) { html += '<li>' + esc(withUmaban(soften(b), d)) + '</li>'; });
+      html += '</ul>';
+    }
   } else {
     // 見送り: 定型の「買い目なし」は省き、参考の本命(◎)と勝つ確率だけ1行で出す(2026-09-26)
     // 参考の本命は新しい決め方(勝つ確率1位)の予想だけに出す。従来の◎(強さ1位)は勝つ確率が低いことがあり、1行で目立たせると誤解を招く
@@ -501,6 +506,24 @@ function renderVerdictCard(d, idx) {
     html += '<div class="commentary"><div class="commentary-h">考察（参考）</div>' +
       String(d.commentary.text).split(/\n+/).map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') +
       '<div class="note">※ 予想の時点で分かるデータ（前走・前々走の成績、各馬の点数の内訳、ペースの予想、コースの形）だけから書いた参考の文章です。</div></div>';
+  }
+
+  // 過去走の記事（2026-11-09〜、race_story.py）: 過去のデータから拾った比較材料を欄ごとに開閉。予想の印・確率には使っていない
+  // opt.noSokatsu（上の簡単なカードで総括を出した時）は総括を省き、どの欄も閉じておく
+  var stKeys = (d.story && d.story.sections) ? Object.keys(d.story.sections).filter(function (k) { return !(opt.noSokatsu && k === '総括'); }) : [];
+  if (stKeys.length) {
+    var st = d.story.sections, keys = stKeys;
+    html += '<div class="commentary story"><div class="commentary-h">比較材料（過去走から）</div>' +
+      keys.map(function (k, i) {
+        return '<details class="st-sec"' + (i === 0 && !opt.noSokatsu ? ' open' : '') + '><summary>' + esc(k) + '<span class="st-n">' + st[k].length + '</span></summary>' +
+          st[k].map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') + '</details>';
+      }).join('') +
+      '<div class="note">※ ' + esc(d.story.note || '') + '</div></div>';
+  } else if (d.yomimono && d.yomimono.paragraphs && d.yomimono.paragraphs.length) {
+    var ym = d.yomimono;
+    html += '<div class="commentary yomimono"><div class="commentary-h">展開の読み物（参考）</div>' +
+      ym.paragraphs.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') +
+      '<div class="note">※ ' + esc(ym.note || '') + '</div></div>';
   }
 
   // 当日チェック — 検証済みの物差しだけを、該当する時だけ出す。
@@ -644,6 +667,11 @@ function axisRuleNote(d) {
   return 'このレースはサインが出ていないので、◎は勝つ確率がいちばん高い馬という意味だけで、特別に推している馬ではありません。';
 }
 
+// 実力の点数・前日の総合点・上げ下げの列（2026-11-10〜 表に出さない。データは予想ファイルに残る）
+var SHOW_POINTS = false;
+// 詳細の強さ・持ち時計・上がりの上位4頭の一覧（2026-11-10〜 出さない）
+var SHOW_RANK_LISTS = false;
+
 function renderHorsesTable(rows, d) {
   var kNames = kenshoPicks(d || {}).map(function (k) { return k.name; });   // 🔍 検証中の注目（表示だけ）
   // 死んでいる列は出さない: オッズが全行空ならオッズ列ごと省く
@@ -652,7 +680,11 @@ function renderHorsesTable(rows, d) {
   var hasSwap = rows.some(function (r) { return swaps[r.name]; });
   // 調教は「このシステムで唯一 独立した価値が検証済みの軸」なので、該当馬がいれば列を出す
   // 2026-10-17〜: 調教の順位（2週間・同じトレセン・同じコースの中で何位か）。全体が上位30%以内か終いが上位5%以内の馬だけ出す
-  var ckShow = function (r) { var c = r.chokyo_rank; return c && (c.pct <= 30 || (c.f1_pct !== undefined && c.f1_pct <= 5)); };
+  // 調教の順位は 🌟の馬と、終いが1%以下の馬だけ出す（2026-11-10〜。🌟なしで全体だけ1%以下の馬は 3着内17%＝平均以下、
+  // 🌟なしでも終い1%以下は 33%。過去の大きな集計でも効くのは終い: SHIMAI_20261016）
+  var ckShow = function (r) { var c = r.chokyo_rank; return c && (r.chokyo || (c.f1_pct !== undefined && c.f1_pct <= 1)); };
+  // 全体と終いの両方が1%以下は 🌟🌟（2021〜の集計で 全体0〜1%×終い0〜2% の3着内 31%、平均22%）
+  var ckStar = function (r) { var c = r.chokyo_rank || {}; var both = c.pct !== undefined && c.pct <= 1 && c.f1_pct !== undefined && c.f1_pct <= 1; return r.chokyo ? (both ? '🌟🌟' : '🌟') : ''; };
   var hasChokyo = rows.some(function (r) { return r.chokyo || ckShow(r); });
 
   // ◎と表の並びは別の決め方なので先に断る(2026-09-26改訂)。
@@ -691,9 +723,9 @@ function renderHorsesTable(rows, d) {
   html += '<tr><th>印</th><th class="c uma">番</th><th>馬名</th>' + (hasChokyo ? '<th>調教</th>' : '') +
           '<th class="num">' + h2('勝つ確率', '勝率') + '</th>' +
           '<th class="num">' + h2('3着内に入る率(推定)', '3着内') + '</th>' +
-          '<th class="num col-drop">実力の点数</th>' +
+          (SHOW_POINTS ? '<th class="num col-drop">実力の点数</th>' +
           '<th class="num">' + h2('前日の総合点', '総合点') + '</th>' +
-          '<th class="num col-drop">条件による上げ下げ</th>' +
+          '<th class="num col-drop">条件による上げ下げ</th>' : '') +
           (hasOdds ? '<th class="num">オッズ</th>' : '') + '</tr>';
   rows.forEach(function (r) {
     var sw = swaps[r.name] ? ' ⇅' : '';
@@ -715,7 +747,7 @@ function renderHorsesTable(rows, d) {
         // 全体が上位5%以内でも終いが甘い馬は普通の調教の馬と同じ（SHIMAI_20261016: 終い15%超で3着内19〜20%、40%超は市場比−1.6/−3.7pt）
         var amai = (ck.f1_pct !== undefined && ck.pct <= 5 && ck.f1_pct > 15)
           ? ' <span class="jk">（終い甘め' + (ck.f1_pct > 40 ? '・割引' : '') + '）</span>' : '';
-        html += '<td class="seihai">' + (r.chokyo ? '🌟' : '') + (ckShow(r) ? esc(mainTxt) + amai +
+        html += '<td class="seihai">' + ckStar(r) + (ckShow(r) ? esc(mainTxt) + amai +
                 '<br><span class="jk">' + esc(ck.loc + ck.kind + ' ' + (ck.days || 14) + '日間 ' + ck.n.toLocaleString() + '本中 ' + (ck.f1_rank !== undefined ? '終い' + ck.f1_rank.toLocaleString() + '位・' : '') + '全体' + ck.rank.toLocaleString() + '位') + '</span>' : '') + '</td>';
       } else {
         html += '<td class="seihai">' + esc(shortChokyo(r.chokyo)) + '</td>';   // 2026-10-16 以前の予想（倍率の表示）
@@ -723,9 +755,11 @@ function renderHorsesTable(rows, d) {
     }
     html += '<td class="num">' + pct(r.mc_win) + '</td>';
     html += '<td class="num">' + pct(r.top3_est) + '</td>';
-    html += '<td class="num col-drop">' + num(r.jitsuryoku) + '</td>';
-    html += '<td class="num">' + num(r.zenjitsu) + '</td>';
-    html += '<td class="num col-drop">' + signed(r.adjust) + '</td>';
+    if (SHOW_POINTS) {
+      html += '<td class="num col-drop">' + num(r.jitsuryoku) + '</td>';
+      html += '<td class="num">' + num(r.zenjitsu) + '</td>';
+      html += '<td class="num col-drop">' + signed(r.adjust) + '</td>';
+    }
     if (hasOdds) html += '<td class="num">' + (r.odds === null || r.odds === undefined ? '—' : num(r.odds, 1)) + '</td>';
     html += '</tr>';
   });
@@ -733,7 +767,7 @@ function renderHorsesTable(rows, d) {
   // 説明はその列が見えている時だけ出す(スマホでは列ごと隠すので注記も隠す)
   // 2026-09 に本体へ足した項(V9.1 時計・V9.2 新馬の血統・V9.3 前走内容・V9.4 騎手の強さ・
   // V9.5 戦績と条件替わり)も adjust(=前日の総合点−実力の点数)に入るため、説明を追記した。
-  html += '<div class="note col-drop">「条件による上げ下げ」＝ 前日の総合点 − 実力の点数。' +
+  if (SHOW_POINTS) html += '<div class="note col-drop">「条件による上げ下げ」＝ 前日の総合点 − 実力の点数。' +
           '調教の動き・想定される展開・枠順と脚質の相性・騎手や厩舎の傾向などをまとめた増減です。' +
           '2026年9月26日以降の予想からは、時計・前走の内容・騎手の過去1年の成績・これまでの戦績と条件替わり' +
           '（新馬戦は血統も）も加えています。</div>';
@@ -928,14 +962,21 @@ function renderDetail(d, rawReason) {
         return (i + 1) + '位 ' + (x.umaban ? esc(x.umaban) + '番 ' : '') + esc(x.name);
       }).join('　');
     };
-    html += '「強さ」上位4頭: ' + (fmt(rk.strength) || '—') + '<br>';
-    html += '「持ち時計」上位4頭: ' + (rk.time ? fmt(rk.time) : '測れず（過去の記録がある馬が少ない）') + '<br>';
-    html += '「上がり」上位4頭: ' + (rk.agari ? fmt(rk.agari) : '測れず（過去の記録がある馬が少ない）') + '<br>';
+    // 上位4頭の一覧は 2026-11-10〜 出さない（1つだけ1位の馬は人気どおり: exp_triple_tiers。重なる馬だけ下に出す）
+    if (SHOW_RANK_LISTS) {
+      html += '「強さ」上位4頭: ' + (fmt(rk.strength) || '—') + '<br>';
+      html += '「持ち時計」上位4頭: ' + (rk.time ? fmt(rk.time) : '測れず（過去の記録がある馬が少ない）') + '<br>';
+      html += '「上がり」上位4頭: ' + (rk.agari ? fmt(rk.agari) : '測れず（過去の記録がある馬が少ない）') + '<br>';
+    }
     if (rk.time && rk.agari) {
       var top3 = function (lst) { return (lst || []).slice(0, 3).map(function (x) { return x.name; }); };
       var t = top3(rk.time), a = top3(rk.agari);
       var all3 = top3(rk.strength).filter(function (n) { return t.indexOf(n) >= 0 && a.indexOf(n) >= 0; });
-      if (all3.length) html += '3つとも3位以内: <b>' + all3.map(esc).join('・') + '</b><br>';
+      // 全部1位／全部2位以内／全部3位以内（2021〜26 の3着内 65%／57%／51%、平均22%。exp_triple_tiers）
+      var worst = function (n) { return Math.max(top3(rk.strength).indexOf(n), t.indexOf(n), a.indexOf(n)) + 1; };
+      if (all3.length) html += '強さ・時計・上がりが全部上位: ' + all3.map(function (n) {
+        var w = worst(n); return '<b>' + esc(n) + '</b>（' + (w === 1 ? '全部1位' : '全部' + w + '位以内') + '）';
+      }).join('・') + '<br><span class="dim">全部そろう馬は過去 3着内 全部1位 約65%・2位以内 約57%・3位以内 約51%（平均は22%）。人気にもほぼ入っています。</span><br>';
     }
     // 2026-10-17〜: 検証中の注目（METRIC_GAP_20261017。表示だけ・買い目の判定には使わない）
     var kp = kenshoPicks(d);
@@ -976,6 +1017,128 @@ function renderDetail(d, rawReason) {
   return html;
 }
 
+/* ---------- 最新予想の簡単なカード（2026-11-10〜） ----------
+   総括（race_story.py の読み物）がある予想は「判定（一言）・印の馬・買い目・総括」だけを出し、
+   ほかの中身（判定の理由・各馬の表・比較材料・結果など今までのカード）は「もっと見る」に畳む。
+   総括が無い予想（過去の予想）は今までどおり renderVerdictCard。 */
+var CARD_MARKS = ['◎', '○', '▲', '△'];
+function hasSokatsu(d) { return !!(d.story && d.story.sections && (d.story.sections['総括'] || []).length); }
+function shortVerdictLine(d) {
+  var av = actionVerdictOf(d), tags = [];
+  if (isShinba(d)) tags.push('新馬戦');
+  if (isOpHandicap(d)) tags.push('OP以上のハンデ戦');
+  if (confPick(d)) tags.push('🎯自信上位');
+  if ((d.seihai || {}).fired) tags.push('🌈特別サイン');
+  return '<span class="' + av.cls + '">' + esc(av.label) + '</span>' +
+         (tags.length ? ' <span class="note">' + tags.map(esc).join('・') + '</span>' : '');
+}
+function markTable(d) {
+  var hs = (d.horses || []).filter(function (h) { return CARD_MARKS.indexOf(h.mark) >= 0; })
+    .sort(function (a, b) { return CARD_MARKS.indexOf(a.mark) - CARD_MARKS.indexOf(b.mark); });
+  if (!hs.length) return '';
+  return '<table class="demo-marks"><tr><th>印</th><th>番</th><th>馬名</th><th>勝つ確率</th><th>3着内</th></tr>' +
+    hs.map(function (h) {
+      return '<tr><td>' + esc(h.mark) + '</td><td class="num">' + esc(h.umaban || '') + '</td><td>' + esc(h.name) +
+             '</td><td class="num">' + pct(h.mc_win) + '</td><td class="num">' + pct(h.top3_est) + '</td></tr>';
+    }).join('') + '</table>';
+}
+// 買い目をやさしい言葉に（2026-11-10〜）: 何を買うか・何が起きれば当たりか・過去どのくらい当たったか・当日のオッズでやめる条件
+var BET_HIT = {
+  '単勝': '1着なら当たり', '複勝': '3着までに入れば当たり',
+  '馬連': '2頭で1着・2着を占めれば当たり（順番は問わない）', '馬単': 'この順番で1着・2着なら当たり',
+  '3連複': '3頭で1〜3着を占めれば当たり（順番は問わない）', '3連単': 'この順番で1〜3着なら当たり'
+};
+function plainBets(d) {
+  var U = {};
+  (d.horses || []).forEach(function (h) { U[h.name] = h.umaban; });
+  var tag = function (n) { return (U[n] ? U[n] + '番 ' : '') + n; };
+  var items = [];
+  (d.bets || []).forEach(function (b) {
+    b = String(b);
+    if (/買い目なし|参考・買わない|^🚫/.test(b)) return;
+    var m = b.match(/(複勝|単勝|馬連|ワイド|馬単|3連複|3連単)\s+([^\s(（]+)/);
+    if (!m) return;
+    var hs = m[2].split(/[-・×]/).filter(function (x) { return x; });
+    var box = m[2].indexOf('・') >= 0;
+    var kind = m[1], hit = BET_HIT[kind];
+    if (kind === 'ワイド') hit = box ? hs.length + '頭のうち2頭が3着までに入れば当たり（2頭以上なら複数当たる）' : '2頭とも3着までに入れば当たり';
+    var what = hs.map(function (n) { return '<b>' + esc(tag(n)) + '</b>'; }).join(box ? '・' : ' と ') + ' の' + kind + (box ? '（' + hs.length + '頭の組み合わせを全部）' : '');
+    var pm = b.match(/(?:的中|当たり)[約~〜]*(\d+)%/), past = '';
+    if (pm) { var k = Math.round(Number(pm[1]) / 10); past = k >= 1 ? '過去は10回に' + k + '回くらい当たり' : '過去は当たりが10回に1回より少ない'; }
+    var line = what + '<br><span class="note">' + esc(hit) + (past ? '。' + esc(past) : '') + '</span>';
+    var om = b.match(/単勝が([\d.]+)倍以上の時だけ/);
+    if (om) line += '<br><span class="note">→ 発走の直前に <b>' + esc(tag(hs[0])) + '</b> の単勝オッズを見て、' + esc(om[1]) + '倍より低ければこの' + kind + 'はやめる</span>';
+    items.push('<li>' + line + '</li>');
+  });
+  if (!items.length) return '';
+  // やめる目安（軸の単勝8倍以上）は当日チェックに入れる（dayCheck）
+  return '<div class="bet">買い目:</div><ul class="plain-bets">' + items.join('') + '</ul>';
+}
+function renderCompactCard(d, idx) {
+  var h = d.header || {}, av = actionVerdictOf(d);
+  var html = '<div class="verdict-block' + (av.kind === 'bet' ? '' : ' vb-skip') + '"' +
+             (idx === undefined ? '' : ' id="' + esc(raceAnchor(idx)) + '"') + '>';
+  var post = (d.race || {}).post_time;   // 発走時刻（2026-11-13 の予想から）
+  html += '<div class="rid">▼ ' + esc(raceTitle(d)) + (post ? ' <span class="post-time">' + esc(post) + '発走</span>' : '') +
+          '　' + esc(h.surface) + dist(h.distance) + ' ' + esc(h.race_class) + '</div>';
+  html += '<div class="line">判定: ' + shortVerdictLine(d) + '</div>';
+  html += markTable(d);
+  if (av.kind === 'bet') html += plainBets(d);
+  html += dayCheck(d, av.kind === 'bet');
+  html += '<div class="commentary story"><div class="commentary-h">総括</div>' +
+          d.story.sections['総括'].map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') +
+          '<div class="note">※ 過去のデータから書いた読み物です。予想の印・確率には使っていません。言葉の意味は<a href="about.html#yougo">用語集</a>へ。</div></div>';
+  // 今までのカードを丸ごと畳む（外枠の verdict-block はレースの切り替えが数えるので名前を変える）
+  // 中身は開いた時に作る（2026-11-11。全レース分の表を最初に作ると重い）→ fillMore
+  html += '<details class="demo-more" data-more="' + (idx === undefined ? '' : idx) + '"><summary>もっと見る（判定の理由・各馬の表・比較材料・結果）</summary>' +
+          (idx === undefined ? fullCard(d) : '<p class="note">読み込み中…</p>') + '</details>';
+  return html + '</div>';
+}
+/* 当日チェック（2026-11-11）: 馬体重の発表・取消・馬場を、自分で確かめて決める所。
+   体重の目安は race_story.day_check（研究で両期に再現したものだけ・どれも「少し割り引く」程度） */
+function firstBetHorse(d) {
+  var r = null;
+  (d.bets || []).some(function (b) {
+    b = String(b);
+    if (/買い目なし|参考・買わない|^🚫/.test(b)) return false;
+    var m = b.match(/(複勝|単勝|馬連|ワイド|馬単|3連複|3連単)\s+([^\s(（]+)/);
+    if (!m) return false;
+    r = m[2].split(/[-・×]/).filter(function (x) { return x; })[0];
+    return true;
+  });
+  return r;
+}
+function dayCheck(d, isBet) {
+  var lines = ((d.story || {}).check || []).slice();
+  // 買い目の軸（◎と別の馬のこともある）。軸が取り消したら見送り
+  var an = isBet ? betAxis(d) : null;
+  var ax = (d.horses || []).filter(function (h) { return h.name === an; })[0];
+  // やめる目安（plainBets から移した。2026-11-11）: 買い目の最初の馬の単勝が8倍以上なら買わない
+  var first = isBet ? firstBetHorse(d) : null, fh = (d.horses || []).filter(function (h) { return h.name === first; })[0];
+  if (fh) lines.push('やめる目安: 発走の直前に ' + (fh.umaban ? fh.umaban + '番 ' : '') + fh.name + ' の単勝オッズが8倍以上なら、このレースは買わない。');
+  if (ax) lines.push((ax.mark || '') + ax.name + '（' + ax.umaban + '番・買い目の軸）が取消になったら、このレースは見送り。買い目のほかの馬の取消は、その馬を含む馬券だけ返ってくる。');
+  var bb = String(((d.header || {}).baba) || '').split('_')[0];
+  if (bb) lines.push('予想は' + bb + '馬場の前提。当日の馬場が変わっていたら' +
+                     (((d.story || {}).sections || {})['道悪'] ? '、もっと見るの「道悪」の材料も見て。' : '、印と確率は前日の馬場で出したものと思って見て。'));
+  if (!lines.length) return '';
+  return '<details class="day-check"' + (isBet ? ' open' : '') + '><summary>当日チェック（馬体重は発走の約70分前に発表）</summary><ul>' +
+         lines.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul></details>';
+}
+function fullCard(d) {
+  return renderVerdictCard(d, undefined, { noSokatsu: true }).replace('<div class="verdict-block', '<div class="vb-inner');
+}
+var LATEST_LIST = [];
+function fillMore(det) {
+  if (!det || det._filled) return;
+  var i = det.getAttribute('data-more');
+  if (i === null || i === '' || !LATEST_LIST[Number(i)]) return;
+  det._filled = true;
+  var sum = det.querySelector('summary');
+  det.innerHTML = '';
+  det.appendChild(sum);
+  det.insertAdjacentHTML('beforeend', fullCard(LATEST_LIST[Number(i)]));
+}
+
 /* ---------- トップ(最新予想) ---------- */
 function initLatest() {
   var el = document.getElementById('latest');
@@ -993,13 +1156,21 @@ function initLatest() {
       return (a.race_no || 99) - (b.race_no || 99);
     });
     document.getElementById('latest-date').textContent = '最新予想日: ' + latest + '(' + todays.length + 'レース)';
-    // 各レースの data.json を取得して結論カードを縦に並べる
-    return Promise.all(todays.map(function (r) { return loadJSON(DATA + 'archive/' + r.file); }))
-      .then(function (list) {
+    // その日の全レースを1つにまとめた latest.json（publish_site.write_latest）を1回で読む。
+    // 無い・古い時は従来どおりレースごとに読む
+    var byFile = {};
+    return loadJSON(DATA + 'latest.json').then(function (lt) {
+      if (lt.latest_date !== latest) throw new Error('old');
+      (lt.files || []).forEach(function (f, k) { byFile[f] = lt.races[k]; });
+      return todays.map(function (r) { if (!byFile[r.file]) throw new Error('missing'); return byFile[r.file]; });
+    }).catch(function () {
+      return Promise.all(todays.map(function (r) { return loadJSON(DATA + 'archive/' + r.file); }));
+    }).then(function (list) {
+        LATEST_LIST = list;
         var rows = list.map(function (d, i) { return { d: d, idx: i }; });
         // 上部にその日の要約(買い目のあるレース/見送り)、続けて従来どおりカードを縦に並べる
         el.innerHTML = renderDaySummary(rows) +
-                       list.map(function (d, i) { return renderVerdictCard(d, i); }).join('');
+                       list.map(function (d, i) { return hasSokatsu(d) ? renderCompactCard(d, i) : renderVerdictCard(d, i); }).join('');
           if (window.initRacePicker) window.initRacePicker(el, list);
       });
   }).catch(function (e) { el.innerHTML = '<p>読み込みエラー: ' + esc(e.message) + '</p>'; });
@@ -1354,6 +1525,12 @@ function bindDetailsUX() {
     if (sum && sum.scrollIntoView) sum.scrollIntoView({ block: 'nearest' });
   });
 
+  // 「もっと見る」は開いた時に中身を作る（fillMore）
+  document.addEventListener('toggle', function (ev) {
+    var det = ev.target;
+    if (det && det.tagName === 'DETAILS' && det.open && det.hasAttribute('data-more')) fillMore(det);
+  }, true);
+
   // アコーディオン(スマホのみ・レース単位の一番外側の details だけが対象)
   document.addEventListener('toggle', function (ev) {
     var det = ev.target;
@@ -1373,6 +1550,19 @@ function bindDetailsUX() {
    ページを増やすときは、専用コンテナのidをここに足す。 */
 function autoInit() {
   bindDetailsUX();
+  // 電波が切れた時の控え（sw.js）。https か手元の確認の時だけ
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
+    navigator.serviceWorker.register('sw.js').catch(function () {});
+  }
+  var off = function () {
+    var u = document.getElementById('updated');
+    if (!u) return;
+    var b = document.getElementById('offline-note');
+    if (!navigator.onLine && !b) {
+      u.insertAdjacentHTML('afterend', '<div class="offline-note" id="offline-note">電波がありません。前に開いた時の内容を出しています。</div>');
+    } else if (navigator.onLine && b) { b.parentNode.removeChild(b); }
+  };
+  window.addEventListener('online', off); window.addEventListener('offline', off); off();
   if (document.getElementById('latest')) { initLatest(); return; }   // index.html
   if (document.getElementById('stats')) { initStats(); return; }     // seiseki.html
   if (document.getElementById('archive')) { initArchive(); return; } // archive.html

@@ -45,28 +45,77 @@
     }
     var h=document.createElement('h2'); h.textContent='レースを選ぶ';picker.appendChild(h);
     var note=document.createElement('p');note.className='note';
-    note.textContent='押すと予想を表示。薄クリームは買い目あり。「未掲載」は予想のない枠です。発走時刻順ではありません。';picker.appendChild(note);
+    note.textContent='押すと予想を表示。薄クリームは買い目あり。「未掲載」は予想のない枠です。発走時刻順ではありません（時刻のあるレースはボタンに発走時刻）。';picker.appendChild(note);
     var table=document.createElement('table');table.className='race-grid';
     table.setAttribute('aria-label','開催場とR番号でレースを選ぶ');
     var head=table.createTHead().insertRow();
-    ['R'].concat(venues).forEach(function(v){var th=document.createElement('th');th.scope='col';th.textContent=v;head.appendChild(th);});
+    ['R'].concat(venues).forEach(function(v,k){var th=document.createElement('th');th.scope='col';th.textContent=v;if(k)th.setAttribute('data-venue',v);head.appendChild(th);});
     var body=table.createTBody();
     for(var n=1;n<=12;n++) {
       var row=body.insertRow(), th=document.createElement('th');th.scope='row';th.textContent=n+'R';row.appendChild(th);
       venues.forEach(function(v){
-        var td=row.insertCell();
+        var td=row.insertCell();td.setAttribute('data-venue',v);
         var matches=entries.filter(function(e){return e.venue===v && e.no===n;});
         if(!matches.length){td.textContent='未掲載';td.className='race-absent';return;}
         matches.forEach(function(e){
           var buy=!cards[e.i].classList.contains('vb-skip');
           var b=button(buy?'買い目あり':'見送り',function(){choose(e.i,b);});
           b.className=buy?'race-buy':''; btnOf[e.i]=b;
+          // 発走時刻（2026-11-13 の予想から。無ければ出さない）
+          var pt=(data[e.i].race||{}).post_time;
+          if(pt){var s=document.createElement('span');s.className='rp-time';s.textContent=pt;b.insertBefore(s,b.firstChild);}
           b.setAttribute('aria-label',v+' '+e.no+'R '+b.textContent);
           td.appendChild(b);
         });
       });
     }
     picker.appendChild(table);
+    // ── 今いる競馬場だけ・次のレース（2026-11-11）。選んだ場はこのスマホに覚えておく ──
+    var VKEY='keiba-venue', myVenue='';
+    try{myVenue=localStorage.getItem(VKEY)||'';}catch(e){}
+    if(venues.indexOf(myVenue)<0)myVenue='';
+    var vbar=document.createElement('div');vbar.className='venue-filter';
+    var vlab=document.createElement('span');vlab.textContent='見る場: ';vbar.appendChild(vlab);
+    var vbtn={};
+    [''].concat(venues).forEach(function(v){
+      var b=button(v||'すべて',function(){setVenue(v);});vbtn[v]=b;vbar.appendChild(b);
+    });
+    var nextBox=document.createElement('div');nextBox.className='next-race';
+    // 置き場所: ページの一番上（メニューのすぐ下の #top-next）。競馬場で一番使うので（2026-11-11）。無ければレースを選ぶの下
+    var slot=document.getElementById('top-next');
+    if(slot){slot.innerHTML='';slot.appendChild(vbar);slot.appendChild(nextBox);}
+    else{picker.insertBefore(nextBox,h.nextSibling);picker.insertBefore(vbar,nextBox);}
+    function setVenue(v){
+      myVenue=v;try{if(v)localStorage.setItem(VKEY,v);else localStorage.removeItem(VKEY);}catch(e){}
+      Object.keys(vbtn).forEach(function(k){vbtn[k].classList.toggle('vf-cur',k===v);vbtn[k].setAttribute('aria-pressed',k===v?'true':'false');});
+      Array.prototype.forEach.call(table.querySelectorAll('[data-venue]'),function(c){c.hidden=!!v&&c.getAttribute('data-venue')!==v;});
+      showNext();
+    }
+    function today(){var t=new Date();return t.getFullYear()+'-'+('0'+(t.getMonth()+1)).slice(-2)+'-'+('0'+t.getDate()).slice(-2);}
+    function showNext(){
+      // その日のレースで、発走時刻がまだ来ていない一番早いレース（発走2分後までは「次」に残す）
+      var now=new Date(),mins=now.getHours()*60+now.getMinutes(),best=null;
+      entries.forEach(function(e){
+        var r=data[e.i].race||{},pt=r.post_time;
+        if(!pt||r.date!==today()||(myVenue&&e.venue!==myVenue))return;
+        var m=pt.split(':'),t=Number(m[0])*60+Number(m[1]);
+        if(t+2<mins)return;
+        if(!best||t<best.t)best={t:t,e:e,pt:pt};
+      });
+      nextBox.innerHTML='';
+      if(!best){nextBox.hidden=true;return;}
+      nextBox.hidden=false;
+      var buy=!cards[best.e.i].classList.contains('vb-skip');
+      var left=best.t-mins;
+      var b=button('',function(){choose(best.e.i,b);});
+      b.className='next-btn'+(buy?' race-buy':'');
+      b.textContent='次のレース: '+best.e.venue+' '+best.e.no+'R '+best.pt+'発走'+(left>0?'（あと'+left+'分）':'')+'・'+(buy?'買い目あり':'見送り')+' →';
+      nextBox.appendChild(b);
+    }
+    setVenue(myVenue);
+    // 画面に戻ってきた時と1分ごとに「次」を直す（隠れている間は数えない）
+    document.addEventListener('visibilitychange',function(){if(!document.hidden)showNext();});
+    setInterval(function(){if(!document.hidden)showNext();},60000);
     // Legacy races without a valid R remain accessible; do not invent numbers.
     entries.filter(function(e){return !Number.isInteger(e.no)||e.no<1||e.no>12;}).forEach(function(e){
       var b=button(e.venue+' R番号未登録の予想 '+(e.i+1),function(){choose(e.i,b);});picker.appendChild(b);
