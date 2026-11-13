@@ -1087,7 +1087,7 @@ function renderCompactCard(d, idx) {
   html += dayCheck(d, av.kind === 'bet');
   html += '<div class="commentary story"><div class="commentary-h">総括</div>' +
           d.story.sections['総括'].map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') +
-          '<div class="note">※ 過去のデータから書いた読み物です。予想の印・確率には使っていません。言葉の意味は<a href="about.html#yougo">用語集</a>へ。</div></div>';
+          '<div class="note">※ 過去のデータから書いた読み物です。予想の印・確率には使っていません。</div></div>';
   // 今までのカードを丸ごと畳む（外枠の verdict-block はレースの切り替えが数えるので名前を変える）
   // 中身は開いた時に作る（2026-11-11。全レース分の表を最初に作ると重い）→ fillMore
   html += '<details class="demo-more" data-more="' + (idx === undefined ? '' : idx) + '"><summary>もっと見る（判定の理由・各馬の表・比較材料・結果）</summary>' +
