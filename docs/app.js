@@ -189,6 +189,11 @@ function plainReason(d) {
   else if (g.state === '一致') head = '「強さ」と「持ち時計」の上位2頭は同じですが、レースとしての狙いどころはもう一歩です';
   else head = 'レースとしては、はっきりした狙い目がありません';
 
+  if (isConfBet(d)) {
+    var ca = betAxis(d);
+    return head + '。ただし ' + axisSym(d, ca) + esc(ca || '本命') +
+           ' は勝つ確率が45%以上の🎯自信上位なので、その<b>複勝</b>を本線にします（当たり重視・配当は安め）。';
+  }
   if (se.fired) {
     // 聖杯発火時: 買い目が出る理由を明示して矛盾に見せない
     return head + '。ただし ' + axisSym(d, se.axis) + esc(se.axis || '本命') +
@@ -244,13 +249,19 @@ var TIER_LABEL = {
   seihai_umaren: '馬連3点',
   group_fukusho: '複勝（試験運用）',
   step_umaren: '馬連1点（試験運用）',
-  wide3: 'ワイド3点（試験運用）'
+  wide3: 'ワイド3点（試験運用）',
+  conf_fukusho: '複勝（本線）'
 };
 /* 買い目の種類 → サインの名前(2026-09-28 試験運用の2つを追加。📐実力差サインは研究終了で新しい予想には出ない) */
 var SIGN_LABEL = {
   seihai_fukusho: '🌈特別サイン', seihai_umaren: '🌈特別サイン', gap_fukusho: '📐実力差サイン',
-  group_fukusho: '🧪上位一致サイン', step_umaren: '🧪段差サイン', wide3: '🧪3頭ワイド'
+  group_fukusho: '🧪上位一致サイン', step_umaren: '🧪段差サイン', wide3: '🧪3頭ワイド',
+  conf_fukusho: '🎯自信上位'
 };
+/* 🎯自信上位の◎複勝を本線にした日（2026-11-14 判断、これ以降に出した予想＝11/15 のレースから。format_prediction.CONF_BET_FROM と同じ）。
+   同じ日から 🌈特別サインは試験運用。過去（B-2 v5、2024〜2026-06）: 627R 当たり87.1%・複勝回収96.5%、◎の94%が1番人気。 */
+var CONF_BET_FROM = '2026-11-14T00:00:00';
+function isConfBet(d) { return ((d && d.verdict) || {}).bet_tier === 'conf_fukusho'; }
 var TRIAL_FROM = '2026-09-28T00:00:00';
 function renderResultLine(d) {
   var res = d.result;
@@ -313,7 +324,7 @@ function renderDaySummary(rows) {
     bets.forEach(function (x) {
       var d = x.d, se = d.seihai || {}, tier = (d.verdict || {}).bet_tier;
       var axis = betAxis(d) || '—';
-      var sign = se.fired ? '🌈特別サイン' : (SIGN_LABEL[tier] || '');
+      var sign = (se.fired && tier !== 'conf_fukusho') ? '🌈特別サイン' : (SIGN_LABEL[tier] || '');
       var what = TIER_LABEL[tier] || '';
       html += '<li><a href="#' + esc(raceAnchor(x.idx)) + '">' +
               esc(venueLabel(d)) + (d.race && d.race.no ? esc(d.race.no) + 'R' : '') + '</a>' +
@@ -332,7 +343,9 @@ function renderDaySummary(rows) {
   });
   if (cl.length) {
     html += '<details class="note ks-box"><summary>🎯 自信上位 ' + cl.length + 'レース</summary>' +
-            '<div class="dim">勝つ確率1位の馬が45%以上のレース。過去は その馬の勝率 約52%・3着以内 約88%（ほぼ1番人気で配当は安め）。記録中の目安で、買いの合図ではありません。</div><ul class="ds-list">' + cl.join('') + '</ul></details>';
+            (String(((cl.length && rows[0]) ? rows[0].d.predicted_at : '') || '') >= CONF_BET_FROM
+              ? '<div class="dim">勝つ確率1位の馬が45%以上のレース。その馬の<b>複勝が本線の買い目</b>です。過去は 3着以内 約87%・複勝の回収 約96%（ほとんど1番人気で配当は安め・回収は100%に届きません）。</div><ul class="ds-list">'
+              : '<div class="dim">勝つ確率1位の馬が45%以上のレース。過去は その馬の勝率 約52%・3着以内 約88%（ほぼ1番人気で配当は安め）。記録中の目安で、買いの合図ではありません。</div><ul class="ds-list">') + cl.join('') + '</ul></details>';
   }
   // 2026-10-17〜: 検証中の注目（買い目とは別枠）
   var kl = [];
@@ -398,7 +411,7 @@ function withUmaban(text, d) {
 /* 買い目の軸: 特別サインは seihai.axis、試験運用のサインは verdict.trials の軸、それ以外は◎(reconcile_results.read_bet と同じ) */
 function betAxis(d) {
   var se = d.seihai || {}, v = d.verdict || {}, tier = v.bet_tier;
-  if (se.fired && se.axis) return se.axis;
+  if (tier !== 'conf_fukusho' && se.fired && se.axis) return se.axis;
   var t = (v.trials || []).filter(function (x) { return x.kind === tier && x.axis; })[0];
   return t ? t.axis : axisFromRows(d);
 }
@@ -457,7 +470,9 @@ function renderVerdictCard(d, idx, opt) {
   var cp = confPick(d);
   if (cp) {
     html += '<div class="line">🎯 自信上位: ' + (cp.umaban ? esc(cp.umaban) + '番 ' : '') + '<b>' + esc(cp.name) + '</b>（勝つ確率 ' + pct(cp.mc_win) + '）' +
-            ' <span class="note">勝つ確率45%以上のレース。過去は この馬の勝率 約52%・3着以内 約88%。人気でも強い本命の目安で配当は安め。記録中の目安で、買いの合図ではありません</span></div>';
+            (isConfBet(d)
+              ? ' <span class="note">勝つ確率45%以上のレース。この馬の<b>複勝が本線の買い目</b>です。過去は 3着以内 約87%・複勝の回収 約96%（ほとんど1番人気で配当は安め）</span></div>'
+              : ' <span class="note">勝つ確率45%以上のレース。過去は この馬の勝率 約52%・3着以内 約88%。人気でも強い本命の目安で配当は安め。記録中の目安で、買いの合図ではありません</span></div>');
   }
   // plainReason は動的部分に esc 済みの安全なHTMLを返す(強調と馬名を含むため二重エスケープしない)
   html += '<div class="line">' + plainReason(d) + '</div>';
@@ -1274,7 +1289,7 @@ function renderForward(fw) {
     return '<p class="note">前向き実績はまだありません（結果の突合が未実行）。</p>';
   }
   var s = fw.series || {};
-  var keys = ['seihai_fukusho', 'group_fukusho', 'wide3', 'step_umaren', 'seihai_umaren', 'gap_fukusho'];
+  var keys = ['conf_fukusho', 'seihai_fukusho', 'group_fukusho', 'wide3', 'step_umaren', 'seihai_umaren', 'gap_fukusho'];
   // 研究終了の系列(retired)はグレーで出す。試験運用(trial)は件数が少ないうちは参考。
   var rowCls = function (v) { return v && v.retired ? ' class="retired"' : ''; };
   var html = '';

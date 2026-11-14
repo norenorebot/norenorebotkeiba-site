@@ -3,11 +3,11 @@
    読めない時（競馬場で電波が弱い・切れた）だけ、控えた分を出す。予想の中身は触らない。
    同じサイトの GET だけが対象（アクセス数のカウンターなど外のサイトは素通し）。 */
 'use strict';
-var CACHE = 'keiba-v7';
+var CACHE = 'keiba-v8';
 
 // 最初の起動で、ページの骨組みを控えておく（その時の表示は控えの仕組みが動く前に読まれているため）
 // 版の印（?v=）は HTML の読み込みと同じにする。控えから探す時は ?v= を無視する
-var SHELL = ['./', 'index.html', 'style.css?v=20261113a', 'counter.css', 'app.js?v=20261113a', 'race-picker.js?v=20261113a', 'counter.js', 'data/index.json', 'data/latest.json'];
+var SHELL = ['./', 'index.html', 'style.css?v=20261114a', 'counter.css', 'app.js?v=20261114a', 'race-picker.js?v=20261114a', 'counter.js', 'data/index.json', 'data/latest.json'];
 self.addEventListener('install', function (ev) {
   self.skipWaiting();
   ev.waitUntil(caches.open(CACHE).then(function (c) {
