@@ -1,0 +1,802 @@
+{
+ "schema": "format_prediction.v2",
+ "generated_at": "2026-11-21T00:55:57",
+ "predicted_at": "2026-11-21T00:06:07",
+ "race_id": "20261121_京ダ1200_新馬",
+ "header": {
+  "date": "2026-11-21",
+  "venue": "京",
+  "surface": "ダ",
+  "distance": 1200.0,
+  "race_class": "新馬",
+  "baba": "良",
+  "N": 7
+ },
+ "race": {
+  "date": "2026-11-21",
+  "no": 6,
+  "venue_code": "京",
+  "venue_name": "京都",
+  "handicap": false,
+  "post_time": "12:55",
+  "labeled": true,
+  "draft": false,
+  "warnings": []
+ },
+ "verdict": {
+  "value": "⚠️慎重",
+  "reason": "V27欠測(対象日より前に戦績を持つ馬が0頭(<3)・時計で語れない)→gap確定不可・慎重フォールバック",
+  "bet_tier": "none",
+  "gap_signal": null,
+  "trials": []
+ },
+ "axis_backing": null,
+ "bets": [
+  "買い目なし(推奨なしを明示=判断支援)"
+ ],
+ "bet_notes": [],
+ "venue_guidance": {
+  "mark": null,
+  "note": "会場の目安は使わない(2026-11-03〜)"
+ },
+ "seihai": {
+  "fired": false
+ },
+ "gap": {
+  "elo_gap_top2": 0.0,
+  "v27_gap_top2": null,
+  "elo_top2": [
+   "ファルディルーチェ",
+   "ロゼフレイバー"
+  ],
+  "v27_top2": null,
+  "big_e": false,
+  "big_v": null,
+  "overlap": null,
+  "state": "V27欠測",
+  "v27_missing": true,
+  "v27_reason": "対象日より前に戦績を持つ馬が0頭(<3)・時計で語れない",
+  "v27_source_latest": null,
+  "time_kind": "time2"
+ },
+ "rankings": {
+  "strength": [
+   {
+    "name": "ロゼフレイバー",
+    "umaban": 7,
+    "value": 1350.0
+   },
+   {
+    "name": "ファルディルーチェ",
+    "umaban": 6,
+    "value": 1350.0
+   },
+   {
+    "name": "セレクトルビー",
+    "umaban": 5,
+    "value": 1350.0
+   },
+   {
+    "name": "ジェルモーリオ",
+    "umaban": 2,
+    "value": 1350.0
+   }
+  ],
+  "time": null,
+  "time_kind": "time2",
+  "agari": null
+ },
+ "fallback": false,
+ "calib": {
+  "calib_ok_30R": true,
+  "calib_sample_n": 91,
+  "calibrated_temp": 59.56922306270989,
+  "using_calibrated_mc": true
+ },
+ "learning_profile": {
+  "available": true,
+  "cell": "京ダ1200・MAIDEN",
+  "build_date": "2026-10-24",
+  "pin": 15.0,
+  "pkl": "phase1_cache_京_ダ_1200m_MAIDEN.pkl",
+  "systems": [
+   {
+    "label": "展開",
+    "pct": 26.5,
+    "bars": "◉◎◎◎◎"
+   },
+   {
+    "label": "騎手",
+    "pct": 15.5,
+    "bars": "◉◎◎◎◎"
+   },
+   {
+    "label": "調教",
+    "pinned": true,
+    "pin": 15.0
+   },
+   {
+    "label": "厩舎",
+    "pct": 27.5,
+    "bars": "◉◎◎◎◎"
+   },
+   {
+    "label": "斤量",
+    "pct": 85.6,
+    "bars": "◉◉◉◉◎"
+   },
+   {
+    "label": "減衰",
+    "pct": 86.2,
+    "bars": "◉◉◉◉◎"
+   }
+  ],
+  "note": "※学習された係数の相対配置。係数の大小が予測寄与を保証するものではない"
+ },
+ "model": {
+  "engine": "V9.6",
+  "applied": {
+   "time": true,
+   "ped": true,
+   "trip": false,
+   "jstr": true,
+   "career": true,
+   "draw": true
+  },
+  "inferred": true,
+  "display_calib": {
+   "enabled": true,
+   "k": 1.94,
+   "eps": 0.12,
+   "cap": 0.5,
+   "b2": false,
+   "b2v2": false,
+   "b2v3": false,
+   "b2v4": false,
+   "b2v5": false,
+   "b2v6": false,
+   "b2v7": false
+  }
+ },
+ "horses": [
+  {
+   "umaban": 7,
+   "mark": "◎",
+   "name": "ロゼフレイバー",
+   "style": "—",
+   "jockey": "松山",
+   "chokyo": null,
+   "chokyo_rank": {
+    "loc": "栗東",
+    "kind": "坂路",
+    "date": "11/18",
+    "rank": 300,
+    "n": 10022,
+    "pct": 3.0,
+    "time": 53.7,
+    "f1": 13.3,
+    "f1_rank": 1565,
+    "f1_pct": 15.6,
+    "days": 14
+   },
+   "mc_win": 0.28803712279822974,
+   "top3_est": 0.7069966600481588,
+   "jitsuryoku": 1350.0,
+   "zenjitsu": 1482.8550374721037,
+   "adjust": 132.85503747210373,
+   "odds": null,
+   "swap": false,
+   "rank_result": null,
+   "breakdown": {
+    "env": 0.2503288749868773,
+    "time": 38.6,
+    "ped": 4.376984539337908,
+    "trip": 0.0,
+    "trip_flags": [],
+    "jockey": 69.21309168333038,
+    "jockey_rate": 0.3862286348501665,
+    "jockey_n": 851,
+    "career": 1.4210854715202004e-14,
+    "career_flags": [
+     "履歴なし"
+    ],
+    "draw": 17.18585,
+    "early": 3.2287823744485693,
+    "p_early": 0.49188892771028075,
+    "parts": {
+     "base": 1350.0,
+     "surf_dist": 0.0,
+     "mud": 0.0,
+     "cls": 0.0,
+     "peak": 0.0,
+     "peak_flag": 0.0,
+     "kinryo": 0.167,
+     "weight": 0.0,
+     "chokyo": 0.0,
+     "jbonus": 4.955,
+     "trainer": -23.822,
+     "vol": 0.0,
+     "env_clip": 0.0,
+     "bias": 18.951,
+     "pace": 0.0,
+     "hl": 0.0
+    }
+   }
+  },
+  {
+   "umaban": 6,
+   "mark": "○",
+   "name": "ファルディルーチェ",
+   "style": "—",
+   "jockey": "高杉",
+   "chokyo": null,
+   "chokyo_rank": {
+    "loc": "栗東",
+    "kind": "坂路",
+    "date": "11/15",
+    "rank": 2424,
+    "n": 10022,
+    "pct": 24.2,
+    "time": 59.5,
+    "f1": 14.5,
+    "f1_rank": 2877,
+    "f1_pct": 28.7,
+    "days": 14
+   },
+   "mc_win": 0.16937725065026965,
+   "top3_est": 0.5113067909367434,
+   "jitsuryoku": 1350.0,
+   "zenjitsu": 1416.2545051807206,
+   "adjust": 66.25450518072057,
+   "odds": null,
+   "swap": false,
+   "rank_result": null,
+   "breakdown": {
+    "env": 9.269281912312692,
+    "time": 38.6,
+    "ped": -11.352228865923141,
+    "trip": 0.0,
+    "trip_flags": [],
+    "jockey": 16.995137706267833,
+    "jockey_rate": 0.26099371069182387,
+    "jockey_n": 586,
+    "career": 1.4210854715202004e-14,
+    "career_flags": [
+     "履歴なし"
+    ],
+    "draw": 11.457233333333333,
+    "early": 1.2850810947298297,
+    "p_early": 0.5052019501741077,
+    "parts": {
+     "base": 1350.0,
+     "surf_dist": 0.0,
+     "mud": 0.0,
+     "cls": 0.0,
+     "peak": 0.0,
+     "peak_flag": 0.0,
+     "kinryo": -0.666,
+     "weight": 0.0,
+     "chokyo": 0.0,
+     "jbonus": 7.221,
+     "trainer": -16.237,
+     "vol": 0.0,
+     "env_clip": 0.0,
+     "bias": 18.951,
+     "pace": 0.0,
+     "hl": 0.0
+    }
+   }
+  },
+  {
+   "umaban": 5,
+   "mark": "▲",
+   "name": "セレクトルビー",
+   "style": "—",
+   "jockey": "田山",
+   "chokyo": null,
+   "chokyo_rank": {
+    "loc": "栗東",
+    "kind": "坂路",
+    "date": "11/18",
+    "rank": 793,
+    "n": 10022,
+    "pct": 7.9,
+    "time": 54.9,
+    "f1": 12.7,
+    "f1_rank": 515,
+    "f1_pct": 5.1,
+    "days": 14
+   },
+   "mc_win": 0.15184252361498832,
+   "top3_est": 0.4713868899748289,
+   "jitsuryoku": 1350.0,
+   "zenjitsu": 1402.1124648853151,
+   "adjust": 52.11246488531515,
+   "odds": null,
+   "swap": false,
+   "rank_result": null,
+   "breakdown": {
+    "env": 13.231063840663623,
+    "time": 38.6,
+    "ped": 3.1196264541119554,
+    "trip": 0.0,
+    "trip_flags": [],
+    "jockey": -8.737525502846056,
+    "jockey_rate": 0.19927876631079477,
+    "jockey_n": 793,
+    "career": 1.4210854715202004e-14,
+    "career_flags": [
+     "履歴なし"
+    ],
+    "draw": 5.728616666666665,
+    "early": 0.17068342671893788,
+    "p_early": 0.5128348109139084,
+    "parts": {
+     "base": 1350.0,
+     "surf_dist": 0.0,
+     "mud": 0.0,
+     "cls": 0.0,
+     "peak": 0.0,
+     "peak_flag": 0.0,
+     "kinryo": 0.999,
+     "weight": 0.0,
+     "chokyo": 0.0,
+     "jbonus": 7.401,
+     "trainer": -14.12,
+     "vol": 0.0,
+     "env_clip": 0.0,
+     "bias": 18.951,
+     "pace": 0.0,
+     "hl": 0.0
+    }
+   }
+  },
+  {
+   "umaban": 2,
+   "mark": "△",
+   "name": "ジェルモーリオ",
+   "style": "—",
+   "jockey": "今村",
+   "chokyo": null,
+   "chokyo_rank": {
+    "loc": "栗東",
+    "kind": "ウッド",
+    "date": "11/18",
+    "rank": 401,
+    "n": 2175,
+    "pct": 18.4,
+    "time": 67.7,
+    "f1": 12.0,
+    "f1_rank": 673,
+    "f1_pct": 30.9,
+    "days": 14
+   },
+   "mc_win": 0.108230395687001,
+   "top3_est": 0.3581691902501829,
+   "jitsuryoku": 1350.0,
+   "zenjitsu": 1356.900639417926,
+   "adjust": 6.900639417925959,
+   "odds": null,
+   "swap": false,
+   "rank_result": null,
+   "breakdown": {
+    "env": -12.451303647689357,
+    "time": 38.6,
+    "ped": 4.665925002615808,
+    "trip": 0.0,
+    "trip_flags": [],
+    "jockey": -11.652202980718119,
+    "jockey_rate": 0.19228846153846155,
+    "jockey_n": 366,
+    "career": 1.4210854715202004e-14,
+    "career_flags": [
+     "履歴なし"
+    ],
+    "draw": -11.457233333333333,
+    "early": -0.804545622949056,
+    "p_early": 0.5195144619390316,
+    "parts": {
+     "base": 1350.0,
+     "surf_dist": 0.0,
+     "mud": 0.0,
+     "cls": 0.0,
+     "peak": 0.0,
+     "peak_flag": 0.0,
+     "kinryo": 1.832,
+     "weight": 0.0,
+     "chokyo": 0.0,
+     "jbonus": 1.253,
+     "trainer": -16.237,
+     "vol": 0.0,
+     "env_clip": 0.0,
+     "bias": 0.7,
+     "pace": 0.0,
+     "hl": 0.0
+    }
+   }
+  },
+  {
+   "umaban": 3,
+   "mark": "",
+   "name": "コパノハーバード",
+   "style": "—",
+   "jockey": "古川吉",
+   "chokyo": null,
+   "chokyo_rank": {
+    "loc": "栗東",
+    "kind": "ウッド",
+    "date": "11/11",
+    "rank": 90,
+    "n": 2175,
+    "pct": 4.1,
+    "time": 65.8,
+    "f1": 13.4,
+    "f1_rank": 1111,
+    "f1_pct": 51.1,
+    "days": 14
+   },
+   "mc_win": 0.10348362600757971,
+   "top3_est": 0.34468418349877683,
+   "jitsuryoku": 1350.0,
+   "zenjitsu": 1350.7157412090787,
+   "adjust": 0.7157412090787147,
+   "odds": null,
+   "swap": false,
+   "rank_result": null,
+   "breakdown": {
+    "env": -3.876046383927365,
+    "time": 38.6,
+    "ped": 0.2120792075013972,
+    "trip": 0.0,
+    "trip_flags": [],
+    "jockey": -27.757751592106732,
+    "jockey_rate": 0.15366233766233767,
+    "jockey_n": 412,
+    "career": 1.4210854715202004e-14,
+    "career_flags": [
+     "履歴なし"
+    ],
+    "draw": -5.7286166666666665,
+    "early": -0.733923355721934,
+    "p_early": 0.5190307477799417,
+    "parts": {
+     "base": 1350.0,
+     "surf_dist": 0.0,
+     "mud": 0.0,
+     "cls": 0.0,
+     "peak": 0.0,
+     "peak_flag": 0.0,
+     "kinryo": 0.167,
+     "weight": 0.0,
+     "chokyo": 0.0,
+     "jbonus": 4.14,
+     "trainer": -8.883,
+     "vol": 0.0,
+     "env_clip": 0.0,
+     "bias": 0.7,
+     "pace": 0.0,
+     "hl": 0.0
+    }
+   }
+  },
+  {
+   "umaban": 1,
+   "mark": "",
+   "name": "サンダージョー",
+   "style": "—",
+   "jockey": "菱田",
+   "chokyo": null,
+   "chokyo_rank": {
+    "loc": "栗東",
+    "kind": "坂路",
+    "date": "11/18",
+    "rank": 1118,
+    "n": 10022,
+    "pct": 11.2,
+    "time": 55.7,
+    "f1": 14.2,
+    "f1_rank": 2585,
+    "f1_pct": 25.8,
+    "days": 14
+   },
+   "mc_win": 0.08959649191326505,
+   "top3_est": 0.3039739065866329,
+   "jitsuryoku": 1350.0,
+   "zenjitsu": 1330.4509579183186,
+   "adjust": -19.549042081681364,
+   "odds": null,
+   "swap": true,
+   "rank_result": null,
+   "breakdown": {
+    "env": -23.311942322749452,
+    "time": 38.6,
+    "ped": -5.4915919705244844,
+    "trip": 0.0,
+    "trip_flags": [],
+    "jockey": -8.724164228119369,
+    "jockey_rate": 0.1993108108108108,
+    "jockey_n": 542,
+    "career": 1.4210854715202004e-14,
+    "career_flags": [
+     "履歴なし"
+    ],
+    "draw": -17.18585,
+    "early": -3.4354935602880765,
+    "p_early": 0.5375346532906687,
+    "parts": {
+     "base": 1350.0,
+     "surf_dist": 0.0,
+     "mud": 0.0,
+     "cls": 0.0,
+     "peak": 0.0,
+     "peak_flag": 0.0,
+     "kinryo": -0.666,
+     "weight": 0.0,
+     "chokyo": 0.0,
+     "jbonus": 1.458,
+     "trainer": -24.804,
+     "vol": 0.0,
+     "env_clip": 0.0,
+     "bias": 0.7,
+     "pace": 0.0,
+     "hl": 0.0
+    }
+   }
+  },
+  {
+   "umaban": 4,
+   "mark": "",
+   "name": "オートドライブ",
+   "style": "—",
+   "jockey": "藤懸",
+   "chokyo": null,
+   "chokyo_rank": {
+    "loc": "栗東",
+    "kind": "坂路",
+    "date": "11/18",
+    "rank": 884,
+    "n": 10022,
+    "pct": 8.8,
+    "time": 55.1,
+    "f1": 13.5,
+    "f1_rank": 1866,
+    "f1_pct": 18.6,
+    "days": 14
+   },
+   "mc_win": 0.08943258932866652,
+   "top3_est": 0.30348237870467604,
+   "jitsuryoku": 1350.0,
+   "zenjitsu": 1330.1892354675863,
+   "adjust": -19.810764532413714,
+   "odds": null,
+   "swap": true,
+   "rank_result": null,
+   "breakdown": {
+    "env": -33.83280072254819,
+    "time": 38.6,
+    "ped": 4.469205632880591,
+    "trip": 0.0,
+    "trip_flags": [],
+    "jockey": -29.336585085807886,
+    "jockey_rate": 0.1498758029978587,
+    "jockey_n": 417,
+    "career": 1.4210854715202004e-14,
+    "career_flags": [
+     "履歴なし"
+    ],
+    "draw": 0.0,
+    "early": 0.2894156430617538,
+    "p_early": 0.5120215765553959,
+    "parts": {
+     "base": 1350.0,
+     "surf_dist": 0.0,
+     "mud": 0.0,
+     "cls": 0.0,
+     "peak": 0.0,
+     "peak_flag": 0.0,
+     "kinryo": 0.167,
+     "weight": 0.0,
+     "chokyo": 0.0,
+     "jbonus": 2.558,
+     "trainer": -37.257,
+     "vol": 0.0,
+     "env_clip": 0.0,
+     "bias": 0.7,
+     "pace": 0.0,
+     "hl": 0.0
+    }
+   }
+  }
+ ],
+ "yomimono": {
+  "version": 2,
+  "made_at": "2026-11-21T00:56",
+  "pace": {
+   "label": "遅め",
+   "dev": 0.63,
+   "reasons": [
+    "逃げ・先行候補 0頭（少ない→遅くなりやすい）",
+    "未勝利（遅くなりやすい）",
+    "このコースは最近 0.4秒速め"
+   ]
+  },
+  "balance": {
+   "pred": 48.6,
+   "dev": 2.9,
+   "bin": "いつもよりスロー",
+   "course_prior": 45.656872037914695
+  },
+  "scenario": {
+   "tops": {
+    "速め": [
+     7,
+     6,
+     5,
+     2,
+     3
+    ],
+    "平均": [
+     7,
+     6,
+     5,
+     2,
+     3
+    ],
+    "スロー": [
+     7,
+     6,
+     5,
+     2,
+     3
+    ]
+   },
+   "d": [
+    -3.5,
+    3.9
+   ]
+  },
+  "paragraphs": [
+   "前半と後半の釣り合いの予想: いつもよりスロー（前半が緩んで上がり勝負）。過去のダでこの予想の時、前に行く見込みの馬の3着内は31%（速め予想の時は27%）。ダートは芝ほど差が出ません。",
+   "はっきりした逃げ馬はいません。過去のダで逃げ候補0頭のレースは前半が緩みやすく、最初の角で3番手以内の馬の3着内率は42%（逃げ候補3頭以上だと36%）。誰が行くかで流れが決まります。",
+   "本体の予想位置では、前は7ロゼフレイバー・6ファルディルーチェ・4オートドライブ、後ろは3コパノハーバード・2ジェルモーリオ・1サンダージョー。",
+   "出走7頭のうち7頭は位置の記録が2走以下で、展開は読みにくいレースです。"
+  ],
+  "horses": [
+   {
+    "umaban": 7,
+    "name": "ロゼフレイバー",
+    "label": "わからない（走数が少ない）",
+    "desc": "わからない（走数が少ない）（最初の角 直近: 記録なし）",
+    "p_early": 0.492
+   },
+   {
+    "umaban": 6,
+    "name": "ファルディルーチェ",
+    "label": "わからない（走数が少ない）",
+    "desc": "わからない（走数が少ない）（最初の角 直近: 記録なし）",
+    "p_early": 0.505
+   },
+   {
+    "umaban": 5,
+    "name": "セレクトルビー",
+    "label": "わからない（走数が少ない）",
+    "desc": "わからない（走数が少ない）（最初の角 直近: 記録なし）",
+    "p_early": 0.513
+   },
+   {
+    "umaban": 2,
+    "name": "ジェルモーリオ",
+    "label": "わからない（走数が少ない）",
+    "desc": "わからない（走数が少ない）（最初の角 直近: 記録なし）",
+    "p_early": 0.52
+   },
+   {
+    "umaban": 3,
+    "name": "コパノハーバード",
+    "label": "わからない（走数が少ない）",
+    "desc": "わからない（走数が少ない）（最初の角 直近: 記録なし）",
+    "p_early": 0.519
+   },
+   {
+    "umaban": 1,
+    "name": "サンダージョー",
+    "label": "わからない（走数が少ない）",
+    "desc": "わからない（走数が少ない）（最初の角 直近: 記録なし）",
+    "p_early": 0.538
+   },
+   {
+    "umaban": 4,
+    "name": "オートドライブ",
+    "label": "わからない（走数が少ない）",
+    "desc": "わからない（走数が少ない）（最初の角 直近: 記録なし）",
+    "p_early": 0.512
+   }
+  ],
+  "note": "読み物（参考）: 過去の位置取りから作った展開の見立て。予想の印・確率には使っていない。"
+ },
+ "story": {
+  "version": 2,
+  "made_at": "2026-11-21T00:57",
+  "sections": {
+   "総括": [
+    "新馬戦は研究しとらん。人気の方が当てになるで。"
+   ],
+   "展開": [
+    "はっきりした逃げ馬がおらん。前半は緩みやすい顔ぶれや。",
+    "このコースのいつもより、前半が緩みそうな顔ぶれ。前に行く馬が残りやすいで。",
+    "キャリアの浅い馬が多く、位置取りは読みにくいわ。"
+   ],
+   "血統": [
+    "ジェルモーリオの父ホッコータルマエの産駒は、京都ダ1200m前後ではほかのダより走らへん。",
+    "サンダージョーの父サンダースノーの産駒は、京都ダ1200m前後ではほかのダより走らへん。",
+    "ロゼフレイバーの父オルフェーヴルの産駒は、京都ダ1200m前後ではほかのダより走らへん。"
+   ],
+   "調教": [
+    "ロゼフレイバーは11/18に栗東坂路で53.7秒と全体の時計は上位。ただ終いは甘い。終いが甘いと並の調教と変わらん。"
+   ],
+   "2頭出し": [
+    "寺島厩舎から2頭: ファルディルーチェ・ジェルモーリオ。"
+   ]
+  },
+  "zenso": [
+   {
+    "u": 1,
+    "n": "サンダージョー",
+    "race": "初出走",
+    "chaku": "",
+    "aite": "",
+    "nakami": ""
+   },
+   {
+    "u": 2,
+    "n": "ジェルモーリオ",
+    "race": "初出走",
+    "chaku": "",
+    "aite": "",
+    "nakami": ""
+   },
+   {
+    "u": 3,
+    "n": "コパノハーバード",
+    "race": "初出走",
+    "chaku": "",
+    "aite": "",
+    "nakami": ""
+   },
+   {
+    "u": 4,
+    "n": "オートドライブ",
+    "race": "初出走",
+    "chaku": "",
+    "aite": "",
+    "nakami": ""
+   },
+   {
+    "u": 5,
+    "n": "セレクトルビー",
+    "race": "初出走",
+    "chaku": "",
+    "aite": "",
+    "nakami": ""
+   },
+   {
+    "u": 6,
+    "n": "ファルディルーチェ",
+    "race": "初出走",
+    "chaku": "",
+    "aite": "",
+    "nakami": ""
+   },
+   {
+    "u": 7,
+    "n": "ロゼフレイバー",
+    "race": "初出走",
+    "chaku": "",
+    "aite": "",
+    "nakami": ""
+   }
+  ],
+  "check": [],
+  "note": "過去のデータから拾った比較材料です。"
+ }
+}
