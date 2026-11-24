@@ -1,1760 +1,1877 @@
 {
- "schema": "format_prediction.v2",
- "generated_at": "2026-11-21T00:56:05",
- "predicted_at": "2026-11-21T00:35:55",
- "race_id": "20261121_福芝2000_OP",
- "header": {
-  "date": "2026-11-21",
-  "venue": "福",
-  "surface": "芝",
-  "distance": 2000.0,
-  "race_class": "OP",
-  "baba": "良_B",
-  "N": 16
- },
- "race": {
-  "date": "2026-11-21",
-  "no": 11,
-  "venue_code": "福",
-  "venue_name": "福島",
-  "handicap": true,
-  "post_time": "15:20",
-  "labeled": true,
-  "draft": false,
-  "warnings": []
- },
- "verdict": {
-  "value": "⚠️慎重",
-  "reason": "Elo格差小(gap一致条件を満たさない)",
-  "bet_tier": "none",
-  "gap_signal": null,
-  "trials": []
- },
- "axis_backing": null,
- "bets": [
-  "買い目なし(推奨なしを明示=判断支援)"
- ],
- "bet_notes": [],
- "venue_guidance": {
-  "mark": null,
-  "note": "会場の目安は使わない(2026-11-03〜)"
- },
- "seihai": {
-  "fired": false
- },
- "gap": {
-  "elo_gap_top2": 10.7,
-  "v27_gap_top2": 0.1,
-  "elo_top2": [
-   "キャントウェイト",
-   "マリアイリダータ"
+  "schema": "format_prediction.v2",
+  "generated_at": "2026-11-21T00:56:05",
+  "predicted_at": "2026-11-21T00:35:55",
+  "race_id": "20261121_福芝2000_OP",
+  "header": {
+    "date": "2026-11-21",
+    "venue": "福",
+    "surface": "芝",
+    "distance": 2000.0,
+    "race_class": "OP",
+    "baba": "良_B",
+    "N": 16
+  },
+  "race": {
+    "date": "2026-11-21",
+    "no": 11,
+    "venue_code": "福",
+    "venue_name": "福島",
+    "handicap": true,
+    "post_time": "15:20",
+    "labeled": true,
+    "draft": false,
+    "warnings": []
+  },
+  "verdict": {
+    "value": "⚠️慎重",
+    "reason": "Elo格差小(gap一致条件を満たさない)",
+    "bet_tier": "none",
+    "gap_signal": null,
+    "trials": []
+  },
+  "axis_backing": null,
+  "bets": [
+    "買い目なし(推奨なしを明示=判断支援)"
   ],
-  "v27_top2": [
-   "キャントウェイト",
-   "レイニング"
-  ],
-  "big_e": false,
-  "big_v": false,
-  "overlap": 1,
-  "state": "中間",
-  "v27_missing": false,
-  "v27_reason": null,
-  "v27_source_latest": null,
-  "time_kind": "time2"
- },
- "rankings": {
-  "strength": [
-   {
-    "name": "マリアイリダータ",
-    "umaban": 13,
-    "value": 1814.7
-   },
-   {
-    "name": "ヨヒーン",
-    "umaban": 8,
-    "value": 1797.3
-   },
-   {
-    "name": "カラマティアノス",
-    "umaban": 1,
-    "value": 1789.0
-   },
-   {
-    "name": "レイニング",
-    "umaban": 16,
-    "value": 1773.2
-   }
-  ],
-  "time": [
-   {
-    "name": "キャントウェイト",
-    "umaban": 15,
-    "value": 7.9
-   },
-   {
-    "name": "レイニング",
-    "umaban": 16,
-    "value": 7.6
-   },
-   {
-    "name": "マリアイリダータ",
-    "umaban": 13,
-    "value": 7.5
-   },
-   {
-    "name": "カラマティアノス",
-    "umaban": 1,
-    "value": 7.5
-   }
-  ],
-  "time_kind": "time2",
-  "agari": [
-   {
-    "name": "レイニング",
-    "umaban": 16,
-    "value": 1867.4
-   },
-   {
-    "name": "ボーンディスウェイ",
-    "umaban": 4,
-    "value": 1839.3
-   },
-   {
-    "name": "キャントウェイト",
-    "umaban": 15,
-    "value": 1835.2
-   },
-   {
-    "name": "マリアイリダータ",
-    "umaban": 13,
-    "value": 1780.1
-   }
-  ]
- },
- "fallback": false,
- "calib": {
-  "calib_ok_30R": true,
-  "calib_sample_n": 30,
-  "calibrated_temp": 97.85475734125333,
-  "using_calibrated_mc": true
- },
- "learning_profile": {
-  "available": true,
-  "cell": "福芝2000・ELITE",
-  "build_date": "2026-11-18",
-  "pin": 36.6,
-  "pkl": "phase1_cache_福_芝_2000m_ELITE.pkl",
-  "systems": [
-   {
-    "label": "展開",
-    "pct": 48.6,
-    "bars": "◉◉◎◎◎"
-   },
-   {
-    "label": "騎手",
-    "pct": 64.4,
-    "bars": "◉◉◉◎◎"
-   },
-   {
-    "label": "調教",
-    "pinned": true,
-    "pin": 36.6
-   },
-   {
-    "label": "厩舎",
-    "pct": 22.8,
-    "bars": "◉◎◎◎◎"
-   },
-   {
-    "label": "斤量",
-    "pct": 52.3,
-    "bars": "◉◉◉◎◎"
-   },
-   {
-    "label": "減衰",
-    "pct": 83.3,
-    "bars": "◉◉◉◉◎"
-   }
-  ],
-  "note": "※学習された係数の相対配置。係数の大小が予測寄与を保証するものではない"
- },
- "model": {
-  "engine": "V9.6",
-  "applied": {
-   "time": true,
-   "ped": false,
-   "trip": true,
-   "jstr": true,
-   "career": true,
-   "draw": false
+  "bet_notes": [],
+  "venue_guidance": {
+    "mark": null,
+    "note": "会場の目安は使わない(2026-11-03〜)"
   },
-  "inferred": true,
-  "display_calib": {
-   "enabled": true,
-   "k": 1.94,
-   "eps": 0.12,
-   "cap": 0.5,
-   "b2": true,
-   "b2v2": true,
-   "b2v3": true,
-   "b2v4": true,
-   "b2v5": true,
-   "b2v6": true,
-   "b2v7": true
-  }
- },
- "horses": [
-  {
-   "umaban": 1,
-   "mark": "◎",
-   "name": "カラマティアノス",
-   "style": "差し",
-   "jockey": "津村",
-   "chokyo": null,
-   "chokyo_rank": {
-    "loc": "美浦",
-    "kind": "ウッド",
-    "date": "11/11",
-    "rank": 49,
-    "n": 2598,
-    "pct": 1.9,
-    "time": 65.6,
-    "f1": 11.6,
-    "f1_rank": 168,
-    "f1_pct": 6.5,
-    "days": 14
-   },
-   "mc_win": 0.1797073329349773,
-   "top3_est": 0.4411764705882353,
-   "jitsuryoku": 1789.0461626832216,
-   "zenjitsu": 2246.768460398999,
-   "adjust": 457.7222977157776,
-   "odds": null,
-   "swap": true,
-   "rank_result": null,
-   "breakdown": {
-    "env": 9.507350552410628,
-    "time": 24.4287951236808,
-    "ped": 0.0,
-    "trip": 22.020000000000003,
-    "trip_flags": [],
-    "jockey": 18.377159027427425,
-    "jockey_rate": 0.292,
-    "jockey_n": 676,
-    "career": 19.50859515073116,
-    "career_flags": [],
-    "draw": 0.0,
-    "early": 37.60693746252827,
-    "p_early": 0.22820804251783544,
-    "b2": 326.2734603989993,
-    "parts": {
-     "base": 1789.046,
-     "surf_dist": 0.0,
-     "mud": 0.0,
-     "cls": 0.0,
-     "peak": 0.0,
-     "peak_flag": 0.0,
-     "kinryo": -2.529,
-     "weight": 0.0,
-     "chokyo": 0.0,
-     "jbonus": 10.665,
-     "trainer": -0.871,
-     "vol": 0.0,
-     "env_clip": 0.0,
-     "bias": 2.242,
-     "pace": 0.0,
-     "hl": 0.0
-    }
-   }
+  "seihai": {
+    "fired": false
   },
-  {
-   "umaban": 13,
-   "mark": "○",
-   "name": "マリアイリダータ",
-   "style": "先行",
-   "jockey": "戸崎圭",
-   "chokyo": null,
-   "chokyo_rank": {
-    "loc": "美浦",
-    "kind": "ウッド",
-    "date": "11/12",
-    "rank": 36,
-    "n": 2598,
-    "pct": 1.4,
-    "time": 65.3,
-    "f1": 11.8,
-    "f1_rank": 423,
-    "f1_pct": 16.3,
-    "days": 14
-   },
-   "mc_win": 0.15699980743226874,
-   "top3_est": 0.4513031550068587,
-   "jitsuryoku": 1814.6743784905111,
-   "zenjitsu": 2196.835884874347,
-   "adjust": 382.1615063838358,
-   "odds": null,
-   "swap": true,
-   "rank_result": null,
-   "breakdown": {
-    "env": 16.734926418247483,
-    "time": 4.094189373669844,
-    "ped": 0.0,
-    "trip": 22.020000000000003,
-    "trip_flags": [],
-    "jockey": 66.98476190831387,
-    "jockey_rate": 0.4085761772853186,
-    "jockey_n": 672,
-    "career": 43.984590837005676,
-    "career_flags": [],
-    "draw": 0.0,
-    "early": 14.299152972251905,
-    "p_early": 0.3878504020402763,
-    "b2": 214.043884874347,
-    "parts": {
-     "base": 1814.674,
-     "surf_dist": 0.0,
-     "mud": 0.0,
-     "cls": 0.0,
-     "peak": 0.0,
-     "peak_flag": 0.0,
-     "kinryo": -0.822,
-     "weight": 0.0,
-     "chokyo": 0.0,
-     "jbonus": 14.988,
-     "trainer": -0.421,
-     "vol": 0.0,
-     "env_clip": 0.0,
-     "bias": -6.145,
-     "pace": 9.135,
-     "hl": 0.0
-    }
-   }
+  "gap": {
+    "elo_gap_top2": 10.7,
+    "v27_gap_top2": 0.1,
+    "elo_top2": [
+      "キャントウェイト",
+      "マリアイリダータ"
+    ],
+    "v27_top2": [
+      "キャントウェイト",
+      "レイニング"
+    ],
+    "big_e": false,
+    "big_v": false,
+    "overlap": 1,
+    "state": "中間",
+    "v27_missing": false,
+    "v27_reason": null,
+    "v27_source_latest": null,
+    "time_kind": "time2"
   },
-  {
-   "umaban": 11,
-   "mark": "▲",
-   "name": "フォルテアンジェロ",
-   "style": "追込",
-   "jockey": "マーカンド",
-   "chokyo": null,
-   "chokyo_rank": {
-    "loc": "美浦",
-    "kind": "ウッド",
-    "date": "11/12",
-    "rank": 49,
-    "n": 2598,
-    "pct": 1.9,
-    "time": 65.6,
-    "f1": 11.6,
-    "f1_rank": 168,
-    "f1_pct": 6.5,
-    "days": 14
-   },
-   "mc_win": 0.11163793278037329,
-   "top3_est": 0.3514809590973202,
-   "jitsuryoku": 1718.6311170005304,
-   "zenjitsu": 2070.795309661894,
-   "adjust": 352.1641926613636,
-   "odds": null,
-   "swap": true,
-   "rank_result": null,
-   "breakdown": {
-    "env": 33.134814873825576,
-    "time": -7.894927126015039,
-    "ped": 0.0,
-    "trip": 34.519999999999996,
-    "trip_flags": [
-     "6着以下",
-     "人気大敗"
+  "rankings": {
+    "strength": [
+      {
+        "name": "マリアイリダータ",
+        "umaban": 13,
+        "value": 1814.7
+      },
+      {
+        "name": "ヨヒーン",
+        "umaban": 8,
+        "value": 1797.3
+      },
+      {
+        "name": "カラマティアノス",
+        "umaban": 1,
+        "value": 1789.0
+      },
+      {
+        "name": "レイニング",
+        "umaban": 16,
+        "value": 1773.2
+      }
     ],
-    "jockey": 30.71527364731048,
-    "jockey_rate": 0.3215906432748538,
-    "jockey_n": 121,
-    "career": -54.53608916299433,
-    "career_flags": [
-     "延長"
+    "time": [
+      {
+        "name": "キャントウェイト",
+        "umaban": 15,
+        "value": 7.9
+      },
+      {
+        "name": "レイニング",
+        "umaban": 16,
+        "value": 7.6
+      },
+      {
+        "name": "マリアイリダータ",
+        "umaban": 13,
+        "value": 7.5
+      },
+      {
+        "name": "カラマティアノス",
+        "umaban": 1,
+        "value": 7.5
+      }
     ],
-    "draw": 0.0,
-    "early": -11.641189232656952,
-    "p_early": 0.5655239787862274,
-    "b2": 327.86630966189387,
-    "parts": {
-     "base": 1731.771,
-     "surf_dist": -13.139,
-     "mud": 0.0,
-     "cls": 0.0,
-     "peak": 0.0,
-     "peak_flag": 0.0,
-     "kinryo": -2.512,
-     "weight": 0.0,
-     "chokyo": 0.0,
-     "jbonus": 3.937,
-     "trainer": 14.86,
-     "vol": 0.0,
-     "env_clip": 0.0,
-     "bias": 18.881,
-     "pace": -2.031,
-     "hl": 0.0
-    }
-   }
-  },
-  {
-   "umaban": 15,
-   "mark": "△",
-   "name": "キャントウェイト",
-   "style": "先行",
-   "jockey": "横山典",
-   "chokyo": null,
-   "chokyo_rank": {
-    "loc": "美浦",
-    "kind": "ウッド",
-    "date": "11/18",
-    "rank": 60,
-    "n": 2598,
-    "pct": 2.3,
-    "time": 65.8,
-    "f1": 11.7,
-    "f1_rank": 275,
-    "f1_pct": 10.6,
-    "days": 14
-   },
-   "mc_win": 0.09789278607887987,
-   "top3_est": 0.2994526974198593,
-   "jitsuryoku": 1752.9915888854598,
-   "zenjitsu": 2022.2292823506202,
-   "adjust": 269.2376934651604,
-   "odds": null,
-   "swap": true,
-   "rank_result": null,
-   "breakdown": {
-    "env": 2.8070506271504314,
-    "time": 50.50434414756075,
-    "ped": 0.0,
-    "trip": 36.24,
-    "trip_flags": [
-     "包まれ"
-    ],
-    "jockey": 9.519274201690173,
-    "jockey_rate": 0.2707560321715818,
-    "jockey_n": 323,
-    "career": 25.741437503672344,
-    "career_flags": [
-     "短縮"
-    ],
-    "draw": 0.0,
-    "early": 9.07830463446655,
-    "p_early": 0.423609637230587,
-    "b2": 135.34728235062016,
-    "parts": {
-     "base": 1787.196,
-     "surf_dist": 6.57,
-     "mud": 0.0,
-     "cls": -40.775,
-     "peak": 0.0,
-     "peak_flag": 0.0,
-     "kinryo": -1.632,
-     "weight": 0.0,
-     "chokyo": 0.0,
-     "jbonus": 3.297,
-     "trainer": -1.849,
-     "vol": 0.0,
-     "env_clip": 0.0,
-     "bias": -6.145,
-     "pace": 9.135,
-     "hl": 0.0
-    }
-   }
-  },
-  {
-   "umaban": 16,
-   "mark": "",
-   "name": "レイニング",
-   "style": "差し",
-   "jockey": "プーシャン",
-   "chokyo": "🌟調教(1.10倍)",
-   "chokyo_rank": {
-    "loc": "美浦",
-    "kind": "ウッド",
-    "date": "11/12",
-    "rank": 60,
-    "n": 2598,
-    "pct": 2.3,
-    "time": 65.8,
-    "f1": 12.0,
-    "f1_rank": 793,
-    "f1_pct": 30.5,
-    "days": 14
-   },
-   "mc_win": 0.08354844444190446,
-   "top3_est": 0.2644692956641161,
-   "jitsuryoku": 1773.2224612027371,
-   "zenjitsu": 1963.6615152770898,
-   "adjust": 190.43905407435273,
-   "odds": null,
-   "swap": true,
-   "rank_result": null,
-   "breakdown": {
-    "env": 18.74660471167772,
-    "time": 34.883693449895944,
-    "ped": 0.0,
-    "trip": 22.020000000000003,
-    "trip_flags": [],
-    "jockey": 14.33509973330979,
-    "jockey_rate": 0.2823058823529412,
-    "jockey_n": 120,
-    "career": -23.300151727096896,
-    "career_flags": [
-     "延長"
-    ],
-    "draw": 0.0,
-    "early": -6.267707370523571,
-    "p_early": 0.5287193084976426,
-    "b2": 130.02151527708975,
-    "parts": {
-     "base": 1779.792,
-     "surf_dist": -6.57,
-     "mud": 0.0,
-     "cls": 0.0,
-     "peak": 0.0,
-     "peak_flag": 0.0,
-     "kinryo": -1.759,
-     "weight": 0.0,
-     "chokyo": 40.374,
-     "jbonus": 0.246,
-     "trainer": -0.723,
-     "vol": 0.0,
-     "env_clip": 0.0,
-     "bias": -19.391,
-     "pace": 0.0,
-     "hl": 0.0
-    }
-   }
-  },
-  {
-   "umaban": 10,
-   "mark": "",
-   "name": "カテリーナ",
-   "style": "先行",
-   "jockey": "浜中",
-   "chokyo": null,
-   "chokyo_rank": {
-    "loc": "栗東",
-    "kind": "ウッド",
-    "date": "11/11",
-    "rank": 303,
-    "n": 2175,
-    "pct": 13.9,
-    "time": 67.2,
-    "f1": 11.3,
-    "f1_rank": 59,
-    "f1_pct": 2.7,
-    "days": 14
-   },
-   "mc_win": 0.06011654740122194,
-   "top3_est": 0.20567235224117414,
-   "jitsuryoku": 1731.6031875856634,
-   "zenjitsu": 1841.9982634047958,
-   "adjust": 110.39507581913244,
-   "odds": null,
-   "swap": true,
-   "rank_result": null,
-   "breakdown": {
-    "env": 30.87171613491219,
-    "time": -11.721704491242111,
-    "ped": 0.0,
-    "trip": 22.020000000000003,
-    "trip_flags": [],
-    "jockey": 12.159933774415382,
-    "jockey_rate": 0.277089156626506,
-    "jockey_n": 365,
-    "career": -13.905031385216542,
-    "career_flags": [
-     "延長",
-     "休み明け"
-    ],
-    "draw": 0.0,
-    "early": 7.916898381467651,
-    "p_early": 0.4315644745798945,
-    "b2": 63.05326340479587,
-    "parts": {
-     "base": 1738.173,
-     "surf_dist": -6.57,
-     "mud": 0.0,
-     "cls": 0.0,
-     "peak": 0.0,
-     "peak_flag": 0.0,
-     "kinryo": 0.632,
-     "weight": 0.0,
-     "chokyo": 0.0,
-     "jbonus": 4.33,
-     "trainer": -0.34,
-     "vol": 0.0,
-     "env_clip": 0.0,
-     "bias": 17.114,
-     "pace": 9.135,
-     "hl": 0.0
-    }
-   }
-  },
-  {
-   "umaban": 3,
-   "mark": "",
-   "name": "ゼンダンハヤブサ",
-   "style": "差し",
-   "jockey": "酒井",
-   "chokyo": "🌟調教(1.17倍)",
-   "chokyo_rank": {
-    "loc": "栗東",
-    "kind": "坂路",
-    "date": "11/12",
-    "rank": 334,
-    "n": 10022,
-    "pct": 3.3,
-    "time": 53.8,
-    "f1": 11.9,
-    "f1_rank": 3,
-    "f1_pct": 0.0,
-    "days": 14
-   },
-   "mc_win": 0.05937883957587056,
-   "top3_est": 0.20567235224117414,
-   "jitsuryoku": 1741.0707437501273,
-   "zenjitsu": 1837.4342644392163,
-   "adjust": 96.363520689089,
-   "odds": null,
-   "swap": true,
-   "rank_result": null,
-   "breakdown": {
-    "env": 41.61953690175932,
-    "time": 15.943646564685306,
-    "ped": 0.0,
-    "trip": -35.94,
-    "trip_flags": [
-     "6着以下"
-    ],
-    "jockey": -46.28394598158157,
-    "jockey_rate": 0.13692252252252254,
-    "jockey_n": 505,
-    "career": -36.55720249632766,
-    "career_flags": [
-     "延長"
-    ],
-    "draw": 0.0,
-    "early": 8.649221261337203,
-    "p_early": 0.4265485644438017,
-    "b2": 148.9322644392164,
-    "parts": {
-     "base": 1747.64,
-     "surf_dist": -6.57,
-     "mud": 0.0,
-     "cls": 0.0,
-     "peak": 0.0,
-     "peak_flag": 0.0,
-     "kinryo": -1.589,
-     "weight": 0.0,
-     "chokyo": 42.776,
-     "jbonus": 1.279,
-     "trainer": -1.058,
-     "vol": 0.0,
-     "env_clip": 0.0,
-     "bias": 2.242,
-     "pace": -2.031,
-     "hl": 0.0
-    }
-   }
-  },
-  {
-   "umaban": 14,
-   "mark": "",
-   "name": "サヴォーナ",
-   "style": "差し",
-   "jockey": "横山武",
-   "chokyo": "🌟調教(1.18倍)",
-   "chokyo_rank": {
-    "loc": "栗東",
-    "kind": "坂路",
-    "date": "11/12",
-    "rank": 143,
-    "n": 10022,
-    "pct": 1.4,
-    "time": 53.0,
-    "f1": 12.3,
-    "f1_rank": 75,
-    "f1_pct": 0.7,
-    "days": 14
-   },
-   "mc_win": 0.04692473111844918,
-   "top3_est": 0.16243654822335027,
-   "jitsuryoku": 1685.2968367635758,
-   "zenjitsu": 1750.424006722244,
-   "adjust": 65.12716995866822,
-   "odds": null,
-   "swap": true,
-   "rank_result": null,
-   "breakdown": {
-    "env": 26.74239612199571,
-    "time": -3.9485592809650125,
-    "ped": 0.0,
-    "trip": -35.94,
-    "trip_flags": [
-     "6着以下"
-    ],
-    "jockey": 48.55968289839518,
-    "jockey_rate": 0.36438709677419356,
-    "jockey_n": 787,
-    "career": 70.03037750367234,
-    "career_flags": [
-     "短縮"
-    ],
-    "draw": 0.0,
-    "early": 32.755265993326056,
-    "p_early": 0.26143866901922047,
-    "b2": -73.07199327775606,
-    "parts": {
-     "base": 1672.157,
-     "surf_dist": 13.139,
-     "mud": 0.0,
-     "cls": 0.0,
-     "peak": 0.0,
-     "peak_flag": 0.0,
-     "kinryo": 2.412,
-     "weight": 0.0,
-     "chokyo": 43.234,
-     "jbonus": 3.691,
-     "trainer": -1.172,
-     "vol": 0.0,
-     "env_clip": 0.0,
-     "bias": -19.391,
-     "pace": -2.031,
-     "hl": 0.0
-    }
-   }
-  },
-  {
-   "umaban": 2,
-   "mark": "",
-   "name": "ヴィスマール",
-   "style": "差し",
-   "jockey": "小沢",
-   "chokyo": null,
-   "chokyo_rank": {
-    "loc": "栗東",
-    "kind": "坂路",
-    "date": "11/18",
-    "rank": 563,
-    "n": 10022,
-    "pct": 5.6,
-    "time": 54.4,
-    "f1": 13.3,
-    "f1_rank": 1565,
-    "f1_pct": 15.6,
-    "days": 14
-   },
-   "mc_win": 0.04417441464381599,
-   "top3_est": 0.14989871708305194,
-   "jitsuryoku": 1722.7262163145583,
-   "zenjitsu": 1728.0982013459625,
-   "adjust": 5.371985031404165,
-   "odds": null,
-   "swap": false,
-   "rank_result": null,
-   "breakdown": {
-    "env": -13.364758500607195,
-    "time": -9.243028599719477,
-    "ped": 0.0,
-    "trip": 49.28,
-    "trip_flags": [
-     "大回り外"
-    ],
-    "jockey": -34.11137981128225,
-    "jockey_rate": 0.16611612903225806,
-    "jockey_n": 570,
-    "career": 14.935958373237554,
-    "career_flags": [
-     "昇級"
-    ],
-    "draw": 0.0,
-    "early": 26.025992223813077,
-    "p_early": 0.30752958524876145,
-    "b2": -28.150798654037544,
-    "parts": {
-     "base": 1752.685,
-     "surf_dist": 0.0,
-     "mud": 0.0,
-     "cls": -29.959,
-     "peak": 0.0,
-     "peak_flag": 0.0,
-     "kinryo": -1.44,
-     "weight": 0.0,
-     "chokyo": 0.0,
-     "jbonus": 7.949,
-     "trainer": -20.084,
-     "vol": 0.0,
-     "env_clip": 0.0,
-     "bias": 2.242,
-     "pace": -2.031,
-     "hl": 0.0
-    }
-   }
-  },
-  {
-   "umaban": 8,
-   "mark": "",
-   "name": "ヨヒーン",
-   "style": "先行",
-   "jockey": "鮫島駿",
-   "chokyo": "🌟調教(1.13倍)",
-   "chokyo_rank": {
-    "loc": "栗東",
-    "kind": "ウッド",
-    "date": "11/11",
-    "rank": 128,
-    "n": 2175,
-    "pct": 5.9,
-    "time": 66.2,
-    "f1": 11.3,
-    "f1_rank": 59,
-    "f1_pct": 2.7,
-    "days": 14
-   },
-   "mc_win": 0.039831248384675944,
-   "top3_est": 0.13322734499205083,
-   "jitsuryoku": 1797.3441320748227,
-   "zenjitsu": 1689.8428616336626,
-   "adjust": -107.50127044116016,
-   "odds": null,
-   "swap": true,
-   "rank_result": null,
-   "breakdown": {
-    "env": 51.36116283464051,
-    "time": -28.00225617662513,
-    "ped": 0.0,
-    "trip": 22.020000000000003,
-    "trip_flags": [],
-    "jockey": -11.710674572572563,
-    "jockey_rate": 0.21984,
-    "jockey_n": 0,
-    "career": 25.135953293146024,
-    "career_flags": [
-     "短縮"
-    ],
-    "draw": 0.0,
-    "early": -27.458317453411496,
-    "p_early": 0.6738604734489297,
-    "b2": -138.8471383663375,
-    "parts": {
-     "base": 1777.635,
-     "surf_dist": 19.709,
-     "mud": 0.0,
-     "cls": 0.0,
-     "peak": 0.0,
-     "peak_flag": 0.0,
-     "kinryo": 0.22,
-     "weight": 0.0,
-     "chokyo": 41.289,
-     "jbonus": 0.0,
-     "trainer": -0.148,
-     "vol": 0.0,
-     "env_clip": 0.0,
-     "bias": 0.865,
-     "pace": 9.135,
-     "hl": 0.0
-    }
-   }
-  },
-  {
-   "umaban": 5,
-   "mark": "",
-   "name": "フィーリウス",
-   "style": "差し",
-   "jockey": "嶋田",
-   "chokyo": null,
-   "chokyo_rank": {
-    "loc": "美浦",
-    "kind": "坂路",
-    "date": "11/8",
-    "rank": 792,
-    "n": 8990,
-    "pct": 8.8,
-    "time": 55.6,
-    "f1": 13.0,
-    "f1_rank": 907,
-    "f1_pct": 10.1,
-    "days": 14
-   },
-   "mc_win": 0.035639972910792246,
-   "top3_est": 0.12333825701624815,
-   "jitsuryoku": 1724.7954668942903,
-   "zenjitsu": 1648.7450529669986,
-   "adjust": -76.05041392729163,
-   "odds": null,
-   "swap": true,
-   "rank_result": null,
-   "breakdown": {
-    "env": -9.197695057237055,
-    "time": -0.008742144543275154,
-    "ped": 0.0,
-    "trip": -35.94,
-    "trip_flags": [
-     "6着以下"
-    ],
-    "jockey": -34.343913180364765,
-    "jockey_rate": 0.16555844155844157,
-    "jockey_n": 258,
-    "career": 53.65372592472498,
-    "career_flags": [],
-    "draw": 0.0,
-    "early": 13.801157563129852,
-    "p_early": 0.3912613295000164,
-    "b2": -64.01494703300136,
-    "parts": {
-     "base": 1724.795,
-     "surf_dist": 0.0,
-     "mud": 0.0,
-     "cls": 0.0,
-     "peak": 0.0,
-     "peak_flag": 0.0,
-     "kinryo": 1.833,
-     "weight": 0.0,
-     "chokyo": 0.0,
-     "jbonus": 4.025,
-     "trainer": -0.644,
-     "vol": 0.0,
-     "env_clip": 0.0,
-     "bias": -12.381,
-     "pace": -2.031,
-     "hl": 0.0
-    }
-   }
-  },
-  {
-   "umaban": 4,
-   "mark": "",
-   "name": "ボーンディスウェイ",
-   "style": "差し",
-   "jockey": "木幡巧",
-   "chokyo": "🌟調教(1.17倍)",
-   "chokyo_rank": {
-    "loc": "美浦",
-    "kind": "坂路",
-    "date": "11/18",
-    "rank": 164,
-    "n": 8990,
-    "pct": 1.8,
-    "time": 53.7,
-    "f1": 12.0,
-    "f1_rank": 25,
-    "f1_pct": 0.3,
-    "days": 14
-   },
-   "mc_win": 0.027456709564400716,
-   "top3_est": 0.09510816604950305,
-   "jitsuryoku": 1679.2556961814507,
-   "zenjitsu": 1552.32225522728,
-   "adjust": -126.93344095417069,
-   "odds": null,
-   "swap": true,
-   "rank_result": null,
-   "breakdown": {
-    "env": 50.896434142990074,
-    "time": 30.68479851203991,
-    "ped": 0.0,
-    "trip": -8.679999999999996,
-    "trip_flags": [
-     "6着以下",
-     "大回り外"
-    ],
-    "jockey": -47.50492420023827,
-    "jockey_rate": 0.1339942363112392,
-    "jockey_n": 644,
-    "career": -11.57210883779107,
-    "career_flags": [
-     "短縮"
-    ],
-    "draw": 0.0,
-    "early": -12.950895798451452,
-    "p_early": 0.5744945717026281,
-    "b2": -127.80674477271987,
-    "parts": {
-     "base": 1662.831,
-     "surf_dist": 16.424,
-     "mud": 0.0,
-     "cls": 0.0,
-     "peak": 0.0,
-     "peak_flag": -200.0,
-     "kinryo": 0.594,
-     "weight": 0.0,
-     "chokyo": 42.891,
-     "jbonus": 8.884,
-     "trainer": -1.684,
-     "vol": 0.0,
-     "env_clip": 0.0,
-     "bias": 2.242,
-     "pace": -2.031,
-     "hl": 0.0
-    }
-   }
-  },
-  {
-   "umaban": 12,
-   "mark": "",
-   "name": "アラタ",
-   "style": "追込",
-   "jockey": "大野",
-   "chokyo": null,
-   "chokyo_rank": {
-    "loc": "美浦",
-    "kind": "ウッド",
-    "date": "11/18",
-    "rank": 49,
-    "n": 2598,
-    "pct": 1.9,
-    "time": 65.6,
-    "f1": 12.1,
-    "f1_rank": 1003,
-    "f1_pct": 38.6,
-    "days": 14
-   },
-   "mc_win": 0.02168918073016743,
-   "top3_est": 0.07402168788307402,
-   "jitsuryoku": 1622.8866664421307,
-   "zenjitsu": 1465.1626859037863,
-   "adjust": -157.72398053834445,
-   "odds": null,
-   "swap": true,
-   "rank_result": null,
-   "breakdown": {
-    "env": 18.677524018240064,
-    "time": 29.775298584433173,
-    "ped": 0.0,
-    "trip": -35.94,
-    "trip_flags": [
-     "6着以下"
-    ],
-    "jockey": -13.526192503763488,
-    "jockey_rate": 0.2154858223062382,
-    "jockey_n": 479,
-    "career": -36.28599582966099,
-    "career_flags": [
-     "休み明け"
-    ],
-    "draw": 0.0,
-    "early": -26.669300711379577,
-    "p_early": 0.6684562491884372,
-    "b2": -93.75531409621362,
-    "parts": {
-     "base": 1622.887,
-     "surf_dist": 0.0,
-     "mud": 0.0,
-     "cls": 0.0,
-     "peak": 0.0,
-     "peak_flag": 0.0,
-     "kinryo": -1.931,
-     "weight": 0.0,
-     "chokyo": 0.0,
-     "jbonus": 5.364,
-     "trainer": -1.606,
-     "vol": 0.0,
-     "env_clip": 0.0,
-     "bias": 18.881,
-     "pace": -2.031,
-     "hl": 0.0
-    }
-   }
-  },
-  {
-   "umaban": 9,
-   "mark": "",
-   "name": "バレエマスター",
-   "style": "差し",
-   "jockey": "菊沢",
-   "chokyo": null,
-   "chokyo_rank": {
-    "loc": "栗東",
-    "kind": "ウッド",
-    "date": "11/11",
-    "rank": 78,
-    "n": 2175,
-    "pct": 3.6,
-    "time": 65.7,
-    "f1": 11.9,
-    "f1_rank": 600,
-    "f1_pct": 27.6,
-    "days": 14
-   },
-   "mc_win": 0.01669662383014358,
-   "top3_est": 0.03676470588235294,
-   "jitsuryoku": 1707.4777421619306,
-   "zenjitsu": 1368.4627544230198,
-   "adjust": -339.0149877389108,
-   "odds": null,
-   "swap": true,
-   "rank_result": null,
-   "breakdown": {
-    "env": 5.821602393529361,
-    "time": 1.9624530339515687,
-    "ped": 0.0,
-    "trip": -35.94,
-    "trip_flags": [
-     "6着以下"
-    ],
-    "jockey": -29.44649982719812,
-    "jockey_rate": 0.17730396475770924,
-    "jockey_n": 858,
-    "career": -60.29503449632766,
-    "career_flags": [
-     "延長"
-    ],
-    "draw": 0.0,
-    "early": -34.178263265885654,
-    "p_early": 0.7198874995617665,
-    "b2": -186.93924557698028,
-    "parts": {
-     "base": 1714.047,
-     "surf_dist": -6.57,
-     "mud": 0.0,
-     "cls": 0.0,
-     "peak": 0.0,
-     "peak_flag": 0.0,
-     "kinryo": -0.432,
-     "weight": 0.0,
-     "chokyo": 0.0,
-     "jbonus": 5.659,
-     "trainer": -1.242,
-     "vol": 0.0,
-     "env_clip": 0.0,
-     "bias": 3.867,
-     "pace": -2.031,
-     "hl": 0.0
-    }
-   }
-  },
-  {
-   "umaban": 6,
-   "mark": "",
-   "name": "バルナバ",
-   "style": "差し",
-   "jockey": "斎藤",
-   "chokyo": null,
-   "chokyo_rank": {
-    "loc": "栗東",
-    "kind": "ウッド",
-    "date": "11/11",
-    "rank": 194,
-    "n": 2175,
-    "pct": 8.9,
-    "time": 66.6,
-    "f1": 12.1,
-    "f1_rank": 762,
-    "f1_pct": 35.0,
-    "days": 14
-   },
-   "mc_win": 0.009333930945060173,
-   "top3_est": 0.021831735889243878,
-   "jitsuryoku": 1679.246938064235,
-   "zenjitsu": 1153.4995903355418,
-   "adjust": -525.7473477286933,
-   "odds": null,
-   "swap": true,
-   "rank_result": null,
-   "breakdown": {
-    "env": -2.020908578995318,
-    "time": -36.297801105840286,
-    "ped": 0.0,
-    "trip": -5.82,
-    "trip_flags": [
-     "6着以下",
-     "序盤外",
-     "包まれ"
-    ],
-    "jockey": -3.265155273364124,
-    "jockey_rate": 0.24009498680738786,
-    "jockey_n": 708,
-    "career": 47.28704861478346,
-    "career_flags": [
-     "短縮",
-     "休み明け"
-    ],
-    "draw": 0.0,
-    "early": -36.92712172081885,
-    "p_early": 0.7387152971982952,
-    "b2": -488.70340966445815,
-    "parts": {
-     "base": 1659.538,
-     "surf_dist": 19.709,
-     "mud": 0.0,
-     "cls": 0.0,
-     "peak": 0.0,
-     "peak_flag": 0.0,
-     "kinryo": 1.54,
-     "weight": 0.0,
-     "chokyo": 0.0,
-     "jbonus": 11.555,
-     "trainer": -0.704,
-     "vol": 0.0,
-     "env_clip": 0.0,
-     "bias": -12.381,
-     "pace": -2.031,
-     "hl": 0.0
-    }
-   }
-  },
-  {
-   "umaban": 7,
-   "mark": "",
-   "name": "シリウスコルト",
-   "style": "追込",
-   "jockey": "田辺",
-   "chokyo": null,
-   "chokyo_rank": {
-    "loc": "美浦",
-    "kind": "坂路",
-    "date": "11/15",
-    "rank": 1686,
-    "n": 8990,
-    "pct": 18.8,
-    "time": 59.1,
-    "f1": 14.3,
-    "f1_rank": 1876,
-    "f1_pct": 20.9,
-    "days": 14
-   },
-   "mc_win": 0.00897149722699871,
-   "top3_est": 0.021831735889243878,
-   "jitsuryoku": 1352.4646484472526,
-   "zenjitsu": 1138.860562682788,
-   "adjust": -213.60408576446457,
-   "odds": null,
-   "swap": false,
-   "rank_result": null,
-   "breakdown": {
-    "env": 16.71025946296237,
-    "time": -11.800199864966562,
-    "ped": 0.0,
-    "trip": -35.94,
-    "trip_flags": [
-     "6着以下"
-    ],
-    "jockey": 19.541500159502903,
-    "jockey_rate": 0.2947924528301887,
-    "jockey_n": 374,
-    "career": -63.82607326555842,
-    "career_flags": [
-     "延長",
-     "芝ダ替"
-    ],
-    "draw": 0.0,
-    "early": 5.959865060807056,
-    "p_early": 0.4449688123926383,
-    "b2": -144.2494373172119,
-    "parts": {
-     "base": 1622.374,
-     "surf_dist": -288.425,
-     "mud": 0.0,
-     "cls": 18.515,
-     "peak": 0.0,
-     "peak_flag": -500.0,
-     "kinryo": 0.513,
-     "weight": 0.0,
-     "chokyo": 0.0,
-     "jbonus": 17.647,
-     "trainer": -2.052,
-     "vol": 0.0,
-     "env_clip": 0.0,
-     "bias": 2.633,
-     "pace": -2.031,
-     "hl": 0.0
-    }
-   },
-   "odds_move": "down"
-  }
- ],
- "yomimono": {
-  "version": 2,
-  "made_at": "2026-11-21T00:56",
-  "pace": {
-   "label": "速め",
-   "dev": -0.62,
-   "reasons": [
-    "逃げ・先行候補 0頭（少ない→遅くなりやすい）",
-    "テンが最も速い馬 速い",
-    "出走馬の持ちタイム 速い組（速くなりやすい）",
-    "クラスが上（オープン、速くなりやすい）"
-   ]
-  },
-  "balance": {
-   "pred": 51.9,
-   "dev": 0.9,
-   "bin": "4",
-   "course_prior": 50.92992125984252
-  },
-  "scenario": {
-   "tops": {
-    "速め": [
-     13,
-     15,
-     1,
-     16,
-     8
-    ],
-    "平均": [
-     13,
-     15,
-     1,
-     16,
-     2
-    ],
-    "スロー": [
-     13,
-     15,
-     1,
-     16,
-     2
+    "time_kind": "time2",
+    "agari": [
+      {
+        "name": "レイニング",
+        "umaban": 16,
+        "value": 1867.4
+      },
+      {
+        "name": "ボーンディスウェイ",
+        "umaban": 4,
+        "value": 1839.3
+      },
+      {
+        "name": "キャントウェイト",
+        "umaban": 15,
+        "value": 1835.2
+      },
+      {
+        "name": "マリアイリダータ",
+        "umaban": 13,
+        "value": 1780.1
+      }
     ]
-   },
-   "d": [
-    -4.3,
-    4.7
-   ]
   },
-  "paragraphs": [
-   "前半と後半の釣り合いの予想: いつもどおりか、ややスロー。",
-   "強さと位置から見た上位5頭は、平均的な流れなら13マリアイリダータ・15キャントウェイト・1カラマティアノス・16レイニング・2ヴィスマール。スローでも顔ぶれは同じ。速めなら8ヨヒーンが入り2ヴィスマールが外れます。（ペースで動くのは先行と差しの差で Elo 約50点分、1頭入れ替わる程度です）",
-   "はっきりした逃げ馬はいません。過去の芝で逃げ候補0頭のレースは前半が緩みやすく、最初の角で3番手以内の馬の3着内率は37%（逃げ候補3頭以上だと31%）。誰が行くかで流れが決まります。",
-   "本体の予想位置では、前は1カラマティアノス・14サヴォーナ・2ヴィスマール、後ろは8ヨヒーン・9バレエマスター・6バルナバ。",
-   "◎カラマティアノスは好位（最初の角 直近: 4/14・5/14・6/17・7/16・7/16）。この型の馬が次のレースで3番手以内だった割合は27%。",
-   "○マリアイリダータは差し（最初の角 直近: 2/18・7/12・5/16・5/9・12/16）。この型の馬が次のレースで3番手以内だった割合は11%。",
-   "位置が読みにくい馬: 11フォルテアンジェロ（位置が一定しない）・16レイニング（位置が一定しない）・2ヴィスマール（脚質転換中）・5フィーリウス（脚質転換中）・12アラタ（脚質転換中）・6バルナバ（位置が一定しない）。"
-  ],
+  "fallback": false,
+  "calib": {
+    "calib_ok_30R": true,
+    "calib_sample_n": 30,
+    "calibrated_temp": 97.85475734125333,
+    "using_calibrated_mc": true
+  },
+  "learning_profile": {
+    "available": true,
+    "cell": "福芝2000・ELITE",
+    "build_date": "2026-11-18",
+    "pin": 36.6,
+    "pkl": "phase1_cache_福_芝_2000m_ELITE.pkl",
+    "systems": [
+      {
+        "label": "展開",
+        "pct": 48.6,
+        "bars": "◉◉◎◎◎"
+      },
+      {
+        "label": "騎手",
+        "pct": 64.4,
+        "bars": "◉◉◉◎◎"
+      },
+      {
+        "label": "調教",
+        "pinned": true,
+        "pin": 36.6
+      },
+      {
+        "label": "厩舎",
+        "pct": 22.8,
+        "bars": "◉◎◎◎◎"
+      },
+      {
+        "label": "斤量",
+        "pct": 52.3,
+        "bars": "◉◉◉◎◎"
+      },
+      {
+        "label": "減衰",
+        "pct": 83.3,
+        "bars": "◉◉◉◉◎"
+      }
+    ],
+    "note": "※学習された係数の相対配置。係数の大小が予測寄与を保証するものではない"
+  },
+  "model": {
+    "engine": "V9.6",
+    "applied": {
+      "time": true,
+      "ped": false,
+      "trip": true,
+      "jstr": true,
+      "career": true,
+      "draw": false
+    },
+    "inferred": true,
+    "display_calib": {
+      "enabled": true,
+      "k": 1.94,
+      "eps": 0.12,
+      "cap": 0.5,
+      "b2": true,
+      "b2v2": true,
+      "b2v3": true,
+      "b2v4": true,
+      "b2v5": true,
+      "b2v6": true,
+      "b2v7": true
+    }
+  },
   "horses": [
-   {
-    "umaban": 1,
-    "name": "カラマティアノス",
-    "label": "好位",
-    "desc": "好位（最初の角 直近: 4/14・5/14・6/17・7/16・7/16）",
-    "p_early": 0.228
-   },
-   {
-    "umaban": 13,
-    "name": "マリアイリダータ",
-    "label": "差し",
-    "desc": "差し（最初の角 直近: 2/18・7/12・5/16・5/9・12/16）",
-    "p_early": 0.388
-   },
-   {
-    "umaban": 11,
-    "name": "フォルテアンジェロ",
-    "label": "位置が一定しない",
-    "desc": "位置が一定しない（最初の角 直近: 3/5・5/16・16/18・13/18・15/16）",
-    "p_early": 0.566
-   },
-   {
-    "umaban": 15,
-    "name": "キャントウェイト",
-    "label": "好位差し",
-    "desc": "好位差し（最初の角 直近: 8/18・4/11・9/16・5/14・6/13）",
-    "p_early": 0.424
-   },
-   {
-    "umaban": 16,
-    "name": "レイニング",
-    "label": "位置が一定しない",
-    "desc": "位置が一定しない（最初の角 直近: 9/14・15/18・2/18・7/16・13/17）",
-    "p_early": 0.529
-   },
-   {
-    "umaban": 10,
-    "name": "カテリーナ",
-    "label": "差し",
-    "desc": "差し（最初の角 直近: 11/14・10/16・4/16・3/13・9/14）",
-    "p_early": 0.432
-   },
-   {
-    "umaban": 3,
-    "name": "ゼンダンハヤブサ",
-    "label": "差し",
-    "desc": "差し（最初の角 直近: 7/13・6/14・6/18・13/16・8/16）",
-    "p_early": 0.427
-   },
-   {
-    "umaban": 14,
-    "name": "サヴォーナ",
-    "label": "好位",
-    "desc": "好位（最初の角 直近: 7/16・4/15・6/16・1/11・9/18）",
-    "p_early": 0.261
-   },
-   {
-    "umaban": 2,
-    "name": "ヴィスマール",
-    "label": "脚質転換中",
-    "desc": "脚質転換中（最初の角 直近: 2/8・5/10・1/8・14/14・10/18）。直近2走で位置を後ろへ",
-    "p_early": 0.308
-   },
-   {
-    "umaban": 8,
-    "name": "ヨヒーン",
-    "label": "差し",
-    "desc": "差し（最初の角 直近: 9/11・7/7・5/11・11/16・7/14）",
-    "p_early": 0.674
-   },
-   {
-    "umaban": 5,
-    "name": "フィーリウス",
-    "label": "脚質転換中",
-    "desc": "脚質転換中（最初の角 直近: 4/14・3/16・5/9・7/15・15/16）。直近2走で位置を後ろへ",
-    "p_early": 0.391
-   },
-   {
-    "umaban": 4,
-    "name": "ボーンディスウェイ",
-    "label": "差し",
-    "desc": "差し（最初の角 直近: 11/14・10/16・2/11・6/18・13/18）",
-    "p_early": 0.574
-   },
-   {
-    "umaban": 12,
-    "name": "アラタ",
-    "label": "脚質転換中",
-    "desc": "脚質転換中（最初の角 直近: 4/16・11/16・7/14・14/15・16/16）。直近2走で位置を後ろへ",
-    "p_early": 0.668
-   },
-   {
-    "umaban": 9,
-    "name": "バレエマスター",
-    "label": "追込",
-    "desc": "追込（最初の角 直近: 10/15・12/15・8/13・9/11・13/16）",
-    "p_early": 0.72
-   },
-   {
-    "umaban": 6,
-    "name": "バルナバ",
-    "label": "位置が一定しない",
-    "desc": "位置が一定しない（最初の角 直近: 7/8・12/17・10/15・14/15・2/13）",
-    "p_early": 0.739
-   },
-   {
-    "umaban": 7,
-    "name": "シリウスコルト",
-    "label": "好位",
-    "desc": "好位（最初の角 直近: 7/16・5/18・13/17・3/14・12/16）",
-    "p_early": 0.445
-   }
+    {
+      "umaban": 1,
+      "mark": "◎",
+      "name": "カラマティアノス",
+      "style": "差し",
+      "jockey": "津村",
+      "chokyo": null,
+      "chokyo_rank": {
+        "loc": "美浦",
+        "kind": "ウッド",
+        "date": "11/11",
+        "rank": 49,
+        "n": 2598,
+        "pct": 1.9,
+        "time": 65.6,
+        "f1": 11.6,
+        "f1_rank": 168,
+        "f1_pct": 6.5,
+        "days": 14
+      },
+      "mc_win": 0.1797073329349773,
+      "top3_est": 0.4411764705882353,
+      "jitsuryoku": 1789.0461626832216,
+      "zenjitsu": 2246.768460398999,
+      "adjust": 457.7222977157776,
+      "odds": null,
+      "swap": true,
+      "rank_result": 3,
+      "breakdown": {
+        "env": 9.507350552410628,
+        "time": 24.4287951236808,
+        "ped": 0.0,
+        "trip": 22.020000000000003,
+        "trip_flags": [],
+        "jockey": 18.377159027427425,
+        "jockey_rate": 0.292,
+        "jockey_n": 676,
+        "career": 19.50859515073116,
+        "career_flags": [],
+        "draw": 0.0,
+        "early": 37.60693746252827,
+        "p_early": 0.22820804251783544,
+        "b2": 326.2734603989993,
+        "parts": {
+          "base": 1789.046,
+          "surf_dist": 0.0,
+          "mud": 0.0,
+          "cls": 0.0,
+          "peak": 0.0,
+          "peak_flag": 0.0,
+          "kinryo": -2.529,
+          "weight": 0.0,
+          "chokyo": 0.0,
+          "jbonus": 10.665,
+          "trainer": -0.871,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": 2.242,
+          "pace": 0.0,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 13,
+      "mark": "○",
+      "name": "マリアイリダータ",
+      "style": "先行",
+      "jockey": "戸崎圭",
+      "chokyo": null,
+      "chokyo_rank": {
+        "loc": "美浦",
+        "kind": "ウッド",
+        "date": "11/12",
+        "rank": 36,
+        "n": 2598,
+        "pct": 1.4,
+        "time": 65.3,
+        "f1": 11.8,
+        "f1_rank": 423,
+        "f1_pct": 16.3,
+        "days": 14
+      },
+      "mc_win": 0.15699980743226874,
+      "top3_est": 0.4513031550068587,
+      "jitsuryoku": 1814.6743784905111,
+      "zenjitsu": 2196.835884874347,
+      "adjust": 382.1615063838358,
+      "odds": null,
+      "swap": true,
+      "rank_result": 1,
+      "breakdown": {
+        "env": 16.734926418247483,
+        "time": 4.094189373669844,
+        "ped": 0.0,
+        "trip": 22.020000000000003,
+        "trip_flags": [],
+        "jockey": 66.98476190831387,
+        "jockey_rate": 0.4085761772853186,
+        "jockey_n": 672,
+        "career": 43.984590837005676,
+        "career_flags": [],
+        "draw": 0.0,
+        "early": 14.299152972251905,
+        "p_early": 0.3878504020402763,
+        "b2": 214.043884874347,
+        "parts": {
+          "base": 1814.674,
+          "surf_dist": 0.0,
+          "mud": 0.0,
+          "cls": 0.0,
+          "peak": 0.0,
+          "peak_flag": 0.0,
+          "kinryo": -0.822,
+          "weight": 0.0,
+          "chokyo": 0.0,
+          "jbonus": 14.988,
+          "trainer": -0.421,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": -6.145,
+          "pace": 9.135,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 11,
+      "mark": "▲",
+      "name": "フォルテアンジェロ",
+      "style": "追込",
+      "jockey": "マーカンド",
+      "chokyo": null,
+      "chokyo_rank": {
+        "loc": "美浦",
+        "kind": "ウッド",
+        "date": "11/12",
+        "rank": 49,
+        "n": 2598,
+        "pct": 1.9,
+        "time": 65.6,
+        "f1": 11.6,
+        "f1_rank": 168,
+        "f1_pct": 6.5,
+        "days": 14
+      },
+      "mc_win": 0.11163793278037329,
+      "top3_est": 0.3514809590973202,
+      "jitsuryoku": 1718.6311170005304,
+      "zenjitsu": 2070.795309661894,
+      "adjust": 352.1641926613636,
+      "odds": null,
+      "swap": true,
+      "rank_result": 7,
+      "breakdown": {
+        "env": 33.134814873825576,
+        "time": -7.894927126015039,
+        "ped": 0.0,
+        "trip": 34.519999999999996,
+        "trip_flags": [
+          "6着以下",
+          "人気大敗"
+        ],
+        "jockey": 30.71527364731048,
+        "jockey_rate": 0.3215906432748538,
+        "jockey_n": 121,
+        "career": -54.53608916299433,
+        "career_flags": [
+          "延長"
+        ],
+        "draw": 0.0,
+        "early": -11.641189232656952,
+        "p_early": 0.5655239787862274,
+        "b2": 327.86630966189387,
+        "parts": {
+          "base": 1731.771,
+          "surf_dist": -13.139,
+          "mud": 0.0,
+          "cls": 0.0,
+          "peak": 0.0,
+          "peak_flag": 0.0,
+          "kinryo": -2.512,
+          "weight": 0.0,
+          "chokyo": 0.0,
+          "jbonus": 3.937,
+          "trainer": 14.86,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": 18.881,
+          "pace": -2.031,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 15,
+      "mark": "△",
+      "name": "キャントウェイト",
+      "style": "先行",
+      "jockey": "横山典",
+      "chokyo": null,
+      "chokyo_rank": {
+        "loc": "美浦",
+        "kind": "ウッド",
+        "date": "11/18",
+        "rank": 60,
+        "n": 2598,
+        "pct": 2.3,
+        "time": 65.8,
+        "f1": 11.7,
+        "f1_rank": 275,
+        "f1_pct": 10.6,
+        "days": 14
+      },
+      "mc_win": 0.09789278607887987,
+      "top3_est": 0.2994526974198593,
+      "jitsuryoku": 1752.9915888854598,
+      "zenjitsu": 2022.2292823506202,
+      "adjust": 269.2376934651604,
+      "odds": null,
+      "swap": true,
+      "rank_result": 6,
+      "breakdown": {
+        "env": 2.8070506271504314,
+        "time": 50.50434414756075,
+        "ped": 0.0,
+        "trip": 36.24,
+        "trip_flags": [
+          "包まれ"
+        ],
+        "jockey": 9.519274201690173,
+        "jockey_rate": 0.2707560321715818,
+        "jockey_n": 323,
+        "career": 25.741437503672344,
+        "career_flags": [
+          "短縮"
+        ],
+        "draw": 0.0,
+        "early": 9.07830463446655,
+        "p_early": 0.423609637230587,
+        "b2": 135.34728235062016,
+        "parts": {
+          "base": 1787.196,
+          "surf_dist": 6.57,
+          "mud": 0.0,
+          "cls": -40.775,
+          "peak": 0.0,
+          "peak_flag": 0.0,
+          "kinryo": -1.632,
+          "weight": 0.0,
+          "chokyo": 0.0,
+          "jbonus": 3.297,
+          "trainer": -1.849,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": -6.145,
+          "pace": 9.135,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 16,
+      "mark": "",
+      "name": "レイニング",
+      "style": "差し",
+      "jockey": "プーシャン",
+      "chokyo": "🌟調教(1.10倍)",
+      "chokyo_rank": {
+        "loc": "美浦",
+        "kind": "ウッド",
+        "date": "11/12",
+        "rank": 60,
+        "n": 2598,
+        "pct": 2.3,
+        "time": 65.8,
+        "f1": 12.0,
+        "f1_rank": 793,
+        "f1_pct": 30.5,
+        "days": 14
+      },
+      "mc_win": 0.08354844444190446,
+      "top3_est": 0.2644692956641161,
+      "jitsuryoku": 1773.2224612027371,
+      "zenjitsu": 1963.6615152770898,
+      "adjust": 190.43905407435273,
+      "odds": null,
+      "swap": true,
+      "rank_result": 12,
+      "breakdown": {
+        "env": 18.74660471167772,
+        "time": 34.883693449895944,
+        "ped": 0.0,
+        "trip": 22.020000000000003,
+        "trip_flags": [],
+        "jockey": 14.33509973330979,
+        "jockey_rate": 0.2823058823529412,
+        "jockey_n": 120,
+        "career": -23.300151727096896,
+        "career_flags": [
+          "延長"
+        ],
+        "draw": 0.0,
+        "early": -6.267707370523571,
+        "p_early": 0.5287193084976426,
+        "b2": 130.02151527708975,
+        "parts": {
+          "base": 1779.792,
+          "surf_dist": -6.57,
+          "mud": 0.0,
+          "cls": 0.0,
+          "peak": 0.0,
+          "peak_flag": 0.0,
+          "kinryo": -1.759,
+          "weight": 0.0,
+          "chokyo": 40.374,
+          "jbonus": 0.246,
+          "trainer": -0.723,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": -19.391,
+          "pace": 0.0,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 10,
+      "mark": "",
+      "name": "カテリーナ",
+      "style": "先行",
+      "jockey": "浜中",
+      "chokyo": null,
+      "chokyo_rank": {
+        "loc": "栗東",
+        "kind": "ウッド",
+        "date": "11/11",
+        "rank": 303,
+        "n": 2175,
+        "pct": 13.9,
+        "time": 67.2,
+        "f1": 11.3,
+        "f1_rank": 59,
+        "f1_pct": 2.7,
+        "days": 14
+      },
+      "mc_win": 0.06011654740122194,
+      "top3_est": 0.20567235224117414,
+      "jitsuryoku": 1731.6031875856634,
+      "zenjitsu": 1841.9982634047958,
+      "adjust": 110.39507581913244,
+      "odds": null,
+      "swap": true,
+      "rank_result": 4,
+      "breakdown": {
+        "env": 30.87171613491219,
+        "time": -11.721704491242111,
+        "ped": 0.0,
+        "trip": 22.020000000000003,
+        "trip_flags": [],
+        "jockey": 12.159933774415382,
+        "jockey_rate": 0.277089156626506,
+        "jockey_n": 365,
+        "career": -13.905031385216542,
+        "career_flags": [
+          "延長",
+          "休み明け"
+        ],
+        "draw": 0.0,
+        "early": 7.916898381467651,
+        "p_early": 0.4315644745798945,
+        "b2": 63.05326340479587,
+        "parts": {
+          "base": 1738.173,
+          "surf_dist": -6.57,
+          "mud": 0.0,
+          "cls": 0.0,
+          "peak": 0.0,
+          "peak_flag": 0.0,
+          "kinryo": 0.632,
+          "weight": 0.0,
+          "chokyo": 0.0,
+          "jbonus": 4.33,
+          "trainer": -0.34,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": 17.114,
+          "pace": 9.135,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 3,
+      "mark": "",
+      "name": "ゼンダンハヤブサ",
+      "style": "差し",
+      "jockey": "酒井",
+      "chokyo": "🌟調教(1.17倍)",
+      "chokyo_rank": {
+        "loc": "栗東",
+        "kind": "坂路",
+        "date": "11/12",
+        "rank": 334,
+        "n": 10022,
+        "pct": 3.3,
+        "time": 53.8,
+        "f1": 11.9,
+        "f1_rank": 3,
+        "f1_pct": 0.0,
+        "days": 14
+      },
+      "mc_win": 0.05937883957587056,
+      "top3_est": 0.20567235224117414,
+      "jitsuryoku": 1741.0707437501273,
+      "zenjitsu": 1837.4342644392163,
+      "adjust": 96.363520689089,
+      "odds": null,
+      "swap": true,
+      "rank_result": 2,
+      "breakdown": {
+        "env": 41.61953690175932,
+        "time": 15.943646564685306,
+        "ped": 0.0,
+        "trip": -35.94,
+        "trip_flags": [
+          "6着以下"
+        ],
+        "jockey": -46.28394598158157,
+        "jockey_rate": 0.13692252252252254,
+        "jockey_n": 505,
+        "career": -36.55720249632766,
+        "career_flags": [
+          "延長"
+        ],
+        "draw": 0.0,
+        "early": 8.649221261337203,
+        "p_early": 0.4265485644438017,
+        "b2": 148.9322644392164,
+        "parts": {
+          "base": 1747.64,
+          "surf_dist": -6.57,
+          "mud": 0.0,
+          "cls": 0.0,
+          "peak": 0.0,
+          "peak_flag": 0.0,
+          "kinryo": -1.589,
+          "weight": 0.0,
+          "chokyo": 42.776,
+          "jbonus": 1.279,
+          "trainer": -1.058,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": 2.242,
+          "pace": -2.031,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 14,
+      "mark": "",
+      "name": "サヴォーナ",
+      "style": "差し",
+      "jockey": "横山武",
+      "chokyo": "🌟調教(1.18倍)",
+      "chokyo_rank": {
+        "loc": "栗東",
+        "kind": "坂路",
+        "date": "11/12",
+        "rank": 143,
+        "n": 10022,
+        "pct": 1.4,
+        "time": 53.0,
+        "f1": 12.3,
+        "f1_rank": 75,
+        "f1_pct": 0.7,
+        "days": 14
+      },
+      "mc_win": 0.04692473111844918,
+      "top3_est": 0.16243654822335027,
+      "jitsuryoku": 1685.2968367635758,
+      "zenjitsu": 1750.424006722244,
+      "adjust": 65.12716995866822,
+      "odds": null,
+      "swap": true,
+      "rank_result": 15,
+      "breakdown": {
+        "env": 26.74239612199571,
+        "time": -3.9485592809650125,
+        "ped": 0.0,
+        "trip": -35.94,
+        "trip_flags": [
+          "6着以下"
+        ],
+        "jockey": 48.55968289839518,
+        "jockey_rate": 0.36438709677419356,
+        "jockey_n": 787,
+        "career": 70.03037750367234,
+        "career_flags": [
+          "短縮"
+        ],
+        "draw": 0.0,
+        "early": 32.755265993326056,
+        "p_early": 0.26143866901922047,
+        "b2": -73.07199327775606,
+        "parts": {
+          "base": 1672.157,
+          "surf_dist": 13.139,
+          "mud": 0.0,
+          "cls": 0.0,
+          "peak": 0.0,
+          "peak_flag": 0.0,
+          "kinryo": 2.412,
+          "weight": 0.0,
+          "chokyo": 43.234,
+          "jbonus": 3.691,
+          "trainer": -1.172,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": -19.391,
+          "pace": -2.031,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 2,
+      "mark": "",
+      "name": "ヴィスマール",
+      "style": "差し",
+      "jockey": "小沢",
+      "chokyo": null,
+      "chokyo_rank": {
+        "loc": "栗東",
+        "kind": "坂路",
+        "date": "11/18",
+        "rank": 563,
+        "n": 10022,
+        "pct": 5.6,
+        "time": 54.4,
+        "f1": 13.3,
+        "f1_rank": 1565,
+        "f1_pct": 15.6,
+        "days": 14
+      },
+      "mc_win": 0.04417441464381599,
+      "top3_est": 0.14989871708305194,
+      "jitsuryoku": 1722.7262163145583,
+      "zenjitsu": 1728.0982013459625,
+      "adjust": 5.371985031404165,
+      "odds": null,
+      "swap": false,
+      "rank_result": 11,
+      "breakdown": {
+        "env": -13.364758500607195,
+        "time": -9.243028599719477,
+        "ped": 0.0,
+        "trip": 49.28,
+        "trip_flags": [
+          "大回り外"
+        ],
+        "jockey": -34.11137981128225,
+        "jockey_rate": 0.16611612903225806,
+        "jockey_n": 570,
+        "career": 14.935958373237554,
+        "career_flags": [
+          "昇級"
+        ],
+        "draw": 0.0,
+        "early": 26.025992223813077,
+        "p_early": 0.30752958524876145,
+        "b2": -28.150798654037544,
+        "parts": {
+          "base": 1752.685,
+          "surf_dist": 0.0,
+          "mud": 0.0,
+          "cls": -29.959,
+          "peak": 0.0,
+          "peak_flag": 0.0,
+          "kinryo": -1.44,
+          "weight": 0.0,
+          "chokyo": 0.0,
+          "jbonus": 7.949,
+          "trainer": -20.084,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": 2.242,
+          "pace": -2.031,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 8,
+      "mark": "",
+      "name": "ヨヒーン",
+      "style": "先行",
+      "jockey": "鮫島駿",
+      "chokyo": "🌟調教(1.13倍)",
+      "chokyo_rank": {
+        "loc": "栗東",
+        "kind": "ウッド",
+        "date": "11/11",
+        "rank": 128,
+        "n": 2175,
+        "pct": 5.9,
+        "time": 66.2,
+        "f1": 11.3,
+        "f1_rank": 59,
+        "f1_pct": 2.7,
+        "days": 14
+      },
+      "mc_win": 0.039831248384675944,
+      "top3_est": 0.13322734499205083,
+      "jitsuryoku": 1797.3441320748227,
+      "zenjitsu": 1689.8428616336626,
+      "adjust": -107.50127044116016,
+      "odds": null,
+      "swap": true,
+      "rank_result": 9,
+      "breakdown": {
+        "env": 51.36116283464051,
+        "time": -28.00225617662513,
+        "ped": 0.0,
+        "trip": 22.020000000000003,
+        "trip_flags": [],
+        "jockey": -11.710674572572563,
+        "jockey_rate": 0.21984,
+        "jockey_n": 0,
+        "career": 25.135953293146024,
+        "career_flags": [
+          "短縮"
+        ],
+        "draw": 0.0,
+        "early": -27.458317453411496,
+        "p_early": 0.6738604734489297,
+        "b2": -138.8471383663375,
+        "parts": {
+          "base": 1777.635,
+          "surf_dist": 19.709,
+          "mud": 0.0,
+          "cls": 0.0,
+          "peak": 0.0,
+          "peak_flag": 0.0,
+          "kinryo": 0.22,
+          "weight": 0.0,
+          "chokyo": 41.289,
+          "jbonus": 0.0,
+          "trainer": -0.148,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": 0.865,
+          "pace": 9.135,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 5,
+      "mark": "",
+      "name": "フィーリウス",
+      "style": "差し",
+      "jockey": "嶋田",
+      "chokyo": null,
+      "chokyo_rank": {
+        "loc": "美浦",
+        "kind": "坂路",
+        "date": "11/8",
+        "rank": 792,
+        "n": 8990,
+        "pct": 8.8,
+        "time": 55.6,
+        "f1": 13.0,
+        "f1_rank": 907,
+        "f1_pct": 10.1,
+        "days": 14
+      },
+      "mc_win": 0.035639972910792246,
+      "top3_est": 0.12333825701624815,
+      "jitsuryoku": 1724.7954668942903,
+      "zenjitsu": 1648.7450529669986,
+      "adjust": -76.05041392729163,
+      "odds": null,
+      "swap": true,
+      "rank_result": null,
+      "breakdown": {
+        "env": -9.197695057237055,
+        "time": -0.008742144543275154,
+        "ped": 0.0,
+        "trip": -35.94,
+        "trip_flags": [
+          "6着以下"
+        ],
+        "jockey": -34.343913180364765,
+        "jockey_rate": 0.16555844155844157,
+        "jockey_n": 258,
+        "career": 53.65372592472498,
+        "career_flags": [],
+        "draw": 0.0,
+        "early": 13.801157563129852,
+        "p_early": 0.3912613295000164,
+        "b2": -64.01494703300136,
+        "parts": {
+          "base": 1724.795,
+          "surf_dist": 0.0,
+          "mud": 0.0,
+          "cls": 0.0,
+          "peak": 0.0,
+          "peak_flag": 0.0,
+          "kinryo": 1.833,
+          "weight": 0.0,
+          "chokyo": 0.0,
+          "jbonus": 4.025,
+          "trainer": -0.644,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": -12.381,
+          "pace": -2.031,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 4,
+      "mark": "",
+      "name": "ボーンディスウェイ",
+      "style": "差し",
+      "jockey": "木幡巧",
+      "chokyo": "🌟調教(1.17倍)",
+      "chokyo_rank": {
+        "loc": "美浦",
+        "kind": "坂路",
+        "date": "11/18",
+        "rank": 164,
+        "n": 8990,
+        "pct": 1.8,
+        "time": 53.7,
+        "f1": 12.0,
+        "f1_rank": 25,
+        "f1_pct": 0.3,
+        "days": 14
+      },
+      "mc_win": 0.027456709564400716,
+      "top3_est": 0.09510816604950305,
+      "jitsuryoku": 1679.2556961814507,
+      "zenjitsu": 1552.32225522728,
+      "adjust": -126.93344095417069,
+      "odds": null,
+      "swap": true,
+      "rank_result": 5,
+      "breakdown": {
+        "env": 50.896434142990074,
+        "time": 30.68479851203991,
+        "ped": 0.0,
+        "trip": -8.679999999999996,
+        "trip_flags": [
+          "6着以下",
+          "大回り外"
+        ],
+        "jockey": -47.50492420023827,
+        "jockey_rate": 0.1339942363112392,
+        "jockey_n": 644,
+        "career": -11.57210883779107,
+        "career_flags": [
+          "短縮"
+        ],
+        "draw": 0.0,
+        "early": -12.950895798451452,
+        "p_early": 0.5744945717026281,
+        "b2": -127.80674477271987,
+        "parts": {
+          "base": 1662.831,
+          "surf_dist": 16.424,
+          "mud": 0.0,
+          "cls": 0.0,
+          "peak": 0.0,
+          "peak_flag": -200.0,
+          "kinryo": 0.594,
+          "weight": 0.0,
+          "chokyo": 42.891,
+          "jbonus": 8.884,
+          "trainer": -1.684,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": 2.242,
+          "pace": -2.031,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 12,
+      "mark": "",
+      "name": "アラタ",
+      "style": "追込",
+      "jockey": "大野",
+      "chokyo": null,
+      "chokyo_rank": {
+        "loc": "美浦",
+        "kind": "ウッド",
+        "date": "11/18",
+        "rank": 49,
+        "n": 2598,
+        "pct": 1.9,
+        "time": 65.6,
+        "f1": 12.1,
+        "f1_rank": 1003,
+        "f1_pct": 38.6,
+        "days": 14
+      },
+      "mc_win": 0.02168918073016743,
+      "top3_est": 0.07402168788307402,
+      "jitsuryoku": 1622.8866664421307,
+      "zenjitsu": 1465.1626859037863,
+      "adjust": -157.72398053834445,
+      "odds": null,
+      "swap": true,
+      "rank_result": 8,
+      "breakdown": {
+        "env": 18.677524018240064,
+        "time": 29.775298584433173,
+        "ped": 0.0,
+        "trip": -35.94,
+        "trip_flags": [
+          "6着以下"
+        ],
+        "jockey": -13.526192503763488,
+        "jockey_rate": 0.2154858223062382,
+        "jockey_n": 479,
+        "career": -36.28599582966099,
+        "career_flags": [
+          "休み明け"
+        ],
+        "draw": 0.0,
+        "early": -26.669300711379577,
+        "p_early": 0.6684562491884372,
+        "b2": -93.75531409621362,
+        "parts": {
+          "base": 1622.887,
+          "surf_dist": 0.0,
+          "mud": 0.0,
+          "cls": 0.0,
+          "peak": 0.0,
+          "peak_flag": 0.0,
+          "kinryo": -1.931,
+          "weight": 0.0,
+          "chokyo": 0.0,
+          "jbonus": 5.364,
+          "trainer": -1.606,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": 18.881,
+          "pace": -2.031,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 9,
+      "mark": "",
+      "name": "バレエマスター",
+      "style": "差し",
+      "jockey": "菊沢",
+      "chokyo": null,
+      "chokyo_rank": {
+        "loc": "栗東",
+        "kind": "ウッド",
+        "date": "11/11",
+        "rank": 78,
+        "n": 2175,
+        "pct": 3.6,
+        "time": 65.7,
+        "f1": 11.9,
+        "f1_rank": 600,
+        "f1_pct": 27.6,
+        "days": 14
+      },
+      "mc_win": 0.01669662383014358,
+      "top3_est": 0.03676470588235294,
+      "jitsuryoku": 1707.4777421619306,
+      "zenjitsu": 1368.4627544230198,
+      "adjust": -339.0149877389108,
+      "odds": null,
+      "swap": true,
+      "rank_result": 13,
+      "breakdown": {
+        "env": 5.821602393529361,
+        "time": 1.9624530339515687,
+        "ped": 0.0,
+        "trip": -35.94,
+        "trip_flags": [
+          "6着以下"
+        ],
+        "jockey": -29.44649982719812,
+        "jockey_rate": 0.17730396475770924,
+        "jockey_n": 858,
+        "career": -60.29503449632766,
+        "career_flags": [
+          "延長"
+        ],
+        "draw": 0.0,
+        "early": -34.178263265885654,
+        "p_early": 0.7198874995617665,
+        "b2": -186.93924557698028,
+        "parts": {
+          "base": 1714.047,
+          "surf_dist": -6.57,
+          "mud": 0.0,
+          "cls": 0.0,
+          "peak": 0.0,
+          "peak_flag": 0.0,
+          "kinryo": -0.432,
+          "weight": 0.0,
+          "chokyo": 0.0,
+          "jbonus": 5.659,
+          "trainer": -1.242,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": 3.867,
+          "pace": -2.031,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 6,
+      "mark": "",
+      "name": "バルナバ",
+      "style": "差し",
+      "jockey": "斎藤",
+      "chokyo": null,
+      "chokyo_rank": {
+        "loc": "栗東",
+        "kind": "ウッド",
+        "date": "11/11",
+        "rank": 194,
+        "n": 2175,
+        "pct": 8.9,
+        "time": 66.6,
+        "f1": 12.1,
+        "f1_rank": 762,
+        "f1_pct": 35.0,
+        "days": 14
+      },
+      "mc_win": 0.009333930945060173,
+      "top3_est": 0.021831735889243878,
+      "jitsuryoku": 1679.246938064235,
+      "zenjitsu": 1153.4995903355418,
+      "adjust": -525.7473477286933,
+      "odds": null,
+      "swap": true,
+      "rank_result": 10,
+      "breakdown": {
+        "env": -2.020908578995318,
+        "time": -36.297801105840286,
+        "ped": 0.0,
+        "trip": -5.82,
+        "trip_flags": [
+          "6着以下",
+          "序盤外",
+          "包まれ"
+        ],
+        "jockey": -3.265155273364124,
+        "jockey_rate": 0.24009498680738786,
+        "jockey_n": 708,
+        "career": 47.28704861478346,
+        "career_flags": [
+          "短縮",
+          "休み明け"
+        ],
+        "draw": 0.0,
+        "early": -36.92712172081885,
+        "p_early": 0.7387152971982952,
+        "b2": -488.70340966445815,
+        "parts": {
+          "base": 1659.538,
+          "surf_dist": 19.709,
+          "mud": 0.0,
+          "cls": 0.0,
+          "peak": 0.0,
+          "peak_flag": 0.0,
+          "kinryo": 1.54,
+          "weight": 0.0,
+          "chokyo": 0.0,
+          "jbonus": 11.555,
+          "trainer": -0.704,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": -12.381,
+          "pace": -2.031,
+          "hl": 0.0
+        }
+      }
+    },
+    {
+      "umaban": 7,
+      "mark": "",
+      "name": "シリウスコルト",
+      "style": "追込",
+      "jockey": "田辺",
+      "chokyo": null,
+      "chokyo_rank": {
+        "loc": "美浦",
+        "kind": "坂路",
+        "date": "11/15",
+        "rank": 1686,
+        "n": 8990,
+        "pct": 18.8,
+        "time": 59.1,
+        "f1": 14.3,
+        "f1_rank": 1876,
+        "f1_pct": 20.9,
+        "days": 14
+      },
+      "mc_win": 0.00897149722699871,
+      "top3_est": 0.021831735889243878,
+      "jitsuryoku": 1352.4646484472526,
+      "zenjitsu": 1138.860562682788,
+      "adjust": -213.60408576446457,
+      "odds": null,
+      "swap": false,
+      "rank_result": 14,
+      "breakdown": {
+        "env": 16.71025946296237,
+        "time": -11.800199864966562,
+        "ped": 0.0,
+        "trip": -35.94,
+        "trip_flags": [
+          "6着以下"
+        ],
+        "jockey": 19.541500159502903,
+        "jockey_rate": 0.2947924528301887,
+        "jockey_n": 374,
+        "career": -63.82607326555842,
+        "career_flags": [
+          "延長",
+          "芝ダ替"
+        ],
+        "draw": 0.0,
+        "early": 5.959865060807056,
+        "p_early": 0.4449688123926383,
+        "b2": -144.2494373172119,
+        "parts": {
+          "base": 1622.374,
+          "surf_dist": -288.425,
+          "mud": 0.0,
+          "cls": 18.515,
+          "peak": 0.0,
+          "peak_flag": -500.0,
+          "kinryo": 0.513,
+          "weight": 0.0,
+          "chokyo": 0.0,
+          "jbonus": 17.647,
+          "trainer": -2.052,
+          "vol": 0.0,
+          "env_clip": 0.0,
+          "bias": 2.633,
+          "pace": -2.031,
+          "hl": 0.0
+        }
+      },
+      "odds_move": "down"
+    }
   ],
-  "note": "読み物（参考）: 過去の位置取りから作った展開の見立て。予想の印・確率には使っていない。"
- },
- "story": {
-  "version": 2,
-  "made_at": "2026-11-21T00:57",
-  "sections": {
-   "総括": [
-    "結論：どれが来てもおかしない。手を出さん方が賢い。まぁ強いて言うなら◎1番カラマティアノスや。",
-    "OP以上のハンデ戦で荒れやすい。1番人気でも勝つのは5回に1回くらいや。",
-    "七夕賞（G3）組（4番ボーンディスウェイ 5着・1番カラマティアノス 7着・14番サヴォーナ 10着）は弱い。あの後13回走って勝ち馬ゼロや。前半から流れた消耗戦やった。",
-    "流れは平均やろ。力の差も小さい。",
-    "14番サヴォーナはこの舞台で2-0-0-1、前走の相手が強い、距離短縮で実績あり。文句なしや。ただこの人気やと妙味はない。単勝21倍つかんと割に合わん。",
-    "3番ゼンダンハヤブサ（人気薄）は前走の負けは言い訳が立つ、栗東坂路の2週間の追い切り10,022本で終いが3番目、距離延長で実績あり。人気はないけど力はある。",
-    "◎1番カラマティアノスは過去走に決め手はないし、計算でも横並びや。選ぶならこれやと思う。",
-    "○13番マリアイリダータ（人気馬）は持ち時計が一番。印どおり押さえてええ。",
-    "▲11番フォルテアンジェロ（人気馬）は前走の負けは言い訳が立つ、距離延長で実績あり。印どおり押さえてええ。",
-    "余談やけど、11番フォルテアンジェロに乗るマーカンド騎手は、イギリスの騎手で、今年はアルメラクで英国のG1を3つ（ダイヤモンドジュビリーS・スプリントC・チャンピオンズスプリント）、フランスのパリ大賞も勝っとる。"
-   ],
-   "展開": [
-    "はっきりした逃げ馬がおらん。前半は緩みやすい顔ぶれや。",
-    "ペースはこのコースのいつもどおりやろ。",
-    "力と位置から見た上位は13マリアイリダータ・15キャントウェイト・1カラマティアノス・16レイニング・2ヴィスマール。流れが速くなれば8ヨヒーンが浮上や。",
-    "位置が読みにくい馬: 11フォルテアンジェロ・16レイニング・2ヴィスマール・5フィーリウス・12アラタ・6バルナバ。"
-   ],
-   "経歴・陣営": [
-    "アラタは2024年のこのレースの勝ち馬。返り咲きがかかる。",
-    "カラマティアノスの津村騎手は、このレースを2勝（最後は2025年のニシノティアモ）や。",
-    "フォルテアンジェロのマーカンド騎手（イギリス）は今回の来日（11月7日〜）で先週まで30戦1勝。JRA の G1 は未勝利。",
-    "レイニングのプーシャン騎手（フランス）は今回の来日（10月31日〜）で先週まで44戦7勝。JRA の G1 は未勝利。",
-    "フォルテアンジェロに乗るマーカンド騎手は、イギリスの騎手で、今年はアルメラクで英国のG1を3つ（ダイヤモンドジュビリーS・スプリントC・チャンピオンズスプリント）、フランスのパリ大賞も勝っとる。",
-    "フォルテアンジェロが勝てば、マーカンド騎手は初の重賞勝ち（1990年からのデータで）や。"
-   ],
-   "人気の落とし穴": [
-    "マリアイリダータは牝馬。夏以外の牝馬は人気ほど走らん。",
-    "ヨヒーンは牝馬。夏以外の牝馬は人気ほど走らん。"
-   ],
-   "前哨戦の顔合わせ": [
-    "同じ舞台の7月12日の七夕賞（G3）（福島芝2000m・稍重）から3頭: ボーンディスウェイ5着（勝ち馬から0.8秒、11番手から上がり3位）、カラマティアノス7着（勝ち馬から1.2秒、4角で外を回して）、サヴォーナ10着（勝ち馬から1.8秒）や。",
-    "同じ舞台の4月12日の福島民報杯（福島芝2000m）から2頭: サヴォーナ1着（2着に0.3秒差、速い流れを3番手で受けて粘った）、バルナバ9着（勝ち馬から0.6秒、4角で大外を回して）。サヴォーナが0.6秒先着しとる。",
-    "9月12日のチャレンジC（G3）（阪神芝2000m）から3頭: カラマティアノス2着（勝ち馬とタイム差なし、7番手から上がり2位）、マリアイリダータ4着（勝ち馬から0.2秒、4角12番手から上がり1位）、フィーリウス10着（勝ち馬から0.9秒）や。"
-   ],
-   "前走のレベル": [
-    "サヴォーナの前走京都大賞典（G2）からは、その後1頭が勝ち上がり（アルゼンチン共和国杯（G2）の勝ち馬も）。レベルの高い一戦や。"
-   ],
-   "前走の形": [
-    "カラマティアノスの前走チャレンジC（G3）はロングスパート戦（残り1000mから11秒台が続く）で2着や。",
-    "マリアイリダータの前走チャレンジC（G3）はロングスパート戦（残り1000mから11秒台が続く）で4着や。",
-    "カテリーナの前走クイーンS（G3）はロングスパート戦（残り1000mから11秒台が続く）で5着や。",
-    "ヴィスマールの前走大原S（3勝クラス）は前半から流れた消耗戦で1着や。"
-   ],
-   "展開の向き不向き": [
-    "ヴィスマールの前走大原S（3勝クラス）は、速い流れを10番手から差して1着。展開の助けがあった。"
-   ],
-   "勝ち上がり": [
-    "ヴィスマールは前走大原S（3勝クラス）を6番人気で勝利（2着に0.1秒差）。3勝クラスからの昇級や。"
-   ],
-   "巻き返し候補": [
-    "フォルテアンジェロは前走京成杯オータムH（G3）6着（着順ほど負けてへん（勝ち馬から0.5秒）・4角14番手から上がり1位）。その前にホープフルS（G1）で2着があり、巻き返してもおかしない。",
-    "ゼンダンハヤブサは前走カシオペアS8着（稍重）。その前に小倉記念（G3）で1着（10番人気）があり、巻き返してもおかしない。",
-    "サヴォーナは前走京都大賞典（G2）17着（稍重）。その前に福島民報杯で1着があり、巻き返してもおかしない。",
-    "バレエマスターは前走カシオペアS11着（稍重）。その前に新潟大賞典（G3）で2着（12番人気）があり、巻き返してもおかしない。"
-   ],
-   "持ち時計": [
-    "マリアイリダータはこのコースの持ち時計（1:56.7）が出走馬で一番。持ち時計1位は4割近くが3着に来とる。",
-    "ヨヒーンの持ち時計（1:58.3）は出走馬で2番目。",
-    "サヴォーナの持ち時計（1:58.4）は出走馬で3番目。"
-   ],
-   "舞台の実績": [
-    "サヴォーナは福島芝1900〜2100mで2-0-0-1（福島民報杯1着）や。",
-    "アラタは福島芝1900〜2100mで1-0-2-2（福島記念（G3）1着）や。",
-    "ヨヒーンは福島芝1900〜2100mで1-0-0-1（1勝クラス1着）や。",
-    "バレエマスターは福島芝1900〜2100mで1-0-0-2（猪苗代特別（2勝クラス）1着）や。"
-   ],
-   "流れの向き": [
-    "カラマティアノスは遅い流れで2-0-2-0、速い流れで0-1-0-3。ゆったり流れてほしい馬。",
-    "カテリーナは遅い流れで2-2-0-2、速い流れで1-0-0-3。ゆったり流れてほしい馬。",
-    "サヴォーナは速い流れで2-3-1-2、遅い流れで1-0-0-4。速くなってこその馬。",
-    "シリウスコルトは遅い流れで2-0-0-2、速い流れで1-1-0-7。ゆったり流れてほしい馬。"
-   ],
-   "回り": [
-    "ヴィスマールは芝の右回りで4-6-1-6と得意、反対回りは0-0-0-3や。",
-    "フィーリウスは芝の右回りで3-1-3-4と得意、反対回りは0-0-0-3や。"
-   ],
-   "兄弟": [
-    "マリアイリダータは母マルケッサの子。兄弟にドゥラエレーデ（ホープフルS（G1）1着）がおる。",
-    "レイニングは母クルミナルの子。兄弟にプルヴィナル（アルテミスS（G3）1着）がおる。",
-    "ヴィスマールは母オーマイベイビーの子。兄弟にステラヴェローチェ（神戸新聞杯（G2）1着）がおる。"
-   ],
-   "鞍上": [
-    "カラマティアノスはルメールから津村に戻るで。津村とは1-1-0-1や。",
-    "ボーンディスウェイはマーカンから木幡巧に戻るで。木幡巧とは3-2-3-11や。",
-    "バルナバは舟山瑠泉から斎藤に戻るで。斎藤とは2-0-0-2や。",
-    "カテリーナは浜中が続けて乗る。このコンビで2-2-0-2や。",
-    "アラタは大野が続けて乗る。このコンビで5-1-2-8や。"
-   ],
-   "騎手と厩舎": [
-    "アラタの和田勇介厩舎は休み明けより叩いてからの方がええ。",
-    "ボーンディスウェイの木幡巧騎手は福島芝2000m前後で3着内19%（芝全体は12%）や。",
-    "ヴィスマールの小沢騎手は福島芝2000m前後で3着内25%（芝全体は16%）や。",
-    "マリアイリダータの戸崎圭騎手は福島芝2000m前後で3着内59%（芝全体は43%）や。"
-   ],
-   "調教": [
-    "ゼンダンハヤブサは11/12の栗東坂路で終い11.9秒。この2週間に栗東坂路で追い切った10,022本の中で3番目（上位0.1%未満）、トップ5級。全体の時計も速いで。この級の終いの馬は4割近くが3着に来とる。",
-    "マリアイリダータは11/12に美浦ウッドで65.3秒と全体の時計は上位。ただ終いは甘い。終いが甘いと並の調教と変わらん。",
-    "サヴォーナは11/12に栗東坂路で53.0秒と全体の時計は上位。",
-    "ボーンディスウェイは11/18に美浦坂路で53.7秒と全体の時計は上位。",
-    "カラマティアノスは11/11に美浦ウッドで65.6秒と全体の時計は上位。"
-   ],
-   "前走との差": [
-    "フォルテアンジェロは前走から400mの距離延長。過去の距離延長では0-1-0-1や。",
-    "レイニングは前走から200mの距離延長。過去の距離延長では1-0-0-1や。",
-    "カテリーナは前走から200mの距離延長。過去の距離延長では1-1-0-0や。",
-    "ゼンダンハヤブサは前走から200mの距離延長。過去の距離延長では3-0-1-1や。",
-    "サヴォーナは前走から400mの距離短縮。過去の距離短縮では1-2-0-1や。"
-   ],
-   "斤量": [
-    "トップハンデはカラマティアノスの58kgや。",
-    "カテリーナは前走から2kg減の53kgや。",
-    "ゼンダンハヤブサは前走から3kg減の55kgや。",
-    "ヴィスマールは前走から3kg減の55kgや。",
-    "バレエマスターは前走から3kg減の55kgや。",
-    "バルナバは前走から2kg減の55kgや。"
-   ],
-   "休み明け": [
-    "カテリーナは約3か月の休み明け。過去の休み明けは1-1-0-1で、走れるタイプや。",
-    "アラタは約3か月の休み明け。過去の休み明けは2-0-1-5で、走れるタイプや。"
-   ],
-   "2頭出し": [
-    "馬主 サンデーレーシング から2頭: カラマティアノス・マリアイリダータ。",
-    "馬主 キャロットファーム から2頭: レイニング・ヴィスマール。"
-   ]
+  "yomimono": {
+    "version": 2,
+    "made_at": "2026-11-21T00:56",
+    "pace": {
+      "label": "速め",
+      "dev": -0.62,
+      "reasons": [
+        "逃げ・先行候補 0頭（少ない→遅くなりやすい）",
+        "テンが最も速い馬 速い",
+        "出走馬の持ちタイム 速い組（速くなりやすい）",
+        "クラスが上（オープン、速くなりやすい）"
+      ]
+    },
+    "balance": {
+      "pred": 51.9,
+      "dev": 0.9,
+      "bin": "4",
+      "course_prior": 50.92992125984252
+    },
+    "scenario": {
+      "tops": {
+        "速め": [
+          13,
+          15,
+          1,
+          16,
+          8
+        ],
+        "平均": [
+          13,
+          15,
+          1,
+          16,
+          2
+        ],
+        "スロー": [
+          13,
+          15,
+          1,
+          16,
+          2
+        ]
+      },
+      "d": [
+        -4.3,
+        4.7
+      ]
+    },
+    "paragraphs": [
+      "前半と後半の釣り合いの予想: いつもどおりか、ややスロー。",
+      "強さと位置から見た上位5頭は、平均的な流れなら13マリアイリダータ・15キャントウェイト・1カラマティアノス・16レイニング・2ヴィスマール。スローでも顔ぶれは同じ。速めなら8ヨヒーンが入り2ヴィスマールが外れます。（ペースで動くのは先行と差しの差で Elo 約50点分、1頭入れ替わる程度です）",
+      "はっきりした逃げ馬はいません。過去の芝で逃げ候補0頭のレースは前半が緩みやすく、最初の角で3番手以内の馬の3着内率は37%（逃げ候補3頭以上だと31%）。誰が行くかで流れが決まります。",
+      "本体の予想位置では、前は1カラマティアノス・14サヴォーナ・2ヴィスマール、後ろは8ヨヒーン・9バレエマスター・6バルナバ。",
+      "◎カラマティアノスは好位（最初の角 直近: 4/14・5/14・6/17・7/16・7/16）。この型の馬が次のレースで3番手以内だった割合は27%。",
+      "○マリアイリダータは差し（最初の角 直近: 2/18・7/12・5/16・5/9・12/16）。この型の馬が次のレースで3番手以内だった割合は11%。",
+      "位置が読みにくい馬: 11フォルテアンジェロ（位置が一定しない）・16レイニング（位置が一定しない）・2ヴィスマール（脚質転換中）・5フィーリウス（脚質転換中）・12アラタ（脚質転換中）・6バルナバ（位置が一定しない）。"
+    ],
+    "horses": [
+      {
+        "umaban": 1,
+        "name": "カラマティアノス",
+        "label": "好位",
+        "desc": "好位（最初の角 直近: 4/14・5/14・6/17・7/16・7/16）",
+        "p_early": 0.228
+      },
+      {
+        "umaban": 13,
+        "name": "マリアイリダータ",
+        "label": "差し",
+        "desc": "差し（最初の角 直近: 2/18・7/12・5/16・5/9・12/16）",
+        "p_early": 0.388
+      },
+      {
+        "umaban": 11,
+        "name": "フォルテアンジェロ",
+        "label": "位置が一定しない",
+        "desc": "位置が一定しない（最初の角 直近: 3/5・5/16・16/18・13/18・15/16）",
+        "p_early": 0.566
+      },
+      {
+        "umaban": 15,
+        "name": "キャントウェイト",
+        "label": "好位差し",
+        "desc": "好位差し（最初の角 直近: 8/18・4/11・9/16・5/14・6/13）",
+        "p_early": 0.424
+      },
+      {
+        "umaban": 16,
+        "name": "レイニング",
+        "label": "位置が一定しない",
+        "desc": "位置が一定しない（最初の角 直近: 9/14・15/18・2/18・7/16・13/17）",
+        "p_early": 0.529
+      },
+      {
+        "umaban": 10,
+        "name": "カテリーナ",
+        "label": "差し",
+        "desc": "差し（最初の角 直近: 11/14・10/16・4/16・3/13・9/14）",
+        "p_early": 0.432
+      },
+      {
+        "umaban": 3,
+        "name": "ゼンダンハヤブサ",
+        "label": "差し",
+        "desc": "差し（最初の角 直近: 7/13・6/14・6/18・13/16・8/16）",
+        "p_early": 0.427
+      },
+      {
+        "umaban": 14,
+        "name": "サヴォーナ",
+        "label": "好位",
+        "desc": "好位（最初の角 直近: 7/16・4/15・6/16・1/11・9/18）",
+        "p_early": 0.261
+      },
+      {
+        "umaban": 2,
+        "name": "ヴィスマール",
+        "label": "脚質転換中",
+        "desc": "脚質転換中（最初の角 直近: 2/8・5/10・1/8・14/14・10/18）。直近2走で位置を後ろへ",
+        "p_early": 0.308
+      },
+      {
+        "umaban": 8,
+        "name": "ヨヒーン",
+        "label": "差し",
+        "desc": "差し（最初の角 直近: 9/11・7/7・5/11・11/16・7/14）",
+        "p_early": 0.674
+      },
+      {
+        "umaban": 5,
+        "name": "フィーリウス",
+        "label": "脚質転換中",
+        "desc": "脚質転換中（最初の角 直近: 4/14・3/16・5/9・7/15・15/16）。直近2走で位置を後ろへ",
+        "p_early": 0.391
+      },
+      {
+        "umaban": 4,
+        "name": "ボーンディスウェイ",
+        "label": "差し",
+        "desc": "差し（最初の角 直近: 11/14・10/16・2/11・6/18・13/18）",
+        "p_early": 0.574
+      },
+      {
+        "umaban": 12,
+        "name": "アラタ",
+        "label": "脚質転換中",
+        "desc": "脚質転換中（最初の角 直近: 4/16・11/16・7/14・14/15・16/16）。直近2走で位置を後ろへ",
+        "p_early": 0.668
+      },
+      {
+        "umaban": 9,
+        "name": "バレエマスター",
+        "label": "追込",
+        "desc": "追込（最初の角 直近: 10/15・12/15・8/13・9/11・13/16）",
+        "p_early": 0.72
+      },
+      {
+        "umaban": 6,
+        "name": "バルナバ",
+        "label": "位置が一定しない",
+        "desc": "位置が一定しない（最初の角 直近: 7/8・12/17・10/15・14/15・2/13）",
+        "p_early": 0.739
+      },
+      {
+        "umaban": 7,
+        "name": "シリウスコルト",
+        "label": "好位",
+        "desc": "好位（最初の角 直近: 7/16・5/18・13/17・3/14・12/16）",
+        "p_early": 0.445
+      }
+    ],
+    "note": "読み物（参考）: 過去の位置取りから作った展開の見立て。予想の印・確率には使っていない。"
   },
-  "zenso": [
-   {
-    "u": 1,
-    "n": "カラマティアノス",
-    "race": "9月12日 チャレンジC（G3）",
-    "chaku": "2着",
-    "ninki": 9,
-    "sa": "勝ち馬とタイム差なし",
-    "aite": "並",
-    "kaku": "格上から",
-    "nakami": "並"
-   },
-   {
-    "u": 2,
-    "n": "ヴィスマール",
-    "race": "10月4日 大原S（3勝クラス）",
-    "chaku": "1着",
-    "ninki": 6,
-    "sa": "2着に0.1秒差",
-    "aite": "並",
-    "kaku": "昇級",
-    "nakami": "濃い"
-   },
-   {
-    "u": 3,
-    "n": "ゼンダンハヤブサ",
-    "race": "10月24日 カシオペアS",
-    "chaku": "8着",
-    "ninki": 10,
-    "sa": "勝ち馬から0.7秒",
-    "aite": "並",
-    "kaku": "",
-    "nakami": "並"
-   },
-   {
-    "u": 4,
-    "n": "ボーンディスウェイ",
-    "race": "11月8日 アルゼンチン共和国杯（G2）",
-    "chaku": "15着",
-    "ninki": 17,
-    "sa": "勝ち馬から1.4秒",
-    "aite": "並",
-    "kaku": "格上から",
-    "nakami": "並"
-   },
-   {
-    "u": 5,
-    "n": "フィーリウス",
-    "race": "9月12日 チャレンジC（G3）",
-    "chaku": "10着",
-    "ninki": 14,
-    "sa": "勝ち馬から0.9秒",
-    "aite": "並",
-    "kaku": "格上から",
-    "nakami": "並"
-   },
-   {
-    "u": 6,
-    "n": "バルナバ",
-    "race": "7月26日 札幌日経OP",
-    "chaku": "12着",
-    "ninki": 11,
-    "sa": "勝ち馬から2.6秒",
-    "aite": "並",
-    "kaku": "",
-    "nakami": "完敗"
-   },
-   {
-    "u": 7,
-    "n": "シリウスコルト",
-    "race": "11月8日 みやこS（G3）",
-    "chaku": "15着",
-    "ninki": 12,
-    "sa": "勝ち馬から2.5秒",
-    "aite": "並",
-    "kaku": "格上から",
-    "nakami": "完敗"
-   },
-   {
-    "u": 8,
-    "n": "ヨヒーン",
-    "race": "9月6日 丹頂SH",
-    "chaku": "4着",
-    "ninki": 7,
-    "sa": "勝ち馬から1.5秒",
-    "aite": "弱い",
-    "kaku": "",
-    "nakami": "並"
-   },
-   {
-    "u": 9,
-    "n": "バレエマスター",
-    "race": "10月24日 カシオペアS",
-    "chaku": "11着",
-    "ninki": 13,
-    "sa": "勝ち馬から1.0秒",
-    "aite": "並",
-    "kaku": "",
-    "nakami": "並"
-   },
-   {
-    "u": 10,
-    "n": "カテリーナ",
-    "race": "8月2日 クイーンS（G3）",
-    "chaku": "5着",
-    "ninki": 10,
-    "sa": "勝ち馬から0.5秒",
-    "aite": "弱い",
-    "kaku": "格上から",
-    "nakami": "濃い"
-   },
-   {
-    "u": 11,
-    "n": "フォルテアンジェロ",
-    "race": "9月5日 京成杯オータムH（G3）",
-    "chaku": "6着",
-    "ninki": 1,
-    "sa": "勝ち馬から0.5秒",
-    "aite": "強い",
-    "kaku": "格上から",
-    "nakami": "濃い"
-   },
-   {
-    "u": 12,
-    "n": "アラタ",
-    "race": "8月16日 札幌記念（G2）",
-    "chaku": "12着",
-    "ninki": 15,
-    "sa": "勝ち馬から1.5秒",
-    "aite": "並",
-    "kaku": "格上から",
-    "nakami": "完敗"
-   },
-   {
-    "u": 13,
-    "n": "マリアイリダータ",
-    "race": "9月12日 チャレンジC（G3）",
-    "chaku": "4着",
-    "ninki": 2,
-    "sa": "勝ち馬から0.2秒",
-    "aite": "並",
-    "kaku": "格上から",
-    "nakami": "濃い"
-   },
-   {
-    "u": 14,
-    "n": "サヴォーナ",
-    "race": "10月4日 京都大賞典（G2）",
-    "chaku": "17着",
-    "ninki": 10,
-    "sa": "勝ち馬から1.3秒",
-    "aite": "並",
-    "kaku": "格上から",
-    "nakami": "並"
-   },
-   {
-    "u": 15,
-    "n": "キャントウェイト",
-    "race": "9月20日 オールカマー（G2）",
-    "chaku": "2着",
-    "ninki": 6,
-    "sa": "勝ち馬とタイム差なし",
-    "aite": "並",
-    "kaku": "格上から",
-    "nakami": "並"
-   },
-   {
-    "u": 16,
-    "n": "レイニング",
-    "race": "10月4日 毎日王冠（G2）",
-    "chaku": "4着",
-    "ninki": 6,
-    "sa": "勝ち馬から0.3秒",
-    "aite": "並",
-    "kaku": "格上から",
-    "nakami": "濃い"
-   }
-  ],
-  "check": [
-   "◎カラマティアノス（1番）: 休み明け（10週）。ベストは465kg。発表が461kg以下（ベストから4kg以上減）なら少し割り引き。",
-   "○マリアイリダータ（13番）: 休み明け（10週）。ベストは444kg。発表が440kg以下（ベストから4kg以上減）なら少し割り引き。",
-   "▲フォルテアンジェロ（11番）: 休み明け（11週）。ベストは448kg。発表が444kg以下（ベストから4kg以上減）なら少し割り引き。"
-  ],
-  "note": "過去のデータから拾った比較材料です。"
- }
+  "story": {
+    "version": 2,
+    "made_at": "2026-11-21T00:57",
+    "sections": {
+      "総括": [
+        "結論：どれが来てもおかしない。手を出さん方が賢い。まぁ強いて言うなら◎1番カラマティアノスや。",
+        "OP以上のハンデ戦で荒れやすい。1番人気でも勝つのは5回に1回くらいや。",
+        "七夕賞（G3）組（4番ボーンディスウェイ 5着・1番カラマティアノス 7着・14番サヴォーナ 10着）は弱い。あの後13回走って勝ち馬ゼロや。前半から流れた消耗戦やった。",
+        "流れは平均やろ。力の差も小さい。",
+        "14番サヴォーナはこの舞台で2-0-0-1、前走の相手が強い、距離短縮で実績あり。文句なしや。ただこの人気やと妙味はない。単勝21倍つかんと割に合わん。",
+        "3番ゼンダンハヤブサ（人気薄）は前走の負けは言い訳が立つ、栗東坂路の2週間の追い切り10,022本で終いが3番目、距離延長で実績あり。人気はないけど力はある。",
+        "◎1番カラマティアノスは過去走に決め手はないし、計算でも横並びや。選ぶならこれやと思う。",
+        "○13番マリアイリダータ（人気馬）は持ち時計が一番。印どおり押さえてええ。",
+        "▲11番フォルテアンジェロ（人気馬）は前走の負けは言い訳が立つ、距離延長で実績あり。印どおり押さえてええ。",
+        "余談やけど、11番フォルテアンジェロに乗るマーカンド騎手は、イギリスの騎手で、今年はアルメラクで英国のG1を3つ（ダイヤモンドジュビリーS・スプリントC・チャンピオンズスプリント）、フランスのパリ大賞も勝っとる。"
+      ],
+      "展開": [
+        "はっきりした逃げ馬がおらん。前半は緩みやすい顔ぶれや。",
+        "ペースはこのコースのいつもどおりやろ。",
+        "力と位置から見た上位は13マリアイリダータ・15キャントウェイト・1カラマティアノス・16レイニング・2ヴィスマール。流れが速くなれば8ヨヒーンが浮上や。",
+        "位置が読みにくい馬: 11フォルテアンジェロ・16レイニング・2ヴィスマール・5フィーリウス・12アラタ・6バルナバ。"
+      ],
+      "経歴・陣営": [
+        "アラタは2024年のこのレースの勝ち馬。返り咲きがかかる。",
+        "カラマティアノスの津村騎手は、このレースを2勝（最後は2025年のニシノティアモ）や。",
+        "フォルテアンジェロのマーカンド騎手（イギリス）は今回の来日（11月7日〜）で先週まで30戦1勝。JRA の G1 は未勝利。",
+        "レイニングのプーシャン騎手（フランス）は今回の来日（10月31日〜）で先週まで44戦7勝。JRA の G1 は未勝利。",
+        "フォルテアンジェロに乗るマーカンド騎手は、イギリスの騎手で、今年はアルメラクで英国のG1を3つ（ダイヤモンドジュビリーS・スプリントC・チャンピオンズスプリント）、フランスのパリ大賞も勝っとる。",
+        "フォルテアンジェロが勝てば、マーカンド騎手は初の重賞勝ち（1990年からのデータで）や。"
+      ],
+      "人気の落とし穴": [
+        "マリアイリダータは牝馬。夏以外の牝馬は人気ほど走らん。",
+        "ヨヒーンは牝馬。夏以外の牝馬は人気ほど走らん。"
+      ],
+      "前哨戦の顔合わせ": [
+        "同じ舞台の7月12日の七夕賞（G3）（福島芝2000m・稍重）から3頭: ボーンディスウェイ5着（勝ち馬から0.8秒、11番手から上がり3位）、カラマティアノス7着（勝ち馬から1.2秒、4角で外を回して）、サヴォーナ10着（勝ち馬から1.8秒）や。",
+        "同じ舞台の4月12日の福島民報杯（福島芝2000m）から2頭: サヴォーナ1着（2着に0.3秒差、速い流れを3番手で受けて粘った）、バルナバ9着（勝ち馬から0.6秒、4角で大外を回して）。サヴォーナが0.6秒先着しとる。",
+        "9月12日のチャレンジC（G3）（阪神芝2000m）から3頭: カラマティアノス2着（勝ち馬とタイム差なし、7番手から上がり2位）、マリアイリダータ4着（勝ち馬から0.2秒、4角12番手から上がり1位）、フィーリウス10着（勝ち馬から0.9秒）や。"
+      ],
+      "前走のレベル": [
+        "サヴォーナの前走京都大賞典（G2）からは、その後1頭が勝ち上がり（アルゼンチン共和国杯（G2）の勝ち馬も）。レベルの高い一戦や。"
+      ],
+      "前走の形": [
+        "カラマティアノスの前走チャレンジC（G3）はロングスパート戦（残り1000mから11秒台が続く）で2着や。",
+        "マリアイリダータの前走チャレンジC（G3）はロングスパート戦（残り1000mから11秒台が続く）で4着や。",
+        "カテリーナの前走クイーンS（G3）はロングスパート戦（残り1000mから11秒台が続く）で5着や。",
+        "ヴィスマールの前走大原S（3勝クラス）は前半から流れた消耗戦で1着や。"
+      ],
+      "展開の向き不向き": [
+        "ヴィスマールの前走大原S（3勝クラス）は、速い流れを10番手から差して1着。展開の助けがあった。"
+      ],
+      "勝ち上がり": [
+        "ヴィスマールは前走大原S（3勝クラス）を6番人気で勝利（2着に0.1秒差）。3勝クラスからの昇級や。"
+      ],
+      "巻き返し候補": [
+        "フォルテアンジェロは前走京成杯オータムH（G3）6着（着順ほど負けてへん（勝ち馬から0.5秒）・4角14番手から上がり1位）。その前にホープフルS（G1）で2着があり、巻き返してもおかしない。",
+        "ゼンダンハヤブサは前走カシオペアS8着（稍重）。その前に小倉記念（G3）で1着（10番人気）があり、巻き返してもおかしない。",
+        "サヴォーナは前走京都大賞典（G2）17着（稍重）。その前に福島民報杯で1着があり、巻き返してもおかしない。",
+        "バレエマスターは前走カシオペアS11着（稍重）。その前に新潟大賞典（G3）で2着（12番人気）があり、巻き返してもおかしない。"
+      ],
+      "持ち時計": [
+        "マリアイリダータはこのコースの持ち時計（1:56.7）が出走馬で一番。持ち時計1位は4割近くが3着に来とる。",
+        "ヨヒーンの持ち時計（1:58.3）は出走馬で2番目。",
+        "サヴォーナの持ち時計（1:58.4）は出走馬で3番目。"
+      ],
+      "舞台の実績": [
+        "サヴォーナは福島芝1900〜2100mで2-0-0-1（福島民報杯1着）や。",
+        "アラタは福島芝1900〜2100mで1-0-2-2（福島記念（G3）1着）や。",
+        "ヨヒーンは福島芝1900〜2100mで1-0-0-1（1勝クラス1着）や。",
+        "バレエマスターは福島芝1900〜2100mで1-0-0-2（猪苗代特別（2勝クラス）1着）や。"
+      ],
+      "流れの向き": [
+        "カラマティアノスは遅い流れで2-0-2-0、速い流れで0-1-0-3。ゆったり流れてほしい馬。",
+        "カテリーナは遅い流れで2-2-0-2、速い流れで1-0-0-3。ゆったり流れてほしい馬。",
+        "サヴォーナは速い流れで2-3-1-2、遅い流れで1-0-0-4。速くなってこその馬。",
+        "シリウスコルトは遅い流れで2-0-0-2、速い流れで1-1-0-7。ゆったり流れてほしい馬。"
+      ],
+      "回り": [
+        "ヴィスマールは芝の右回りで4-6-1-6と得意、反対回りは0-0-0-3や。",
+        "フィーリウスは芝の右回りで3-1-3-4と得意、反対回りは0-0-0-3や。"
+      ],
+      "兄弟": [
+        "マリアイリダータは母マルケッサの子。兄弟にドゥラエレーデ（ホープフルS（G1）1着）がおる。",
+        "レイニングは母クルミナルの子。兄弟にプルヴィナル（アルテミスS（G3）1着）がおる。",
+        "ヴィスマールは母オーマイベイビーの子。兄弟にステラヴェローチェ（神戸新聞杯（G2）1着）がおる。"
+      ],
+      "鞍上": [
+        "カラマティアノスはルメールから津村に戻るで。津村とは1-1-0-1や。",
+        "ボーンディスウェイはマーカンから木幡巧に戻るで。木幡巧とは3-2-3-11や。",
+        "バルナバは舟山瑠泉から斎藤に戻るで。斎藤とは2-0-0-2や。",
+        "カテリーナは浜中が続けて乗る。このコンビで2-2-0-2や。",
+        "アラタは大野が続けて乗る。このコンビで5-1-2-8や。"
+      ],
+      "騎手と厩舎": [
+        "アラタの和田勇介厩舎は休み明けより叩いてからの方がええ。",
+        "ボーンディスウェイの木幡巧騎手は福島芝2000m前後で3着内19%（芝全体は12%）や。",
+        "ヴィスマールの小沢騎手は福島芝2000m前後で3着内25%（芝全体は16%）や。",
+        "マリアイリダータの戸崎圭騎手は福島芝2000m前後で3着内59%（芝全体は43%）や。"
+      ],
+      "調教": [
+        "ゼンダンハヤブサは11/12の栗東坂路で終い11.9秒。この2週間に栗東坂路で追い切った10,022本の中で3番目（上位0.1%未満）、トップ5級。全体の時計も速いで。この級の終いの馬は4割近くが3着に来とる。",
+        "マリアイリダータは11/12に美浦ウッドで65.3秒と全体の時計は上位。ただ終いは甘い。終いが甘いと並の調教と変わらん。",
+        "サヴォーナは11/12に栗東坂路で53.0秒と全体の時計は上位。",
+        "ボーンディスウェイは11/18に美浦坂路で53.7秒と全体の時計は上位。",
+        "カラマティアノスは11/11に美浦ウッドで65.6秒と全体の時計は上位。"
+      ],
+      "前走との差": [
+        "フォルテアンジェロは前走から400mの距離延長。過去の距離延長では0-1-0-1や。",
+        "レイニングは前走から200mの距離延長。過去の距離延長では1-0-0-1や。",
+        "カテリーナは前走から200mの距離延長。過去の距離延長では1-1-0-0や。",
+        "ゼンダンハヤブサは前走から200mの距離延長。過去の距離延長では3-0-1-1や。",
+        "サヴォーナは前走から400mの距離短縮。過去の距離短縮では1-2-0-1や。"
+      ],
+      "斤量": [
+        "トップハンデはカラマティアノスの58kgや。",
+        "カテリーナは前走から2kg減の53kgや。",
+        "ゼンダンハヤブサは前走から3kg減の55kgや。",
+        "ヴィスマールは前走から3kg減の55kgや。",
+        "バレエマスターは前走から3kg減の55kgや。",
+        "バルナバは前走から2kg減の55kgや。"
+      ],
+      "休み明け": [
+        "カテリーナは約3か月の休み明け。過去の休み明けは1-1-0-1で、走れるタイプや。",
+        "アラタは約3か月の休み明け。過去の休み明けは2-0-1-5で、走れるタイプや。"
+      ],
+      "2頭出し": [
+        "馬主 サンデーレーシング から2頭: カラマティアノス・マリアイリダータ。",
+        "馬主 キャロットファーム から2頭: レイニング・ヴィスマール。"
+      ]
+    },
+    "zenso": [
+      {
+        "u": 1,
+        "n": "カラマティアノス",
+        "race": "9月12日 チャレンジC（G3）",
+        "chaku": "2着",
+        "ninki": 9,
+        "sa": "勝ち馬とタイム差なし",
+        "aite": "並",
+        "kaku": "格上から",
+        "nakami": "並"
+      },
+      {
+        "u": 2,
+        "n": "ヴィスマール",
+        "race": "10月4日 大原S（3勝クラス）",
+        "chaku": "1着",
+        "ninki": 6,
+        "sa": "2着に0.1秒差",
+        "aite": "並",
+        "kaku": "昇級",
+        "nakami": "濃い"
+      },
+      {
+        "u": 3,
+        "n": "ゼンダンハヤブサ",
+        "race": "10月24日 カシオペアS",
+        "chaku": "8着",
+        "ninki": 10,
+        "sa": "勝ち馬から0.7秒",
+        "aite": "並",
+        "kaku": "",
+        "nakami": "並"
+      },
+      {
+        "u": 4,
+        "n": "ボーンディスウェイ",
+        "race": "11月8日 アルゼンチン共和国杯（G2）",
+        "chaku": "15着",
+        "ninki": 17,
+        "sa": "勝ち馬から1.4秒",
+        "aite": "並",
+        "kaku": "格上から",
+        "nakami": "並"
+      },
+      {
+        "u": 5,
+        "n": "フィーリウス",
+        "race": "9月12日 チャレンジC（G3）",
+        "chaku": "10着",
+        "ninki": 14,
+        "sa": "勝ち馬から0.9秒",
+        "aite": "並",
+        "kaku": "格上から",
+        "nakami": "並"
+      },
+      {
+        "u": 6,
+        "n": "バルナバ",
+        "race": "7月26日 札幌日経OP",
+        "chaku": "12着",
+        "ninki": 11,
+        "sa": "勝ち馬から2.6秒",
+        "aite": "並",
+        "kaku": "",
+        "nakami": "完敗"
+      },
+      {
+        "u": 7,
+        "n": "シリウスコルト",
+        "race": "11月8日 みやこS（G3）",
+        "chaku": "15着",
+        "ninki": 12,
+        "sa": "勝ち馬から2.5秒",
+        "aite": "並",
+        "kaku": "格上から",
+        "nakami": "完敗"
+      },
+      {
+        "u": 8,
+        "n": "ヨヒーン",
+        "race": "9月6日 丹頂SH",
+        "chaku": "4着",
+        "ninki": 7,
+        "sa": "勝ち馬から1.5秒",
+        "aite": "弱い",
+        "kaku": "",
+        "nakami": "並"
+      },
+      {
+        "u": 9,
+        "n": "バレエマスター",
+        "race": "10月24日 カシオペアS",
+        "chaku": "11着",
+        "ninki": 13,
+        "sa": "勝ち馬から1.0秒",
+        "aite": "並",
+        "kaku": "",
+        "nakami": "並"
+      },
+      {
+        "u": 10,
+        "n": "カテリーナ",
+        "race": "8月2日 クイーンS（G3）",
+        "chaku": "5着",
+        "ninki": 10,
+        "sa": "勝ち馬から0.5秒",
+        "aite": "弱い",
+        "kaku": "格上から",
+        "nakami": "濃い"
+      },
+      {
+        "u": 11,
+        "n": "フォルテアンジェロ",
+        "race": "9月5日 京成杯オータムH（G3）",
+        "chaku": "6着",
+        "ninki": 1,
+        "sa": "勝ち馬から0.5秒",
+        "aite": "強い",
+        "kaku": "格上から",
+        "nakami": "濃い"
+      },
+      {
+        "u": 12,
+        "n": "アラタ",
+        "race": "8月16日 札幌記念（G2）",
+        "chaku": "12着",
+        "ninki": 15,
+        "sa": "勝ち馬から1.5秒",
+        "aite": "並",
+        "kaku": "格上から",
+        "nakami": "完敗"
+      },
+      {
+        "u": 13,
+        "n": "マリアイリダータ",
+        "race": "9月12日 チャレンジC（G3）",
+        "chaku": "4着",
+        "ninki": 2,
+        "sa": "勝ち馬から0.2秒",
+        "aite": "並",
+        "kaku": "格上から",
+        "nakami": "濃い"
+      },
+      {
+        "u": 14,
+        "n": "サヴォーナ",
+        "race": "10月4日 京都大賞典（G2）",
+        "chaku": "17着",
+        "ninki": 10,
+        "sa": "勝ち馬から1.3秒",
+        "aite": "並",
+        "kaku": "格上から",
+        "nakami": "並"
+      },
+      {
+        "u": 15,
+        "n": "キャントウェイト",
+        "race": "9月20日 オールカマー（G2）",
+        "chaku": "2着",
+        "ninki": 6,
+        "sa": "勝ち馬とタイム差なし",
+        "aite": "並",
+        "kaku": "格上から",
+        "nakami": "並"
+      },
+      {
+        "u": 16,
+        "n": "レイニング",
+        "race": "10月4日 毎日王冠（G2）",
+        "chaku": "4着",
+        "ninki": 6,
+        "sa": "勝ち馬から0.3秒",
+        "aite": "並",
+        "kaku": "格上から",
+        "nakami": "濃い"
+      }
+    ],
+    "check": [
+      "◎カラマティアノス（1番）: 休み明け（10週）。ベストは465kg。発表が461kg以下（ベストから4kg以上減）なら少し割り引き。",
+      "○マリアイリダータ（13番）: 休み明け（10週）。ベストは444kg。発表が440kg以下（ベストから4kg以上減）なら少し割り引き。",
+      "▲フォルテアンジェロ（11番）: 休み明け（11週）。ベストは448kg。発表が444kg以下（ベストから4kg以上減）なら少し割り引き。"
+    ],
+    "note": "過去のデータから拾った比較材料です。"
+  },
+  "result": {
+    "status": "確定",
+    "reconciled_at": "2026-11-25",
+    "source": "jra_data_*.csv(日付+馬名結線)",
+    "race_key": {
+      "kaisai": "3福5",
+      "r": "11",
+      "race_name": "福島記念",
+      "atama": 15
+    },
+    "finish": [
+      "マリアイリダータ",
+      "ゼンダンハヤブサ",
+      "カラマティアノス"
+    ],
+    "horses": [
+      {
+        "name": "カラマティアノス",
+        "rank": 3,
+        "note": null
+      },
+      {
+        "name": "マリアイリダータ",
+        "rank": 1,
+        "note": null
+      },
+      {
+        "name": "フォルテアンジェロ",
+        "rank": 7,
+        "note": null
+      },
+      {
+        "name": "キャントウェイト",
+        "rank": 6,
+        "note": null
+      },
+      {
+        "name": "レイニング",
+        "rank": 12,
+        "note": null
+      },
+      {
+        "name": "カテリーナ",
+        "rank": 4,
+        "note": null
+      },
+      {
+        "name": "ゼンダンハヤブサ",
+        "rank": 2,
+        "note": null
+      },
+      {
+        "name": "サヴォーナ",
+        "rank": 15,
+        "note": null
+      },
+      {
+        "name": "ヴィスマール",
+        "rank": 11,
+        "note": null
+      },
+      {
+        "name": "ヨヒーン",
+        "rank": 9,
+        "note": null
+      },
+      {
+        "name": "フィーリウス",
+        "rank": null,
+        "note": "出走取消"
+      },
+      {
+        "name": "ボーンディスウェイ",
+        "rank": 5,
+        "note": null
+      },
+      {
+        "name": "アラタ",
+        "rank": 8,
+        "note": null
+      },
+      {
+        "name": "バレエマスター",
+        "rank": 13,
+        "note": null
+      },
+      {
+        "name": "バルナバ",
+        "rank": 10,
+        "note": null
+      },
+      {
+        "name": "シリウスコルト",
+        "rank": 14,
+        "note": null
+      }
+    ],
+    "unmatched": [],
+    "bet": {
+      "tier": "none",
+      "axis": "カラマティアノス",
+      "axis_rank": 3,
+      "axis_odds": 8.1,
+      "partners": [
+        "マリアイリダータ",
+        "フォルテアンジェロ",
+        "キャントウェイト"
+      ],
+      "partners_src": "○▲△マーク(bets未パース)",
+      "in_odds_band": true,
+      "cost": 0.0,
+      "hit": null,
+      "payout": 0.0,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない"
+    },
+    "trials": []
+  }
 }

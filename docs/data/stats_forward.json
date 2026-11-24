@@ -1,8 +1,8 @@
 {
   "schema": "stats_forward.v1",
-  "generated_at": "2026-11-20T23:11:03",
+  "generated_at": "2026-11-25T01:22:07",
   "period_from": "2026-07-19",
-  "results_latest_date": "20261115",
+  "results_latest_date": "20261121",
   "source": "docs/archive/*.json(公開した買い目) ⋈ jra_data_*.csv(確定着順・払戻)",
   "series": {
     "conf_fukusho": {
@@ -10,10 +10,10 @@
       "retired": false,
       "trial": false,
       "all": {
-        "n": 1,
+        "n": 2,
         "hit_rate": 100.0,
         "roi": 100.0,
-        "f5_roi": null,
+        "f5_roi": 100.0,
         "color": "gray_参考外"
       },
       "rule_8_15": {
@@ -86,10 +86,10 @@
       "retired": false,
       "trial": true,
       "all": {
-        "n": 10,
-        "hit_rate": 70.0,
-        "roi": 90.0,
-        "f5_roi": 81.1,
+        "n": 12,
+        "hit_rate": 66.7,
+        "roi": 83.3,
+        "f5_roi": 75.5,
         "color": "light_傾向"
       },
       "rule_8_15": {
@@ -105,11 +105,11 @@
       "retired": false,
       "trial": true,
       "all": {
-        "n": 18,
-        "hit_rate": 11.1,
-        "roi": 76.1,
-        "f5_roi": 23.5,
-        "color": "light_傾向"
+        "n": 20,
+        "hit_rate": 10.0,
+        "roi": 68.5,
+        "f5_roi": 21.1,
+        "color": "normal"
       },
       "rule_8_15": {
         "n": 0,
@@ -124,10 +124,10 @@
       "retired": false,
       "trial": true,
       "all": {
-        "n": 7,
+        "n": 8,
         "hit_rate": 100.0,
-        "roi": 128.1,
-        "f5_roi": 112.8,
+        "roi": 120.0,
+        "f5_roi": 105.7,
         "color": "gray_参考外"
       },
       "rule_8_15": {
@@ -351,10 +351,10 @@
     {
       "month": "2026-11",
       "conf_fukusho": {
-        "n": 1,
+        "n": 2,
         "hit_rate": 100.0,
         "roi": 100.0,
-        "f5_roi": null,
+        "f5_roi": 100.0,
         "color": "gray_参考外"
       },
       "seihai_fukusho": {
@@ -379,45 +379,45 @@
         "color": "gray_参考外"
       },
       "group_fukusho": {
-        "n": 6,
-        "hit_rate": 66.7,
-        "roi": 85.0,
-        "f5_roi": 68.0,
+        "n": 8,
+        "hit_rate": 62.5,
+        "roi": 76.2,
+        "f5_roi": 62.9,
         "color": "gray_参考外"
       },
       "step_umaren": {
-        "n": 3,
+        "n": 5,
         "hit_rate": 0.0,
         "roi": 0.0,
         "f5_roi": null,
         "color": "gray_参考外"
       },
       "wide3": {
-        "n": 2,
+        "n": 3,
         "hit_rate": 100.0,
-        "roi": 143.3,
-        "f5_roi": 66.7,
+        "roi": 116.7,
+        "f5_roi": 65.0,
         "color": "gray_参考外"
       }
     }
   ],
   "skipped_reference": {
-    "n": 693,
-    "axis_top3": 354,
-    "axis_win": 167,
+    "n": 711,
+    "axis_top3": 367,
+    "axis_win": 174,
     "gap_disagree": {
-      "n": 43,
+      "n": 44,
       "axis_top3": 16,
       "axis_win": 8
     },
     "no_signal": {
-      "n": 650,
-      "axis_top3": 338,
-      "axis_win": 159
+      "n": 667,
+      "axis_top3": 351,
+      "axis_win": 166
     },
     "by_verdict": {
-      "⚠️慎重": 650,
-      "🚫見送り": 43
+      "⚠️慎重": 667,
+      "🚫見送り": 44
     },
     "note": "見送った判断の事後確認(参考)。買い目としては提示せず、回収率にも一切含めない。 gap_disagree=上位2頭が食い違い(危険サイン回避) / no_signal=買う条件が不足。"
   },
@@ -555,10 +555,10 @@
       "series": {
         "conf_fukusho": {
           "all": {
-            "n": 1,
+            "n": 2,
             "hit_rate": 100.0,
             "roi": 100.0,
-            "f5_roi": null,
+            "f5_roi": 100.0,
             "color": "gray_参考外"
           },
           "rule_8_15": {
@@ -619,10 +619,10 @@
         },
         "group_fukusho": {
           "all": {
-            "n": 10,
-            "hit_rate": 70.0,
-            "roi": 90.0,
-            "f5_roi": 81.1,
+            "n": 12,
+            "hit_rate": 66.7,
+            "roi": 83.3,
+            "f5_roi": 75.5,
             "color": "light_傾向"
           },
           "rule_8_15": {
@@ -635,11 +635,11 @@
         },
         "step_umaren": {
           "all": {
-            "n": 18,
-            "hit_rate": 11.1,
-            "roi": 76.1,
-            "f5_roi": 23.5,
-            "color": "light_傾向"
+            "n": 20,
+            "hit_rate": 10.0,
+            "roi": 68.5,
+            "f5_roi": 21.1,
+            "color": "normal"
           },
           "rule_8_15": {
             "n": 0,
@@ -651,10 +651,10 @@
         },
         "wide3": {
           "all": {
-            "n": 7,
+            "n": 8,
             "hit_rate": 100.0,
-            "roi": 128.1,
-            "f5_roi": 112.8,
+            "roi": 120.0,
+            "f5_roi": 105.7,
             "color": "gray_参考外"
           },
           "rule_8_15": {
@@ -667,9 +667,9 @@
         }
       },
       "skipped": {
-        "n": 378,
-        "axis_top3": 207,
-        "axis_win": 93
+        "n": 396,
+        "axis_top3": 220,
+        "axis_win": 100
       }
     }
   ],
@@ -14152,6 +14152,376 @@
       "payout": 190.0,
       "in_odds_band": false,
       "note": "複勝は3着まで(頭数12)"
+    },
+    {
+      "date": "2026-11-21",
+      "file": "20261121_京都_10R.json",
+      "venue": "京都",
+      "race_no": 10,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "ロードフィレール",
+      "axis_rank": 1,
+      "axis_odds": 2.4,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-11-21",
+      "file": "20261121_京都_11R.json",
+      "venue": "京都",
+      "race_no": 11,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "チェリヴェント",
+      "axis_rank": 5,
+      "axis_odds": 3.8,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-11-21",
+      "file": "20261121_京都_12R.json",
+      "venue": "京都",
+      "race_no": 12,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "バルティカ",
+      "axis_rank": 1,
+      "axis_odds": 5.0,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-11-20",
+      "file": "20261121_京都_1R.json",
+      "venue": "京都",
+      "race_no": 1,
+      "verdict": "🚫見送り",
+      "tier": "none",
+      "axis": "ドミナント",
+      "axis_rank": 6,
+      "axis_odds": 2.6,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "gap_disagree"
+    },
+    {
+      "date": "2026-11-20",
+      "file": "20261121_京都_2R.json",
+      "venue": "京都",
+      "race_no": 2,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "スタニスラス",
+      "axis_rank": 2,
+      "axis_odds": 1.7,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-11-20",
+      "file": "20261121_京都_3R.json",
+      "venue": "京都",
+      "race_no": 3,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "カツダルマ",
+      "axis_rank": 4,
+      "axis_odds": 2.8,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-11-20",
+      "file": "20261121_京都_4R.json",
+      "venue": "京都",
+      "race_no": 4,
+      "verdict": "⚠️慎重",
+      "tier": "step_umaren",
+      "axis": "ジャンゴッド",
+      "axis_rank": 3,
+      "axis_odds": 5.4,
+      "hit": false,
+      "cost": 100.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "試験運用の買い目(種類ごとの集計は result.trials)"
+    },
+    {
+      "date": "2026-11-20",
+      "file": "20261121_京都_5R.json",
+      "venue": "京都",
+      "race_no": 5,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "アウダチェ",
+      "axis_rank": 1,
+      "axis_odds": 1.7,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-11-21",
+      "file": "20261121_京都_6R.json",
+      "venue": "京都",
+      "race_no": 6,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "ロゼフレイバー",
+      "axis_rank": 5,
+      "axis_odds": 3.2,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-11-21",
+      "file": "20261121_京都_7R.json",
+      "venue": "京都",
+      "race_no": 7,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "ヤエギリ",
+      "axis_rank": 1,
+      "axis_odds": 2.1,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-11-21",
+      "file": "20261121_京都_8R.json",
+      "venue": "京都",
+      "race_no": 8,
+      "verdict": "⚠️慎重",
+      "tier": "group_fukusho",
+      "axis": "ジューンアゲイン",
+      "axis_rank": 12,
+      "axis_odds": 3.7,
+      "hit": false,
+      "cost": 100.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "試験運用の買い目(種類ごとの集計は result.trials)"
+    },
+    {
+      "date": "2026-11-21",
+      "file": "20261121_京都_9R.json",
+      "venue": "京都",
+      "race_no": 9,
+      "verdict": "⚠️慎重",
+      "tier": "conf_fukusho",
+      "axis": "カレンハウ",
+      "axis_rank": 1,
+      "axis_odds": 1.9,
+      "hit": true,
+      "cost": 100.0,
+      "payout": 100.0,
+      "in_odds_band": false,
+      "note": "複勝は2着まで(頭数7)"
+    },
+    {
+      "date": "2026-11-21",
+      "file": "20261121_福島_10R.json",
+      "venue": "福島",
+      "race_no": 10,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "ゼファーテソーロ",
+      "axis_rank": 3,
+      "axis_odds": 10.6,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": true,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-11-21",
+      "file": "20261121_福島_11R.json",
+      "venue": "福島",
+      "race_no": 11,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "カラマティアノス",
+      "axis_rank": 3,
+      "axis_odds": 8.1,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": true,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-11-21",
+      "file": "20261121_福島_12R.json",
+      "venue": "福島",
+      "race_no": 12,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "ヤマニンフェイエル",
+      "axis_rank": 3,
+      "axis_odds": 7.8,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-11-20",
+      "file": "20261121_福島_1R.json",
+      "venue": "福島",
+      "race_no": 1,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "ネージュドレーヴ",
+      "axis_rank": 1,
+      "axis_odds": 2.6,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-11-20",
+      "file": "20261121_福島_2R.json",
+      "venue": "福島",
+      "race_no": 2,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "ワイドデコラシオン",
+      "axis_rank": 2,
+      "axis_odds": 10.3,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": true,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-11-20",
+      "file": "20261121_福島_3R.json",
+      "venue": "福島",
+      "race_no": 3,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "ランフェザー",
+      "axis_rank": 1,
+      "axis_odds": 1.8,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-11-20",
+      "file": "20261121_福島_6R.json",
+      "venue": "福島",
+      "race_no": 6,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "リュウカルネ",
+      "axis_rank": 1,
+      "axis_odds": 2.1,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-11-21",
+      "file": "20261121_福島_7R.json",
+      "venue": "福島",
+      "race_no": 7,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "アントレピード",
+      "axis_rank": 4,
+      "axis_odds": 4.7,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-11-21",
+      "file": "20261121_福島_8R.json",
+      "venue": "福島",
+      "race_no": 8,
+      "verdict": "⚠️慎重",
+      "tier": "none",
+      "axis": "ピカキウイ",
+      "axis_rank": 3,
+      "axis_odds": 2.4,
+      "hit": null,
+      "cost": 0.0,
+      "payout": 0.0,
+      "in_odds_band": false,
+      "note": "買い目なし → 見送った判断の事後確認(参考)。回収率には含めない",
+      "skip_kind": "no_signal"
+    },
+    {
+      "date": "2026-11-21",
+      "file": "20261121_福島_9R.json",
+      "venue": "福島",
+      "race_no": 9,
+      "verdict": "⚠️慎重",
+      "tier": "step_umaren",
+      "axis": "バンオンタイム",
+      "axis_rank": 1,
+      "axis_odds": 9.8,
+      "hit": false,
+      "cost": 100.0,
+      "payout": 0.0,
+      "in_odds_band": true,
+      "note": "試験運用の買い目(種類ごとの集計は result.trials)"
     }
   ],
   "notes": [
