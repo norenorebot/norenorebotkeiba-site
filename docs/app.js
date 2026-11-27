@@ -936,6 +936,10 @@ function confPick(d) {
   if (!dc.b2v5 || isOpHandicap(d)) return null;
   var top = null;
   (d.horses || []).forEach(function (h) { if (h.mc_win != null && (!top || h.mc_win > top.mc_win)) top = h; });
+  // 2026-11-29〜（本体 V9.8.15、重賞以外）: ◎と勝つ確率は B-2 v8、🎯に入れるかは v7 の確率（conf_win）で決める
+  var hs = d.horses || [];
+  if (top && hs.length && hs.every(function (h) { return h.conf_win != null; }))
+    return Math.max.apply(null, hs.map(function (h) { return h.conf_win; })) >= CONF_TH ? top : null;
   return (top && top.mc_win >= CONF_TH) ? top : null;
 }
 
