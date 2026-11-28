@@ -461,6 +461,7 @@ function renderVerdictCard(d, idx, opt) {
           (vgNew ? '' : '　<span class="note">[' + esc(venueLabel(d)) + ': ' + esc(vgLabel) + ']</span>') + '</div>';
   html += incompleteNote(d);
   if (!opt.noSokatsu) html += '<div class="line">判定: <span class="' + av.cls + '">' + esc(av.label) + '</span></div>';   // 簡単なカードの中では上に出ている
+  html += specialNote(d);
   if (isShinba(d)) {
     html += '<div class="line">ℹ️ 新馬戦: <span class="note">初めて走る馬ばかりで、この予想の材料は血統・騎手・枠などに限られます。過去は予想の◎の3着以内 約56%に対し、1番人気は約73%で、市場の方がずっと正確です。参考程度に見てください（買い目は出しません）</span></div>';
   }
@@ -1041,6 +1042,11 @@ function renderDetail(d, rawReason) {
    ほかの中身（判定の理由・各馬の表・比較材料・結果など今までのカード）は「もっと見る」に畳む。
    総括が無い予想（過去の予想）は今までどおり renderVerdictCard。 */
 var CARD_MARKS = ['◎', '○', '▲', '△'];
+// このレースだけの見立て（2026-11-29 ジャパンC〜）: 外国馬が多いなど、いつもの計算で測れないレースは表の確率を見立てに差し替え、その旨を出す
+function specialNote(d) {
+  var sp = d.special || {};
+  return sp.note ? '<div class="line">ℹ️ このレースだけの見立て: <span class="note">' + esc(sp.note) + '</span></div>' : '';
+}
 function hasSokatsu(d) { return !!(d.story && d.story.sections && (d.story.sections['総括'] || []).length); }
 function shortVerdictLine(d) {
   var av = actionVerdictOf(d), tags = [];
@@ -1101,12 +1107,13 @@ function renderCompactCard(d, idx) {
   html += '<div class="rid">▼ ' + esc(raceTitle(d)) + (post ? ' <span class="post-time">' + esc(post) + '発走</span>' : '') +
           '　' + esc(h.surface) + dist(h.distance) + ' ' + esc(h.race_class) + '</div>';
   html += '<div class="line">判定: ' + shortVerdictLine(d) + '</div>';
+  html += specialNote(d);
   html += markTable(d);
   if (av.kind === 'bet') html += plainBets(d);
   html += dayCheck(d, av.kind === 'bet');
   html += '<div class="commentary story"><div class="commentary-h">総括</div>' +
           d.story.sections['総括'].map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') +
-          '<div class="note">※ 過去のデータから書いた読み物です。予想の印・確率には使っていません。</div></div>';
+          '<div class="note">※ ' + ((d.special || {}).note ? 'いつもの計算と見立てを合わせて書いた予想記事です。買い推奨には入れていません。' : '過去のデータから書いた読み物です。予想の印・確率には使っていません。') + '</div></div>';
   // 今までのカードを丸ごと畳む（外枠の verdict-block はレースの切り替えが数えるので名前を変える）
   // 中身は開いた時に作る（2026-11-11。全レース分の表を最初に作ると重い）→ fillMore
   html += '<details class="demo-more" data-more="' + (idx === undefined ? '' : idx) + '"><summary>もっと見る（判定の理由・各馬の表・比較材料・結果）</summary>' +
